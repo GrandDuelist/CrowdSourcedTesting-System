@@ -3,6 +3,7 @@ package cn.com.crowdsourcedtesting.DAO;
 import org.hibernate.Session;
 
 
+
 /**
  * Data access object (DAO) for domain model
  * @author MyEclipse Persistence Tools

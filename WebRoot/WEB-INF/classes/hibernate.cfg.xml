@@ -23,6 +23,10 @@
 		</property>
 		<mapping
 			resource="cn/com/crowdsourcedtesting/DAO/Administrator.hbm.xml" />
+		<mapping 
+			resource="cn/com/crowdsourcedtesting/DAO/Publisher.hbm.xml" />
+		<mapping 
+			resource="cn/com/crowdsourcedtesting/DAO/Recruiment.hbm.xml" />
 
 	</session-factory>
 
