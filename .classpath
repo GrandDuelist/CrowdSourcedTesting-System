@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="cn/com/crowdsourcedtesting/subsystem/credit/|cn/com/crowdsourcedtesting/subsystem/gift/|cn/com/crowdsourcedtesting/subsystem/infomanagement/|cn/com/crowdsourcedtesting/subsystem/questionnaire/|cn/com/crowdsourcedtesting/subsystem/recruitment/|cn/com/crowdsourcedtesting/subsystem/security/|cn/com/crowdsourcedtesting/subsystem/testtask/" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
