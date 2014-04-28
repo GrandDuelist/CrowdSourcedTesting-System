@@ -4,8 +4,8 @@ import cn.com.crowdsourcedtesting.DAO.*;
 
 public class DAOFactory {
 	
-	public static JoinQuestionnairDAO getJoinQuestionnairDAO(){
-		return new JoinQuestionnairDAO();
+	public static GiftDAO getGiftDAO(){
+		return new GiftDAO();
 	}
 	
 	public static AdministratorDAO getAdministratorDAO()
@@ -37,9 +37,23 @@ public class DAOFactory {
 		return new JoinQuestionnaireDAO();
 	}
 	
-	public static ChoiceDAO getChoiceDAO()
+	public static QuestionDAO getQuestionDAO()
 	{
-		return new ChoiceDAO();
+		return new QuestionDAO();
 	}
+	
+	public static RecruitmentDAO getRecruitmentDAO()
+	{
+		return new RecruitmentDAO();
+	}
+	
+	public static QuestionnaireDAO getQuestionnaireDAO()
+	{
+		return new QuestionnaireDAO();
+	}
+	
+	
+	
+	
 
 }

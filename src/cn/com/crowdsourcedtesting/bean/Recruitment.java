@@ -3,10 +3,10 @@ package cn.com.crowdsourcedtesting.bean;
 import java.util.Date;
 
 /**
- * Recruiment entity. @author MyEclipse Persistence Tools
+ * Recruitment entity. @author MyEclipse Persistence Tools
  */
 
-public class Recruiment implements java.io.Serializable {
+public class Recruitment implements java.io.Serializable {
 
 	// Fields
 
@@ -26,12 +26,12 @@ public class Recruiment implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public Recruiment() {
+	public Recruitment() {
 	}
 
 	/** minimal constructor */
-	public Recruiment(Publisher publisher, String activityName, Boolean online,
-			Boolean recruimentType) {
+	public Recruitment(Publisher publisher, String activityName,
+			Boolean online, Boolean recruimentType) {
 		this.publisher = publisher;
 		this.activityName = activityName;
 		this.online = online;
@@ -39,7 +39,7 @@ public class Recruiment implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Recruiment(Administrator administrator, Publisher publisher,
+	public Recruitment(Administrator administrator, Publisher publisher,
 			String activityName, Date timeStart, Date timeEnd, Boolean online,
 			String content, String brief, String company, String place,
 			Boolean recruimentType) {

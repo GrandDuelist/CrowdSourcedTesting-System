@@ -44,7 +44,7 @@
             <key>
                 <column name="PUBLISHER_ID" precision="9" scale="0" not-null="true" />
             </key>
-            <one-to-many class="cn.com.crowdsourcedtesting.bean.Recruiment" />
+            <one-to-many class="cn.com.crowdsourcedtesting.bean.Recruitment" />
         </set>
         <set name="testTasks" inverse="true">
             <key>

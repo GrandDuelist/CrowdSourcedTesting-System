@@ -8,23 +8,23 @@ import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cn.com.crowdsourcedtesting.bean.Recruiment;
+import cn.com.crowdsourcedtesting.bean.Recruitment;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * Recruiment entities. Transaction control of the save(), update() and delete()
- * operations can directly support Spring container-managed transactions or they
- * can be augmented to handle user-managed Spring transactions. Each of these
- * methods provides additional information for how to configure it for the
- * desired type of transaction control.
+ * Recruitment entities. Transaction control of the save(), update() and
+ * delete() operations can directly support Spring container-managed
+ * transactions or they can be augmented to handle user-managed Spring
+ * transactions. Each of these methods provides additional information for how
+ * to configure it for the desired type of transaction control.
  * 
- * @see cn.com.crowdsourcedtesting.bean.Recruiment
+ * @see cn.com.crowdsourcedtesting.bean.Recruitment
  * @author MyEclipse Persistence Tools
  */
 
-public class RecruimentDAO extends BaseHibernateDAO {
+public class RecruitmentDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory
-			.getLogger(RecruimentDAO.class);
+			.getLogger(RecruitmentDAO.class);
 	// property constants
 	public static final String ACTIVITY_NAME = "activityName";
 	public static final String ONLINE = "online";
@@ -34,8 +34,8 @@ public class RecruimentDAO extends BaseHibernateDAO {
 	public static final String PLACE = "place";
 	public static final String RECRUIMENT_TYPE = "recruimentType";
 
-	public void save(Recruiment transientInstance) {
-		log.debug("saving Recruiment instance");
+	public void save(Recruitment transientInstance) {
+		log.debug("saving Recruitment instance");
 		try {
 			getSession().save(transientInstance);
 			log.debug("save successful");
@@ -45,8 +45,8 @@ public class RecruimentDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void delete(Recruiment persistentInstance) {
-		log.debug("deleting Recruiment instance");
+	public void delete(Recruitment persistentInstance) {
+		log.debug("deleting Recruitment instance");
 		try {
 			getSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -56,11 +56,11 @@ public class RecruimentDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public Recruiment findById(java.lang.Integer id) {
-		log.debug("getting Recruiment instance with id: " + id);
+	public Recruitment findById(java.lang.Integer id) {
+		log.debug("getting Recruitment instance with id: " + id);
 		try {
-			Recruiment instance = (Recruiment) getSession().get(
-					"cn.com.crowdsourcedtesting.DAO.Recruiment", id);
+			Recruitment instance = (Recruitment) getSession().get(
+					"cn.com.crowdsourcedtesting.DAO.Recruitment", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -68,11 +68,12 @@ public class RecruimentDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public List findByExample(Recruiment instance) {
-		log.debug("finding Recruiment instance by example");
+	public List findByExample(Recruitment instance) {
+		log.debug("finding Recruitment instance by example");
 		try {
 			List results = getSession()
-					.createCriteria("cn.com.crowdsourcedtesting.DAO.Recruiment")
+					.createCriteria(
+							"cn.com.crowdsourcedtesting.DAO.Recruitment")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -84,10 +85,10 @@ public class RecruimentDAO extends BaseHibernateDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding Recruiment instance with property: " + propertyName
+		log.debug("finding Recruitment instance with property: " + propertyName
 				+ ", value: " + value);
 		try {
-			String queryString = "from Recruiment as model where model."
+			String queryString = "from Recruitment as model where model."
 					+ propertyName + "= ?";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
@@ -127,9 +128,9 @@ public class RecruimentDAO extends BaseHibernateDAO {
 	}
 
 	public List findAll() {
-		log.debug("finding all Recruiment instances");
+		log.debug("finding all Recruitment instances");
 		try {
-			String queryString = "from Recruiment";
+			String queryString = "from Recruitment";
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -138,10 +139,10 @@ public class RecruimentDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public Recruiment merge(Recruiment detachedInstance) {
-		log.debug("merging Recruiment instance");
+	public Recruitment merge(Recruitment detachedInstance) {
+		log.debug("merging Recruitment instance");
 		try {
-			Recruiment result = (Recruiment) getSession().merge(
+			Recruitment result = (Recruitment) getSession().merge(
 					detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -151,8 +152,8 @@ public class RecruimentDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(Recruiment instance) {
-		log.debug("attaching dirty Recruiment instance");
+	public void attachDirty(Recruitment instance) {
+		log.debug("attaching dirty Recruitment instance");
 		try {
 			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -162,8 +163,8 @@ public class RecruimentDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachClean(Recruiment instance) {
-		log.debug("attaching clean Recruiment instance");
+	public void attachClean(Recruitment instance) {
+		log.debug("attaching clean Recruitment instance");
 		try {
 			getSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
