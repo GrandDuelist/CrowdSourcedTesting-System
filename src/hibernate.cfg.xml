@@ -21,13 +21,38 @@
 		<property name="myeclipse.connection.profile">
 			Oracle 11
 		</property>
+		<property name="show_sql">true</property>
+		<mapping resource="cn/com/crowdsourcedtesting/DAO/Gift.hbm.xml" />
+		<mapping
+			resource="cn/com/crowdsourcedtesting/DAO/ChangeGift.hbm.xml" />
+		<mapping
+			resource="cn/com/crowdsourcedtesting/DAO/Tester.hbm.xml" />
+		<mapping
+			resource="cn/com/crowdsourcedtesting/DAO/Recruiment.hbm.xml" />
+		<mapping
+			resource="cn/com/crowdsourcedtesting/DAO/Subcategory.hbm.xml" />
+		<mapping
+			resource="cn/com/crowdsourcedtesting/DAO/Category.hbm.xml" />
+		<mapping
+			resource="cn/com/crowdsourcedtesting/DAO/Question.hbm.xml" />
+		<mapping
+			resource="cn/com/crowdsourcedtesting/DAO/TaskComment.hbm.xml" />
+		<mapping
+			resource="cn/com/crowdsourcedtesting/DAO/TestTask.hbm.xml" />
+		<mapping
+			resource="cn/com/crowdsourcedtesting/DAO/BugReport.hbm.xml" />
+		<mapping
+			resource="cn/com/crowdsourcedtesting/DAO/Questionnaire.hbm.xml" />
 		<mapping
 			resource="cn/com/crowdsourcedtesting/DAO/Administrator.hbm.xml" />
-		<mapping 
+		<mapping
+			resource="cn/com/crowdsourcedtesting/DAO/JoinQuestionnaire.hbm.xml" />
+		<mapping
+			resource="cn/com/crowdsourcedtesting/DAO/Choice.hbm.xml" />
+		<mapping
 			resource="cn/com/crowdsourcedtesting/DAO/Publisher.hbm.xml" />
-		<mapping 
-			resource="cn/com/crowdsourcedtesting/DAO/Recruiment.hbm.xml" />
-
+		<mapping
+			resource="cn/com/crowdsourcedtesting/DAO/Product.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>

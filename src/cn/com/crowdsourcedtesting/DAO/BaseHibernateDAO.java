@@ -2,6 +2,8 @@ package cn.com.crowdsourcedtesting.DAO;
 
 import org.hibernate.Session;
 
+import cn.com.crowdtest.factory.HibernateSessionFactory;
+
 
 
 /**
