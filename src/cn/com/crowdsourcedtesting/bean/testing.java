@@ -13,7 +13,7 @@ public class testing {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-	   GiftDAO gd=  DAOFactory.getGiftDAO();
+	 /*  GiftDAO gd=  DAOFactory.getGiftDAO();
 		
 		List<Gift> gifts=gd.findAll();
 		System.out.println();
@@ -30,7 +30,15 @@ public class testing {
 		gd.save(g);
 		
 		System.out.println(gd.getTotalRows());
-
+*/
+		
+		
+		Tester tester = DAOFactory.getTesterDAO().isTester("ezhihan", "123");
+		
+		if(tester==null)
+		{
+			System.out.println(tester.getTesterId());
+		}
 	}
 
 }

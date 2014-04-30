@@ -3,7 +3,7 @@ package cn.com.crowdtest.test;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import cn.com.crowdsourcedtesting.DAO.HibernateSessionFactory;
+import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
 import cn.com.crowdsourcedtesting.bean.Tester;
 
 public class StaticTest {

@@ -133,30 +133,17 @@
 <!--=== Content Part ===-->
 <div class="container">		
 	<div class="row-fluid">
-        <form  action="security.do?method=login" class="log-page" />
+        <form  action="security.do?method=login" class="log-page" method="post" >
             <h3>帐号登录</h3>    
             <div class="input-prepend">
                 <span class="add-on"><i class="icon-user"></i></span>
-                <html:text property="username"><input class="input-xlarge" type="text" placeholder="用户名" /></html:text>
+                <input class="input-xlarge" type="text" name="username"  placeholder="用户名" />d
             </div>
             <div class="input-prepend">
                 <span class="add-on"><i class="icon-lock"></i></span>
-                <html:text property="username"> <input class="input-xlarge" type="password" placeholder="密码" /></html:text>
+                <input class="input-xlarge" type="password" name="password" placeholder="密码" />
             </div>
-            <div class="input-prepend">
-                <label class="radio inline" value="option1" name="loginRole">
-                	<input id="tester" type="radio" checked="" value="role_tester" name="roleChooser"></input>
-                   	测试者
-                </label>
-                <label class="radio inline" value="option1" name="loginRole">
-                	<input id="publisher" type="radio" checked="" value="role_publisher" name="roleChooser"></input>
-                   	发布者
-                </label>
-                <label class="radio inline" value="option1" name="loginRole">
-                	<input id="publisher" type="radio" checked="" value="role_admin" name="roleChooser"></input>
-                   	管理员
-                </label>
-            </div>
+         
             <div class="controls form-inline">
                 <label class="checkbox"><input type="checkbox" /> 记住密码</label>
                 <button class="btn-u pull-right" type="submit">登录</button>

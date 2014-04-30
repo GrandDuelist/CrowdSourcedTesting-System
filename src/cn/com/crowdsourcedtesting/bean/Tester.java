@@ -2,7 +2,10 @@ package cn.com.crowdsourcedtesting.bean;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+
 
 /**
  * Tester entity. @author MyEclipse Persistence Tools
@@ -165,5 +168,8 @@ public class Tester implements java.io.Serializable {
 	public void setChangeGifts(Set changeGifts) {
 		this.changeGifts = changeGifts;
 	}
+	
+	
+	
 
 }

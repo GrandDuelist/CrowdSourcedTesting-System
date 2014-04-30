@@ -35,8 +35,9 @@ public class SecurityRouter extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 //		LoginForm loginForm = (LoginForm) form;// TODO Auto-generated method stub
 		
+		LoginForm f= (LoginForm)form;
 		
-		System.out.println("用户登录");
+		System.out.println(f.getUsername());
 		return null;
 	}
 }

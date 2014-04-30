@@ -12,13 +12,15 @@
   <action-mappings >
     <action
       attribute="loginForm"
-      input="/LoginView.jsp"
       parameter = "method"
+      input="/LoginView.jsp"
       name="loginForm"
       path="/security"
       scope="request"
       type="cn.com.crowdsourcedtesting.controller.SecurityRouter">
       <set-property property="cancellable" value="true" />
+      
+      <forward name="login" path="LoginView.jsp"></forward>
     </action>
 
   </action-mappings>

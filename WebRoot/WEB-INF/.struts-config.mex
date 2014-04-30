@@ -1,12 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FlowViewLayout Version="1.2">
-  <StrutsActivity path="/security.do" location="90,105" dimension="354,104" />
-  <StrutsActivity path="/security/login.jsp" location="630,135" dimension="135,53" />
   <StrutsActivity path="/LoginView.jsp" location="950,50" dimension="116,53" />
+  <StrutsActivity path="/security/login.jsp" location="630,135" dimension="135,53" />
+  <StrutsActivity path="security/login.jsp" location="650,250" dimension="130,53" />
+  <StrutsActivity path="/LoginVe" location="50,350" dimension="84,53" />
+  <StrutsActivity path="/L" location="350,350" dimension="43,53" />
+  <StrutsActivity path="/Lgo" location="650,450" dimension="59,53" />
+  <StrutsActivity path="" location="950,450" dimension="32,53" />
+  <StrutsActivity path="/security.do" location="90,105" dimension="354,104" />
+  <StrutsActivity path="LoginView.jsp" />
+  <StrutsTransition id="login;6,null,,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="966,337" />
+      <AbsolutePoint location="966,450" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="security/login.jsp,null,/security.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="650,276" />
+      <AbsolutePoint location="267,276" />
+      <AbsolutePoint location="267,209" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/security.do,login,/LoginView.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="444,203" />
+      <AbsolutePoint location="1008,203" />
+      <AbsolutePoint location="1008,103" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="login;6,null,/LoginVe,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1013,337" />
+      <AbsolutePoint location="1013,376" />
+      <AbsolutePoint location="134,376" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/security.do,login,LoginView.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="267,157" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="login;6,null,/Lgo,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1013,337" />
+      <AbsolutePoint location="1013,476" />
+      <AbsolutePoint location="709,476" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
   <StrutsTransition id="/security/login.jsp,null,/security.do,2" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="630,157" />
       <AbsolutePoint location="444,157" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="login;6,null,/LoginView.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1008,250" />
+      <AbsolutePoint location="1008,103" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="login;6,null,/L,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1013,337" />
+      <AbsolutePoint location="1013,376" />
+      <AbsolutePoint location="393,376" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/LoginView.jsp,null,/security.do,2" routingType="0">
