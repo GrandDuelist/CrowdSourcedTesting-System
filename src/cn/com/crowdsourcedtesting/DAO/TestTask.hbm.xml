@@ -8,7 +8,7 @@
     <class name="cn.com.crowdsourcedtesting.bean.TestTask" table="TEST_TASK" schema="SCOTT">
         <id name="taskId" type="java.lang.Integer">
             <column name="TASK_ID" precision="9" scale="0" />
-            <generator class="sequence" />
+            <generator class="native" />
         </id>
         <many-to-one name="product" class="cn.com.crowdsourcedtesting.bean.Product" fetch="select">
             <column name="PRODUCT_ID" precision="9" scale="0" not-null="true" />

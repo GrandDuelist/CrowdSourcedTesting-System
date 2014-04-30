@@ -8,7 +8,7 @@
     <class name="cn.com.crowdsourcedtesting.bean.Tester" table="TESTER" schema="SCOTT">
         <id name="testerId" type="java.lang.Integer">
             <column name="TESTER_ID" precision="9" scale="0" />
-            <generator class="sequence" />
+            <generator class="native" />
         </id>
         <property name="testerName" type="java.lang.String">
             <column name="TESTER_NAME" length="40" not-null="true" unique="true" />

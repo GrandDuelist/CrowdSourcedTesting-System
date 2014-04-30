@@ -2,87 +2,97 @@ package cn.com.crowdsourcedtesting.bean;
 
 import java.util.Date;
 
-import cn.com.crowdsourcedtesting.bean.*;
 
 /**
  * ChangeGift entity. @author MyEclipse Persistence Tools
  */
 
-public class ChangeGift implements java.io.Serializable {
+public class ChangeGift  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer changeId;
-	private Gift gift;
-	private Tester tester;
-	private Double credit;
-	private Date changeDate;
-	private String sendAddress;
+    // Fields    
 
-	// Constructors
+     private Integer changeId;
+     private Gift gift;
+     private Tester tester;
+     private Double credit;
+     private Date changeDate;
+     private String sendAddress;
 
-	/** default constructor */
-	public ChangeGift() {
-	}
 
-	/** full constructor */
-	public ChangeGift(Gift gift, Tester tester, Double credit, Date changeDate,
-			String sendAddress) {
-		this.gift = gift;
-		this.tester = tester;
-		this.credit = credit;
-		this.changeDate = changeDate;
-		this.sendAddress = sendAddress;
-	}
+    // Constructors
 
-	// Property accessors
+    /** default constructor */
+    public ChangeGift() {
+    }
 
-	public Integer getChangeId() {
-		return this.changeId;
-	}
+    
+    /** full constructor */
+    public ChangeGift(Gift gift, Tester tester, Double credit, Date changeDate, String sendAddress) {
+        this.gift = gift;
+        this.tester = tester;
+        this.credit = credit;
+        this.changeDate = changeDate;
+        this.sendAddress = sendAddress;
+    }
 
-	public void setChangeId(Integer changeId) {
-		this.changeId = changeId;
-	}
+   
+    // Property accessors
 
-	public Gift getGift() {
-		return this.gift;
-	}
+    public Integer getChangeId() {
+        return this.changeId;
+    }
+    
+    public void setChangeId(Integer changeId) {
+        this.changeId = changeId;
+    }
 
-	public void setGift(Gift gift) {
-		this.gift = gift;
-	}
+    public Gift getGift() {
+        return this.gift;
+    }
+    
+    public void setGift(Gift gift) {
+        this.gift = gift;
+    }
 
-	public Tester getTester() {
-		return this.tester;
-	}
+    public Tester getTester() {
+        return this.tester;
+    }
+    
+    public void setTester(Tester tester) {
+        this.tester = tester;
+    }
 
-	public void setTester(Tester tester) {
-		this.tester = tester;
-	}
+    public Double getCredit() {
+        return this.credit;
+    }
+    
+    public void setCredit(Double credit) {
+        this.credit = credit;
+    }
 
-	public Double getCredit() {
-		return this.credit;
-	}
+    public Date getChangeDate() {
+        return this.changeDate;
+    }
+    
+    public void setChangeDate(Date changeDate) {
+        this.changeDate = changeDate;
+    }
 
-	public void setCredit(Double credit) {
-		this.credit = credit;
-	}
+    public String getSendAddress() {
+        return this.sendAddress;
+    }
+    
+    public void setSendAddress(String sendAddress) {
+        this.sendAddress = sendAddress;
+    }
+   
 
-	public Date getChangeDate() {
-		return this.changeDate;
-	}
 
-	public void setChangeDate(Date changeDate) {
-		this.changeDate = changeDate;
-	}
 
-	public String getSendAddress() {
-		return this.sendAddress;
-	}
 
-	public void setSendAddress(String sendAddress) {
-		this.sendAddress = sendAddress;
-	}
+
+
+
 
 }

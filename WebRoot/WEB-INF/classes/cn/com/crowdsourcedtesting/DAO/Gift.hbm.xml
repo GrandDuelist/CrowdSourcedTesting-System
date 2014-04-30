@@ -8,7 +8,7 @@
     <class name="cn.com.crowdsourcedtesting.bean.Gift" table="GIFT" schema="SCOTT">
         <id name="giftId" type="java.lang.Integer">
             <column name="GIFT_ID" precision="9" scale="0" />
-            <generator class="sequence" />
+            <generator class="native" />
         </id>
         <property name="giftAmount" type="java.lang.Integer">
             <column name="GIFT_AMOUNT" precision="9" scale="0" not-null="true" />

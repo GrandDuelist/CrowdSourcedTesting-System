@@ -4,157 +4,165 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
  * TestTask entity. @author MyEclipse Persistence Tools
  */
 
-public class TestTask implements java.io.Serializable {
+public class TestTask  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer taskId;
-	private Product product;
-	private Publisher publisher;
-	private Date taskStartTime;
-	private Date taskEndTime;
-	private Boolean taskType;
-	private Integer checkedAdministratorId;
-	private String taskEnvironment;
-	private Double perReward;
-	private Double wholeCredit;
-	private Set bugReports = new HashSet(0);
-	private Set taskComments = new HashSet(0);
+    // Fields    
 
-	// Constructors
+     private Integer taskId;
+     private Product product;
+     private Publisher publisher;
+     private Date taskStartTime;
+     private Date taskEndTime;
+     private Boolean taskType;
+     private Integer checkedAdministratorId;
+     private String taskEnvironment;
+     private Double perReward;
+     private Double wholeCredit;
+     private Set bugReports = new HashSet(0);
+     private Set taskComments = new HashSet(0);
 
-	/** default constructor */
-	public TestTask() {
-	}
+
+    // Constructors
+
+    /** default constructor */
+    public TestTask() {
+    }
 
 	/** minimal constructor */
-	public TestTask(Product product, Publisher publisher, Boolean taskType,
-			Double perReward, Double wholeCredit) {
-		this.product = product;
-		this.publisher = publisher;
-		this.taskType = taskType;
-		this.perReward = perReward;
-		this.wholeCredit = wholeCredit;
-	}
+    public TestTask(Product product, Publisher publisher, Boolean taskType, Double perReward, Double wholeCredit) {
+        this.product = product;
+        this.publisher = publisher;
+        this.taskType = taskType;
+        this.perReward = perReward;
+        this.wholeCredit = wholeCredit;
+    }
+    
+    /** full constructor */
+    public TestTask(Product product, Publisher publisher, Date taskStartTime, Date taskEndTime, Boolean taskType, Integer checkedAdministratorId, String taskEnvironment, Double perReward, Double wholeCredit, Set bugReports, Set taskComments) {
+        this.product = product;
+        this.publisher = publisher;
+        this.taskStartTime = taskStartTime;
+        this.taskEndTime = taskEndTime;
+        this.taskType = taskType;
+        this.checkedAdministratorId = checkedAdministratorId;
+        this.taskEnvironment = taskEnvironment;
+        this.perReward = perReward;
+        this.wholeCredit = wholeCredit;
+        this.bugReports = bugReports;
+        this.taskComments = taskComments;
+    }
 
-	/** full constructor */
-	public TestTask(Product product, Publisher publisher, Date taskStartTime,
-			Date taskEndTime, Boolean taskType, Integer checkedAdministratorId,
-			String taskEnvironment, Double perReward, Double wholeCredit,
-			Set bugReports, Set taskComments) {
-		this.product = product;
-		this.publisher = publisher;
-		this.taskStartTime = taskStartTime;
-		this.taskEndTime = taskEndTime;
-		this.taskType = taskType;
-		this.checkedAdministratorId = checkedAdministratorId;
-		this.taskEnvironment = taskEnvironment;
-		this.perReward = perReward;
-		this.wholeCredit = wholeCredit;
-		this.bugReports = bugReports;
-		this.taskComments = taskComments;
-	}
+   
+    // Property accessors
 
-	// Property accessors
+    public Integer getTaskId() {
+        return this.taskId;
+    }
+    
+    public void setTaskId(Integer taskId) {
+        this.taskId = taskId;
+    }
 
-	public Integer getTaskId() {
-		return this.taskId;
-	}
+    public Product getProduct() {
+        return this.product;
+    }
+    
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
-	public void setTaskId(Integer taskId) {
-		this.taskId = taskId;
-	}
+    public Publisher getPublisher() {
+        return this.publisher;
+    }
+    
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
 
-	public Product getProduct() {
-		return this.product;
-	}
+    public Date getTaskStartTime() {
+        return this.taskStartTime;
+    }
+    
+    public void setTaskStartTime(Date taskStartTime) {
+        this.taskStartTime = taskStartTime;
+    }
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
+    public Date getTaskEndTime() {
+        return this.taskEndTime;
+    }
+    
+    public void setTaskEndTime(Date taskEndTime) {
+        this.taskEndTime = taskEndTime;
+    }
 
-	public Publisher getPublisher() {
-		return this.publisher;
-	}
+    public Boolean getTaskType() {
+        return this.taskType;
+    }
+    
+    public void setTaskType(Boolean taskType) {
+        this.taskType = taskType;
+    }
 
-	public void setPublisher(Publisher publisher) {
-		this.publisher = publisher;
-	}
+    public Integer getCheckedAdministratorId() {
+        return this.checkedAdministratorId;
+    }
+    
+    public void setCheckedAdministratorId(Integer checkedAdministratorId) {
+        this.checkedAdministratorId = checkedAdministratorId;
+    }
 
-	public Date getTaskStartTime() {
-		return this.taskStartTime;
-	}
+    public String getTaskEnvironment() {
+        return this.taskEnvironment;
+    }
+    
+    public void setTaskEnvironment(String taskEnvironment) {
+        this.taskEnvironment = taskEnvironment;
+    }
 
-	public void setTaskStartTime(Date taskStartTime) {
-		this.taskStartTime = taskStartTime;
-	}
+    public Double getPerReward() {
+        return this.perReward;
+    }
+    
+    public void setPerReward(Double perReward) {
+        this.perReward = perReward;
+    }
 
-	public Date getTaskEndTime() {
-		return this.taskEndTime;
-	}
+    public Double getWholeCredit() {
+        return this.wholeCredit;
+    }
+    
+    public void setWholeCredit(Double wholeCredit) {
+        this.wholeCredit = wholeCredit;
+    }
 
-	public void setTaskEndTime(Date taskEndTime) {
-		this.taskEndTime = taskEndTime;
-	}
+    public Set getBugReports() {
+        return this.bugReports;
+    }
+    
+    public void setBugReports(Set bugReports) {
+        this.bugReports = bugReports;
+    }
 
-	public Boolean getTaskType() {
-		return this.taskType;
-	}
+    public Set getTaskComments() {
+        return this.taskComments;
+    }
+    
+    public void setTaskComments(Set taskComments) {
+        this.taskComments = taskComments;
+    }
+   
 
-	public void setTaskType(Boolean taskType) {
-		this.taskType = taskType;
-	}
 
-	public Integer getCheckedAdministratorId() {
-		return this.checkedAdministratorId;
-	}
 
-	public void setCheckedAdministratorId(Integer checkedAdministratorId) {
-		this.checkedAdministratorId = checkedAdministratorId;
-	}
 
-	public String getTaskEnvironment() {
-		return this.taskEnvironment;
-	}
 
-	public void setTaskEnvironment(String taskEnvironment) {
-		this.taskEnvironment = taskEnvironment;
-	}
 
-	public Double getPerReward() {
-		return this.perReward;
-	}
 
-	public void setPerReward(Double perReward) {
-		this.perReward = perReward;
-	}
-
-	public Double getWholeCredit() {
-		return this.wholeCredit;
-	}
-
-	public void setWholeCredit(Double wholeCredit) {
-		this.wholeCredit = wholeCredit;
-	}
-
-	public Set getBugReports() {
-		return this.bugReports;
-	}
-
-	public void setBugReports(Set bugReports) {
-		this.bugReports = bugReports;
-	}
-
-	public Set getTaskComments() {
-		return this.taskComments;
-	}
-
-	public void setTaskComments(Set taskComments) {
-		this.taskComments = taskComments;
-	}
 
 }

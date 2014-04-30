@@ -8,7 +8,7 @@
     <class name="cn.com.crowdsourcedtesting.bean.JoinQuestionnaire" table="JOIN_QUESTIONNAIRE" schema="SCOTT">
         <id name="joinId" type="java.lang.Integer">
             <column name="JOIN_ID" precision="9" scale="0" />
-            <generator class="sequence" />
+            <generator class="native" />
         </id>
         <many-to-one name="questionnaire" class="cn.com.crowdsourcedtesting.bean.Questionnaire" fetch="select">
             <column name="QUESTIONNAIRE_ID" precision="9" scale="0" not-null="true" />

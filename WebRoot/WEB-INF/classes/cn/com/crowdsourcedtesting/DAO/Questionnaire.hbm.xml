@@ -8,7 +8,7 @@
     <class name="cn.com.crowdsourcedtesting.bean.Questionnaire" table="QUESTIONNAIRE" schema="SCOTT">
         <id name="questionnaireId" type="java.lang.Integer">
             <column name="QUESTIONNAIRE_ID" precision="9" scale="0" />
-            <generator class="sequence" />
+            <generator class="native" />
         </id>
         <many-to-one name="administrator" class="cn.com.crowdsourcedtesting.bean.Administrator" fetch="select">
             <column name="CHECK_ADMINISTATOR_ID" precision="9" scale="0" />

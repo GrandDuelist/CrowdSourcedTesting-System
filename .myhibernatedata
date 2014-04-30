@@ -1,6 +1,6 @@
 #MyEclipse Hibernate Properties
-#Tue Apr 29 00:52:06 CST 2014
-sessionFactoryName=cn.com.crowdsourcedtesting.DAO.HibernateSessionFactory
+#Tue Apr 29 22:48:12 CST 2014
+sessionFactoryName=cn.com.crowdsourcedtesting.base.HibernateSessionFactory
 genBasicCompId=false
 profile=
 daoSFId=
@@ -11,7 +11,7 @@ reStrategyClass=
 detectO2O=true
 springDaoFile=
 useJavaTypes=true
-keyGenerator=sequence
+keyGenerator=native
 libInstallFolder=WebRoot/WEB-INF/lib
 addLibs2Project=true
 genVersionTag=false
@@ -22,4 +22,4 @@ reSettingsFile=
 configFile=/CrowdSourcedTesting-System/src/hibernate.cfg.xml
 createConfigFile=true
 addLibs2Classpath=true
-baseDaoClass=cn.com.crowdsourcedtesting.DAO.BaseHibernateDAO
+baseDaoClass=cn.com.crowdsourcedtesting.base.BaseHibernateDAO

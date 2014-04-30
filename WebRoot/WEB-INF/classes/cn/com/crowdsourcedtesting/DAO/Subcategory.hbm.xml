@@ -8,7 +8,7 @@
     <class name="cn.com.crowdsourcedtesting.bean.Subcategory" table="SUBCATEGORY" schema="SCOTT">
         <id name="subcategoryId" type="java.lang.Integer">
             <column name="SUBCATEGORY_ID" precision="9" scale="0" />
-            <generator class="sequence" />
+            <generator class="native" />
         </id>
         <many-to-one name="category" class="cn.com.crowdsourcedtesting.bean.Category" fetch="select">
             <column name="CATEGORY_ID" precision="9" scale="0" not-null="true" />

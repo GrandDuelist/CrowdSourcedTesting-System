@@ -8,7 +8,7 @@
     <class name="cn.com.crowdsourcedtesting.bean.Recruitment" table="RECRUITMENT" schema="SCOTT">
         <id name="activityId" type="java.lang.Integer">
             <column name="ACTIVITY_ID" precision="9" scale="0" />
-            <generator class="sequence" />
+            <generator class="native" />
         </id>
         <many-to-one name="administrator" class="cn.com.crowdsourcedtesting.bean.Administrator" fetch="select">
             <column name="CHECK_ADMINISTRATOR_ID" precision="9" scale="0" />

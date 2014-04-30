@@ -8,6 +8,16 @@ public class DAOFactory {
 		return new GiftDAO();
 	}
 	
+	public static TesterDAO getTesterDAO(){
+		return new TesterDAO();
+	}
+	
+	
+	public static PublisherDAO getPublisherDAO()
+	{
+		return new PublisherDAO();
+	}
+	
 	public static AdministratorDAO getAdministratorDAO()
 	{
 		return new AdministratorDAO();

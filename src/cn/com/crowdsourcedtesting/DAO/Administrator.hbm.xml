@@ -8,7 +8,7 @@
     <class name="cn.com.crowdsourcedtesting.bean.Administrator" table="ADMINISTRATOR" schema="SCOTT">
         <id name="administratorId" type="java.lang.Integer">
             <column name="ADMINISTRATOR_ID" precision="9" scale="0" />
-            <generator class="sequence" />
+            <generator class="native" />
         </id>
         <property name="administratorName" type="java.lang.String">
             <column name="ADMINISTRATOR_NAME" length="40" not-null="true" unique="true" />
@@ -25,7 +25,7 @@
         <property name="administratorOccupation" type="java.lang.String">
             <column name="ADMINISTRATOR_OCCUPATION" length="40" not-null="true" />
         </property>
-        <set name="recruiments" inverse="true">
+        <set name="recruitments" inverse="true">
             <key>
                 <column name="CHECK_ADMINISTRATOR_ID" precision="9" scale="0" />
             </key>

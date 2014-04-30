@@ -8,7 +8,7 @@
     <class name="cn.com.crowdsourcedtesting.bean.ChangeGift" table="CHANGE_GIFT" schema="SCOTT">
         <id name="changeId" type="java.lang.Integer">
             <column name="CHANGE_ID" precision="9" scale="0" />
-            <generator class="sequence" />
+            <generator class="native" />
         </id>
         <many-to-one name="gift" class="cn.com.crowdsourcedtesting.bean.Gift" fetch="select">
             <column name="GIFT_ID" precision="9" scale="0" not-null="true" />

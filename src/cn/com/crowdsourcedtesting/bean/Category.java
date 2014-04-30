@@ -3,71 +3,82 @@ package cn.com.crowdsourcedtesting.bean;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
  * Category entity. @author MyEclipse Persistence Tools
  */
 
-public class Category implements java.io.Serializable {
+public class Category  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer categoryId;
-	private String categoryName;
-	private Boolean plateformType;
-	private Set subcategories = new HashSet(0);
+    // Fields    
 
-	// Constructors
+     private Integer categoryId;
+     private String categoryName;
+     private Boolean plateformType;
+     private Set subcategories = new HashSet(0);
 
-	/** default constructor */
-	public Category() {
-	}
+
+    // Constructors
+
+    /** default constructor */
+    public Category() {
+    }
 
 	/** minimal constructor */
-	public Category(String categoryName, Boolean plateformType) {
-		this.categoryName = categoryName;
-		this.plateformType = plateformType;
-	}
+    public Category(String categoryName, Boolean plateformType) {
+        this.categoryName = categoryName;
+        this.plateformType = plateformType;
+    }
+    
+    /** full constructor */
+    public Category(String categoryName, Boolean plateformType, Set subcategories) {
+        this.categoryName = categoryName;
+        this.plateformType = plateformType;
+        this.subcategories = subcategories;
+    }
 
-	/** full constructor */
-	public Category(String categoryName, Boolean plateformType,
-			Set subcategories) {
-		this.categoryName = categoryName;
-		this.plateformType = plateformType;
-		this.subcategories = subcategories;
-	}
+   
+    // Property accessors
 
-	// Property accessors
+    public Integer getCategoryId() {
+        return this.categoryId;
+    }
+    
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
 
-	public Integer getCategoryId() {
-		return this.categoryId;
-	}
+    public String getCategoryName() {
+        return this.categoryName;
+    }
+    
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
-	public void setCategoryId(Integer categoryId) {
-		this.categoryId = categoryId;
-	}
+    public Boolean getPlateformType() {
+        return this.plateformType;
+    }
+    
+    public void setPlateformType(Boolean plateformType) {
+        this.plateformType = plateformType;
+    }
 
-	public String getCategoryName() {
-		return this.categoryName;
-	}
+    public Set getSubcategories() {
+        return this.subcategories;
+    }
+    
+    public void setSubcategories(Set subcategories) {
+        this.subcategories = subcategories;
+    }
+   
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
 
-	public Boolean getPlateformType() {
-		return this.plateformType;
-	}
 
-	public void setPlateformType(Boolean plateformType) {
-		this.plateformType = plateformType;
-	}
 
-	public Set getSubcategories() {
-		return this.subcategories;
-	}
 
-	public void setSubcategories(Set subcategories) {
-		this.subcategories = subcategories;
-	}
+
+
 
 }

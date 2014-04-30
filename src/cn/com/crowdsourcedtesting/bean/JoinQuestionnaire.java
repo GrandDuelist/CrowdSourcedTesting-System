@@ -3,65 +3,77 @@ package cn.com.crowdsourcedtesting.bean;
 import java.util.Date;
 
 
+
 /**
  * JoinQuestionnaire entity. @author MyEclipse Persistence Tools
  */
 
-public class JoinQuestionnaire implements java.io.Serializable {
+public class JoinQuestionnaire  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer joinId;
-	private Questionnaire questionnaire;
-	private Tester tester;
-	private Date joinTime;
+    // Fields    
 
-	// Constructors
+     private Integer joinId;
+     private Questionnaire questionnaire;
+     private Tester tester;
+     private Date joinTime;
 
-	/** default constructor */
-	public JoinQuestionnaire() {
-	}
 
-	/** full constructor */
-	public JoinQuestionnaire(Questionnaire questionnaire, Tester tester,
-			Date joinTime) {
-		this.questionnaire = questionnaire;
-		this.tester = tester;
-		this.joinTime = joinTime;
-	}
+    // Constructors
 
-	// Property accessors
+    /** default constructor */
+    public JoinQuestionnaire() {
+    }
 
-	public Integer getJoinId() {
-		return this.joinId;
-	}
+    
+    /** full constructor */
+    public JoinQuestionnaire(Questionnaire questionnaire, Tester tester, Date joinTime) {
+        this.questionnaire = questionnaire;
+        this.tester = tester;
+        this.joinTime = joinTime;
+    }
 
-	public void setJoinId(Integer joinId) {
-		this.joinId = joinId;
-	}
+   
+    // Property accessors
 
-	public Questionnaire getQuestionnaire() {
-		return this.questionnaire;
-	}
+    public Integer getJoinId() {
+        return this.joinId;
+    }
+    
+    public void setJoinId(Integer joinId) {
+        this.joinId = joinId;
+    }
 
-	public void setQuestionnaire(Questionnaire questionnaire) {
-		this.questionnaire = questionnaire;
-	}
+    public Questionnaire getQuestionnaire() {
+        return this.questionnaire;
+    }
+    
+    public void setQuestionnaire(Questionnaire questionnaire) {
+        this.questionnaire = questionnaire;
+    }
 
-	public Tester getTester() {
-		return this.tester;
-	}
+    public Tester getTester() {
+        return this.tester;
+    }
+    
+    public void setTester(Tester tester) {
+        this.tester = tester;
+    }
 
-	public void setTester(Tester tester) {
-		this.tester = tester;
-	}
+    public Date getJoinTime() {
+        return this.joinTime;
+    }
+    
+    public void setJoinTime(Date joinTime) {
+        this.joinTime = joinTime;
+    }
+   
 
-	public Date getJoinTime() {
-		return this.joinTime;
-	}
 
-	public void setJoinTime(Date joinTime) {
-		this.joinTime = joinTime;
-	}
+
+
+
+
+
 
 }

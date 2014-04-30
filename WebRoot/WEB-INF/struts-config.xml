@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+  <data-sources />
+  <form-beans >
+    <form-bean name="loginForm" type="cn.com.crowdsourcedtesting.struts.form.LoginForm" />
+
+  </form-beans>
+
+  <global-exceptions />
+  <global-forwards />
+  <action-mappings >
+    <action
+      attribute="loginForm"
+      input="/LoginView.jsp"
+      parameter = "method"
+      name="loginForm"
+      path="/security"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.SecurityRouter">
+      <set-property property="cancellable" value="true" />
+    </action>
+
+  </action-mappings>
+
+  <message-resources parameter="cn.com.crowdsourcedtesting.struts.ApplicationResources" />
+</struts-config>
+

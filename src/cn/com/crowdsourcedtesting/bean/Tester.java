@@ -4,166 +4,174 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
  * Tester entity. @author MyEclipse Persistence Tools
  */
 
-public class Tester implements java.io.Serializable {
+public class Tester  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer testerId;
-	private String testerName;
-	private String testerEmail;
-	private String testerPassword;
-	private Boolean testerGender;
-	private String testerMobile;
-	private Date testerBirthday;
-	private String testerPhoto;
-	private Double testerCredit;
-	private Set taskComments = new HashSet(0);
-	private Set bugReports = new HashSet(0);
-	private Set joinQuestionnaires = new HashSet(0);
-	private Set changeGifts = new HashSet(0);
+    // Fields    
 
-	// Constructors
+     private Integer testerId;
+     private String testerName;
+     private String testerEmail;
+     private String testerPassword;
+     private Boolean testerGender;
+     private String testerMobile;
+     private Date testerBirthday;
+     private String testerPhoto;
+     private Double testerCredit;
+     private Set taskComments = new HashSet(0);
+     private Set bugReports = new HashSet(0);
+     private Set joinQuestionnaires = new HashSet(0);
+     private Set changeGifts = new HashSet(0);
 
-	/** default constructor */
-	public Tester() {
-	}
+
+    // Constructors
+
+    /** default constructor */
+    public Tester() {
+    }
 
 	/** minimal constructor */
-	public Tester(String testerName, String testerEmail, String testerPassword,
-			Double testerCredit) {
-		this.testerName = testerName;
-		this.testerEmail = testerEmail;
-		this.testerPassword = testerPassword;
-		this.testerCredit = testerCredit;
-	}
+    public Tester(String testerName, String testerEmail, String testerPassword, Double testerCredit) {
+        this.testerName = testerName;
+        this.testerEmail = testerEmail;
+        this.testerPassword = testerPassword;
+        this.testerCredit = testerCredit;
+    }
+    
+    /** full constructor */
+    public Tester(String testerName, String testerEmail, String testerPassword, Boolean testerGender, String testerMobile, Date testerBirthday, String testerPhoto, Double testerCredit, Set taskComments, Set bugReports, Set joinQuestionnaires, Set changeGifts) {
+        this.testerName = testerName;
+        this.testerEmail = testerEmail;
+        this.testerPassword = testerPassword;
+        this.testerGender = testerGender;
+        this.testerMobile = testerMobile;
+        this.testerBirthday = testerBirthday;
+        this.testerPhoto = testerPhoto;
+        this.testerCredit = testerCredit;
+        this.taskComments = taskComments;
+        this.bugReports = bugReports;
+        this.joinQuestionnaires = joinQuestionnaires;
+        this.changeGifts = changeGifts;
+    }
 
-	/** full constructor */
-	public Tester(String testerName, String testerEmail, String testerPassword,
-			Boolean testerGender, String testerMobile, Date testerBirthday,
-			String testerPhoto, Double testerCredit, Set taskComments,
-			Set bugReports, Set joinQuestionnaires, Set changeGifts) {
-		this.testerName = testerName;
-		this.testerEmail = testerEmail;
-		this.testerPassword = testerPassword;
-		this.testerGender = testerGender;
-		this.testerMobile = testerMobile;
-		this.testerBirthday = testerBirthday;
-		this.testerPhoto = testerPhoto;
-		this.testerCredit = testerCredit;
-		this.taskComments = taskComments;
-		this.bugReports = bugReports;
-		this.joinQuestionnaires = joinQuestionnaires;
-		this.changeGifts = changeGifts;
-	}
+   
+    // Property accessors
 
-	// Property accessors
+    public Integer getTesterId() {
+        return this.testerId;
+    }
+    
+    public void setTesterId(Integer testerId) {
+        this.testerId = testerId;
+    }
 
-	public Integer getTesterId() {
-		return this.testerId;
-	}
+    public String getTesterName() {
+        return this.testerName;
+    }
+    
+    public void setTesterName(String testerName) {
+        this.testerName = testerName;
+    }
 
-	public void setTesterId(Integer testerId) {
-		this.testerId = testerId;
-	}
+    public String getTesterEmail() {
+        return this.testerEmail;
+    }
+    
+    public void setTesterEmail(String testerEmail) {
+        this.testerEmail = testerEmail;
+    }
 
-	public String getTesterName() {
-		return this.testerName;
-	}
+    public String getTesterPassword() {
+        return this.testerPassword;
+    }
+    
+    public void setTesterPassword(String testerPassword) {
+        this.testerPassword = testerPassword;
+    }
 
-	public void setTesterName(String testerName) {
-		this.testerName = testerName;
-	}
+    public Boolean getTesterGender() {
+        return this.testerGender;
+    }
+    
+    public void setTesterGender(Boolean testerGender) {
+        this.testerGender = testerGender;
+    }
 
-	public String getTesterEmail() {
-		return this.testerEmail;
-	}
+    public String getTesterMobile() {
+        return this.testerMobile;
+    }
+    
+    public void setTesterMobile(String testerMobile) {
+        this.testerMobile = testerMobile;
+    }
 
-	public void setTesterEmail(String testerEmail) {
-		this.testerEmail = testerEmail;
-	}
+    public Date getTesterBirthday() {
+        return this.testerBirthday;
+    }
+    
+    public void setTesterBirthday(Date testerBirthday) {
+        this.testerBirthday = testerBirthday;
+    }
 
-	public String getTesterPassword() {
-		return this.testerPassword;
-	}
+    public String getTesterPhoto() {
+        return this.testerPhoto;
+    }
+    
+    public void setTesterPhoto(String testerPhoto) {
+        this.testerPhoto = testerPhoto;
+    }
 
-	public void setTesterPassword(String testerPassword) {
-		this.testerPassword = testerPassword;
-	}
+    public Double getTesterCredit() {
+        return this.testerCredit;
+    }
+    
+    public void setTesterCredit(Double testerCredit) {
+        this.testerCredit = testerCredit;
+    }
 
-	public Boolean getTesterGender() {
-		return this.testerGender;
-	}
+    public Set getTaskComments() {
+        return this.taskComments;
+    }
+    
+    public void setTaskComments(Set taskComments) {
+        this.taskComments = taskComments;
+    }
 
-	public void setTesterGender(Boolean testerGender) {
-		this.testerGender = testerGender;
-	}
+    public Set getBugReports() {
+        return this.bugReports;
+    }
+    
+    public void setBugReports(Set bugReports) {
+        this.bugReports = bugReports;
+    }
 
-	public String getTesterMobile() {
-		return this.testerMobile;
-	}
+    public Set getJoinQuestionnaires() {
+        return this.joinQuestionnaires;
+    }
+    
+    public void setJoinQuestionnaires(Set joinQuestionnaires) {
+        this.joinQuestionnaires = joinQuestionnaires;
+    }
 
-	public void setTesterMobile(String testerMobile) {
-		this.testerMobile = testerMobile;
-	}
+    public Set getChangeGifts() {
+        return this.changeGifts;
+    }
+    
+    public void setChangeGifts(Set changeGifts) {
+        this.changeGifts = changeGifts;
+    }
+   
 
-	public Date getTesterBirthday() {
-		return this.testerBirthday;
-	}
 
-	public void setTesterBirthday(Date testerBirthday) {
-		this.testerBirthday = testerBirthday;
-	}
 
-	public String getTesterPhoto() {
-		return this.testerPhoto;
-	}
 
-	public void setTesterPhoto(String testerPhoto) {
-		this.testerPhoto = testerPhoto;
-	}
 
-	public Double getTesterCredit() {
-		return this.testerCredit;
-	}
 
-	public void setTesterCredit(Double testerCredit) {
-		this.testerCredit = testerCredit;
-	}
 
-	public Set getTaskComments() {
-		return this.taskComments;
-	}
-
-	public void setTaskComments(Set taskComments) {
-		this.taskComments = taskComments;
-	}
-
-	public Set getBugReports() {
-		return this.bugReports;
-	}
-
-	public void setBugReports(Set bugReports) {
-		this.bugReports = bugReports;
-	}
-
-	public Set getJoinQuestionnaires() {
-		return this.joinQuestionnaires;
-	}
-
-	public void setJoinQuestionnaires(Set joinQuestionnaires) {
-		this.joinQuestionnaires = joinQuestionnaires;
-	}
-
-	public Set getChangeGifts() {
-		return this.changeGifts;
-	}
-
-	public void setChangeGifts(Set changeGifts) {
-		this.changeGifts = changeGifts;
-	}
 
 }

@@ -13,11 +13,21 @@ public class testing {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		GiftDAO g=  DAOFactory.getGiftDAO();
+		GiftDAO gd=  DAOFactory.getGiftDAO();
 		
-		List<Gift> gifts=g.findAll();
+		/*List<Gift> gifts=g.findAll();
 		System.out.println();
-		System.out.println(gifts.size());
+		System.out.println(gifts.size());*/
+		
+		Gift g =  new  Gift();
+		g.setChangeGifts(null);
+		g.setGiftName("礼品");
+		g.setGiftPhoto("000");
+		g.setGiftCredit(12.00);
+		g.setGiftAmount(22);
+		
+		
+		gd.save(g);
 
 	}
 
