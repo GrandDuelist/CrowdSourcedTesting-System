@@ -5,7 +5,6 @@
   <data-sources />
   <form-beans >
     <form-bean name="loginForm" type="cn.com.crowdsourcedtesting.struts.form.LoginForm" />
-
   </form-beans>
 
   <global-exceptions />

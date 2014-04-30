@@ -141,7 +141,7 @@
             </div>
             <div class="input-prepend">
                 <span class="add-on"><i class="icon-lock"></i></span>
-                <html:text property="password"><input class="input-xlarge" type="text" placeholder="密码" /></html:text>
+                <html:text property="username"> <input class="input-xlarge" type="password" placeholder="密码" /></html:text>
             </div>
             <div class="input-prepend">
                 <label class="radio inline" value="option1" name="loginRole">

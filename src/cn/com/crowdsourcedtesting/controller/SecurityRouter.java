@@ -23,7 +23,6 @@ public class SecurityRouter extends DispatchAction {
 	/*
 	 * Generated Methods
 	 */
-
 	/** 
 	 * 用户登录
 	 * @param mapping
@@ -35,6 +34,7 @@ public class SecurityRouter extends DispatchAction {
 	public ActionForward login(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 //		LoginForm loginForm = (LoginForm) form;// TODO Auto-generated method stub
+		
 		
 		System.out.println("用户登录");
 		return null;

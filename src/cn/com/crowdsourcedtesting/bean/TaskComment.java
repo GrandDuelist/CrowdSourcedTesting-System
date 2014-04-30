@@ -2,87 +2,75 @@ package cn.com.crowdsourcedtesting.bean;
 
 import java.util.Date;
 
-
 /**
  * TaskComment entity. @author MyEclipse Persistence Tools
  */
 
-public class TaskComment  implements java.io.Serializable {
+public class TaskComment implements java.io.Serializable {
 
+	// Fields
 
-    // Fields    
+	private Integer commentId;
+	private TestTask testTask;
+	private Tester tester;
+	private String commentContent;
+	private Date commentTime;
 
-     private Integer commentId;
-     private TestTask testTask;
-     private Tester tester;
-     private String commentContent;
-     private Date commentTime;
+	// Constructors
 
+	/** default constructor */
+	public TaskComment() {
+	}
 
-    // Constructors
+	/** full constructor */
+	public TaskComment(TestTask testTask, Tester tester, String commentContent,
+			Date commentTime) {
+		this.testTask = testTask;
+		this.tester = tester;
+		this.commentContent = commentContent;
+		this.commentTime = commentTime;
+	}
 
-    /** default constructor */
-    public TaskComment() {
-    }
+	// Property accessors
 
-    
-    /** full constructor */
-    public TaskComment(TestTask testTask, Tester tester, String commentContent, Date commentTime) {
-        this.testTask = testTask;
-        this.tester = tester;
-        this.commentContent = commentContent;
-        this.commentTime = commentTime;
-    }
+	public Integer getCommentId() {
+		return this.commentId;
+	}
 
-   
-    // Property accessors
+	public void setCommentId(Integer commentId) {
+		this.commentId = commentId;
+	}
 
-    public Integer getCommentId() {
-        return this.commentId;
-    }
-    
-    public void setCommentId(Integer commentId) {
-        this.commentId = commentId;
-    }
+	public TestTask getTestTask() {
+		return this.testTask;
+	}
 
-    public TestTask getTestTask() {
-        return this.testTask;
-    }
-    
-    public void setTestTask(TestTask testTask) {
-        this.testTask = testTask;
-    }
+	public void setTestTask(TestTask testTask) {
+		this.testTask = testTask;
+	}
 
-    public Tester getTester() {
-        return this.tester;
-    }
-    
-    public void setTester(Tester tester) {
-        this.tester = tester;
-    }
+	public Tester getTester() {
+		return this.tester;
+	}
 
-    public String getCommentContent() {
-        return this.commentContent;
-    }
-    
-    public void setCommentContent(String commentContent) {
-        this.commentContent = commentContent;
-    }
+	public void setTester(Tester tester) {
+		this.tester = tester;
+	}
 
-    public Date getCommentTime() {
-        return this.commentTime;
-    }
-    
-    public void setCommentTime(Date commentTime) {
-        this.commentTime = commentTime;
-    }
-   
+	public String getCommentContent() {
+		return this.commentContent;
+	}
 
+	public void setCommentContent(String commentContent) {
+		this.commentContent = commentContent;
+	}
 
+	public Date getCommentTime() {
+		return this.commentTime;
+	}
 
-
-
-
-
+	public void setCommentTime(Date commentTime) {
+		this.commentTime = commentTime;
+	}
 
 }

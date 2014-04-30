@@ -42,7 +42,7 @@
     <load-on-startup>0</load-on-startup>
   </servlet>
   <servlet-mapping>
-    <servlet-name>FrontPageRouter</servlet-name>
+    <servlet-name>frontpage</servlet-name>
     <url-pattern>/FrontPageRouter</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
