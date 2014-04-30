@@ -21,7 +21,7 @@ public class Recruitment implements java.io.Serializable {
 	private String brief;
 	private String company;
 	private String place;
-	private Boolean recruimentType;
+	private Boolean recruitmentType;
 
 	// Constructors
 
@@ -31,11 +31,11 @@ public class Recruitment implements java.io.Serializable {
 
 	/** minimal constructor */
 	public Recruitment(Publisher publisher, String activityName,
-			Boolean online, Boolean recruimentType) {
+			Boolean online, Boolean recruitmentType) {
 		this.publisher = publisher;
 		this.activityName = activityName;
 		this.online = online;
-		this.recruimentType = recruimentType;
+		this.recruitmentType = recruitmentType;
 	}
 
 	/** full constructor */
@@ -53,7 +53,7 @@ public class Recruitment implements java.io.Serializable {
 		this.brief = brief;
 		this.company = company;
 		this.place = place;
-		this.recruimentType = recruimentType;
+		this.recruitmentType = recruitmentType;
 	}
 
 	// Property accessors
@@ -146,12 +146,12 @@ public class Recruitment implements java.io.Serializable {
 		this.place = place;
 	}
 
-	public Boolean getRecruimentType() {
-		return this.recruimentType;
+	public Boolean getRecruitmentType() {
+		return this.recruitmentType;
 	}
 
-	public void setRecruimentType(Boolean recruimentType) {
-		this.recruimentType = recruimentType;
+	public void setRecruitmentType(Boolean recruimentType) {
+		this.recruitmentType = recruimentType;
 	}
 
 }

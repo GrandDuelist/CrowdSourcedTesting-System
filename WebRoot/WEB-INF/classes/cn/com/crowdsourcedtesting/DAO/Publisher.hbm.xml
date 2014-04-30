@@ -54,7 +54,7 @@
 			type="java.lang.String">
 			<column length="40" name="PUBLISHER_CONNECT_EMAIL" />
 		</property>
-		<set inverse="true" name="recruiments" sort="unsorted">
+		<set inverse="true" name="recruitments" sort="unsorted">
 			<key>
 				<column name="PUBLISHER_ID" not-null="true" precision="9"
 					scale="0" />

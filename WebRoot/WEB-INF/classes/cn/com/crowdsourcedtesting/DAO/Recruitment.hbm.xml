@@ -53,7 +53,7 @@
 			type="java.lang.String">
 			<column length="50" name="PLACE" />
 		</property>
-		<property generated="never" lazy="false" name="recruimentType"
+		<property generated="never" lazy="false" name="recruitmentType"
 			type="java.lang.Boolean">
 			<column name="RECRUIMENT_TYPE" not-null="true" precision="1"
 				scale="0" />
