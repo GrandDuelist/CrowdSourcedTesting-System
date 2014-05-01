@@ -6,38 +6,113 @@ package cn.com.crowdsourcedtesting.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+
+import cn.com.crowdsourcedtesting.bean.Tester;
+import cn.com.crowdsourcedtesting.model.SecurityHandler;
+import cn.com.crowdsourcedtesting.modelhelper.UserType;
 import cn.com.crowdsourcedtesting.struts.form.LoginForm;
 
-/** 
- * MyEclipse Struts
- * Creation date: 04-29-2014
+/**
+ * MyEclipse Struts Creation date: 04-29-2014
  * 
  * XDoclet definition:
- * @struts.action path="/login" name="loginForm" input="/security/login.jsp" scope="request" validate="true"
+ * 
+ * @struts.action path="/login" name="loginForm" input="/security/login.jsp"
+ *                scope="request" validate="true"
  */
 public class SecurityRouter extends DispatchAction {
 	/*
 	 * Generated Methods
 	 */
-	/** 
-	 * 用户登录
+	
+	private SecurityHandler handler = new SecurityHandler();
+
+	
+	/**
+	 * 测试者登陆
 	 * @param mapping
 	 * @param form
 	 * @param request
 	 * @param response
-	 * @return ActionForward
+	 * @return
 	 */
-	public ActionForward login(ActionMapping mapping, ActionForm form,
+	public ActionForward testerLogin(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-//		LoginForm loginForm = (LoginForm) form;// TODO Auto-generated method stub
+		// LoginForm loginForm = (LoginForm) form;// TODO Auto-generated method
+		// stub
+
+		LoginForm f = (LoginForm) form;
+
+		HttpSession session = request.getSession();
+		Tester tester = handler.handleTesterLogin(f);
 		
-		LoginForm f= (LoginForm)form;
 		
-		System.out.println(f.getUsername());
-		return null;
+		if (tester!=null) {
+			// 测试者登陆成功
+			session.setAttribute("UserType", UserType.Tester);
+			session.setAttribute("Tester", tester);
+			return mapping.findForward("home");
+
+		} else {
+			// 测试者登录失败
+			session.setAttribute("login", "fail");
+			return mapping.findForward("login");
+		}
+
 	}
+
+	/**
+	 * 测试者登出
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward testerLogout(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		HttpSession session = request.getSession();
+
+		if (session.getAttribute("UserType") != null) {
+			session.removeAttribute("UserType");
+		}
+		return mapping.findForward("home");
+	}
+	
+	/**
+	 * 跳转到测试者登录页面
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward goToLogin(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		return mapping.findForward("login");
+	}
+	
+	
+	/**
+	 * 测试者登陆
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward entrance(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		return mapping.findForward("Manage");
+	}
+	
 }

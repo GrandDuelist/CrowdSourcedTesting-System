@@ -1,71 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FlowViewLayout Version="1.2">
-  <StrutsActivity path="/LoginView.jsp" location="950,50" dimension="116,53" />
-  <StrutsActivity path="/security/login.jsp" location="630,135" dimension="135,53" />
-  <StrutsActivity path="security/login.jsp" location="650,250" dimension="130,53" />
-  <StrutsActivity path="/LoginVe" location="50,350" dimension="84,53" />
-  <StrutsActivity path="/L" location="350,350" dimension="43,53" />
-  <StrutsActivity path="/Lgo" location="650,450" dimension="59,53" />
-  <StrutsActivity path="" location="950,450" dimension="32,53" />
   <StrutsActivity path="/security.do" location="90,105" dimension="354,104" />
-  <StrutsActivity path="LoginView.jsp" />
-  <StrutsTransition id="login;6,null,,1" routingType="0">
+  <StrutsActivity path="/index.jsp" location="950,250" dimension="88,53" />
+  <StrutsActivity path="/LoginView.jsp" location="950,50" dimension="116,53" />
+  <StrutsActivity path="ManageTestTaskView.jsp" location="780,375" dimension="178,53" />
+  <StrutsActivity path="/testtask.do" location="50,350" dimension="360,104" />
+  <StrutsActivity path="/ManageTestTaskView" location="650,150" dimension="163,53" />
+  <StrutsActivity path="/ManageTestTaskView.jsp" location="650,350" dimension="183,53" />
+  <StrutsTransition id="/security.do,manage,/ManageTestTaskView.jsp,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="966,337" />
-      <AbsolutePoint location="966,450" />
+      <AbsolutePoint location="267,157" />
+      <AbsolutePoint location="741,376" />
     </AutomaticBendpoints>
   </StrutsTransition>
-  <StrutsTransition id="security/login.jsp,null,/security.do,2" routingType="0">
+  <StrutsTransition id="/security.do,manage,/ManageTestTaskView,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="650,276" />
-      <AbsolutePoint location="267,276" />
-      <AbsolutePoint location="267,209" />
+      <AbsolutePoint location="444,176" />
+      <AbsolutePoint location="650,176" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="ManageTestTaskView.jsp,null,/testtask.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="780,402" />
+      <AbsolutePoint location="410,402" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/security.do,login,/LoginView.jsp,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="444,203" />
-      <AbsolutePoint location="1008,203" />
-      <AbsolutePoint location="1008,103" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
-  <StrutsTransition id="login;6,null,/LoginVe,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="1013,337" />
-      <AbsolutePoint location="1013,376" />
-      <AbsolutePoint location="134,376" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
-  <StrutsTransition id="/security.do,login,LoginView.jsp,1" routingType="0">
-    <AutomaticBendpoints>
       <AbsolutePoint location="267,157" />
-      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="1008,76" />
     </AutomaticBendpoints>
   </StrutsTransition>
-  <StrutsTransition id="login;6,null,/Lgo,1" routingType="0">
+  <StrutsTransition id="ManageTestTaskView.jsp,null,/TestTask.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="1013,337" />
-      <AbsolutePoint location="1013,476" />
-      <AbsolutePoint location="709,476" />
+      <AbsolutePoint location="780,402" />
+      <AbsolutePoint location="410,402" />
     </AutomaticBendpoints>
   </StrutsTransition>
-  <StrutsTransition id="/security/login.jsp,null,/security.do,2" routingType="0">
+  <StrutsTransition id="/ManageTestTaskView.jsp,null,/manageTestTask.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="630,157" />
-      <AbsolutePoint location="444,157" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
-  <StrutsTransition id="login;6,null,/LoginView.jsp,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="1008,250" />
-      <AbsolutePoint location="1008,103" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
-  <StrutsTransition id="login;6,null,/L,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="1013,337" />
-      <AbsolutePoint location="1013,376" />
-      <AbsolutePoint location="393,376" />
+      <AbsolutePoint location="650,376" />
+      <AbsolutePoint location="584,386" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/LoginView.jsp,null,/security.do,2" routingType="0">
@@ -73,6 +48,19 @@
       <AbsolutePoint location="950,76" />
       <AbsolutePoint location="267,76" />
       <AbsolutePoint location="267,105" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/security.do,home,/index.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="267,209" />
+      <AbsolutePoint location="267,276" />
+      <AbsolutePoint location="950,276" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="ManageTestTaskView.jsp,null,/manageTestTask.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="780,412" />
+      <AbsolutePoint location="584,412" />
     </AutomaticBendpoints>
   </StrutsTransition>
 </FlowViewLayout>

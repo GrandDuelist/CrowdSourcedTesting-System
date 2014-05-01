@@ -5,6 +5,8 @@
   <data-sources />
   <form-beans >
     <form-bean name="loginForm" type="cn.com.crowdsourcedtesting.struts.form.LoginForm" />
+    <form-bean name="ManageTestTaskForm" type="cn.com.crowdsourcedtesting.struts.form.ManageTestTaskForm" />
+   
   </form-beans>
 
   <global-exceptions />
@@ -19,9 +21,22 @@
       scope="request"
       type="cn.com.crowdsourcedtesting.controller.SecurityRouter">
       <set-property property="cancellable" value="true" />
+    
+       <forward name="home" path="/index.jsp"></forward>
+       <forward name="login" path="/LoginView.jsp"></forward>
+       <forward name="manage" path="/ManageTestTaskView.jsp"></forward>
       
-      <forward name="login" path="LoginView.jsp"></forward>
     </action>
+    <action
+      attribute="manageTestTaskForm"
+      input="ManageTestTaskView.jsp"
+      name="manageTestTaskForm"
+      path="/testtask"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.TestTaskRouter">
+      <set-property property="cancellable" value="true" />
+    </action>
+    
 
   </action-mappings>
 
