@@ -5,7 +5,11 @@
   <data-sources />
   <form-beans >
     <form-bean name="loginForm" type="cn.com.crowdsourcedtesting.struts.form.LoginForm" />
+    <form-bean name="manageTestTaskForm" type="cn.com.crowdsourcedtesting.struts.form.ManageTestTaskForm" />
+    <form-bean name="publisherLoginForm" type="cn.com.crowdsourcedtesting.struts.form.PublisherLoginForm" />
     <form-bean name="giftForm" type="cn.com.crowdsourcedtesting.struts.form.GiftForm" />
+
+   
   </form-beans>
 
   <global-exceptions />
@@ -20,9 +24,12 @@
       scope="request"
       type="cn.com.crowdsourcedtesting.controller.SecurityRouter">
       <set-property property="cancellable" value="true" />
-      
-      <forward name="login" path="LoginView.jsp"></forward>
+    
+      <forward name="home" path="/index.jsp"></forward>
+      <forward name="login" path="/LoginView.jsp"></forward>
+
     </action>
+    
     <action
       attribute="giftForm"
       parameter = "method"
@@ -36,6 +43,33 @@
       <forward name="allgifts" path="/gifts.jsp"></forward>
       <forward name="giftitem" path="/gift.jsp"></forward>
     </action>
+    
+      <action
+      attribute="publisherLoginForm"
+      parameter = "method"
+      input="/PublisherLoginView.jsp"
+      name="publisherLoginForm"
+      path="/entrance"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.SecurityRouter">      
+
+      <set-property property="cancellable" value="true" />
+        <forward name="login" path="/PublisherLoginView.jsp"></forward>
+         <forward name="manage" path="/ManageTestTaskView.jsp"></forward>
+   
+    </action>
+    
+    
+    <action
+      attribute="manageTestTaskForm"
+      input="ManageTestTaskView.jsp"
+      name="manageTestTaskForm"
+      path="/testtask"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.TestTaskRouter">
+      <set-property property="cancellable" value="true" />
+    </action>
+    
 
   </action-mappings>
 

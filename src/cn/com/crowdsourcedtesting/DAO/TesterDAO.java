@@ -38,7 +38,7 @@ public class TesterDAO extends BaseHibernateDAO {
 	public static final String TESTER_CREDIT = "testerCredit";
 
 
-	public void save(Gift transientInstance) {
+	public void save(Tester transientInstance) {
 		log.debug("saving Driver instance");
 		 Session session=getSession();
 		try {
@@ -181,11 +181,22 @@ public class TesterDAO extends BaseHibernateDAO {
 	}
 	
 	//判断是否为Tester
-		public Tester isTester(String testerName,String password)
+		public Tester isTester(String email,String password)
 		{
 			Tester tester=null;
 			
-			this.findByProperty(TESTER_EMAIL,"ezhihan");
+			List<Tester>testers=(List<Tester>)this.findByProperty(TESTER_EMAIL,email);
+			
+		    if(testers!=null&&testers.size()!=0)
+		    {
+		    	tester = testers.get(0);
+		    	if(!tester.getTesterPassword().equals(password))
+		    	{
+		    		tester=null;
+		    	}
+		    }
+		    
+		   
 			
 			return tester;
 			

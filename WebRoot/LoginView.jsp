@@ -35,7 +35,7 @@
         <li class="theme-blue" data-style="blue" data-header="dark"></li>
         <li class="theme-orange" data-style="orange" data-header="dark"></li>
         <li class="theme-red" data-style="red" data-header="dark"></li>
-        <li class="theme-light" data-style="light" data-header="dark"></li>
+        <li cl	ass="theme-light" data-style="light" data-header="dark"></li>
     </ul>
 </div><!--/style-switcher-->
 <!--=== End Style Switcher ===-->    
@@ -133,11 +133,20 @@
 <!--=== Content Part ===-->
 <div class="container">		
 	<div class="row-fluid">
-        <form  action="security.do?method=login" class="log-page" method="post" >
-            <h3>帐号登录</h3>    
+        <form  action="security.do?method=testerLogin" class="log-page" method="post" >
+        <h3>帐号登录
+        <%if(session.getAttribute("login")!=null&&session.getAttribute("login").equals("fail")){
+        session.setAttribute("login", null);
+        session.removeAttribute("login");
+        %>
+         <font size="2" color="red" >&nbsp&nbsp用户名密码错误</font>    
+       <% } %>
+       </h3>
+              
             <div class="input-prepend">
                 <span class="add-on"><i class="icon-user"></i></span>
-                <input class="input-xlarge" type="text" name="username"  placeholder="用户名" />d
+                <input class="input-xlarge" type="text" name="username"  placeholder="用户名" />
+      
             </div>
             <div class="input-prepend">
                 <span class="add-on"><i class="icon-lock"></i></span>

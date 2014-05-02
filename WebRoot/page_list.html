@@ -21,6 +21,7 @@
     <link rel="shortcut icon" href="favicon.ico" />        
     <!-- CSS Implementing Plugins -->    
     <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/plugins/portfolioSorting/css/sorting.css" />    
     <!-- CSS Theme -->    
     <link rel="stylesheet" href="assets/css/themes/default.css" id="style_color" />
     <link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-1" />    
@@ -54,6 +55,7 @@
         </div>        				
     </div><!--/container-->		
 </div><!--/top-->
+<!--=== End Top ===--> 
 <!--=== End Top ===-->    
 
 <!--=== Header ===-->
@@ -73,7 +75,7 @@
                     <span class="icon-bar"></span>
                 </a><!-- /nav-collapse -->                                  
                 <div class="nav-collapse collapse">                                     
-                    <ul class="nav">
+                    <ul class="nav top-2">
                         <li>
                            <a href="index.html">主页
                             
@@ -106,11 +108,11 @@
                         </li>
                         <li><a class="search search-nav"><i class="icon-search search-btn"></i></a></li>                                
                     </ul>
-                    <div class="search-open search-open-inner">
+                    <div class="search-open">
                         <div class="input-append">
                             <form />
-                                <input type="text" class="span3" placeholder="Search" />
-                                <button type="submit" class="btn-u">Search</button>
+                                <input type="text" class="span3" placeholder="搜索" />
+                                <button type="submit" class="btn-u">搜索</button>
                             </form>
                         </div>
                     </div>
@@ -122,12 +124,12 @@
 <!--=== End Header ===-->
 
 <!--=== Breadcrumbs ===-->
-<div class="row-fluid breadcrumbs margin-bottom-40">
+<div class="breadcrumbs margin-bottom-40">
 	<div class="container">
-        <h1 class="pull-left">任务广场</h1>
+        <h1 class="color-green pull-left">任务广场</h1>
         <ul class="pull-right breadcrumb">
             <li><a href="index.html">主页</a> <span class="divider">/</span></li>
-            <li class="active">任务广场</li>
+            <li class="active">礼品中心</li>
         </ul>
     </div><!--/container-->
 </div><!--/breadcrumbs-->
@@ -317,7 +319,7 @@
         </div>
         <div class="pagination pagination-centered">
             <ul>
-              <li><a href="#">Prev</a></li>
+              <li><a href="#">前一页</a></li>
               <li><a href="#">1</a></li>
               <li><a href="#">2</a></li>
               <li class="active"><a href="#">3</a></li>
@@ -326,7 +328,7 @@
               <li><a href="#">6</a></li>
               <li><a href="#">7</a></li>
               <li><a href="#">8</a></li>
-              <li><a href="#">Next</a></li>
+              <li><a href="#">后一页</a></li>
             </ul>
         </div>       
     </div><!--/row-fluid-->
@@ -376,7 +378,7 @@
 			</div><!--/span4-->
 		</div><!--/row-fluid-->	
 	</div><!--/container-->	
-</div><!--/footer-->	
+</div><!--/footer-->
 <!--=== End Footer ===-->
 
 <!--=== Copyright ===-->
@@ -387,7 +389,7 @@
 	            <p>Copyright &copy; 2014.TCtest All rights reserved.</p>
 			</div>
 			<div class="span4">	
-                <a href="index.html"><img id="logo-footer" src="assets/img/logo2-default.png" class="pull-right" alt="" /></a>
+				<a href="index.html"><img id="logo-footer" src="assets/img/logo2-default.png" class="pull-right" alt="" /></a>
 			</div>
 		</div><!--/row-fluid-->
 	</div><!--/container-->	
@@ -399,23 +401,19 @@
 <script type="text/javascript" src="assets/js/modernizr.custom.js"></script>        
 <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
 <!-- JS Implementing Plugins -->           
-<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/sequence.jquery-min.js"></script>
-<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/horizontal-parallax.js"></script>
-<script type="text/javascript" src="assets/plugins/bxslider/jquery.bxslider.js"></script>
+<script type="text/javascript" src="assets/plugins/portfolioSorting/js/jquery.quicksand.js"></script>
+<script type="text/javascript" src="assets/plugins/portfolioSorting/js/sorting.js"></script>
 <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
 <!-- JS Page Level -->           
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
-        App.initSliders();
-        App.initBxSlider();
     });
 </script>
 <!--[if lt IE 9]>
-	<script src="assets/js/respond.js"></script>
-<![endif]-->		
-
+    <script src="assets/js/respond.js"></script>
+<![endif]-->
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
-</html>	
+</html> 

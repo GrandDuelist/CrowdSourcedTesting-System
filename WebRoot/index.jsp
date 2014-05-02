@@ -1,26 +1,530 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.modelhelper.*,cn.com.crowdsourcedtesting.bean.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%try{ %>
 <html>
+<% UserType  userType = (UserType)session.getAttribute("UserType");
+   Tester tester  = (Tester)session.getAttribute("Tester");
+ %>
   <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'index.jsp' starting page</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-  </head>
+   <title>TCTEST</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <!-- CSS Global Compulsory-->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/headers/header1.css" />
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="assets/css/style_responsive.css" />
+    <link rel="shortcut icon" href="favicon.ico" />        
+    <!-- CSS Implementing Plugins -->    
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/plugins/flexslider/flexslider.css" type="text/css" media="screen" /> 
+    <link rel="stylesheet" href="assets/plugins/bxslider/jquery.bxslider.css" />             
+    <link rel="stylesheet" href="assets/plugins/horizontal-parallax/css/horizontal-parallax.css" />
+    <!-- CSS Theme -->    
+    <link rel="stylesheet" href="assets/css/themes/default.css" id="style_color" />
+    <link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-2" />    
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  </head> 
   
   <body>
-    This is my JSP page. <br>
+    <!--=== Style Switcher ===-->    
+<i class="style-switcher-btn style-switcher-btn-option icon-cogs"></i>
+<div class="style-switcher style-switcher-inner">
+    <div class="theme-close"><i class="icon-remove"></i></div>
+    <div class="theme-heading">主题颜色</div>
+    <ul class="unstyled">
+        <li class="theme-default theme-active" data-style="default" data-header="dark"></li>
+        <li class="theme-blue" data-style="blue" data-header="dark"></li>
+        <li class="theme-orange" data-style="orange" data-header="dark"></li>
+        <li class="theme-red" data-style="red" data-header="dark"></li>
+        <li class="theme-light" data-style="light" data-header="dark"></li>
+    </ul>
+</div><!--/style-switcher-->
+<!--=== End Style Switcher ===-->    
+
+<!--=== Top ===-->    
+<div class="top">
+    <div class="container">			        
+        <div class="row-fluid">
+            <ul class="loginbar inline">
+                <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i> chengran327@gmail.com</a></li>	
+                <li><a><i class="icon-phone-sign"></i> 021 4202 2656</a></li>	
+                <%if(userType==null){ %>
+                <li><a href="security.do?method=goToLogin"><i class="icon-user"></i> 登录</a></li>	
+                <%}else if(userType.equals(UserType.Tester)) {%>
+                  <li><a href="security.do?method=testerLogout"><i class="icon-user"></i>注销</a></li>
+                   <li><%=tester.getTesterName()%></li>	
+               <% }%>
+            </ul>
+        </div>        				
+    </div><!--/container-->		
+</div><!--/top-->
+<!--=== End Top ===-->    
+
+<!--=== Header ===-->
+<div class="header">               
+    <div class="container"> 
+        <!-- Logo -->       
+        <div class="logo">                                             
+            <a href="index.html"><img id="logo-header" src="assets/img/logo2-default.png" alt="Logo" /></a>
+        </div><!-- /logo -->        
+                                    
+        <!-- Menu -->       
+        <div class="navbar">                                
+            <div class="navbar-inner">                                  
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a><!-- /nav-collapse -->                                  
+                <div class="nav-collapse collapse">                                     
+                    <ul class="nav">
+                        <li class="active">
+                           <a href="index.html">主页
+                            
+                            </a>
+                           
+                      </li>
+                        <li>
+                            <a href="gifts.html">礼品中心
+                                                        
+                            </a>
+                                       
+                        </li>
+                        <li>
+                            <a href="page_list.html">任务广场                            
+                            </a>
+                        </li>
+                        <li>
+                            <a href="page_hirelist.html">招募帖                          
+                            </a>
+                        </li>
+                        <li>
+                            <a href="page_clients.html">合作伙伴</a>
+      
+                        </li>
+                        <li>
+                            <a href="page_contact.html">联系我们
+                            </a>
+                            
+                                                    
+                        </li>
+                        <li><a class="search search-nav"><i class="icon-search search-btn"></i></a></li>                                
+                    </ul>
+                    <div class="search-open search-open-inner">
+                        <div class="input-append">
+                            <form />
+                                <input type="text" class="span3" placeholder="Search" />
+                                <button type="submit" class="btn-u">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- /nav-collapse -->                                
+            </div><!-- /navbar-inner -->
+        </div><!-- /navbar -->                          
+    </div><!-- /container -->               
+</div><!--/header -->      
+<!--=== End Header ===-->
+
+<!--=== Slider ===-->
+<div id="sequence-theme" class="sequence-inner">
+    <div id="sequence">
+        <img class="prev" src="assets/plugins/horizontal-parallax/images/bt-prev1.png" alt="Previous" />
+        <img class="next" src="assets/plugins/horizontal-parallax/images/bt-next1.png" alt="Next" />
+        <ul>
+            <li class="animate-in">
+                <div class="info">
+                    <h2>事业腾飞的起点</h2>
+                    <p>通过吐槽网，你可以有自己事业的第二春，在这个虚拟的公司里，你将有自己的声望，名誉，甚至，做到CEO</p>
+                </div>
+                <img class="balloon" src="assets/plugins/horizontal-parallax/images/balloon.png" alt="Balloon" />
+            </li>
+            <li>
+                <div class="info">
+                    <h2>高效运营的保障</h2>
+                    <p>我么有一只无形的测试军队，为你，为所有人进行测试，高效、便捷</p>
+                </div>
+                <img class="aeroplane" src="assets/plugins/horizontal-parallax/images/aeroplane.png" alt="Aeroplane" />
+            </li>
+            <li>
+                <div class="info">
+                    <h2>减少开支的理由</h2>
+                    <p>为中小型公司组建的专业团队，现在，您不需要再为测试养一群程序员了</p>
+                </div>
+                <img class="kite" src="assets/plugins/horizontal-parallax/images/kite.png" alt="Kite" />
+            </li>
+        </ul>
+    </div>
+</div><!--/sequence-theme-->
+<!--=== End Slider ===-->
+
+<!-- Purchase Block -->
+<div class="row-fluid purchase margin-bottom-30">
+    <div class="container">
+		<div class="span9">
+            <span>吐槽网是一个众包测试网站，服务超过两百家中型企业</span>
+            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi  vehicula sem ut volutpat. Ut non libero magna fusce condimentum eleifend enim a feugiat.</p>
+        </div>
+        <a href="#" class="btn-buy hover-effect">详情</a>
+    </div>
+</div><!--/row-fluid-->
+<!-- End Purchase Block -->
+
+<!--=== Content Part ===-->
+<div class="container">		
+    <div class="row-fluid">
+        <!-- Left Sidebar(Content Part) -->        
+        <div class="span9">
+            <!-- Our Services -->
+            <div class="row-fluid">
+                <div class="headline"><h3>服务简介</h3></div>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem donec id elit non mi porta gravida at eget metus.</p><br />
+                <div class="row-fluid servive-block servive-block-in">
+                    <div class="span4">
+                        <h4><a href="#">Lorem sequat ipsum de</a></h4>
+                        <p><i class="icon-bell"></i></p>
+                        <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine.</p>
+                    </div>
+                    <div class="span4">
+                        <h4><a href="#">Vivamus imperdiet gravi</a></h4>
+                        <p><i class="icon-bullhorn"></i></p>
+                        <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine.</p>
+                    </div>
+                    <div class="span4">
+                        <h4><a href="#">Donec idslacs elit nomi</a></h4>
+                        <p><i class=" icon-lightbulb"></i></p>
+                        <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine.</p>
+                    </div>
+                </div><!--/welcome-block-->
+            </div><!--/row-fluid-->        
+        
+            <!-- Recent Works -->
+            <div class="headline">
+              <h3>测试产品列表</h3></div>
+            <div class="row-fluid margin-bottom-40">
+                <ul id="list" class="bxslider recent-work">
+                    <li>
+                       <div class="booking-blocks">
+             <div class="pull-left booking-img">
+                <img src="assets/img/new/img1.jpg" alt="" />
+                <ul class="unstyled">
+                   <li><i class="icon-briefcase"></i> Dell, Google</li>
+                   <li><i class="icon-trophy"></i>20 积分</li>
+                </ul>
+             </div>
+             <div style="overflow:hidden;">
+                <h2><a href="#">谷歌文档测试</a></h2>
+                <p>对谷歌文档进行测试并拿取丰厚奖励 <a href="#">详细信息</a></p>
+             </div>
+          </div>
+                    </li>
+ <li>
+                       <div class="booking-blocks">
+             <div class="pull-left booking-img">
+                <img src="assets/img/new/img4.jpg" alt="" />
+                <ul class="unstyled">
+                   <li><i class="icon-briefcase"></i> Dell, Google</li>
+                   <li><i class="icon-trophy"></i>20 积分</li>
+                </ul>
+             </div>
+             <div style="overflow:hidden;">
+                <h2><a href="#">谷歌文档测试</a></h2>
+                <p>对谷歌文档进行测试并拿取丰厚奖励 <a href="#">详细信息</a></p>
+             </div>
+          </div>
+                    </li>
+                     <li>
+                       <div class="booking-blocks">
+             <div class="pull-left booking-img">
+                <img src="assets/img/new/img3.jpg" alt="" />
+                <ul class="unstyled">
+                   <li><i class="icon-briefcase"></i> Dell, Google</li>
+                   <li><i class="icon-trophy"></i>20 积分</li>
+                </ul>
+             </div>
+             <div style="overflow:hidden;">
+                <h2><a href="#">谷歌文档测试</a></h2>
+                <p>对谷歌文档进行测试并拿取丰厚奖励 <a href="#">详细信息</a></p>
+             </div>
+          </div>
+                    </li>
+                     <li>
+                       <div class="booking-blocks">
+             <div class="pull-left booking-img">
+                <img src="assets/img/new/img2.jpg" alt="" />
+                <ul class="unstyled">
+                   <li><i class="icon-briefcase"></i> Dell, Google</li>
+                   <li><i class="icon-trophy"></i>20 积分</li>
+                </ul>
+             </div>
+             <div style="overflow:hidden;">
+                <h2><a href="#">谷歌文档测试</a></h2>
+                <p>对谷歌文档进行测试并拿取丰厚奖励 <a href="#">详细信息</a></p>
+             </div>
+          </div>
+                    </li>
+
+                </ul>        
+            </div><!--/row-->
+            <!-- //End Recent Works -->
+
+           
+
+            
+        </div><!--/span9-->
+
+        <!-- Right Sidebar -->        
+        <div class="span3">
+            <!-- Posts -->
+			<div class="posts margin-bottom-30">
+                <div class="headline"><h3>近期任务</h3></div>
+                <dl class="dl-horizontal">
+                    <dt><a href="#"><img alt="" src="assets/img/sliders/elastislide/6.jpg" /></a></dt>
+                    <dd>
+                        <p><a href="#">baidu云评测任务</a></p> 
+                    </dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt><a href="#"><img alt="" src="assets/img/sliders/elastislide/10.jpg" /></a></dt>
+                    <dd>
+                        <p><a href="#">qq输入法测试任务</a></p> 
+                    </dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt><a href="#"><img alt="" src="assets/img/sliders/elastislide/11.jpg" /></a></dt>
+                    <dd>
+                        <p><a href="#">安卓客户端测试任务</a></p> 
+                    </dd>
+                </dl>
+            </div>
+            
+            <!-- Why Choose Us -->
+            <div class="who margin-bottom-30">
+                <div class="headline"><h3>为何选择我们</h3></div>
+                <p>Pellentesque fermentum, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id.</p>
+                <ul class="unstyled">
+                    <li><a href="#"><i class="icon-desktop"></i>Vivamus imperdiet condimentum</a></li>
+                    <li><a href="#"><i class="icon-bullhorn"></i>Anim pariatur cliche squid</a></li>
+                    <li><a href="#"><i class="icon-globe"></i>Eget placerat felis consectetur</a></li>
+                    <li><a href="#"><i class="icon-group"></i>Condimentum diam eget placerat</a></li>
+                </ul>
+            </div>
+
+           
+           
+    </div><!--/row-fluid-->
+    <!-- //End Container -->
+
+    <!-- Our Clients -->
+    <div id="clients-flexslider" class="flexslider home clients">
+        <div class="headline"><h3>合作企业</h3></div>    
+        <ul class="slides">
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/hp_grey.png" alt="" /> 
+                    <img src="assets/img/clients/hp.png" class="color-img" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/igneus_grey.png" alt="" /> 
+                    <img src="assets/img/clients/igneus.png" class="color-img" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/vadafone_grey.png" alt="" /> 
+                    <img src="assets/img/clients/vadafone.png" class="color-img" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/walmart_grey.png" alt="" /> 
+                    <img src="assets/img/clients/walmart.png" class="color-img" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/shell_grey.png" alt="" /> 
+                    <img src="assets/img/clients/shell.png" class="color-img" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/natural_grey.png" alt="" /> 
+                    <img src="assets/img/clients/natural.png" class="color-img" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/aztec_grey.png" alt="" /> 
+                    <img src="assets/img/clients/aztec.png" class="color-img" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/gamescast_grey.png" alt="" /> 
+                    <img src="assets/img/clients/gamescast.png" class="color-img" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/cisco_grey.png" alt="" /> 
+                    <img src="assets/img/clients/cisco.png" class="color-img" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/everyday_grey.png" alt="" /> 
+                    <img src="assets/img/clients/everyday.png" class="color-img" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/cocacola_grey.png" alt="" /> 
+                    <img src="assets/img/clients/cocacola.png" class="color-img" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/spinworkx_grey.png" alt="" /> 
+                    <img src="assets/img/clients/spinworkx.png" class="color-img" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/shell_grey.png" alt="" /> 
+                    <img src="assets/img/clients/shell.png" class="color-img" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/natural_grey.png" alt="" /> 
+                    <img src="assets/img/clients/natural.png" class="color-img" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/gamescast_grey.png" alt="" /> 
+                    <img src="assets/img/clients/gamescast.png" class="color-img" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/everyday_grey.png" alt="" /> 
+                    <img src="assets/img/clients/everyday.png" class="color-img" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/clients/spinworkx_grey.png" alt="" /> 
+                    <img src="assets/img/clients/spinworkx.png" class="color-img" alt="" />
+                </a>
+            </li>
+        </ul>
+    </div><!--/flexslider-->
+    <!-- //End Our Clients -->
+</div><!--/container-->		
+<!--=== End Content Part ===-->
+
+<!--=== Footer ===-->
+<div class="footer">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span4">
+                <!-- About -->
+		        <div class="headline"><h3>关于</h3></div>	
+				<p class="margin-bottom-25">TCTest全名为吐槽测试网的英文，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见。</p>	
+
+				
+			</div><!--/span4-->	
+			
+			<div class="span4">
+            <!-- Monthly Newsletter -->
+		        <div class="headline"><h3>联系我们</h3></div>	
+                <address>
+					4800号，曹安公路，同济大学软件学院 <br />
+					上海市, 中国 <br />
+					电话: 131 6293 7287 <br />
+					传真: 800 123 3456 <br />
+					Email: <a href="mailto:info@anybiz.com" class="">chengran327@gmail.com</a>
+                </address>
+			</div><!--/span4-->
+
+			<div class="span4">
+	
+
+                <!-- Stay Connected -->
+		        <div class="headline">
+		          <h3>关注我们</h3></div>	
+                <ul class="social-icons">
+                    <li><a href="#" data-original-title="Feed" class="social_rss"></a></li>
+                    <li><a href="#" data-original-title="Facebook" class="social_picasa"></a></li>
+                    <li><a href="#" data-original-title="Twitter" class="social_twitter"></a></li>
+                    <li><a href="#" data-original-title="Goole Plus" class="social_tumblr"></a></li>
+                    <li><a href="#" data-original-title="Pinterest" class="social_pintrest"></a></li>
+                    <li><a href="#" data-original-title="Linkedin" class="social_linkedin"></a></li>
+                    <li><a href="#" data-original-title="Vimeo" class="social_vimeo"></a></li>
+                </ul>
+			</div><!--/span4-->
+		</div><!--/row-fluid-->	
+	</div><!--/container-->	
+</div><!--/footer-->	
+<!--=== End Footer ===-->
+
+<!--=== Copyright ===-->
+<div class="copyright">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span8">						
+	            <p>Copyright &copy; 2014.TCtest All rights reserved.</p>
+			</div>
+			<div class="span4">	
+                <a href="index.html"><img id="logo-footer" src="assets/img/logo2-default.png" class="pull-right" alt="" /></a>
+			</div>
+		</div><!--/row-fluid-->
+	</div><!--/container-->	
+</div><!--/copyright-->	
+<!--=== End Copyright ===-->
+
+<!-- JS Global Compulsory -->           
+<script type="text/javascript" src="assets/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="assets/js/modernizr.custom.js"></script>        
+<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
+<!-- JS Implementing Plugins -->           
+<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
+<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/sequence.jquery-min.js"></script>
+<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/horizontal-parallax.js"></script>
+<script type="text/javascript" src="assets/plugins/bxslider/jquery.bxslider.js"></script>
+<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
+<!-- JS Page Level -->           
+<script type="text/javascript" src="assets/js/app.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        App.init();
+        App.initSliders();
+        App.initBxSlider();
+    });
+</script>
+<!--[if lt IE 9]>
+	<script src="assets/js/respond.js"></script>
+<![endif]-->	
   </body>
 </html>
+<%}catch(Exception e)
+{
+
+   response.sendRedirect("security.do?method=goToLogin");	
+}
+%>

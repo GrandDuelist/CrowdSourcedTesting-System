@@ -31,11 +31,16 @@ public class testing {
 		
 		System.out.println(gd.getTotalRows());
 */
+		/*Tester tester = new Tester();
+		tester.setTesterEmail("ezhihan@gmail.com");
+		tester.setTesterPassword("1234");
+		tester.setTesterName("ezhihan");
 		
+		DAOFactory.getTesterDAO().save(tester);*/
 		
-		Tester tester = DAOFactory.getTesterDAO().isTester("ezhihan", "123");
+		Tester tester = DAOFactory.getTesterDAO().isTester("ezhihan@gmail.com", "123");
 		
-		if(tester==null)
+		if(tester!=null)
 		{
 			System.out.println(tester.getTesterId());
 		}
