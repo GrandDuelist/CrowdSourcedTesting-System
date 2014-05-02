@@ -13,10 +13,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.crowdsourcedtesting.model.SecurityHandler;
 import cn.com.crowdsourcedtesting.modelhelper.UserType;
 import cn.com.crowdsourcedtesting.struts.form.LoginForm;
+import cn.com.crowdsourcedtesting.struts.form.PublisherLoginForm;
 
 /**
  * MyEclipse Struts Creation date: 04-29-2014
@@ -109,10 +111,31 @@ public class SecurityRouter extends DispatchAction {
 	 * @param response
 	 * @return
 	 */
-	public ActionForward entrance(ActionMapping mapping, ActionForm form,
+	public ActionForward enter(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 
-		return mapping.findForward("Manage");
+		PublisherLoginForm f = (PublisherLoginForm) form;
+		
+	
+
+		HttpSession session = request.getSession();
+		Publisher publisher = handler.handlePublisherLogin(f);
+		
+		
+		if (publisher!=null) {
+			// 测试者登陆成功
+			session.setAttribute("UserType", UserType.Publisher);
+			session.setAttribute("Publisher",publisher);
+			return mapping.findForward("manage");
+
+		} else {
+			// 测试者登录失败
+			session.setAttribute("p_login", "fail");
+			return mapping.findForward("login");
+		}
+		
+		
+		
 	}
 	
 }

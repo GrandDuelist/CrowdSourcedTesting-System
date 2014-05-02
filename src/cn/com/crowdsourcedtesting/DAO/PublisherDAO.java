@@ -2,6 +2,7 @@ package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.Publisher;
+import cn.com.crowdsourcedtesting.bean.Tester;
 
 import java.util.List;
 import java.util.Set;
@@ -181,5 +182,26 @@ public class PublisherDAO extends BaseHibernateDAO {
 			log.error("attach failed", re);
 			throw re;
 		}
+	}
+
+	public Publisher isPublisher(String email, String password) {
+		// TODO Auto-generated method stub
+
+		Publisher publisher=null;
+		
+		List<Publisher>publishers=(List<Publisher>)this.findByProperty(PUBLISHER_LOG_EMAIL,email);
+		
+	    if(publishers!=null&&publishers.size()!=0)
+	    {
+	    	publisher = publishers.get(0);
+	    	if(!publisher.getPublisherPassword().equals(password))
+	    	{
+	    		publisher=null;
+	    	}
+	    }
+	    
+	   
+		
+		return publisher;
 	}
 }

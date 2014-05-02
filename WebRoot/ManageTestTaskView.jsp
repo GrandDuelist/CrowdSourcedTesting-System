@@ -8,9 +8,9 @@
 <!-- Meta, title, CSS, favicons, etc. -->
 <meta charset="utf-8" />
 <title>TCTEST</title>
-<meta name="keywords" content="HTML5 Bootstrap 3 Admin Template UI Theme" />
-<meta name="description" content="Stardom - A Responsive HTML5 Admin UI Template Theme" />
-<meta name="author" content="Holladay" />
+<meta name="keywords" content="TCTEST" />
+<meta name="description" content="TCTEST" />
+<meta name="author" content="Rain Cheng" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- Font CSS  -->
@@ -270,9 +270,10 @@
     </div>
     <div id="sidebar-menu">
       <ul class="nav sidebar-nav">
-        <li class="active"> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
-        <li> <a href="#"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
-        <li> <a href="#"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>
+        <li> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
+        <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
+        <li> <a href="publisher_questionnaire_man.html"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
+        <li> <a href="publisher_hireman.html"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
           </ul>
         </li>
       </ul>
@@ -365,48 +366,48 @@
 		},
 		events: [
 			{
-				title: 'All Day Event',
+				title: '开会',
 				start: new Date(y, m, 9),
 				color: '#008aaf '
 			},
 			{
-				title: 'Long Event',
+				title: '准备考核',
 				start: new Date(y, m, d-5),
 				end: new Date(y, m, d-3)
 			},
 			{
 				id: 999,
-				title: 'Repeating Event',
+				title: '重复开会',
 				start: new Date(y, m, d+3, 16, 0),
 				allDay: false
 			},
 			{
 				id: 999,
-				title: 'Repeating Event',
+				title: '重复开会',
 				start: new Date(y, m, d+10, 16, 0),
 				allDay: false
 			},
 			{
-				title: 'Meeting',
+				title: '开会',
 				start: new Date(y, m, d, 10, 30),
 				allDay: false,
 				color: '#0070ab'
 			},
 			{
-				title: 'Lunch',
+				title: '午餐',
 				start: new Date(y, m, d, 12, 0),
 				end: new Date(y, m, d, 14, 0),
 				allDay: false,
 				color: '#0070ab'
 			},
 			{
-				title: 'Birthday Party',
+				title: '生日聚会',
 				start: new Date(y, m, d+1, 19, 0),
 				end: new Date(y, m, d+1, 22, 30),
 				allDay: false
 			},
 			{
-				title: 'Mandatory!',
+				title: '纪念日!',
 				start: new Date(y, m, 22),
 				color: '#d10011'
 			}
@@ -465,3 +466,4 @@
 </script>
 </body>
 </html>
+

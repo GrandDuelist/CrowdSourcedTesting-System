@@ -5,7 +5,8 @@
   <data-sources />
   <form-beans >
     <form-bean name="loginForm" type="cn.com.crowdsourcedtesting.struts.form.LoginForm" />
-    <form-bean name="ManageTestTaskForm" type="cn.com.crowdsourcedtesting.struts.form.ManageTestTaskForm" />
+    <form-bean name="manageTestTaskForm" type="cn.com.crowdsourcedtesting.struts.form.ManageTestTaskForm" />
+    <form-bean name="publisherLoginForm" type="cn.com.crowdsourcedtesting.struts.form.PublisherLoginForm" />
    
   </form-beans>
 
@@ -24,9 +25,26 @@
     
        <forward name="home" path="/index.jsp"></forward>
        <forward name="login" path="/LoginView.jsp"></forward>
-       <forward name="manage" path="/ManageTestTaskView.jsp"></forward>
+     
       
     </action>
+    
+      <action
+      attribute="publisherLoginForm"
+      parameter = "method"
+      input="/PublisherLoginView.jsp"
+      name="publisherLoginForm"
+      path="/entrance"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.SecurityRouter">      
+
+      <set-property property="cancellable" value="true" />
+        <forward name="login" path="/PublisherLoginView.jsp"></forward>
+         <forward name="manage" path="/ManageTestTaskView.jsp"></forward>
+   
+    </action>
+    
+    
     <action
       attribute="manageTestTaskForm"
       input="ManageTestTaskView.jsp"

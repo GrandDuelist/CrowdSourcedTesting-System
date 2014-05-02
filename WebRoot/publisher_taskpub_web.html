@@ -4,9 +4,9 @@
 <!-- Meta, title, CSS, favicons, etc. -->
 <meta charset="utf-8" />
 <title>TCTEST</title>
-<meta name="keywords" content="HTML5 Bootstrap 3 Admin Template UI Theme" />
-<meta name="description" content="Stardom - A Responsive HTML5 Admin UI Template Theme" />
-<meta name="author" content="Holladay" />
+<meta name="keywords" content="TCTEST" />
+<meta name="description" content="TCTEST" />
+<meta name="author" content="Rain Cheng" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- Font CSS  -->
@@ -18,19 +18,13 @@
 <link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
 <!-- Plugin CSS -->
-<link rel="stylesheet" type="text/css" href="vendor/plugins/mfpopup/dist/magnific-popup.css" media="screen" />
-<link rel="stylesheet" href="vendor/plugins/dropzone/downloads/css/dropzone.css" />
-<link rel="stylesheet" href="vendor/plugins/jqueryupload/plugins/blueimp/css/blueimp-gallery.min.css" />
-<link rel="stylesheet" href="vendor/plugins/jqueryupload/css/jquery.fileupload.css" />
-<link rel="stylesheet" href="vendor/plugins/jqueryupload/css/jquery.fileupload-ui.css" />
-
-<!-- No Script CSS -->
-<noscript>
-<link rel="stylesheet" href="vendor/plugins/jqueryupload/css/jquery.fileupload-noscript.css" />
-</noscript>
-<noscript>
-<link rel="stylesheet" href="vendor/plugins/jqueryupload/css/jquery.fileupload-ui-noscript.css" />
-</noscript>
+<link rel="stylesheet" type="text/css" href="vendor/plugins/chosen/chosen.min.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/timepicker/bootstrap-timepicker.min.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/colorpicker/colorpicker.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/datepicker/datepicker.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/daterange/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/formswitch/css/bootstrap-switch.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/tags/tagmanager.css" />
 
 <!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="css/theme.css" />
@@ -52,7 +46,7 @@
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 </head>
 <body>
 <!-- Start: Theme Preview Pane -->
@@ -271,7 +265,7 @@
     <div id="sidebar-search">
       <form role="search" />
       
-      <input type="text" class="search-bar form-control" placeholder="Search" />
+      <input type="text" class="search-bar form-control" placeholder="搜索" />
       <i class="fa fa-search field-icon-right"></i>
       <button type="submit" class="btn btn-default hidden"></button>
       </form>
@@ -280,8 +274,9 @@
     <div id="sidebar-menu">
       <ul class="nav sidebar-nav">
         <li class="active"> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
-        <li> <a href="#"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
-        <li> <a href="#"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>
+        <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
+        <li> <a href="publisher_questionnaire_man.html"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
+        <li> <a href="publisher_hireman.html"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
       </ul>
       </li>
       </ul>
@@ -294,20 +289,24 @@
       <ol class="breadcrumb">
         <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
         <li><a href="publisher_home.html">主页</a></li>
-        <li class="active">任务管理</li>
+        <li><a href="publisher_taskman.html">任务管理</a></li>
+        <li><a href="publisher_taskpub.html">发布任务</a></li>
+        <li class="active">网站任务</li>
       </ol>
     </div>
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <div class="panel">
-            <div class="panel-heading"></div>
+            <div class="panel-heading">
+            	<div class="panel-title"><i class="fa fa-globe"></i>网战测试</div>
+            </div>
             <div class="panel-body">
               <h2 class="text-primary"> 请填写详细信息 </h2>
               <hr/>
               <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                  <p class="alert alert-success">请<b>正确填写</b>注册信息</p>
+                  <p class="alert alert-success">请<b>正确填写</b>信息</p>
                   <div class="form-group">
                     <label for="web_url"> 网站URL </label>
                     <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-link"></i> </span>
@@ -317,21 +316,47 @@
                   </div>
                   <div class="form-group">
                     <label for="web_url"> 上传图标 </label>
-                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-cloud-upload"></i> </span>
+                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-picture-o"></i> </span>
                       <input class="form-control" type="text" required placeholder="" name="icon">
                       </input>
                     </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="textArea">任务描述</label>
+                      <div class="input-group">
+                        <textarea class="form-control" id="textArea" cols="80" rows="3"></textarea>
+                      </div>
                   </div>
                    <div class="form-group">
-                    <label for="web_url"> 上传图标 </label>
+                    <label for="web_url"> 是否需要测试帐号 </label>
+                    <label class="radio-inline">
+                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
+                          需要 </label>
+                    <label class="radio-inline">
+                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked="" />
+                          不需要 </label>
+                  </div>
+                   <div class="form-group">
+                    <label for="web_url"> 上传测试帐号信息 </label>
                     <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-cloud-upload"></i> </span>
-                      <input class="form-control" type="text" required placeholder="" name="icon">
+                      <input class="form-control" type="text" required placeholder="TesterAccountData.xml" name="icon" disabled="">
                       </input>
                     </div>
                   </div>
+                  
+                  <hr></hr>
+                  <div class="pull-left">
+                  	<button class="btn btn-gradient btn-lg btn-green" type="button">返回</button>
+                  </div>
+                  <div class="pull-right">
+                  	<button class="btn btn-info btn-gradient btn-lg" type="button">下一步</button>
+                  </div>
+                  
                 </div>
               </div>
+              <div class="row"><hr></hr></div>
             </div>
+            
           </div>
         </div>
       </div>

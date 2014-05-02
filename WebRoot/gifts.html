@@ -55,6 +55,7 @@
         </div>        				
     </div><!--/container-->		
 </div><!--/top-->
+<!--=== End Top ===--> 
 <!--=== End Top ===-->    
 
 <!--=== Header ===-->
@@ -74,7 +75,7 @@
                     <span class="icon-bar"></span>
                 </a><!-- /nav-collapse -->                                  
                 <div class="nav-collapse collapse">                                     
-                    <ul class="nav">
+                    <ul class="nav top-2">
                         <li>
                            <a href="index.html">主页
                             
@@ -107,11 +108,11 @@
                         </li>
                         <li><a class="search search-nav"><i class="icon-search search-btn"></i></a></li>                                
                     </ul>
-                    <div class="search-open search-open-inner">
+                    <div class="search-open">
                         <div class="input-append">
                             <form />
-                                <input type="text" class="span3" placeholder="Search" />
-                                <button type="submit" class="btn-u">Search</button>
+                                <input type="text" class="span3" placeholder="搜索" />
+                                <button type="submit" class="btn-u">搜索</button>
                             </form>
                         </div>
                     </div>
@@ -139,6 +140,7 @@
 	<div class="row-fluid"> 
         <div id="w">    
             <div class="sort" id="sort">
+            
 				<ul class="unstyled inline">
                 	<li><a href="#" class="all selected">所有</a></li>
                 	<li><a href="#" class="web">常规礼品</a></li>
@@ -146,6 +148,8 @@
                 	<li><a href="#" class="print">可兑换礼品</a></li>
                 </ul>
             </div>
+            
+            	
             
             <ul class="portfolio recent-work clearfix"> 
                 <li data-id="id-1" class="ios">
@@ -284,7 +288,21 @@
                     </a>
                 </li>
             </ul>
-        </div>                
+        </div>
+        <div class="pagination pagination-centered">
+            <ul>
+              <li><a href="#">前一页</a></li>
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li class="active"><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li><a href="#">6</a></li>
+              <li><a href="#">7</a></li>
+              <li><a href="#">8</a></li>
+              <li><a href="#">后一页</a></li>
+            </ul>
+        </div>                  
     </div><!--/row-fluid-->         
 </div><!--/container-->	 	
 <!--=== End Content Part ===-->
@@ -296,14 +314,14 @@
 			<div class="span4">
                 <!-- About -->
 		        <div class="headline"><h3>关于</h3></div>	
-				<p class="margin-bottom-25">TCTest全名为吐槽测试网，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见。</p>	
+				<p class="margin-bottom-25">TCTest全名为吐槽测试网的英文，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见。</p>	
 
 				
 			</div><!--/span4-->	
 			
 			<div class="span4">
             <!-- Monthly Newsletter -->
-		        <div class="headline"><h3>联系方式</h3></div>	
+		        <div class="headline"><h3>联系我们</h3></div>	
                 <address>
 					4800号，曹安公路，同济大学软件学院 <br />
 					上海市, 中国 <br />
@@ -331,7 +349,7 @@
 			</div><!--/span4-->
 		</div><!--/row-fluid-->	
 	</div><!--/container-->	
-</div><!--/footer-->	
+</div><!--/footer-->
 <!--=== End Footer ===-->
 
 <!--=== Copyright ===-->
@@ -342,7 +360,7 @@
 	            <p>Copyright &copy; 2014.TCtest All rights reserved.</p>
 			</div>
 			<div class="span4">	
-                <a href="index.html"><img id="logo-footer" src="assets/img/logo2-default.png" class="pull-right" alt="" /></a>
+				<a href="index.html"><img id="logo-footer" src="assets/img/logo2-default.png" class="pull-right" alt="" /></a>
 			</div>
 		</div><!--/row-fluid-->
 	</div><!--/container-->	
@@ -354,23 +372,19 @@
 <script type="text/javascript" src="assets/js/modernizr.custom.js"></script>        
 <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
 <!-- JS Implementing Plugins -->           
-<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/sequence.jquery-min.js"></script>
-<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/horizontal-parallax.js"></script>
-<script type="text/javascript" src="assets/plugins/bxslider/jquery.bxslider.js"></script>
+<script type="text/javascript" src="assets/plugins/portfolioSorting/js/jquery.quicksand.js"></script>
+<script type="text/javascript" src="assets/plugins/portfolioSorting/js/sorting.js"></script>
 <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
 <!-- JS Page Level -->           
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
-        App.initSliders();
-        App.initBxSlider();
     });
 </script>
 <!--[if lt IE 9]>
-	<script src="assets/js/respond.js"></script>
-<![endif]-->		
-
+    <script src="assets/js/respond.js"></script>
+<![endif]-->
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
-</html>	
+</html> 

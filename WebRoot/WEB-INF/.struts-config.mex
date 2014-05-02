@@ -6,23 +6,18 @@
   <StrutsActivity path="ManageTestTaskView.jsp" location="780,375" dimension="178,53" />
   <StrutsActivity path="/testtask.do" location="50,350" dimension="360,104" />
   <StrutsActivity path="/ManageTestTaskView" location="650,150" dimension="163,53" />
-  <StrutsActivity path="/ManageTestTaskView.jsp" location="650,350" dimension="183,53" />
-  <StrutsTransition id="/security.do,manage,/ManageTestTaskView.jsp,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="267,157" />
-      <AbsolutePoint location="741,376" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
-  <StrutsTransition id="/security.do,manage,/ManageTestTaskView,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="444,176" />
-      <AbsolutePoint location="650,176" />
-    </AutomaticBendpoints>
+  <StrutsActivity path="/ManageTestTaskView.jsp" location="735,300" dimension="183,53" />
+  <StrutsActivity path="/entrance.do" location="50,550" dimension="354,104" />
+  <StrutsActivity path="/PublisherLoginView.jsp" location="650,550" dimension="169,53" />
+  <StrutsTransition id="/security.do,manage,/ManageTestTaskView.jsp,1" routingType="1">
+    <Bendpoints>
+      <Point rDim1="153,218" rDim2="-321,-1" />
+    </Bendpoints>
   </StrutsTransition>
   <StrutsTransition id="ManageTestTaskView.jsp,null,/testtask.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="780,402" />
-      <AbsolutePoint location="410,402" />
+      <AbsolutePoint location="780,418" />
+      <AbsolutePoint location="410,418" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/security.do,login,/LoginView.jsp,1" routingType="0">
@@ -31,15 +26,30 @@
       <AbsolutePoint location="1008,76" />
     </AutomaticBendpoints>
   </StrutsTransition>
+  <StrutsTransition id="/entrance.do,manage,/ManageTestTaskView.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="404,618" />
+      <AbsolutePoint location="549,618" />
+      <AbsolutePoint location="549,326" />
+      <AbsolutePoint location="735,326" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
   <StrutsTransition id="ManageTestTaskView.jsp,null,/TestTask.do,2" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="780,402" />
       <AbsolutePoint location="410,402" />
     </AutomaticBendpoints>
   </StrutsTransition>
+  <StrutsTransition id="/LoginView.jsp,null,/entrance.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1053,103" />
+      <AbsolutePoint location="1053,602" />
+      <AbsolutePoint location="404,602" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
   <StrutsTransition id="/ManageTestTaskView.jsp,null,/manageTestTask.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="650,376" />
+      <AbsolutePoint location="735,326" />
       <AbsolutePoint location="584,386" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -55,6 +65,25 @@
       <AbsolutePoint location="267,209" />
       <AbsolutePoint location="267,276" />
       <AbsolutePoint location="950,276" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/PublisherLoginView.jsp,null,/entrance.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="650,576" />
+      <AbsolutePoint location="404,576" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/security.do,manage,/ManageTestTaskView,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="444,176" />
+      <AbsolutePoint location="650,176" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/entrance.do,login,/PublisherLoginView.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="404,648" />
+      <AbsolutePoint location="734,648" />
+      <AbsolutePoint location="734,603" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="ManageTestTaskView.jsp,null,/manageTestTask.do,2" routingType="0">
