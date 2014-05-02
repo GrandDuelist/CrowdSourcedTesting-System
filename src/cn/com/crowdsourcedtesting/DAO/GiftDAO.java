@@ -119,7 +119,18 @@ public class GiftDAO extends BaseHibernateDAO {
 	}
 
 	public List findByGiftCredit(Object giftCredit) {
-		return findByProperty(GIFT_CREDIT, giftCredit);
+		log.debug("finding Gift instance with property: " + GIFT_CREDIT
+				+ ", under value: " + giftCredit);
+		try {
+			String queryString = "from Gift as model where model."
+					+ GIFT_CREDIT + "<= ?";
+			Query queryObject = getSession().createQuery(queryString);
+			queryObject.setParameter(0, giftCredit);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
+			throw re;
+		}
 	}
 
 	public List findByGiftName(Object giftName) {
@@ -217,4 +228,53 @@ public class GiftDAO extends BaseHibernateDAO {
 						
 				//return this.findAll().size();
 			}
+			
+			
+			//
+			@SuppressWarnings("unchecked")
+			public List findAvailableByPage(Object giftCredit, Page page)
+			{
+				try {
+				List<Gift> gifts = new ArrayList<Gift>();
+				
+				String queryString = "from Gift as model where model."
+						+ GIFT_CREDIT + "<= ?";
+				Query queryObject = getSession().createQuery(queryString);
+				queryObject.setParameter(0, giftCredit);
+				
+				 gifts=queryObject
+				.setFirstResult((page.getCurrentPage()-1)*page.getPerRows())
+				.setMaxResults(page.getPerRows())
+				.list();
+				
+				return gifts;
+				}
+				catch(RuntimeException re) {
+					log.error("find by page failed", re);
+					throw re;
+				}
+					
+					
+				}
+				
+				
+			
+			//得到总的礼品数
+			public int getTotalAvailableRows(Double giftCredit)
+			{
+			
+				try {					
+					String queryString = "from Gift as model where model."
+							+ GIFT_CREDIT + "<= ?";
+					Query queryObject = getSession().createQuery(queryString);
+					queryObject.setParameter(0, giftCredit);
+					return queryObject.list().size();
+				}
+				catch(RuntimeException re) {
+						log.error("find by page failed", re);
+						throw re;
+					}
+				
+			}
+			
 }
