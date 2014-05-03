@@ -9,6 +9,7 @@
     <form-bean name="publisherLoginForm" type="cn.com.crowdsourcedtesting.struts.form.PublisherLoginForm" />
     <form-bean name="giftForm" type="cn.com.crowdsourcedtesting.struts.form.GiftForm" />
     <form-bean name="registrationTesterForm" type="cn.com.crowdsourcedtesting.struts.form.RegistrationTesterForm" />
+    <form-bean name="registrationPublisherForm" type="cn.com.crowdsourcedtesting.struts.form.RegistrationPublisherForm" />
 
    
   </form-beans>
@@ -80,7 +81,19 @@
       scope="request"
       type="cn.com.crowdsourcedtesting.controller.RegistrationRouter">
       <set-property property="cancellable" value="true" />
-      	<forward name="activate" path="/testre.jsp"></forward>
+      	<forward name="activate" path="/registration_tester_code.jsp"></forward>
+      	<forward name="success" path="/registration.html"></forward>
+    </action>
+    <action
+      attribute="registrationPublisherForm"
+      parameter = "method"
+      input="/registration_firm.html"
+      name="registrationPublisherForm"
+      path="/registrationPublisher"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.RegistrationRouter">
+      <set-property property="cancellable" value="true" />
+      	<forward name="activate" path="/registration_publisher_code.jsp"></forward>
       	<forward name="success" path="/registration.html"></forward>
     </action>
 

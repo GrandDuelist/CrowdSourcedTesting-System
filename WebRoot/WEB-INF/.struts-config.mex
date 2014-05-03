@@ -5,6 +5,7 @@
   <StrutsActivity path="/entrance.do" location="50,550" dimension="354,104" />
   <StrutsActivity path="/testtask.do" location="50,350" dimension="360,104" />
   <StrutsActivity path="/registrationTester.do" location="1250,50" dimension="379,104" />
+  <StrutsActivity path="/registrationPublisher.do" location="650,850" dimension="432,104" />
   <StrutsActivity path="/index.jsp" location="950,250" dimension="88,53" />
   <StrutsActivity path="/LoginView.jsp" location="950,50" dimension="116,53" />
   <StrutsActivity path="/gift.jsp" location="50,750" dimension="76,53" />
@@ -12,23 +13,110 @@
   <StrutsActivity path="/PublisherLoginView.jsp" location="650,550" dimension="169,53" />
   <StrutsActivity path="/ManageTestTaskView.jsp" location="735,300" dimension="183,53" />
   <StrutsActivity path="ManageTestTaskView.jsp" location="780,375" dimension="178,53" />
-  <StrutsActivity path="/testre.jsp" location="1250,250" dimension="90,53" />
   <StrutsActivity path="/registration.html" location="1250,450" dimension="132,53" />
   <StrutsActivity path="/registration_tester.html" location="1250,650" dimension="170,53" />
+  <StrutsActivity path="/registration_firm.html" location="1250,850" dimension="160,53" />
   <StrutsActivity path="LoginView.jsp" location="950,250" dimension="111,53" />
   <StrutsActivity path="/security/login.jsp" location="630,135" dimension="135,53" />
   <StrutsActivity path="security/login.jsp" location="650,250" dimension="130,53" />
   <StrutsActivity path="/LoginVe" location="50,350" dimension="84,53" />
   <StrutsActivity path="/L" location="350,350" dimension="43,53" />
   <StrutsActivity path="/Lgo" location="650,450" dimension="59,53" />
-  <StrutsActivity path="" location="950,450" dimension="32,53" />
   <StrutsActivity path="gift.jsp" location="950,650" dimension="71,53" />
   <StrutsActivity path="gifts.jsp" location="350,750" dimension="77,53" />
   <StrutsActivity path="/ManageTestTaskView" location="650,150" dimension="163,53" />
+  <StrutsActivity path="/tester.jsp" location="50,950" dimension="90,53" />
+  <StrutsActivity path="/publisher.jsp" location="350,950" dimension="111,53" />
+  <StrutsActivity path="/registration_tester_code.jsp" location="650,1050" dimension="196,53" />
+  <StrutsActivity path="/registration_publisher_code.jsp" location="950,1050" dimension="217,53" />
+  <StrutsActivity path="/registration_tester.jsp" location="50,1150" dimension="162,53" />
+  <StrutsActivity path="/.jsp" location="350,1150" dimension="57,53" />
+  <StrutsActivity path="/test.jsp" location="650,1250" dimension="78,53" />
   <StrutsTransition id="ManageTestTaskView.jsp,null,/testtask.do,2" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="780,402" />
       <AbsolutePoint location="410,402" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/registrationPublisher.do,activate,/test.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="866,954" />
+      <AbsolutePoint location="866,1276" />
+      <AbsolutePoint location="728,1276" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gifts.do,allgifts,/gifts.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="250,654" />
+      <AbsolutePoint location="250,676" />
+      <AbsolutePoint location="650,676" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gifts.do,giftitem,/gift.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="88,654" />
+      <AbsolutePoint location="88,750" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/security.do,home,/index.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="444,120" />
+      <AbsolutePoint location="994,120" />
+      <AbsolutePoint location="994,250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/registration_firm.html,null,/registrationPublisher.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1250,876" />
+      <AbsolutePoint location="1082,876" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/registrationPublisher.do,success,/registration.html,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="866,850" />
+      <AbsolutePoint location="866,476" />
+      <AbsolutePoint location="1250,476" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/entrance.do,login,/PublisherLoginView.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="404,576" />
+      <AbsolutePoint location="650,576" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/registrationPublisher.do,activate,/registration_publisher.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1082,918" />
+      <AbsolutePoint location="1341,918" />
+      <AbsolutePoint location="1341,1050" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/registrationTester.do,success,/registration.html,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1355,154" />
+      <AbsolutePoint location="1355,450" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/registrationTester.do,activate,/registration_tester_code.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1448,154" />
+      <AbsolutePoint location="1448,969" />
+      <AbsolutePoint location="748,969" />
+      <AbsolutePoint location="748,1050" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/registrationPublisher.do,activate,/tester.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="650,902" />
+      <AbsolutePoint location="95,902" />
+      <AbsolutePoint location="95,950" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/registrationPublisher.do,activate,/.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="866,954" />
+      <AbsolutePoint location="866,1176" />
+      <AbsolutePoint location="407,1176" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/security.do,login,/LoginView.jsp,1" routingType="0">
@@ -52,17 +140,11 @@
       <AbsolutePoint location="1405,154" />
     </AutomaticBendpoints>
   </StrutsTransition>
-  <StrutsTransition id="/gifts.do,giftitem,/gift.jsp,1" routingType="0">
+  <StrutsTransition id="/registrationTester.do,activate,/test.jsp,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="88,654" />
-      <AbsolutePoint location="88,750" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
-  <StrutsTransition id="/gifts.do,allgifts,/gifts.jsp,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="250,654" />
-      <AbsolutePoint location="250,676" />
-      <AbsolutePoint location="650,676" />
+      <AbsolutePoint location="1448,154" />
+      <AbsolutePoint location="1448,1276" />
+      <AbsolutePoint location="728,1276" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/LoginView.jsp,null,/security.do,2" routingType="0">
@@ -73,11 +155,12 @@
       <AbsolutePoint location="267,105" />
     </AutomaticBendpoints>
   </StrutsTransition>
-  <StrutsTransition id="/security.do,home,/index.jsp,1" routingType="0">
+  <StrutsTransition id="/registrationTester.do,activate,/tester.jsp,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="444,120" />
-      <AbsolutePoint location="994,120" />
-      <AbsolutePoint location="994,250" />
+      <AbsolutePoint location="1448,154" />
+      <AbsolutePoint location="1448,818" />
+      <AbsolutePoint location="95,818" />
+      <AbsolutePoint location="95,950" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/PublisherLoginView.jsp,null,/entrance.do,2" routingType="0">
@@ -88,24 +171,40 @@
       <AbsolutePoint location="227,550" />
     </AutomaticBendpoints>
   </StrutsTransition>
+  <StrutsTransition id="/registrationPublisher.do,activate,/publisher.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="650,902" />
+      <AbsolutePoint location="405,902" />
+      <AbsolutePoint location="405,950" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
   <StrutsTransition id="/gifts.jsp,null,/gifts.do,2" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="691,703" />
-      <AbsolutePoint location="691,878" />
-      <AbsolutePoint location="220,878" />
+      <AbsolutePoint location="691,718" />
+      <AbsolutePoint location="220,718" />
       <AbsolutePoint location="220,654" />
     </AutomaticBendpoints>
   </StrutsTransition>
-  <StrutsTransition id="/entrance.do,login,/PublisherLoginView.jsp,1" routingType="0">
+  <StrutsTransition id="/registrationPublisher.do,activate,/registration_publisher_code.jsp,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="404,576" />
-      <AbsolutePoint location="650,576" />
+      <AbsolutePoint location="1058,954" />
+      <AbsolutePoint location="1058,1050" />
     </AutomaticBendpoints>
   </StrutsTransition>
-  <StrutsTransition id="/registrationTester.do,success,/registration.html,1" routingType="0">
+  <StrutsTransition id="/registrationTester.do,activate,/registration_tester.jsp,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="1355,154" />
-      <AbsolutePoint location="1355,450" />
+      <AbsolutePoint location="1448,154" />
+      <AbsolutePoint location="1448,1018" />
+      <AbsolutePoint location="125,1018" />
+      <AbsolutePoint location="125,1150" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/registrationPublisher.do,activate,/testre.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1081,850" />
+      <AbsolutePoint location="1081,276" />
+      <AbsolutePoint location="1250,276" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/registrationTester.do,activate,/testre.jsp,1" routingType="0">
