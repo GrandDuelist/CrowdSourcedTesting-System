@@ -339,7 +339,8 @@
                 if (opts.output === null) {
                     hiddenObj = $('<input/>', {
                         type: 'hidden',
-                        name: opts.hiddenTagListName
+                        name: 'choices',
+                        id: 'choices'
                     });
                     $self.after(hiddenObj);
                     $self.data("lhiddenTagList", hiddenObj);

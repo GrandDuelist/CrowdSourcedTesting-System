@@ -2,8 +2,14 @@ package cn.com.crowdsourcedtesting.bean;
 
 import java.util.List;
 
-import cn.com.crowdsourcedtesting.DAO.*;
+import org.hibernate.Session;
 
+
+import cn.com.crowdsourcedtesting.DAO.*;
+import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
+import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
+
+import cn.com.crowdtest.factory.BeanFactory;
 import cn.com.crowdtest.factory.DAOFactory;
 
 public class testing {
@@ -38,12 +44,27 @@ public class testing {
 		
 		DAOFactory.getTesterDAO().save(tester);*/
 		
-		Tester tester = DAOFactory.getTesterDAO().isTester("ezhihan@gmail.com", "123");
+//		Tester tester = DAOFactory.getTesterDAO().isTester("ezhihan@gmail.com", "123");
+//		
+//		if(tester!=null)
+//		{
+//			System.out.println(tester.getTesterId());
+//		}
 		
-		if(tester!=null)
-		{
-			System.out.println(tester.getTesterId());
-		}
+		/*Session session = HibernateSessionFactory.getSession();
+		Questionnaire q = BeanFactory.getQuestionnaire();
+		Question q1 = BeanFactory.getQuestion();
+		Choice c1= BeanFactory.getChoice();
+		c1.setChoiceContent("怎么样");
+		q1.setQuestionContent("你喜欢那个英雄");
+		q.setTitle("游戏问卷");
+		
+		q1.getChoices().add(c1);
+		q.getQuestions().add(q1);
+		
+		DAOFactory.getChoiceDAO().save(c1);
+		DAOFactory.getQuestionDAO().save(q1);
+		DAOFactory.getQuestionnaireDAO().save(q);*/
 	}
 
 }
