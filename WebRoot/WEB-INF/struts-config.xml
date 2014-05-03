@@ -70,6 +70,18 @@
       <set-property property="cancellable" value="true" />
     </action>
     
+    <action
+      attribute="registrationTesterForm"
+      parameter = "method"
+      input="/registration_tester.html"
+      name="registrationTesterForm"
+      path="/registrationTester"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.RegistrationRouter">
+      <set-property property="cancellable" value="true" />
+      	<forward name="activate" path="/testre.jsp"></forward>
+      	<forward name="success" path="/registration.html"></forward>
+    </action>
 
   </action-mappings>
 
