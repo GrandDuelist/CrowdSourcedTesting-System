@@ -3,6 +3,7 @@
 
 <struts-config>
   <data-sources />
+  
   <form-beans >
     <form-bean name="loginForm" type="cn.com.crowdsourcedtesting.struts.form.LoginForm" />
     <form-bean name="manageTestTaskForm" type="cn.com.crowdsourcedtesting.struts.form.ManageTestTaskForm" />
@@ -10,6 +11,8 @@
     <form-bean name="giftForm" type="cn.com.crowdsourcedtesting.struts.form.GiftForm" />
     <form-bean name="registrationTesterForm" type="cn.com.crowdsourcedtesting.struts.form.RegistrationTesterForm" />
     <form-bean name="registrationPublisherForm" type="cn.com.crowdsourcedtesting.struts.form.RegistrationPublisherForm" />
+    <form-bean name="publisherQuestionnaireForm" type="cn.com.crowdsourcedtesting.struts.form.PublisherQuestionnaireForm" />
+    <form-bean name="questionForm" type="cn.com.crowdsourcedtesting.struts.form.QuestionForm" />
 
    
   </form-beans>
@@ -41,6 +44,9 @@
       scope="request"
       type="cn.com.crowdsourcedtesting.struts.action.GiftAction">
       <set-property property="cancellable" value="true" />
+       <forward name="home" path="/index.jsp"></forward>
+       <forward name="login" path="/LoginView.jsp"></forward>
+     
       
       <forward name="allgifts" path="/gifts.jsp"></forward>
       <forward name="giftitem" path="/gift.jsp"></forward>
@@ -59,6 +65,8 @@
         <forward name="login" path="/PublisherLoginView.jsp"></forward>
          <forward name="manage" path="/ManageTestTaskView.jsp"></forward>
    
+         
+   
     </action>
     
     
@@ -71,6 +79,18 @@
       type="cn.com.crowdsourcedtesting.controller.TestTaskRouter">
       <set-property property="cancellable" value="true" />
     </action>
+    
+    <action  name="publisherQuestionnaireForm" 
+             input="/PublisherQuestionnaireView.jsp"
+             attribute="publisherQuestionnaireForm"
+            path="/questionnaire" 
+            parameter="method" 
+            scope="request" 
+            type="cn.com.crowdsourcedtesting.controller.QuestionnaireRouter">
+      <set-property property="cancellable" value="true" />
+       <forward name="add" path="/PublisherQuestionnaireView.jsp"></forward>
+    </action>
+    
     
     <action
       attribute="registrationTesterForm"
@@ -96,8 +116,10 @@
       	<forward name="activate" path="/registration_publisher_code.jsp"></forward>
       	<forward name="success" path="/registration.html"></forward>
     </action>
+    
 
   </action-mappings>
+  <controller processorClass="filters.MyRequestProcessor" />
 
   <message-resources parameter="cn.com.crowdsourcedtesting.struts.ApplicationResources" />
 </struts-config>
