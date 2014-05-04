@@ -1,4 +1,4 @@
-#Sat May 03 17:04:08 CST 2014
+#Sat May 03 23:02:45 CST 2014
 eclipse.preferences.version=1
 encoding//WebRoot/LoginView.jsp=UTF-8
 encoding//WebRoot/WEB-INF/struts-config.xml=UTF-8
@@ -7,5 +7,4 @@ encoding//WebRoot/index.jsp=UTF-8
 encoding//WebRoot/js/charts.js=UTF-8
 encoding//src/cn/com/crowdsourcedtesting/controller/QuestionnaireRouter.java=UTF-8
 encoding//src/cn/com/crowdsourcedtesting/controller/SecurityRouter.java=UTF-8
-encoding//src/cn/com/crowdsourcedtesting/struts/form/PublisherQuestionnaireForm.java=UTF-8
 encoding/<project>=UTF-8

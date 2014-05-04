@@ -45,14 +45,7 @@ public class QuestionnaireRouter extends DispatchAction {
 	 */
 	public ActionForward goToPublish(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		   try {
-				request.setCharacterEncoding("utf-8");
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-			   response.setContentType("text/html;charset=utf-8");
+		
 		return mapping.findForward("add");
 	}
 	/**
@@ -83,6 +76,7 @@ public class QuestionnaireRouter extends DispatchAction {
 		// TODO Auto-generated method stub
 
 
+		
 		PublisherQuestionnaireForm f =  (PublisherQuestionnaireForm)form;
 		
 		/*PrintWriter out;
@@ -94,7 +88,9 @@ public class QuestionnaireRouter extends DispatchAction {
 			e.printStackTrace();
 		}*/
 		
-	 myHandler.createItem(f, request);
+			
+	   myHandler.createItem(f, request);
 	  return mapping.findForward("add");
 	}
+	
 }

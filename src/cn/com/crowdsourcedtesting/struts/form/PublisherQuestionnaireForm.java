@@ -11,7 +11,7 @@ import org.apache.struts.action.ActionMapping;
 
 /** 
  * MyEclipse Struts
- * Creation date: 05-02-2014
+ * Creation date: 05-04-2014
  * 
  * XDoclet definition:
  * @struts.form name="publisherQuestionnaireForm"
@@ -21,12 +21,26 @@ public class PublisherQuestionnaireForm extends ActionForm {
 	 * Generated fields
 	 */
 
+	/** currentOne property */
+	private String currentOne;
+	
+	private String subType;
+
+	public String getSubType() {
+		return subType;
+	}
+
+	public void setSubType(String subType) {
+		this.subType = subType;
+	}
+
 	/** questionnaireName property */
 	private String questionnaireName;
 
 	/** questionName property */
 	private String questionName;
-	
+
+	/** choices property */
 	private String choices;
 
 	/*
@@ -52,6 +66,22 @@ public class PublisherQuestionnaireForm extends ActionForm {
 	 */
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		// TODO Auto-generated method stub
+	}
+
+	/** 
+	 * Returns the currentOne.
+	 * @return String
+	 */
+	public String getCurrentOne() {
+		return currentOne;
+	}
+
+	/** 
+	 * Set the currentOne.
+	 * @param currentOne The currentOne to set
+	 */
+	public void setCurrentOne(String currentOne) {
+		this.currentOne = currentOne;
 	}
 
 	/** 
@@ -85,10 +115,9 @@ public class PublisherQuestionnaireForm extends ActionForm {
 	public void setQuestionName(String questionName) {
 		this.questionName = questionName;
 	}
-	
-	
+
 	/** 
-	 * Returns the questionName.
+	 * Returns the choices.
 	 * @return String
 	 */
 	public String getChoices() {
@@ -96,8 +125,8 @@ public class PublisherQuestionnaireForm extends ActionForm {
 	}
 
 	/** 
-	 * Set the questionName.
-	 * @param questionName The questionName to set
+	 * Set the choices.
+	 * @param choices The choices to set
 	 */
 	public void setChoices(String choices) {
 		this.choices = choices;

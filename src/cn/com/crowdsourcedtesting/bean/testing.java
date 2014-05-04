@@ -3,6 +3,7 @@ package cn.com.crowdsourcedtesting.bean;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 
 import cn.com.crowdsourcedtesting.DAO.*;
@@ -65,6 +66,34 @@ public class testing {
 		DAOFactory.getChoiceDAO().save(c1);
 		DAOFactory.getQuestionDAO().save(q1);
 		DAOFactory.getQuestionnaireDAO().save(q);*/
+		
+		
+//		List<Recruitment> t=DAOFactory.getRecruitmentDAO().findAll();
+//		System.out.println(t.size());
+		Questionnaire q = new Questionnaire(new PublisherDAO().findById(8),"问卷",0.0,0);
+		Session sess = HibernateSessionFactory.getSession();
+
+		Transaction tran = null;
+
+		try {
+
+		    
+			tran = sess.beginTransaction();
+			DAOFactory.getQuestionnaireDAO().save(q);
+			tran.commit();
+		
+	} catch (RuntimeException e) {
+
+		e.printStackTrace();
+		if (tran != null) {
+			tran.rollback();
+		}
+
+	} finally {
+
+		sess.close();
+	}
+	
 	}
 
 }

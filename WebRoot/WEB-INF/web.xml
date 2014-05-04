@@ -35,19 +35,6 @@
 	</welcome-file-list>
 
 
-	<filter>
-		<filter-name>Set Character Encoding</filter-name>
-
-		<filter-class>filters.TomcatFormFilter</filter-class>
-	</filter>
-
-	<filter-mapping>
-
-		<filter-name>Set Character Encoding</filter-name>
-
-		<url-pattern>/*</url-pattern>
-
-	</filter-mapping>
 
 
 </web-app>

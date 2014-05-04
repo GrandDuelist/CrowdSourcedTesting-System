@@ -2,7 +2,7 @@ package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.Publisher;
-import cn.com.crowdsourcedtesting.bean.Tester;
+
 
 import java.util.List;
 import java.util.Set;
@@ -64,7 +64,7 @@ public class PublisherDAO extends BaseHibernateDAO {
 		log.debug("getting Publisher instance with id: " + id);
 		try {
 			Publisher instance = (Publisher) getSession().get(
-					"cn.com.crowdsourcedtesting.DAO.Publisher", id);
+					"cn.com.crowdsourcedtesting.bean.Publisher", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);

@@ -66,8 +66,68 @@ $("#createItem").click(function()
     
 
 }
-
 );
+
+$("div#selectButton").click(function()
+{
+
+    $("form#selectForm input[name='currentOne']").attr("value",$(this).attr("title"));
+    
+    
+   
+     $("form#selectForm input[name='subType']").attr("value","selectQuestion");
+    $("form#selectForm").attr("action","questionnaire.do?method=createItem");
+    $("form#selectForm").submit();
+      
+    
+
+}
+);
+
+
+$("div#confirm").click(function()
+{
+
+    $("form#selectForm input[name='currentOne']").attr("value",$("div#currentQuestion h3").attr("id"));
+    
+     $("form#selectForm input[name='subType']").attr("value","confirmQuestion");
+    $("form#selectForm").attr("action","questionnaire.do?method=createItem");
+    $("form#selectForm").submit();
+      
+    
+
+}
+);
+
+
+$("div#deleteQuestion").click(function()
+{
+
+    $("form#selectForm input[name='currentOne']").attr("value",$("div#currentQuestion h3").attr("id"));
+    
+     $("form#selectForm input[name='subType']").attr("value","deleteQuestion");
+    $("form#selectForm").attr("action","questionnaire.do?method=createItem");
+    $("form#selectForm").submit();
+      
+    
+
+}
+);
+
+$("div#publishQuetionnaire").click(function()
+{
+
+   
+    
+     $("form#selectForm input[name='subType']").attr("value","publishQuetionnaire");
+    $("form#selectForm").attr("action","questionnaire.do?method=createItem");
+    $("form#selectForm").submit();
+      
+    
+
+}
+);
+
 
 });
 </script>
@@ -77,8 +137,20 @@ $("#createItem").click(function()
  List<Question> questions = (List<Question>) session.getAttribute("questions");
  String type = (String)session.getAttribute("type");
  Questionnaire questionnaire = (Questionnaire)session.getAttribute("questionnaire");
+ String currentID =(String)session.getAttribute("currentID");
+ 
+ System.out.println(currentID);
+
   %>
+  
+  <%try{ %>
 <body>
+
+<form id="selectForm"  method="post">
+ <input type="hidden" name="currentOne"/>
+ <input type="hidden" name="subType">
+</form>
+
 <!-- Start: Theme Preview Pane -->
 <div id="skin-toolbox">
   <div class="skin-toolbox-toggle"> <i class="fa fa-flask"></i> </div>
@@ -335,12 +407,15 @@ $("#createItem").click(function()
             
               <div class="form-group">
                 <label for="web_url"> 问卷名称 </label>
-                <%if(type==null&&questionnaire==null) {%>
+                <%if(type==null||questionnaire==null||questionnaire.getTitle()==null||"".equals(questionnaire.getTitle())) {%>
                 <input type="text" class="form-control event-name"  name="questionnaireName" placeholder="游戏兴趣调查？" />
                 <%}else {  %>
                  <input type="text" class="form-control event-name" disabled=true value="<%=questionnaire.getTitle() %>" />
                 <%} %>
               </div>
+             
+             
+             
              
               <div id="external-events">
               <%if(questions!=null){
@@ -349,7 +424,8 @@ $("#createItem").click(function()
               {
                  Question question = questions.get(i);
               %>
-                <div class='external-event' data-length="2"><%=question.getQuestionContent() %></div>
+                
+                <div class='external-event' id="selectButton" title="<%=i %>" data-length="2"><%=question.getQuestionContent() %></div>
               <%} } %>
               
               </div>
@@ -370,11 +446,9 @@ $("#createItem").click(function()
                 </div>
                 
                 <div class="form-group margin-bottom-none pull-right">
-                <%if(type==null||"create".equals(type)){ %>
+              
                   <button type="button" class="btn btn-success btn-gradient margin-bottom margin-right-sm" id="createItem">创建题目</button>
-                  <%}else if("confirm".equals(type)){%>
-                    <button type="button" class="create-event-form btn btn-default btn-gradient" disabled=true id="createItem">创建题目</button>
-                 <% } %>
+                 
                 </div>
                 <div class="clearfix"></div>
                 </form>
@@ -385,8 +459,8 @@ $("#createItem").click(function()
         <div class="col-md-6">
           <div class="panel">
             <div class="panel-heading">
-              <div class="panel-title"><i class="fa fa-book"></i>问卷发布</div>
-              <div class="pull-right"><a href="#" class="btn btn-success btn-gradient margin-bottom margin-right-sm" id="publish">确认问卷</a></div>
+              <div class="panel-title"><i class="fa fa-book" ></i>问卷发布</div>
+              <div class="pull-right"  id="publishQuetionnaire"><a class="btn btn-success btn-gradient margin-bottom margin-right-sm">确认问卷</a></div>
             </div>
             <div class="panel-body">
               <h2 class="text-primary"> 题目预览 </h2>
@@ -396,27 +470,55 @@ $("#createItem").click(function()
                   <p class="alert alert-success">问卷<b>未填写完整</b>确定提交？</p>
                   <div class="form-group">
                     <label for="web_url"> 标题 </label>
-                    <div class="text-center">
-                      <h3 class="text-alert">问题3：你了解这款游戏是因为什么？</h3>
+                    <%int current=-1;
+                    if(questions!=null&&questions.size()!=0){ 
+                    Question question=new Question();
+                    if(currentID!=null&&!"".equals(currentID)){
+                    
+                    try{
+                    current=Integer.parseInt(currentID);
+                    question = questions.get(current);
+                    currentID=null;
+                    
+                    session.removeAttribute("currentID");
+                    }catch(Exception e){
+                     session.removeAttribute("currentID");
+                     current=questions.size()-1;
+                      question = questions.get(current);
+                    }
+                  }
+                    else{
+                      current=questions.size()-1;
+                      question = questions.get(current);
+                    }
+                    
+                   
+                     %>
+                    <div class="text-center" id="currentQuestion">
+                      <h3 class="text-alert" id="<%=current%>"><%=question.getQuestionContent() %></h3>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="textArea">详细内容</label>
-                    <div class="input-group text-center"> <a id="comments" class="editable editable-pre-wrapped editable-click" data-title="Enter comments" data-placeholder="Your comments here..." data-pk="1" data-type="textarea" href="#">大家为什么喜欢这款游戏呢？应该有很多理由吧！
-                      大家选选看吧…^-^啊哈哈哈哈哈哈哈哈哈</a> </div>
+                  
                   </div>
                   <div class="text-left">
                     <ol>
-                      <li><a href="#" id="answer1" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" data-title="修改选项1" class="editable editable-click editable-empty">运行流畅</a></li>
-                      <li><a href="#" id="answer2" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" data-title="修改选项2" class="editable editable-click editable-empty">故事情节好</a></li>
-                      <li><a href="#" id="answer3" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" data-title="修改选项3" class="editable editable-click editable-empty">主人公好看</a></li>
-                      <li><a href="#" id="answer4" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" data-title="修改选项4" class="editable editable-click editable-empty">因为兴趣</a></li>
+                    <%Iterator it = question.getChoices().iterator();
+                    int i=0;
+                    while(it.hasNext()) {
+                     i++;
+                      Choice choice =(Choice)it.next();
+                    %>
+                      <li><a id='<%="answer"+i %>' data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" data-title='<%="修改选项"+i %>' class="editable editable-click editable-empty"><%=choice.getChoiceContent() %></a></li>
+                     <%} %>
                     </ol>
                   </div>
+                  <% }%>
                   <hr>
                   </hr>
-                  <div class="pull-left animate-me-btns"> <a class="btn btn-alert btn-gradient btn-lg" data-test="bounceInDown">预览问卷</a> </div>
-                  <div class="pull-right"> <a href="#" class="btn btn-info btn-gradient btn-lg margin-bottom margin-right-sm" id="confirm">确认题目</a> </div>
+                  <div class="pull-left" id="deleteQuestion"> <a class="btn btn-alert btn-gradient btn-lg" data-test="bounceInDown">抛弃题目</a> </div>
+                  <div class="pull-right" id="confirm"> <a class="btn btn-info btn-gradient btn-lg margin-bottom margin-right-sm" >确认题目</a> </div>
                 </div>
               </div>
               <div class="row">
@@ -434,25 +536,33 @@ $("#createItem").click(function()
                   <div class="panel-title"><i class="fa fa-star"></i> 问卷预览 </div>
                 </div>
                 <div class="panel-body"> 
-                  <h4 class="panel-body-title">关于游戏的调查问卷</h4>
+                <%if(questionnaire!=null){ %>
+                  <h4 class="panel-body-title"><%=questionnaire.getTitle() %></h4>
                 
-                  	现在越来越多的同学对游戏感兴趣，现在我们来对大家做一个关于LOL的游戏调查
+                  
                   
                   <hr/>
                   <p>
                   	<ol>
-                        <li><label for="web_url"> 你喜欢哪个英雄的造型？ </label>
+                  	<% Iterator it = questionnaire.getQuestions().iterator();
+                  	while(it.hasNext()){ 
+                  	Question  q =(Question) it.next();
+                  
+                  	%>
+                  	 <li><label for="web_url"> <%=q.getQuestionContent()%>? </label>
                     <div class="text-left">
+                  	<%
+                  	Iterator it2 = q.getChoices().iterator();
+                  	while(it2.hasNext()){
+                  	Choice choice = (Choice)it2.next();
+                  	%>
                       <label class="radio-inline">
                           <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          盖伦 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-                          阿狸 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios3" value="option3" />
-                          琴女 </label>
-                    </div> </li>
+                          <%=choice.getChoiceContent() %> </label>
+                       
+                    
+                    
+                  <%} }%></div> </li> <%}%>  
                         <li><label for="web_url"> 你喜欢哪个英雄的造型？ </label>
                     <div class="text-left">
                       <label class="radio-inline">
@@ -913,4 +1023,10 @@ $("#createItem").click(function()
 });
 </script>
 </body>
+<%}catch(Exception e) 
+{
+    session.removeAttribute("questionnaire");
+    session.removeAttribute("questions");
+
+}%>
 </html>
