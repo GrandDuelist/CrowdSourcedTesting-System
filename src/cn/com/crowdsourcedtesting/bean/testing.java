@@ -70,7 +70,8 @@ public class testing {
 		
 //		List<Recruitment> t=DAOFactory.getRecruitmentDAO().findAll();
 //		System.out.println(t.size());
-		Questionnaire q = new Questionnaire(new PublisherDAO().findById(8),"问卷",0.0,0);
+		Publisher publisher= new PublisherDAO().findById(8);
+		Questionnaire q = new Questionnaire(publisher,"问卷",0.0,0);
 		Session sess = HibernateSessionFactory.getSession();
 
 		Transaction tran = null;
@@ -79,7 +80,7 @@ public class testing {
 
 		    
 			tran = sess.beginTransaction();
-			DAOFactory.getQuestionnaireDAO().save(q);
+			sess.save(q);
 			tran.commit();
 		
 	} catch (RuntimeException e) {

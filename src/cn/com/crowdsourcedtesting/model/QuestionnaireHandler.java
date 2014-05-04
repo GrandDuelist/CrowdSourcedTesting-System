@@ -117,7 +117,7 @@ public class QuestionnaireHandler {
 			     q.setQuestionnaireCount(q.getQuestions().size());
 			     
 				
-				DAOFactory.getQuestionnaireDAO().save(q);
+				sess.save(q);
 				
 				Iterator it1 = q.getQuestions().iterator();
 				
@@ -128,7 +128,7 @@ public class QuestionnaireHandler {
 					q1.setQuestionnaire(q);
 					q1.setQuestionCount(q1.getChoices().size());
 					q1.setQuestionType(false);
-					DAOFactory.getQuestionDAO().save(q1);
+					sess.save(q1);
 					
 					
 					Iterator it2 = q1.getChoices().iterator();
@@ -138,7 +138,7 @@ public class QuestionnaireHandler {
 						Choice c = (Choice) it2.next();
 						c.setQuestion(q1);
 						c.setSelectCount(0);
-						DAOFactory.getChoiceDAO().save(c);
+						sess.save(c);
 					}
 					
 					
