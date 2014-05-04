@@ -11,7 +11,7 @@
   <head>
     <html:base />
     
-    <title>testre.jsp</title>
+    <title>registration_tester_code.jsp</title>
 
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">

@@ -10,9 +10,14 @@
     <form-bean name="publisherLoginForm" type="cn.com.crowdsourcedtesting.struts.form.PublisherLoginForm" />
     <form-bean name="giftForm" type="cn.com.crowdsourcedtesting.struts.form.GiftForm" />
     <form-bean name="registrationTesterForm" type="cn.com.crowdsourcedtesting.struts.form.RegistrationTesterForm" />
+<<<<<<< HEAD
     <form-bean name="registrationPublisherForm" type="cn.com.crowdsourcedtesting.struts.form.RegistrationPublisherForm" />
+=======
     <form-bean name="publisherQuestionnaireForm" type="cn.com.crowdsourcedtesting.struts.form.PublisherQuestionnaireForm" />
-  
+    <form-bean name="questionForm" type="cn.com.crowdsourcedtesting.struts.form.QuestionForm" />
+>>>>>>> df0834fe042e1738df87e48a5bd15322ae5ebc01
+
+   
   </form-beans>
 
   <global-exceptions />
@@ -78,8 +83,7 @@
       <set-property property="cancellable" value="true" />
     </action>
     
-    <action  
-    name="publisherQuestionnaireForm" 
+    <action  name="publisherQuestionnaireForm" 
              input="/PublisherQuestionnaireView.jsp"
              attribute="publisherQuestionnaireForm"
             path="/questionnaire" 

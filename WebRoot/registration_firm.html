@@ -81,7 +81,7 @@
             </div>
           </div>
           <div class="panel-body">
-            <form class="cmxform" id="commentForm" method="get" />
+            <form class="cmxform" action="registrationPublisher.do?method=publisherRegistrationActive" id="commentForm" method="post" />
               <div id="rootwizard">
                 <div class="wizard-wrapper">
                   <ul class="wizard-steps">
@@ -104,7 +104,7 @@
                         
                         <div class="form-group">
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-envelope-o"></i> </span>
-                            <input class="form-control" type="email" name="reg_email" placeholder="注册邮箱" required />
+                            <input class="form-control" type="email" name="logEmail" placeholder="注册邮箱" required />
                           </div>
                         </div>
                         <div class="form-group">
@@ -119,7 +119,7 @@
                         </div>
                         <div class="form-group">
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-envelope-o"></i> </span>
-                            <input class="form-control" type="email" name="contact_email" placeholder="联络邮箱" required />
+                            <input class="form-control" type="email" name="connectEmail" placeholder="联络邮箱" required />
                           </div>
                         </div>
                         <div class="form-group">
@@ -131,7 +131,7 @@
                         </div>
                         <div class="form-group">
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i> </span>
-                            <input class="form-control" type="text" name="name" placeholder="公司法人" required />
+                            <input class="form-control" type="text" name="type111" placeholder="no类型" required />
                           </div>
                         </div>
                         <div class="form-group">
@@ -165,7 +165,7 @@
                         <li class="previous first" style="display:none;"><a href="#">填写注册信息</a></li>
                         <li class="previous"><a href="#">上一步</a></li>
                         <li class="next last" style="display:none;"><a href="#">发送确认链接</a></li>
-                        <li class="next"><a href="#">下一步</a></li>
+                        <li class="next"><input type="submit" value="下一步" /></li>
                         <li class="save" style="display:none;"><a href="#">等待审核</a></li>
                       </ul>
                     </div>

@@ -18,6 +18,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import cn.com.crowdsourcedtesting.model.RegistrationHandler;
+import cn.com.crowdsourcedtesting.struts.form.RegistrationPublisherForm;
 import cn.com.crowdsourcedtesting.struts.form.RegistrationTesterForm;
 
 import javax.mail.Address;   
@@ -50,6 +51,7 @@ public class RegistrationRouter extends DispatchAction {
 	private RegistrationHandler handler = new RegistrationHandler();
 	
 	private RegistrationTesterForm registrationTesterForm;
+	private RegistrationPublisherForm registrationPublisherForm;
 	
 	private char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
 			   'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
@@ -127,10 +129,69 @@ public class RegistrationRouter extends DispatchAction {
 		}
 	}
 	
-	public ActionForward firmRegistraton(ActionMapping mapping, ActionForm form,
+	public ActionForward publisherRegistrationActive(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		RegistrationTesterForm registrationTesterForm = (RegistrationTesterForm) form;// TODO Auto-generated method stub
-		return null;
+		registrationPublisherForm =(RegistrationPublisherForm) form;
+		
+		Random random = new Random();
+		StringBuffer randomcode = new StringBuffer();
+		for (int i = 0; i < 4; i++) {
+			String strRandString =String.valueOf(codeSequence[random.nextInt(36)]);
+			randomcode.append(strRandString.toLowerCase());
+		}
+		registrationPublisherForm.setCode(randomcode.toString());
+		
+		MyAuthenticator authenticator = new MyAuthenticator("lin1014582610@163.com","zhaoyunting36057");
+		
+		Properties props = new Properties();
+		props.put("mail.smtp.host", "smtp.163.com");   
+	    props.put("mail.smtp.port", "25");  
+	    props.put("mail.transport.protocol", "smtp");
+	    props.put("mail.smtp.auth", "true");
+		
+		Session sendMailSession = Session.getDefaultInstance(props,authenticator);
+		
+		try {
+			
+			Message mailMessage = new MimeMessage(sendMailSession);
+			Address fromaAddress = new InternetAddress("lin1014582610@163.com");
+			mailMessage.setFrom(fromaAddress);
+			Address toAddress = new InternetAddress(registrationPublisherForm.getLogEmail());
+			mailMessage.setRecipient(Message.RecipientType.TO, toAddress);
+			mailMessage.setSubject("注册验证码");
+			mailMessage.setSentDate(new Date());
+			Multipart mainpart = new MimeMultipart();
+			BodyPart html = new MimeBodyPart();
+			html.setContent(registrationPublisherForm.getCode(),"text/html;charset=utf-8");
+			mainpart.addBodyPart(html);
+			mailMessage.setContent(mainpart);
+			
+			
+			Transport transport = sendMailSession.getTransport("smtp");
+		    transport.connect("smtp.163.com","lin1014582610@163.com", "zhaoyunting36057");
+		    transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
+		    transport.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
+		return mapping.findForward("activate");
+	}
+	
+	public ActionForward publisherRegistration(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		RegistrationPublisherForm registrationPublisherForm_comfirm = (RegistrationPublisherForm) form;
+		
+		if (registrationPublisherForm.getCode().equals(registrationPublisherForm_comfirm.getComfirmCode())) {
+			handler.handleRegistrationPublisher(registrationPublisherForm);
+			return mapping.findForward("success");
+		}
+		else {
+			return null;
+		}
 	}
 }
 class MyAuthenticator extends Authenticator{  
