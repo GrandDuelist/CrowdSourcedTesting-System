@@ -24,6 +24,7 @@ public class SecurityHandler {
 		{
 			Publisher publisher=DAOFactory.getPublisherDAO().isPublisher(form.getUsername(), form.getPassword());
 
+			
 			return publisher;
 			
 		}

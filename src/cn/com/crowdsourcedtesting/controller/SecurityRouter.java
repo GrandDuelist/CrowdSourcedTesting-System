@@ -126,6 +126,7 @@ public class SecurityRouter extends DispatchAction {
 			// 测试者登陆成功
 			session.setAttribute("UserType", UserType.Publisher);
 			session.setAttribute("Publisher",publisher);
+			
 			return mapping.findForward("manage");
 
 		} else {
