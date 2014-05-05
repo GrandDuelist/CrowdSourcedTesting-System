@@ -36,7 +36,10 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.jdbc-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.orm-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.transaction-3.0.5.RELEASE.jar"/>
+<<<<<<< HEAD
+=======
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activation.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mail.jar"/>
+>>>>>>> e741384294f3a101339bad92ff288b99f043a999
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

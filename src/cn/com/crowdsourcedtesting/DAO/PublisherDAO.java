@@ -2,7 +2,7 @@ package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.Publisher;
-import cn.com.crowdsourcedtesting.bean.Tester;
+
 
 import java.util.List;
 import java.util.Set;

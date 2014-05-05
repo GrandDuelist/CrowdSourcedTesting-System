@@ -1,18 +1,17 @@
 package cn.com.crowdsourcedtesting.DAO;
 
-import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
-import cn.com.crowdsourcedtesting.bean.Gift;
-import cn.com.crowdsourcedtesting.bean.Tester;
-
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
+
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
+import cn.com.crowdsourcedtesting.bean.Tester;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -37,18 +36,18 @@ public class TesterDAO extends BaseHibernateDAO {
 	public static final String TESTER_PHOTO = "testerPhoto";
 	public static final String TESTER_CREDIT = "testerCredit";
 
-
 	public void save(Tester transientInstance) {
 		log.debug("saving Driver instance");
-		 Session session=getSession();
+		Session session = getSession();
+		Transaction tran = null;
 		try {
-			session.beginTransaction();
-			getSession().save(transientInstance);
-			session.beginTransaction().commit();
+			tran = session.beginTransaction();
+			session.save(transientInstance);
+			tran.commit();
 			log.debug("save successful");
 		} catch (RuntimeException re) {
 			log.error("save failed", re);
-			session.beginTransaction().rollback();
+			tran.rollback();
 			throw re;
 		}
 	}
@@ -179,27 +178,23 @@ public class TesterDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
-	
-	//判断是否为Tester
-		public Tester isTester(String email,String password)
-		{
-			Tester tester=null;
-			
-			List<Tester>testers=(List<Tester>)this.findByProperty(TESTER_EMAIL,email);
-			
-		    if(testers!=null&&testers.size()!=0)
-		    {
-		    	tester = testers.get(0);
-		    	if(!tester.getTesterPassword().equals(password))
-		    	{
-		    		tester=null;
-		    	}
-		    }
-		    
-		   
-			
-			return tester;
-			
-			
+
+	// 判断是否为Tester
+	public Tester isTester(String email, String password) {
+		Tester tester = null;
+		List<Tester> testers = (List<Tester>) this.findByProperty(TESTER_EMAIL,
+				email);
+		if (testers != null && testers.size() != 0) {
+			tester = testers.get(0);
+			if (!tester.getTesterPassword().equals(password)) {
+				tester = null;
+			}
 		}
+		return tester;
+	}
+	
+//	public void testerRegist(String name, String email, String password) {
+//		
+//	}
+
 }
