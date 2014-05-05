@@ -1,5 +1,11 @@
 package cn.com.crowdsourcedtesting.model;
 
+import oracle.net.aso.i;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.crowdsourcedtesting.struts.form.RegistrationPublisherForm;
@@ -38,6 +44,21 @@ public class RegistrationHandler {
 		publisher.setPublisherType(false);
 		publisher.setPublisherConnectEmail(form.getConnectEmail());
 		
-		DAOFactory.getPublisherDAO().save(publisher);
+		Session session = HibernateSessionFactory.getSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			DAOFactory.getPublisherDAO().save(publisher);
+			transaction.commit();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			
+		} finally {
+			session.close();
+		}
+	
 	}
 }
