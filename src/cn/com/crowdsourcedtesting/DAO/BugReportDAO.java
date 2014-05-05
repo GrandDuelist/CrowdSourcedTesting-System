@@ -61,7 +61,7 @@ public class BugReportDAO extends BaseHibernateDAO {
 		log.debug("getting BugReport instance with id: " + id);
 		try {
 			BugReport instance = (BugReport) getSession().get(
-					"cn.com.crowdsourcedtesting.DAO.BugReport", id);
+					"cn.com.crowdsourcedtesting.bean.BugReport", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -73,7 +73,7 @@ public class BugReportDAO extends BaseHibernateDAO {
 		log.debug("finding BugReport instance by example");
 		try {
 			List results = getSession()
-					.createCriteria("cn.com.crowdsourcedtesting.DAO.BugReport")
+					.createCriteria("cn.com.crowdsourcedtesting.bean.BugReport")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

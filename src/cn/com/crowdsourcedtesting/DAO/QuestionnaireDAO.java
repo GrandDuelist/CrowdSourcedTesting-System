@@ -57,7 +57,7 @@ public class QuestionnaireDAO extends BaseHibernateDAO {
 		log.debug("getting Questionnaire instance with id: " + id);
 		try {
 			Questionnaire instance = (Questionnaire) getSession().get(
-					"cn.com.crowdsourcedtesting.DAO.Questionnaire", id);
+					"cn.com.crowdsourcedtesting.bean.Questionnaire", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -70,7 +70,7 @@ public class QuestionnaireDAO extends BaseHibernateDAO {
 		try {
 			List results = getSession()
 					.createCriteria(
-							"cn.com.crowdsourcedtesting.DAO.Questionnaire")
+							"cn.com.crowdsourcedtesting.bean.Questionnaire")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

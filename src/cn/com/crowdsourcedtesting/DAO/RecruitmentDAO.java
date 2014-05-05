@@ -2,7 +2,9 @@ package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.Recruitment;
+import cn.com.other.page.Page;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.LockMode;
@@ -33,7 +35,9 @@ public class RecruitmentDAO extends BaseHibernateDAO {
 	public static final String BRIEF = "brief";
 	public static final String COMPANY = "company";
 	public static final String PLACE = "place";
-	public static final String RECRUIMENT_TYPE = "recruimentType";
+	public static final String RECRUITMENT_TYPE = "recruitmentType";
+	public static final String PUBLISHER_ID = "publisherId";
+	public static final String CHECK_ADMINISTRATOR_ID = "checkAdministratorId";
 
 	public void save(Recruitment transientInstance) {
 		log.debug("saving Recruitment instance");
@@ -61,7 +65,7 @@ public class RecruitmentDAO extends BaseHibernateDAO {
 		log.debug("getting Recruitment instance with id: " + id);
 		try {
 			Recruitment instance = (Recruitment) getSession().get(
-					"cn.com.crowdsourcedtesting.DAO.Recruitment", id);
+					"cn.com.crowdsourcedtesting.bean.Recruitment", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -74,7 +78,7 @@ public class RecruitmentDAO extends BaseHibernateDAO {
 		try {
 			List results = getSession()
 					.createCriteria(
-							"cn.com.crowdsourcedtesting.DAO.Recruitment")
+							"cn.com.crowdsourcedtesting.bean.Recruitment")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -124,8 +128,16 @@ public class RecruitmentDAO extends BaseHibernateDAO {
 		return findByProperty(PLACE, place);
 	}
 
-	public List findByRecruimentType(Object recruimentType) {
-		return findByProperty(RECRUIMENT_TYPE, recruimentType);
+	public List findByRecruitmentType(Object recruitmentType) {
+		return findByProperty(RECRUITMENT_TYPE, recruitmentType);
+	}
+
+	public List findByPublisherId(Object publisherId) {
+		return findByProperty(PUBLISHER_ID, publisherId);
+	}
+
+	public List findByCheckAdministratorId(Object checkAdministratorId) {
+		return findByProperty(CHECK_ADMINISTRATOR_ID, checkAdministratorId);
 	}
 
 	public List findAll() {
@@ -174,4 +186,45 @@ public class RecruitmentDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
+	
+	
+	//按页查找
+	
+		@SuppressWarnings("unchecked")
+		public List findByPage(Page page)
+		{
+			try {
+				List<Recruitment> recruitments = new ArrayList<Recruitment>();
+				String queryString = "from Recruitment";
+				
+				Query queryObject = getSession().createQuery(queryString);
+				queryObject.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
+				queryObject.setMaxResults(page.getPerRows());
+				
+				recruitments = queryObject.list();						
+				return recruitments;
+				}
+				catch(RuntimeException re) {
+					log.error("find by page failed", re);
+					throw re;
+				}
+					
+				
+				
+			}
+			
+			
+		public int getTotalRows()
+		{
+		
+					 Number c= (Number) getSession().createQuery("select count(*) from Recruitment")
+					.uniqueResult();
+					 
+					
+					 return c.intValue();
+					
+					
+			//return this.findAll().size();
+		}
+	
 }

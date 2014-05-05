@@ -54,7 +54,7 @@ public class ChoiceDAO extends BaseHibernateDAO {
 		log.debug("getting Choice instance with id: " + id);
 		try {
 			Choice instance = (Choice) getSession().get(
-					"cn.com.crowdsourcedtesting.DAO.Choice", id);
+					"cn.com.crowdsourcedtesting.bean.Choice", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -66,7 +66,7 @@ public class ChoiceDAO extends BaseHibernateDAO {
 		log.debug("finding Choice instance by example");
 		try {
 			List results = getSession()
-					.createCriteria("cn.com.crowdsourcedtesting.DAO.Choice")
+					.createCriteria("cn.com.crowdsourcedtesting.bean.Choice")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

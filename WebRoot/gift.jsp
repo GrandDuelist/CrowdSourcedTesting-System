@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" import="cn.com.crowdsourcedtesting.bean.*;" contentType="text/html; charset=UTF-8"%>
 
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -31,6 +31,19 @@
     <link rel="stylesheet" href="assets/css/themes/default.css" id="style_color" />
     <link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-1" />    
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head> 
+
+
+<%
+ String flag = (String)request.getAttribute("isLegal");
+ if(flag == null || flag != "legal")
+ {
+ 	response.sendRedirect("gifts.do?method=selectAllGifts");
+ 	return;
+ }
+ else
+ 	request.removeAttribute("isLegal");
+ %>
+ 
 
 <body>
 <!--=== Style Switcher ===-->    
@@ -87,7 +100,7 @@
                            
                       </li>
                         <li class="active">
-                            <a href="gifts.html">礼品中心
+                           <a href="gifts.jsp">礼品中心
                                                         
                             </a>
                                        
@@ -97,7 +110,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="page_hirelist.html">招募帖                          
+                            <a href="page_hirelist.jsp">招募帖                          
                             </a>
                         </li>
                         <li>
@@ -139,42 +152,36 @@
 </div><!--/breadcrumbs-->
 <!--=== End Breadcrumbs ===-->
 
+
+<%
+ Gift gift  =(Gift) request.getAttribute("giftitem");
+ %>
+
 <!--=== Content Part ===-->
 <div class="container"> 	
 	<div class="row-fluid"> 
         <div id="w">    
-            <div class="sort" id="sort">
-				<ul class="unstyled inline">
-                	<li><a href="#" class="all selected">所有</a></li>
-                	<li><a href="#" class="web">常规礼品</a></li>
-                	<li><a href="#" class="ios">项目礼品</a></li>
-                	<li><a href="#" class="print">可兑换礼品</a></li>
-                </ul>
-            </div>
             
             <ul class="portfolio recent-work clearfix"> 
             
                 <li data-id="id-1" class="ios">
-                    <a href="portfolio_item.html">
+                    <a href="#">
                     	<em class="overflow-hidden"><img src="assets/plugins/portfolioSorting/img/2.jpg" alt="" /></em>
                         <span>
-                            <strong>Happy New Year</strong>
-                            <i>Anim pariatur cliche reprehenderit</i>
+                            <strong><%=gift.getGiftName()%></strong>
+                            <i><%=gift.getGiftCredit()%></i>
                         </span>
                     </a>
-                </li>
-                
-                <li data-id="id-15" class="web">
-                    <a href="portfolio_item.html">
-                    	<em class="overflow-hidden"><img src="assets/plugins/portfolioSorting/img/7.jpg" alt="" /></em>
-                        <span>
-                            <strong>Happy New Year</strong>
-                            <i>Anim pariatur cliche reprehenderit</i>
-                        </span>
-                    </a>
-                </li>
+                </li>                           
                 
             </ul>
+            
+            <ul>
+            	<li>
+            		<a href="gifts.do?method=getGift&giftId=<%=gift.getGiftId()%>">我要兑换</a>
+            	</li>
+            </ul>
+            
         </div>                
     </div><!--/row-fluid-->         
 </div><!--/container-->	 	

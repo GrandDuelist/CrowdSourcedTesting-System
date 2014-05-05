@@ -56,7 +56,7 @@ public class ChangeGiftDAO extends BaseHibernateDAO {
 		log.debug("getting ChangeGift instance with id: " + id);
 		try {
 			ChangeGift instance = (ChangeGift) getSession().get(
-					"cn.com.crowdsourcedtesting.DAO.ChangeGift", id);
+					"cn.com.crowdsourcedtesting.bean.ChangeGift", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -68,7 +68,7 @@ public class ChangeGiftDAO extends BaseHibernateDAO {
 		log.debug("finding ChangeGift instance by example");
 		try {
 			List results = getSession()
-					.createCriteria("cn.com.crowdsourcedtesting.DAO.ChangeGift")
+					.createCriteria("cn.com.crowdsourcedtesting.bean.ChangeGift")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

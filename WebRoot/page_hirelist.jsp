@@ -32,18 +32,17 @@
     <link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-1" />    
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head> 
 
-
-<%
- String flag = (String)request.getAttribute("isLegal");
+<% 
+String flag = (String)request.getAttribute("isLegal");
  if(flag == null || flag != "legal")
  {
- 	response.sendRedirect("gifts.do?method=selectAllGifts");
+ 	response.sendRedirect("recruitment.do?method=selectAllRecruitment");
  	return;
  }
  else
  	request.removeAttribute("isLegal");
- %>
- 
+%>
+
 
 <body>
 <!--=== Style Switcher ===-->    
@@ -73,6 +72,7 @@
         </div>        				
     </div><!--/container-->		
 </div><!--/top-->
+<!--=== End Top ===--> 
 <!--=== End Top ===-->    
 
 <!--=== Header ===-->
@@ -92,16 +92,15 @@
                     <span class="icon-bar"></span>
                 </a><!-- /nav-collapse -->                                  
                 <div class="nav-collapse collapse">                                     
-                    <ul class="nav">
+                    <ul class="nav top-2">
                         <li>
                            <a href="index.html">主页
                             
                             </a>
                            
                       </li>
-                        <li class="active">
+                        <li>
                             <a href="gifts.jsp">礼品中心
-                           
                                                         
                             </a>
                                        
@@ -110,7 +109,7 @@
                             <a href="page_list.html">任务广场                            
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="page_hirelist.jsp">招募帖                          
                             </a>
                         </li>
@@ -126,11 +125,11 @@
                         </li>
                         <li><a class="search search-nav"><i class="icon-search search-btn"></i></a></li>                                
                     </ul>
-                    <div class="search-open search-open-inner">
+                    <div class="search-open">
                         <div class="input-append">
                             <form />
-                                <input type="text" class="span3" placeholder="Search" />
-                                <button type="submit" class="btn-u">Search</button>
+                                <input type="text" class="span3" placeholder="搜索" />
+                                <button type="submit" class="btn-u">搜索</button>
                             </form>
                         </div>
                     </div>
@@ -144,75 +143,162 @@
 <!--=== Breadcrumbs ===-->
 <div class="breadcrumbs margin-bottom-40">
 	<div class="container">
-        <h1 class="color-green pull-left">礼品中心</h1>
+        <h1 class="pull-left">招募信息列表</h1>
         <ul class="pull-right breadcrumb">
             <li><a href="index.html">主页</a> <span class="divider">/</span></li>
-            <li class="active">礼品中心</li>
+            <li class="active">招募信息</li>
         </ul>
     </div><!--/container-->
 </div><!--/breadcrumbs-->
 <!--=== End Breadcrumbs ===-->
 
 <%
- List <Gift> gifts  =(List<Gift>) request.getAttribute("gifts");
- Page giftpage = (Page)request.getAttribute("page");
- Iterator<Gift> it= gifts.iterator();
- Gift gift = null;
+ List <Recruitment> recruitments  =(List<Recruitment>) request.getAttribute("hirelist");
+ Page hirepage = (Page)request.getAttribute("page");
+ Iterator<Recruitment> it= recruitments.iterator();
+ Recruitment recruitment = null;
  %>
 
 <!--=== Content Part ===-->
-<div class="container"> 	
-	<div class="row-fluid"> 
-        <div id="w">    
-            <div class="sort" id="sort">
-				<ul class="unstyled inline">
-                	<li><a href="gifts.do?method=selectAllGifts" class="all selected">所有礼品</a></li>
-                	<!-- 
-                	<li><a href="#" class="web">常规礼品</a></li>
-                	<li><a href="#" class="ios">项目礼品</a></li>
-                	 -->
-                	<li><a href="gifts.do?method=selectAvailableGifts&usercredit=5000" class="print">可兑换礼品</a></li>
-                </ul>
+<div class="container">		
+	<div class="row-fluid">
+    	<!-- Our Services -->
+	<div class="row-fluid">
+        <div class="row-fluid margin-bottom-20"> 
+        
+        		<%
+                	if(!it.hasNext())
+                		return;
+                	else
+                	{
+						recruitment=it.next();
+						String type = "线下";
+						if(recruitment.getOnline())
+							type = "线上";
+						String startdate = (recruitment.getTimeStart().getYear()+1900)+"-"+(recruitment.getTimeStart().getMonth()+1)+"-"+recruitment.getTimeStart().getDate();
+ 						String enddate = (recruitment.getTimeEnd().getYear()+1900)+"-"+(recruitment.getTimeEnd().getMonth()+1)+"-"+recruitment.getTimeEnd().getDate();
+             	%>
+        
+		<!-- Carousel -->
+        <div class="span7">
+            <div id="myCarousel" class="carousel slide">
+                <div class="carousel-inner">
+        
+                    <div class="item active">
+                        <img src="assets/img/carousel/5.jpg" alt="" />
+                        <div class="carousel-caption">
+                            <h4><%=recruitment.getBrief()%></h4>
+                        </div>
+                    </div>
+                    <!-- 
+                    <div class="item">
+                        <img src="assets/img/carousel/4.jpg" alt="" />
+                        <div class="carousel-caption">
+                            <h4>Second Thumbnail label</h4>
+                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="assets/img/carousel/3.jpg" alt="" />
+                        <div class="carousel-caption">
+                            <h4>Third Thumbnail label</h4>
+                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta.</p>
+                        </div>
+                    </div>
+                     -->
+                </div>
+                <!--  
+                <div class="carousel-arrow">
+                    <a data-slide="prev" href="#myCarousel" class="left carousel-control"><i class="icon-angle-left"></i></a>
+                    <a data-slide="next" href="#myCarousel" class="right carousel-control"><i class="icon-angle-right"></i></a>
+                </div>
+                 -->
             </div>
-            
-            <ul class="portfolio recent-work clearfix"> 
-            
-		<% 
-            for(int i=0;i<10;i++)
-  			{ 
-  				if(!it.hasNext())
+        </div><!--/span7-->
+        
+        <!-- //End Tabs and Carousel -->
+        
+        <div class="span5">
+        	<h3><%=recruitment.getActivityName()%></h3>
+        	<p><%=recruitment.getContent()%></p>
+            <ul class="unstyled">
+            	<li><i class="icon-user color-green"></i>公司: <%=recruitment.getCompany()%></li>
+            	<li><i class="icon-calendar color-green"></i>时间: <%=startdate%>至<%=enddate%></li>
+            	<li><i class="icon-tags color-green"></i>地点: <%=type%>--<%=recruitment.getPlace()%></li>
+            </ul>
+            <p><a class="btn-u btn-u-large" href="recruitment.do?method=selectRecruitment&id=<%=recruitment.getActivityId()%>">VISIT THE PROJECT</a></p>
+        </div>
+        
+        		<%
+        			}
+        		%>
+        
+        
+    </div><!--/row-fluid-->
+
+		<%
+			for(int k=1; k<=4; k++)
+			{
+		%>
+		
+			<div class="row-fluid servive-block">
+		
+		<%
+			for(int i=1; i<=3; i++)
+			{
+				if(!it.hasNext())
 					break;
 					
-				gift=it.next();
-  		%>
-                <li data-id="id-1" class="ios">
-                    <a href="gifts.do?method=selectGift&giftId=<%=gift.getGiftId()%>">
-                    	<em class="overflow-hidden"><img src="assets/plugins/portfolioSorting/img/2.jpg" alt="" /></em>
-                        <span>
-                            <strong><%=gift.getGiftName()%></strong>
-                            <i><%=gift.getGiftCredit()%>积分</i>
-                        </span>
-                    </a>
-                </li> 
-      	<% 
-      		}
-      	%>         
-            </ul>
+				recruitment=it.next();
+				String type = "线下";
+				if(recruitment.getOnline())
+					type = "线上";
+				String startdate = (recruitment.getTimeStart().getYear()+1900)+"-"+(recruitment.getTimeStart().getMonth()+1)+"-"+recruitment.getTimeStart().getDate();
+ 				String enddate = (recruitment.getTimeEnd().getYear()+1900)+"-"+(recruitment.getTimeEnd().getMonth()+1)+"-"+recruitment.getTimeEnd().getDate();
+ 		%>
+			
+                <div class="span4">
+                    <h4><a href="recruitment.do?method=selectRecruitment&id=<%=(i+3*(k-1))%>"><%=recruitment.getActivityName()%></a></h4>
+                    <p>时间: <%=startdate%>至<%=enddate%></p>
+                    <p>简介: <%=recruitment.getBrief()%></p>
+                </div>
+                
+        <%
+            }
+        %>
+                                       
+            </div><!--/row-fluid-->
             
-        <!-- 导航 start --> 
+        <%
+            }
+        %>
+        
+            
+            
+            
+        </div><!--/row-fluid-->        
+    	<!--//End Our Services -->
+        
+    </div><!--/row-fluid-->
+	<div class="pagination pagination-centered">
+            <ul>
+            
+              <!-- 导航 start --> 
         <% 
-            for(int i=0;i<giftpage.getTotalPage();i++)
+            for(int i=0;i<hirepage.getTotalPage();i++)
   			{ 
   		%>  
-  				<a href="gifts.do?method=selectPage&pagenow=<%=(1+i)%>"><%=(1+i)%></a>
+  				<a href="recruitment.do?method=selectPage&pagenow=<%=(1+i)%>"><%=(1+i)%></a>
   		<%
   			}
-  		 %>
+  		%>
   		<!-- 导航end -->  
-            
-        </div>                
-    </div><!--/row-fluid-->         
-</div><!--/container-->	 	
+  		
+            </ul>
+        </div>     
+	
+    
+</div><!--/container-->		
 <!--=== End Content Part ===-->
 
 <!--=== Footer ===-->
@@ -222,14 +308,14 @@
 			<div class="span4">
                 <!-- About -->
 		        <div class="headline"><h3>关于</h3></div>	
-				<p class="margin-bottom-25">TCTest全名为吐槽测试网，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见。</p>	
+				<p class="margin-bottom-25">TCTest全名为吐槽测试网的英文，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见。</p>	
 
 				
 			</div><!--/span4-->	
 			
 			<div class="span4">
             <!-- Monthly Newsletter -->
-		        <div class="headline"><h3>联系方式</h3></div>	
+		        <div class="headline"><h3>联系我们</h3></div>	
                 <address>
 					4800号，曹安公路，同济大学软件学院 <br />
 					上海市, 中国 <br />
@@ -257,7 +343,7 @@
 			</div><!--/span4-->
 		</div><!--/row-fluid-->	
 	</div><!--/container-->	
-</div><!--/footer-->	
+</div><!--/footer-->
 <!--=== End Footer ===-->
 
 <!--=== Copyright ===-->
@@ -268,7 +354,7 @@
 	            <p>Copyright &copy; 2014.TCtest All rights reserved.</p>
 			</div>
 			<div class="span4">	
-                <a href="index.html"><img id="logo-footer" src="assets/img/logo2-default.png" class="pull-right" alt="" /></a>
+				<a href="index.html"><img id="logo-footer" src="assets/img/logo2-default.png" class="pull-right" alt="" /></a>
 			</div>
 		</div><!--/row-fluid-->
 	</div><!--/container-->	
@@ -280,23 +366,19 @@
 <script type="text/javascript" src="assets/js/modernizr.custom.js"></script>        
 <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
 <!-- JS Implementing Plugins -->           
-<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/sequence.jquery-min.js"></script>
-<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/horizontal-parallax.js"></script>
-<script type="text/javascript" src="assets/plugins/bxslider/jquery.bxslider.js"></script>
+<script type="text/javascript" src="assets/plugins/portfolioSorting/js/jquery.quicksand.js"></script>
+<script type="text/javascript" src="assets/plugins/portfolioSorting/js/sorting.js"></script>
 <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
 <!-- JS Page Level -->           
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
-        App.initSliders();
-        App.initBxSlider();
     });
 </script>
 <!--[if lt IE 9]>
-	<script src="assets/js/respond.js"></script>
-<![endif]-->		
-
+    <script src="assets/js/respond.js"></script>
+<![endif]-->
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html:html>

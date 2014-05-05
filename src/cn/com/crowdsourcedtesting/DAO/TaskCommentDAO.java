@@ -55,7 +55,7 @@ public class TaskCommentDAO extends BaseHibernateDAO {
 		log.debug("getting TaskComment instance with id: " + id);
 		try {
 			TaskComment instance = (TaskComment) getSession().get(
-					"cn.com.crowdsourcedtesting.DAO.TaskComment", id);
+					"cn.com.crowdsourcedtesting.bean.TaskComment", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -68,7 +68,7 @@ public class TaskCommentDAO extends BaseHibernateDAO {
 		try {
 			List results = getSession()
 					.createCriteria(
-							"cn.com.crowdsourcedtesting.DAO.TaskComment")
+							"cn.com.crowdsourcedtesting.bean.TaskComment")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

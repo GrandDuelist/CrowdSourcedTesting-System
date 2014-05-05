@@ -64,7 +64,7 @@ public class PublisherDAO extends BaseHibernateDAO {
 		log.debug("getting Publisher instance with id: " + id);
 		try {
 			Publisher instance = (Publisher) getSession().get(
-					"cn.com.crowdsourcedtesting.DAO.Publisher", id);
+					"cn.com.crowdsourcedtesting.bean.Publisher", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -76,7 +76,7 @@ public class PublisherDAO extends BaseHibernateDAO {
 		log.debug("finding Publisher instance by example");
 		try {
 			List results = getSession()
-					.createCriteria("cn.com.crowdsourcedtesting.DAO.Publisher")
+					.createCriteria("cn.com.crowdsourcedtesting.bean.Publisher")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

@@ -55,7 +55,7 @@ public class SubcategoryDAO extends BaseHibernateDAO {
 		log.debug("getting Subcategory instance with id: " + id);
 		try {
 			Subcategory instance = (Subcategory) getSession().get(
-					"cn.com.crowdsourcedtesting.DAO.Subcategory", id);
+					"cn.com.crowdsourcedtesting.bean.Subcategory", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -68,7 +68,7 @@ public class SubcategoryDAO extends BaseHibernateDAO {
 		try {
 			List results = getSession()
 					.createCriteria(
-							"cn.com.crowdsourcedtesting.DAO.Subcategory")
+							"cn.com.crowdsourcedtesting.bean.Subcategory")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
