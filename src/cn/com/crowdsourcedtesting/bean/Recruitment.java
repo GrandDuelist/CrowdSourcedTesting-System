@@ -20,8 +20,8 @@ public class Recruitment implements java.io.Serializable {
 	private String company;
 	private String place;
 	private Boolean recruitmentType;
-	private Integer publisherId;
-	private Integer checkAdministratorId;
+	private Publisher publisher;
+	private Administrator checkAdministrator;
 
 	// Constructors
 
@@ -31,18 +31,18 @@ public class Recruitment implements java.io.Serializable {
 
 	/** minimal constructor */
 	public Recruitment(String activityName, Boolean online,
-			Boolean recruitmentType, Integer publisherId) {
+			Boolean recruitmentType, Publisher publisher) {
 		this.activityName = activityName;
 		this.online = online;
 		this.recruitmentType = recruitmentType;
-		this.publisherId = publisherId;
+		this.publisher = publisher;
 	}
 
 	/** full constructor */
 	public Recruitment(String activityName, Date timeStart, Date timeEnd,
 			Boolean online, String content, String brief, String company,
-			String place, Boolean recruitmentType, Integer publisherId,
-			Integer checkAdministratorId) {
+			String place, Boolean recruitmentType, Publisher publisher,
+			Administrator checkAdministrator) {
 		this.activityName = activityName;
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
@@ -52,8 +52,8 @@ public class Recruitment implements java.io.Serializable {
 		this.company = company;
 		this.place = place;
 		this.recruitmentType = recruitmentType;
-		this.publisherId = publisherId;
-		this.checkAdministratorId = checkAdministratorId;
+		this.publisher = publisher;
+		this.checkAdministrator = checkAdministrator;
 	}
 
 	// Property accessors
@@ -138,20 +138,20 @@ public class Recruitment implements java.io.Serializable {
 		this.recruitmentType = recruitmentType;
 	}
 
-	public Integer getPublisherId() {
-		return this.publisherId;
+	public Publisher getPublisher() {
+		return publisher;
 	}
 
-	public void setPublisherId(Integer publisherId) {
-		this.publisherId = publisherId;
+	public void setPublisher(Publisher publisher) {
+		this.publisher = publisher;
 	}
 
-	public Integer getCheckAdministratorId() {
-		return this.checkAdministratorId;
+	public Administrator getCheckAdministrator() {
+		return checkAdministrator;
 	}
 
-	public void setCheckAdministratorId(Integer checkAdministratorId) {
-		this.checkAdministratorId = checkAdministratorId;
+	public void setCheckAdministrator(Administrator checkAdministrator) {
+		this.checkAdministrator = checkAdministrator;
 	}
 
 }
