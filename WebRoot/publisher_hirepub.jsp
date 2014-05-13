@@ -298,7 +298,7 @@
         <li> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
         <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
         <li> <a href="publisher_questionnaire_man.html"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
-        <li class="active"> <a href="publisher_hireman.html"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
+        <li class="active"> <a href="publisher_hireman.jsp"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
       </ul>
       </li>
       </ul>
@@ -311,7 +311,7 @@
       <ol class="breadcrumb">
         <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
         <li><a href="publisher_home.html">主页</a></li>
-        <li><a href="publisher_hireman.html">招募信息</a></li>
+        <li><a href="publisher_hireman.jsp">招募信息</a></li>
         <li class="active">发布信息</li>
       </ol>
     </div>
@@ -327,14 +327,14 @@
               <hr/>
               <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                  <p class="alert alert-success">请<b>正确填写</b>信息</p>
+                  <p id="instructor" class="alert alert-success">请正确填写信息</p>
                   
                   
-                  <form action="recruitment.do?method=addNewRecruitment" method="post">
+                  <form id="AddRecruitmentForm" action="recruitment.do?method=addNewRecruitment" method="post">
                   <div class="form-group">
                     <label for="web_url"> 招募标题 </label>
                     <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-bookmark"></i> </span>
-                      <input class="form-control" type="text" name="title">
+                      <input id="RecruitmentTitle" class="form-control" type="text" name="title">
                       </input>
                     </div>
                   </div>
@@ -353,14 +353,14 @@
                   <div class="form-group">
                   	<label for="web_url"> 开始时间</label>
                     <div class="input-group"> <span class="input-group-addon"><i class="fa fa-calendar"></i> </span>
-                       <input type="text" id="datepicker" class="form-control datepicker margin-top-none" name="startdate" />                      
+                       <input type="text" id="datepicker1" class="form-control datepicker margin-top-none" name="startdate" />                      
                     </div>
                   </div>
                   
                   <div class="form-group">
                   	<label for="web_url"> 截止时间</label>
                     <div class="input-group"> <span class="input-group-addon"><i class="fa fa-calendar"></i> </span>
-                       <input type="text" id="datepicker" class="form-control datepicker margin-top-none" name="enddate" />                      
+                       <input type="text" id="datepicker2" class="form-control datepicker margin-top-none" name="enddate" />                      
                      </div>
                   </div>
                   
@@ -383,7 +383,7 @@
                   <div class="form-group">
                     <label for="web_url"> 招募简介</label>
                     <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-bookmark"></i> </span>
-                      <input class="form-control" type="text" name="brief">
+                      <input id="RecruitmentBrief" class="form-control" type="text" name="brief">
                       </input>
                     </div>
                   </div>
@@ -391,7 +391,7 @@
                   <div class="form-group">
                       <label for="textArea">招募内容</label>
                       <div class="input-group">
-                        <textarea class="form-control" id="textArea" cols="80" rows="6" name="content"></textarea>
+                        <textarea id="RecruitmentContent" class="form-control" cols="80" rows="6" name="content"></textarea>
                       </div>
                   </div>                                            
                   <hr></hr>
@@ -401,7 +401,7 @@
                   </div>
                    -->
                   <div class="pull-right">
-                  	<html:submit>完成</html:submit>
+                  	<button id="addRecruitment" class="btn btn-gradient btn-lg btn-green" type="button">完成</button>
                   </div>
                   </form>
                   
@@ -460,10 +460,39 @@ jQuery(document).ready(function() {
 	
 	
 	//$('#isOnline').onchange(test);	
-
+	$('#addRecruitment').click(function(){
+		//alert($('#RecruitmentTitle').val());
+		if($.trim($('#RecruitmentTitle').val())=="")
+		{
+			$("#instructor").text("招募标题不能为空");
+			$('#RecruitmentTitle').focus();
+		}
+		else if($.trim($('#datepicker1').val())=="")
+		{
+			$("#instructor").text("开始时间不能为空");
+			$('#datepicker1').focus();
+		}
+		else if($.trim($('#datepicker2').val())=="")
+		{
+			$("#instructor").text("截止时间不能为空");
+			$('#datepicker2').focus();
+		}
+		else if($.trim($('#RecruitmentBrief').val())=="")
+		{
+			$("#instructor").text("招募简介不能为空");
+			$('#RecruitmentBrief').focus();
+		}
+		else if($.trim($('#RecruitmentContent').val())=="")
+		{
+			$("#instructor").text("招募时间不能为空");
+			$('#RecruitmentContent').focus();
+		}
+		else
+			$("#AddRecruitmentForm").submit();
+	});
 });
 
-function test()
+function checkNull()
 {
 	alert("test");
 }

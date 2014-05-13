@@ -300,7 +300,7 @@
         <li> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
         <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
         <li> <a href="publisher_questionnaire_man.html"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
-        <li class="active"> <a href="publisher_hireman.html"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
+        <li class="active"> <a href="publisher_hireman.jsp"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
       </ul>
       </li>
       </ul>
@@ -332,7 +332,7 @@
                           <th>信息名称</th>
                           <th>时间</th>
                           <th>简介</th>
-                          <th style="width: 70px;" class="text-right">操作</th>
+                          <th>操作</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -374,6 +374,17 @@
     </div>
   </section>
   <!-- End: Content --> 
+  
+  
+  
+  <form id="pageform" type="hidden" action="recruitment.do?method=gotoList" method="post">
+  	<input id="rowvalue" name="perrow">
+  </form>
+  
+  
+  
+  
+  
 </div>
 <!-- End: Main --> 
 
@@ -400,7 +411,7 @@ jQuery(document).ready(function() {
 
   Core.init();
 
-  $('#datatable').dataTable( {
+ $('#datatable').dataTable( {
 	"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ -1 ] }],
 	"oLanguage": { "oPaginate": {"sPrevious": "", "sNext": ""} },
 	"iDisplayLength": 6,
@@ -411,7 +422,18 @@ jQuery(document).ready(function() {
   $.fn.editable.defaults.mode = 'popup';
   $('.xedit').editable();
 
+	
+
 });
+
+$( "body" ).delegate( "ul.chosen-results", "click", function() {
+  		//alert($("#RowValue").text());	
+  		$("#rowvalue").attr("value",$("#RowValue").text());
+    	//$("form#pageform").attr("action","recruitment.do?method=gotoList");
+    	$("form#pageform").submit();
+	});
+
 </script>
+
 </body>
 </html:html>

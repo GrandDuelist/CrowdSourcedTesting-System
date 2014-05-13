@@ -309,8 +309,8 @@ String flag = (String)request.getAttribute("isLegal");
       <ol class="breadcrumb">
         <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
         <li><a href="publisher_home.html">主页</a></li>
-        <li><a href="publisher_hireman.html">招募信息</a></li>
-        <li><a href="publisher_hirelist.html">信息管理</a></li>
+        <li><a href="publisher_hireman.jsp">招募信息</a></li>
+        <li><a href="publisher_hirelist.jsp">信息管理</a></li>
         <li class="active">信息详情</li>
       </ol>
     </div>
@@ -318,6 +318,11 @@ String flag = (String)request.getAttribute("isLegal");
     
  <%
  Recruitment recruitment = (Recruitment)request.getAttribute("hireitem");
+ if(recruitment == null)
+ {
+ 	response.sendRedirect("recruitment.do?method=gotoList");
+ 	return;
+ }
  String type = "线下";
  if(recruitment.getOnline())
  type = "线上";
@@ -333,40 +338,64 @@ String flag = (String)request.getAttribute("isLegal");
             <div class="panel-heading">
               <div class="panel-title"> <i class="fa fa-pencil"></i> 招募信息详情 </div>
               <div class="panel-btns pull-right">
-                <label style="display: inline-block; margin-right: 15px; font-size: 12px; color: #888888;">
-                  <input type="checkbox" class="checkbox" id="autoopen" style="vertical-align: baseline" />
-                  &nbsp;自动跳转</label>
+                
                 <button id="enable" class="btn btn-default btn-gradient">编辑 / 查看</button>
               </div>
             </div>
+                      
             <div class="panel-body">
+            
+            <form action="recruitment.do?method=reviceRecruitment" method="post">
+            	<input name="id" type="hidden" value=<%=recruitment.getActivityId()%>>
+            
+            
               <div class="alert alert-success">本页面可以对招募信息进行编辑和预览，点击<b>右上角</b>的<b>编辑/查看</b>按钮进行切换</div>
               <p><hr/><h2 class="text-alert">详细内容</h2></p>
               
               <table id="user" class="table table-bordered table-striped" style="clear: both">
                 <tbody>
                   <tr>
-                    <td style="width: 35%;">标题</td>
-                    <td style="width: 65%;"><a href="#" id="username" data-type="text" data-pk="1" data-title="请输入标题" class="editable editable-click"><%=recruitment.getActivityName()%></a></td>
+                    <td style="width: 35%;">招募标题</td>
+                    <td style="width: 65%;"><input name="title" readonly="readonly" class="revice" value=<%=recruitment.getActivityName()%>></td>
                   </tr>
                   <tr>
-                    <td>招募简介 </td>
-                    <td><a href="#" id="comments" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-title="请输入内容" class="editable editable-pre-wrapped editable-click"><%=recruitment.getBrief()%></a></td>
-                  </tr>
-                  <tr>
-                    <td>招募内容 </td>
-                    <td><a href="#" id="comments" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-title="请输入内容" class="editable editable-pre-wrapped editable-click"><%=recruitment.getContent()%></a></td>
+                    <td>开始时间</td>
+                    <td><input readonly="disabled" class="norevice" value=<%=recruitment.getTimeStart()%>></td>
                   </tr>
                   <tr>
                     <td>截止时间</td>
-                    <td><a href="#" id="comments" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-title="请输入内容" class="editable editable-pre-wrapped editable-click"><%=recruitment.getTimeEnd()%></a></td>
+                    <td><input readonly="disabled" class="norevice" value=<%=recruitment.getTimeEnd()%>></td>
                   </tr>
+                  <tr>
+                    <td>招募公司</td>
+                    <td><input name="company" readonly="readonly" class="revice" value=<%=recruitment.getCompany()%>></td>
+                  </tr>
+                  <tr>
+                    <td>招募地点</td>
+                    <td><input name="place" readonly="readonly" class="revice" value=<%=recruitment.getPlace()%>></td>
+                  </tr>
+                  <tr>
+                    <td>招募简介 </td>
+                    <td><input name="brief" readonly="readonly" class="revice" value=<%=recruitment.getBrief()%>></td>
+                  </tr>
+                  <tr>
+                    <td>招募内容 </td>
+                    <!-- 
+                    <td><input name="content" readonly="readonly" class="revice" value=<%=recruitment.getContent()%>></td>
+                     -->
+                    <td><textarea name="content" readonly="readonly" class="revice" cols="80" rows="6" ><%=recruitment.getContent()%></textarea></td>
+                  </tr>
+                  
                   
                 </tbody>
               </table>
               <div class="text-center">
-              <a class="btn btn-info btn-gradient">提交修改</a></div>
+              <button type="submit" class="btn btn-info btn-gradient">提交修改</button></div>
               <hr/>
+              
+              </form>
+              
+              
             </div>
           </div>
         </div>
@@ -403,141 +432,47 @@ String flag = (String)request.getAttribute("isLegal");
 
 	  //enable / disable xedit
 	  $('#enable').click(function() {
-		 $('#user .editable').editable('toggleDisabled');
+		 //alert("shit");
+		 var arrRevice=$('.revice');
+		 var idsContainer = $(".revice");  //获取所有节点的dom数组
+		 var len = idsContainer.length; 
+         for(var i=0;i<len;i++){
+             var $container = $(idsContainer[i]);
+             var flag = $container.attr("readonly");
+             if(flag != "readonly")
+             {
+             	$container.attr("readonly",true);
+             	$container.css("background", "white");
+             	//alert("flag");
+             	continue;
+             }
+             $container.attr("readonly",false);
+             $container.css("background", "red");
+             //var id  = $container.val();
+    		 //alert(id);
+         }
 	  });    
-	  
-	  //editables 
-	  $('#username').editable({
-			 type: 'text',
-			 pk: 1,
-			 name: 'username',
-			 title: 'Enter username'
-	  });
-	  
-	  $('#firstname').editable({
-		  validate: function(value) {
-			 if($.trim(value) == '') return 'This field is required';
-		  }
-	  });
-	  
-	  $('#sex').editable({
-		  prepend: "not selected",
-		  source: [
-			  {value: 1, text: 'Male'},
-			  {value: 2, text: 'Female'}
-		  ],
-		  display: function(value, sourceData) {
-			   var colors = {"": "gray", 1: "green", 2: "blue"},
-				   elem = $.grep(sourceData, function(o){return o.value == value;});
-				   
-			   if(elem.length) {    
-				   $(this).text(elem[0].text).css("color", colors[value]); 
-			   } else {
-				   $(this).empty(); 
-			   }
-		  }   
-	  });    
-	  
-	  $('#status').editable();   
-	  
-	  $('#group').editable({
-		 showbuttons: false 
-	  });   
-  
-	  $('#vacation').editable({
-		  datepicker: { todayBtn: 'linked' } 
-	  });  
-		  
-	  $('#dob').editable();
-			
-	  $('#event').editable({
-		  placement: 'right',
-		  combodate: {
-			  firstItem: 'name'
-		  }
-	  });      
-	  
-	  $('#meeting_start').editable({
-		  format: 'yyyy-mm-dd hh:ii',    
-		  viewformat: 'dd/mm/yyyy hh:ii',
-		  validate: function(v) {
-			 if(v && v.getDate() == 10) return 'Day cant be 10!';
-		  },
-		  datetimepicker: {
-			 todayBtn: 'linked',
-			 weekStart: 1
-		  }        
-	  });            
-	  
-	  $('#comments').editable({
-		  showbuttons: 'bottom'
-	  }); 
-	  
-	  $('#note').editable(); 
+
 	  $('#pencil').click(function(e) {
 		  e.stopPropagation();
 		  e.preventDefault();
 		  $('#note').editable('toggle');
 	 });   
 	 
-	  $('#state').editable({
-		  source: ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
-	  }); 
-	  
-	  $('#state2').editable({
-		  value: 'California',
-		  typeahead: {
-			  name: 'state',
-			  local: ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
-		  }
-	  });   
-	 
-	 $('#fruits').editable({
-		 pk: 1,
-		 limit: 3,
-		 source: [
-		  {value: 1, text: 'banana'},
-		  {value: 2, text: 'peach'},
-		  {value: 3, text: 'apple'},
-		  {value: 4, text: 'watermelon'},
-		  {value: 5, text: 'orange'}
-		 ]
-	  }); 
-	  
-	  $('#address').editable({
-		  url: '/post',
-		  value: {
-			  city: "Moscow", 
-			  street: "Lenina", 
-			  building: "12"
-		  },
-		  validate: function(value) {
-			  if(value.city == '') return 'city is required!'; 
-		  },
-		  display: function(value) {
-			  if(!value) {
-				  $(this).empty();
-				  return; 
-			  }
-			  var html = '<b>' + $('<div>').text(value.city).html() + '</b>, ' + $('<div>').text(value.street).html() + ' st., bld. ' + $('<div>').text(value.building).html();
-			  $(this).html(html); 
-		  }         
-	  });              
-		   
-	 $('#user .editable').on('hidden', function(e, reason){
-		  if(reason === 'save' || reason === 'nochange') {
-			  var $next = $(this).closest('tr').next().find('.editable');
-			  if($('#autoopen').is(':checked')) {
-				  setTimeout(function() {
-					  $next.editable('show');
-				  }, 300); 
-			  } else {
-				  $next.focus();
-			  } 
-		  }
-	 });
 
  });
+ 
+ 	$( "body" ).delegate( "button#editconfirm", "click", function() {
+  		alert("agfd");
+  		
+	});
+    
+    
+	//$( "body" ).delegate( "span#RowValue", "change", function() {
+  	//	alert("agfd");
+  	//	alert($("#Rowvalue")[0].firstChild.data);	
+	//});
+	
 </script>
 </body>
 </html:html>
