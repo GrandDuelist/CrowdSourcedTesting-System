@@ -19,8 +19,16 @@ public class Questionnaire implements java.io.Serializable {
 	private Integer questionnaireCount;
 	private Set questions = new HashSet(0);
 	private Set joinQuestionnaires = new HashSet(0);
-
+    private Boolean isPassed;
 	// Constructors
+
+	public Boolean getIsPassed() {
+		return isPassed;
+	}
+
+	public void setIsPassed(Boolean isPassed) {
+		this.isPassed = isPassed;
+	}
 
 	/** default constructor */
 	public Questionnaire() {

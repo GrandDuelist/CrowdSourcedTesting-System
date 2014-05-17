@@ -2,6 +2,7 @@ package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.Administrator;
+import cn.com.crowdsourcedtesting.bean.Publisher;
 
 import java.util.List;
 import java.util.Set;
@@ -163,5 +164,27 @@ public class AdministratorDAO extends BaseHibernateDAO {
 			log.error("attach failed", re);
 			throw re;
 		}
+	}
+	
+	
+	public Administrator isAdministrator(String email, String password) {
+		// TODO Auto-generated method stub
+
+		Administrator administrator=null;
+		
+		List<Administrator>administrators=(List<Administrator>)this.findByProperty(ADMINISTRATOR_EMAIL,email);
+		
+	    if(administrators!=null&&administrators.size()!=0)
+	    {
+	    	administrator = administrators.get(0);
+	    	if(!administrator.getAdministratorPassword().equals(password))
+	    	{
+	    		administrator=null;
+	    	}
+	    }
+	    
+	   
+		
+		return administrator;
 	}
 }

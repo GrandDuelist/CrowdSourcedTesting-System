@@ -7,17 +7,21 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.struts.action.ActionForward;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
+import cn.com.crowdsourcedtesting.bean.Administrator;
 import cn.com.crowdsourcedtesting.bean.Choice;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Question;
 import cn.com.crowdsourcedtesting.bean.Questionnaire;
+import cn.com.crowdsourcedtesting.struts.form.PageIdForm;
 import cn.com.crowdsourcedtesting.struts.form.PublisherQuestionnaireForm;
 import cn.com.crowdtest.factory.BeanFactory;
 import cn.com.crowdtest.factory.DAOFactory;
+import cn.com.other.page.Page;
 
 /**
  * 处理添加新问卷
@@ -98,12 +102,12 @@ public class QuestionnaireHandler {
 			Questionnaire q = (Questionnaire) session
 					.getAttribute("questionnaire");
 			
-			if(session.getAttribute("Publisher")!=null)
-			{
+		
 				Publisher publisher  = (Publisher)session.getAttribute("Publisher");
 			     q.setPublisher(publisher);
 			    
-			}
+			
+			
 			Session sess = HibernateSessionFactory.getSession();
 
 			Transaction tran = null;
@@ -116,7 +120,7 @@ public class QuestionnaireHandler {
 				 q.setCredit(300.00);
 			     q.setQuestionnaireCount(q.getQuestions().size());
 			     
-				
+				q.setIsPassed(false);
 				sess.save(q);
 				
 				Iterator it1 = q.getQuestions().iterator();
@@ -214,4 +218,86 @@ public class QuestionnaireHandler {
 			session.setAttribute("type", "confirm");
 		}
 	}
+	
+	/**
+	 * 审查问卷列表
+	 * @param form
+	 * @param request
+	 */
+	public void checkQuestionnaire(PageIdForm form,
+			HttpServletRequest request) {
+		String subType = null; //子类型 
+		Page  page = new Page();
+		page.setTotalRows(DAOFactory.getQuestionnaireDAO().getUncheckedTotalRows());
+		
+		
+		if(form!=null)
+		{
+			
+			subType=form.getSubType();
+		}
+		
+		int currentPage = 1;
+		//根据不同的类型来
+		
+		//类型为空
+		if(subType ==null)
+		{
+			currentPage = 1;
+			
+		}else if(subType.equals("detail"))
+		{
+			currentPage = Integer.parseInt(form.getPage());
+		}else if("checkConfirm".equals(subType))  //审核通过
+		{
+			int id = Integer.parseInt(form.getId());
+			
+		}else if("pageNum".equals(subType))
+		{
+			currentPage  = Integer.parseInt(form.getPage());
+		}else if("previousPage".equals(subType))
+		{
+			currentPage = Integer.parseInt(form.getPage())-1;
+		}else if("nextPage".equals(subType))
+		{
+			currentPage = Integer.parseInt(form.getPage())+1;
+		}
+		
+		
+		page.setCurrentPage(currentPage);
+		List <Questionnaire> questionnaires  = DAOFactory.getQuestionnaireDAO().findByUnCheckedPage(page);
+		HttpSession session  = request.getSession();
+		session.setAttribute("currentPage", page);
+		session.setAttribute("questionnaires", questionnaires);
+		session.setAttribute("questionnaireCurrentPage", currentPage);
+	}
+	
+	
+	/**
+	 * 查看具体的问卷
+	 * @param pageIDForm
+	 * @param request
+	 */
+
+	public void checkQuestionnaireDetail(PageIdForm pageIDForm,
+			HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+		if(pageIDForm!=null&&pageIDForm.getId()!=null&&!pageIDForm.getId().equals(""))
+		{
+		int id  = Integer.parseInt(pageIDForm.getId());
+		
+		Questionnaire questionnaire = DAOFactory.getQuestionnaireDAO().findById(id);
+		HttpSession session  = request.getSession();
+
+		session.setAttribute("questionnaire", questionnaire);
+		}
+		
+		
+		
+		
+	}
+	
+	
+	
 }

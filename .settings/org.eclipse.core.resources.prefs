@@ -1,5 +1,8 @@
-#Sat May 03 23:02:45 CST 2014
+#Wed May 14 13:52:23 CST 2014
 eclipse.preferences.version=1
+encoding//WebRoot/AdminLoginView.jsp=UTF-8
+encoding//WebRoot/CheckQuestionnaireDetailView.jsp=UTF-8
+encoding//WebRoot/CheckQuestionnaireView.jsp=UTF-8
 encoding//WebRoot/LoginView.jsp=UTF-8
 encoding//WebRoot/WEB-INF/struts-config.xml=UTF-8
 encoding//WebRoot/WEB-INF/struts-html.tld=UTF-8

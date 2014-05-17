@@ -1,12 +1,16 @@
 package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
+import cn.com.crowdsourcedtesting.bean.Gift;
 import cn.com.crowdsourcedtesting.bean.Questionnaire;
+import cn.com.other.page.Page;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +35,7 @@ public class QuestionnaireDAO extends BaseHibernateDAO {
 	public static final String CREDIT = "credit";
 	public static final String QUESTIONNAIRE_COUNT = "questionnaireCount";
 
-	public void save(Questionnaire transientInstance) {
+/*	public void save(Questionnaire transientInstance) {
 		log.debug("saving Questionnaire instance");
 		try {
 			getSession().save(transientInstance);
@@ -41,7 +45,25 @@ public class QuestionnaireDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
+*/
+	
 
+	public void save(Questionnaire transientInstance) {
+		log.debug("saving Questionnaire instance");
+		 Session session=getSession();
+		try {
+			session.beginTransaction();
+			getSession().save(transientInstance);
+			session.beginTransaction().commit();
+			log.debug("save successful");
+		} catch (RuntimeException re) {
+			log.error("save failed", re);
+			session.beginTransaction().rollback();
+			throw re;
+		}
+	}
+	
+	
 	public void delete(Questionnaire persistentInstance) {
 		log.debug("deleting Questionnaire instance");
 		try {
@@ -57,7 +79,7 @@ public class QuestionnaireDAO extends BaseHibernateDAO {
 		log.debug("getting Questionnaire instance with id: " + id);
 		try {
 			Questionnaire instance = (Questionnaire) getSession().get(
-					"cn.com.crowdsourcedtesting.DAO.Questionnaire", id);
+					"cn.com.crowdsourcedtesting.bean.Questionnaire", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -154,4 +176,95 @@ public class QuestionnaireDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
+	
+	//按页查找
+	
+	@SuppressWarnings("unchecked")
+	public List<Questionnaire> findByPage(Page page)
+	{
+		try {
+		List<Questionnaire> gifts = new ArrayList<Questionnaire>();
+		String queryString = "from Questionnaire";
+		Query queryObject = getSession().createQuery(queryString);
+		
+		 gifts=queryObject
+		.setFirstResult((page.getCurrentPage()-1)*page.getPerRows())
+		.setMaxResults(page.getPerRows())
+		.list();
+		
+		return gifts;
+		}
+		catch(RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
+		}
+			
+			
+		}
+		
+		
+	
+	//得到总的
+	public int getTotalRows()
+	{
+	
+				 Number c= (Number) getSession().createQuery("select count(*) from Questionnaire")
+				.uniqueResult();
+				 
+				
+				 return c.intValue();
+				
+				
+		//return this.findAll().size();
+	}
+	
+	
+	//得到
+		public int getUncheckedTotalRows()
+		{
+		
+					 Number c= (Number) getSession().createQuery("select count(*) from Questionnaire  where CHECK_ADMINISTATOR_ID=null")
+					.uniqueResult();
+					 
+					
+					 return c.intValue();
+					
+					
+			//return this.findAll().size();
+		}
+	
+	//得到总的参与分数
+		public int getJoinCounts()
+		{
+		
+					 Number c= (Number) getSession().createQuery("select count(*) from JoinQuestionnaire")
+					.uniqueResult();
+					 
+					
+					 return c.intValue();
+					
+					
+			//return this.findAll().size();
+		}
+
+		public List<Questionnaire> findByUnCheckedPage(Page page) {
+			// TODO Auto-generated method stub
+			try {
+				List<Questionnaire> gifts = new ArrayList<Questionnaire>();
+				String queryString = "from Questionnaire where CHECK_ADMINISTATOR_ID=null";
+				Query queryObject = getSession().createQuery(queryString);
+				
+				 gifts=queryObject
+				.setFirstResult((page.getCurrentPage()-1)*page.getPerRows())
+				.setMaxResults(page.getPerRows())
+				.list();
+				
+				return gifts;
+				}
+				catch(RuntimeException re) {
+					log.error("find by page failed", re);
+					throw re;
+				}
+		}
+	
 }

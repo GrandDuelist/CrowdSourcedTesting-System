@@ -2,8 +2,12 @@ package cn.com.crowdsourcedtesting.model;
 
 import javax.servlet.http.HttpSession;
 
+import org.omg.DynamicAny.DynAnyOperations;
+
+import cn.com.crowdsourcedtesting.bean.Administrator;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Tester;
+import cn.com.crowdsourcedtesting.struts.form.AdminLoginForm;
 import cn.com.crowdsourcedtesting.struts.form.LoginForm;
 import cn.com.crowdsourcedtesting.struts.form.PublisherLoginForm;
 import cn.com.crowdtest.factory.DAOFactory;
@@ -27,5 +31,13 @@ public class SecurityHandler {
 			
 			return publisher;
 			
+			
+		}
+		
+     //管理员的登录
+		public Administrator handleAdministratorLogin(AdminLoginForm form)
+		{
+			Administrator administrator = DAOFactory.getAdministratorDAO().isAdministrator(form.getUsername(), form.getPassword());
+			return administrator;
 		}
 }

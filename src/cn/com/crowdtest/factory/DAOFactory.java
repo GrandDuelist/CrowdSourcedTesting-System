@@ -1,6 +1,10 @@
 package cn.com.crowdtest.factory;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import cn.com.crowdsourcedtesting.DAO.*;
+import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
 
 public class DAOFactory {
 	
@@ -63,7 +67,29 @@ public class DAOFactory {
 	}
 	
 	
-	
+	public static void sessionSaveOrUpdate(Object q )
+	{
+		Session sess = HibernateSessionFactory.getSession();
+
+		Transaction tran = null;
+
+		try {
+
+		    
+			tran = sess.beginTransaction();
+			sess.saveOrUpdate(q);
+		} catch (RuntimeException e) {
+
+			e.printStackTrace();
+			if (tran != null) {
+				tran.rollback();
+			}
+
+		} finally {
+
+			sess.close();
+		}
+	}
 	
 
 }

@@ -13,10 +13,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+import cn.com.crowdsourcedtesting.bean.Administrator;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.crowdsourcedtesting.model.SecurityHandler;
 import cn.com.crowdsourcedtesting.modelhelper.UserType;
+import cn.com.crowdsourcedtesting.struts.form.AdminLoginForm;
 import cn.com.crowdsourcedtesting.struts.form.LoginForm;
 import cn.com.crowdsourcedtesting.struts.form.PublisherLoginForm;
 
@@ -102,7 +104,65 @@ public class SecurityRouter extends DispatchAction {
 		return mapping.findForward("login");
 	}
 	
+	/**
+	 * 跳转到管理员的登录页面
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	
+	public ActionForward adminLogin(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		return mapping.findForward("adminLogin");
+	}
+	
+	
+	
+	
+	/**
+	 * 进入管理者页面
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	
+	public ActionForward manage(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		
+		if(form==null)
+		{
+			System.out.println("failed");
+		}
+
+		AdminLoginForm f = (AdminLoginForm) form;
+		
+	
+
+		HttpSession session = request.getSession();
+		Administrator administrator = handler.handleAdministratorLogin(f);
+		
+		
+		if (administrator!=null) {
+			// 管理员登陆成功
+			session.setAttribute("UserType", UserType.Administor);
+			session.setAttribute("Administrator",administrator);
+			
+			return mapping.findForward("home");
+
+		} else {
+			// 测试者登录失败
+			session.setAttribute("a_login", "fail");
+			return mapping.findForward("adminLogin");
+		}
+		
+		
+	}
 	/**
 	 * 测试者登陆
 	 * @param mapping
@@ -138,5 +198,39 @@ public class SecurityRouter extends DispatchAction {
 		
 		
 	}
+	/**
+	 * 审核注册的列表
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward checklist(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		PublisherLoginForm f = (PublisherLoginForm) form;
+		
 	
+
+		HttpSession session = request.getSession();
+		Publisher publisher = handler.handlePublisherLogin(f);
+		
+		
+		if (publisher!=null) {
+			// 测试者登陆成功
+			session.setAttribute("UserType", UserType.Publisher);
+			session.setAttribute("Publisher",publisher);
+			
+			return mapping.findForward("manage");
+
+		} else {
+			// 测试者登录失败
+			session.setAttribute("p_login", "fail");
+			return mapping.findForward("login");
+		}
+		
+		
+		
+	}
 }
