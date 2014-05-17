@@ -56,7 +56,7 @@ public class CategoryDAO extends BaseHibernateDAO {
 		log.debug("getting Category instance with id: " + id);
 		try {
 			Category instance = (Category) getSession().get(
-					"cn.com.crowdsourcedtesting.DAO.Category", id);
+					"cn.com.crowdsourcedtesting.bean.Category", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -68,7 +68,7 @@ public class CategoryDAO extends BaseHibernateDAO {
 		log.debug("finding Category instance by example");
 		try {
 			List results = getSession()
-					.createCriteria("cn.com.crowdsourcedtesting.DAO.Category")
+					.createCriteria("cn.com.crowdsourcedtesting.bean.Category")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

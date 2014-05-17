@@ -62,7 +62,7 @@ public class ProductDAO extends BaseHibernateDAO {
 		log.debug("getting Product instance with id: " + id);
 		try {
 			Product instance = (Product) getSession().get(
-					"cn.com.crowdsourcedtesting.DAO.Product", id);
+					"cn.com.crowdsourcedtesting.bean.Product", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -74,7 +74,7 @@ public class ProductDAO extends BaseHibernateDAO {
 		log.debug("finding Product instance by example");
 		try {
 			List results = getSession()
-					.createCriteria("cn.com.crowdsourcedtesting.DAO.Product")
+					.createCriteria("cn.com.crowdsourcedtesting.bean.Product")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

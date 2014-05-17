@@ -11,8 +11,6 @@ public class Recruitment implements java.io.Serializable {
 	// Fields
 
 	private Integer activityId;
-	private Administrator administrator;
-	private Publisher publisher;
 	private String activityName;
 	private Date timeStart;
 	private Date timeEnd;
@@ -22,6 +20,8 @@ public class Recruitment implements java.io.Serializable {
 	private String company;
 	private String place;
 	private Boolean recruitmentType;
+	private Publisher publisher;
+	private Administrator checkAdministrator;
 
 	// Constructors
 
@@ -30,21 +30,19 @@ public class Recruitment implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Recruitment(Publisher publisher, String activityName,
-			Boolean online, Boolean recruitmentType) {
-		this.publisher = publisher;
+	public Recruitment(String activityName, Boolean online,
+			Boolean recruitmentType, Publisher publisher) {
 		this.activityName = activityName;
 		this.online = online;
 		this.recruitmentType = recruitmentType;
+		this.publisher = publisher;
 	}
 
 	/** full constructor */
-	public Recruitment(Administrator administrator, Publisher publisher,
-			String activityName, Date timeStart, Date timeEnd, Boolean online,
-			String content, String brief, String company, String place,
-			Boolean recruimentType) {
-		this.administrator = administrator;
-		this.publisher = publisher;
+	public Recruitment(String activityName, Date timeStart, Date timeEnd,
+			Boolean online, String content, String brief, String company,
+			String place, Boolean recruitmentType, Publisher publisher,
+			Administrator checkAdministrator) {
 		this.activityName = activityName;
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
@@ -54,6 +52,8 @@ public class Recruitment implements java.io.Serializable {
 		this.company = company;
 		this.place = place;
 		this.recruitmentType = recruitmentType;
+		this.publisher = publisher;
+		this.checkAdministrator = checkAdministrator;
 	}
 
 	// Property accessors
@@ -64,22 +64,6 @@ public class Recruitment implements java.io.Serializable {
 
 	public void setActivityId(Integer activityId) {
 		this.activityId = activityId;
-	}
-
-	public Administrator getAdministrator() {
-		return this.administrator;
-	}
-
-	public void setAdministrator(Administrator administrator) {
-		this.administrator = administrator;
-	}
-
-	public Publisher getPublisher() {
-		return this.publisher;
-	}
-
-	public void setPublisher(Publisher publisher) {
-		this.publisher = publisher;
 	}
 
 	public String getActivityName() {
@@ -150,8 +134,24 @@ public class Recruitment implements java.io.Serializable {
 		return this.recruitmentType;
 	}
 
-	public void setRecruitmentType(Boolean recruimentType) {
-		this.recruitmentType = recruimentType;
+	public void setRecruitmentType(Boolean recruitmentType) {
+		this.recruitmentType = recruitmentType;
+	}
+
+	public Publisher getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(Publisher publisher) {
+		this.publisher = publisher;
+	}
+
+	public Administrator getCheckAdministrator() {
+		return checkAdministrator;
+	}
+
+	public void setCheckAdministrator(Administrator checkAdministrator) {
+		this.checkAdministrator = checkAdministrator;
 	}
 
 }

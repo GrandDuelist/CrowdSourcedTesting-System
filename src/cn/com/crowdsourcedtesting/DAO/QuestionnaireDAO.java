@@ -92,7 +92,7 @@ public class QuestionnaireDAO extends BaseHibernateDAO {
 		try {
 			List results = getSession()
 					.createCriteria(
-							"cn.com.crowdsourcedtesting.DAO.Questionnaire")
+							"cn.com.crowdsourcedtesting.bean.Questionnaire")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

@@ -60,7 +60,7 @@ public class AdministratorDAO extends BaseHibernateDAO {
 		log.debug("getting Administrator instance with id: " + id);
 		try {
 			Administrator instance = (Administrator) getSession().get(
-					"cn.com.crowdsourcedtesting.DAO.Administrator", id);
+					"cn.com.crowdsourcedtesting.bean.Administrator", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -73,7 +73,7 @@ public class AdministratorDAO extends BaseHibernateDAO {
 		try {
 			List results = getSession()
 					.createCriteria(
-							"cn.com.crowdsourcedtesting.DAO.Administrator")
+							"cn.com.crowdsourcedtesting.bean.Administrator")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

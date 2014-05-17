@@ -76,7 +76,7 @@ public class GiftDAO extends BaseHibernateDAO {
 		log.debug("getting Gift instance with id: " + id);
 		try {
 			Gift instance = (Gift) getSession().get(
-					"cn.com.crowdsourcedtesting.DAO.Gift", id);
+					"cn.com.crowdsourcedtesting.bean.Gift", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -88,7 +88,7 @@ public class GiftDAO extends BaseHibernateDAO {
 		log.debug("finding Gift instance by example");
 		try {
 			List results = getSession()
-					.createCriteria("cn.com.crowdsourcedtesting.DAO.Gift")
+					.createCriteria("cn.com.crowdsourcedtesting.bean.Gift")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -196,13 +196,12 @@ public class GiftDAO extends BaseHibernateDAO {
 				try {
 				List<Gift> gifts = new ArrayList<Gift>();
 				String queryString = "from Gift";
+				
 				Query queryObject = getSession().createQuery(queryString);
+				queryObject.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
+				queryObject.setMaxResults(page.getPerRows());
 				
-				 gifts=queryObject
-				.setFirstResult((page.getCurrentPage()-1)*page.getPerRows())
-				.setMaxResults(page.getPerRows())
-				.list();
-				
+				gifts = queryObject.list();						
 				return gifts;
 				}
 				catch(RuntimeException re) {
@@ -211,7 +210,7 @@ public class GiftDAO extends BaseHibernateDAO {
 				}
 					
 					
-				}
+			}
 				
 				
 			
@@ -241,12 +240,10 @@ public class GiftDAO extends BaseHibernateDAO {
 						+ GIFT_CREDIT + "<= ?";
 				Query queryObject = getSession().createQuery(queryString);
 				queryObject.setParameter(0, giftCredit);
+				queryObject.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
+				queryObject.setMaxResults(page.getPerRows());
 				
-				 gifts=queryObject
-				.setFirstResult((page.getCurrentPage()-1)*page.getPerRows())
-				.setMaxResults(page.getPerRows())
-				.list();
-				
+				gifts = queryObject.list();						
 				return gifts;
 				}
 				catch(RuntimeException re) {

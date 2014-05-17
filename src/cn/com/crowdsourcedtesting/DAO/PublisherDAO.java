@@ -76,7 +76,7 @@ public class PublisherDAO extends BaseHibernateDAO {
 		log.debug("finding Publisher instance by example");
 		try {
 			List results = getSession()
-					.createCriteria("cn.com.crowdsourcedtesting.DAO.Publisher")
+					.createCriteria("cn.com.crowdsourcedtesting.bean.Publisher")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

@@ -9,6 +9,7 @@
     <form-bean name="manageTestTaskForm" type="cn.com.crowdsourcedtesting.struts.form.ManageTestTaskForm" />
     <form-bean name="publisherLoginForm" type="cn.com.crowdsourcedtesting.struts.form.PublisherLoginForm" />
     <form-bean name="giftForm" type="cn.com.crowdsourcedtesting.struts.form.GiftForm" />
+    <form-bean name="recruitmentForm" type="cn.com.crowdsourcedtesting.struts.form.RecruitmentForm" />
     <form-bean name="registrationTesterForm" type="cn.com.crowdsourcedtesting.struts.form.RegistrationTesterForm" />
     <form-bean name="registrationPublisherForm" type="cn.com.crowdsourcedtesting.struts.form.RegistrationPublisherForm" />
     <form-bean name="publisherQuestionnaireForm" type="cn.com.crowdsourcedtesting.struts.form.PublisherQuestionnaireForm" />
@@ -61,15 +62,16 @@
       name="giftForm"
       path="/gifts"
       scope="request"
-      type="cn.com.crowdsourcedtesting.struts.action.GiftAction">
+      type= "cn.com.crowdsourcedtesting.controller.GiftAction">
       <set-property property="cancellable" value="true" />
        <forward name="home" path="/index.jsp"></forward>
        <forward name="login" path="/LoginView.jsp"></forward>
      
       
-      <forward name="allgifts" path="/gifts.jsp"></forward>
+      
       <forward name="giftitem" path="/gift.jsp"></forward>
-    </action>
+      <forward name="allgifts" path="/gifts.jsp" />
+    </action>    
     
       <action
       attribute="publisherLoginForm"
@@ -97,6 +99,26 @@
       scope="request"
       type="cn.com.crowdsourcedtesting.controller.TestTaskRouter">
       <set-property property="cancellable" value="true" />
+    </action>
+    
+    
+    <action
+      attribute="recruitmentForm"
+      input="/page_hirelist.jsp"
+      name="recruitmentForm"
+      parameter="method"
+      path="/recruitment"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.RecruitmentAction">
+      <set-property property="cancellable" value="true" />
+      
+      <forward name="hireitem" path="/page_hireitem.jsp"></forward>
+      <forward name="hirelist" path="/page_hirelist.jsp" />
+      
+      <forward name="edititem" path="/publisher_hireinfo.jsp" />
+      <forward name="checklist" path="/publisher_hirelist.jsp" />
+      <forward name="backstage" path="/publisher_hireman.jsp" />
+      <forward name="additem" path="/publisher_hirepub.jsp" />
     </action>
     
        <action  

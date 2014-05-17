@@ -30,7 +30,7 @@ public class GiftForm extends ActionForm {
 	/*
 	 * Generated Methods
 	 */
-
+	
 	public int getPagenow() {
 		return pagenow;
 	}
