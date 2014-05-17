@@ -152,7 +152,7 @@ public class RecruitmentAction extends DispatchAction {
 		String company = recruitmentForm.getCompany();
 		int publisherId = 8;		
 		
-		handler.addNewRecruitment(title, online, startdate, enddate, place, brief, content, company, publisherId, request);
+//		handler.addNewRecruitment(title, online, startdate, enddate, place, brief, content, company, publisherId, request);
 		
 		return this.gotoList(mapping, recruitmentForm, request, response);
 	}

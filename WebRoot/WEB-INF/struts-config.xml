@@ -139,7 +139,6 @@
       	<forward name="activate" path="/registration_publisher_code.jsp"></forward>
       	<forward name="success" path="/registration.html"></forward>
     </action>
-    
 
   </action-mappings>
   <controller processorClass="filters.MyRequestProcessor" />
