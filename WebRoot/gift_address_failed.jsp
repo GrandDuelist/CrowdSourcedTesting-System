@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,java.util.List,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" import="cn.com.crowdsourcedtesting.bean.*;" contentType="text/html; charset=UTF-8"%>
 
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -6,7 +6,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
 
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html:html lang="true">
   <head>
     <title>TCTEST</title>
@@ -31,19 +31,6 @@
     <link rel="stylesheet" href="assets/css/themes/default.css" id="style_color" />
     <link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-1" />    
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head> 
-
-
-<%
- String flag = (String)request.getAttribute("isLegal");
- if(flag == null || flag != "legal")
- {
- 	response.sendRedirect("gifts.do?method=selectAllGifts");
- 	return;
- }
- else
- 	request.removeAttribute("isLegal");
- %>
- 
 
 <body>
 <!--=== Style Switcher ===-->    
@@ -73,6 +60,7 @@
         </div>        				
     </div><!--/container-->		
 </div><!--/top-->
+<!--=== End Top ===--> 
 <!--=== End Top ===-->    
 
 <!--=== Header ===-->
@@ -127,7 +115,7 @@
                     </ul>
                     <div class="search-open">
                         <div class="input-append">
-                            <form>
+                            <form />
                                 <input type="text" class="span3" placeholder="搜索" />
                                 <button type="submit" class="btn-u">搜索</button>
                             </form>
@@ -140,80 +128,34 @@
 </div><!--/header -->      
 <!--=== End Header ===-->
 
-
 <!--=== Breadcrumbs ===-->
-<div class="breadcrumbs margin-bottom-40">
+<div class="breadcrumbs">
 	<div class="container">
         <h1 class="color-green pull-left">礼品中心</h1>
         <ul class="pull-right breadcrumb">
             <li><a href="index.html">主页</a> <span class="divider">/</span></li>
-            <li class="active">礼品中心</li>
+            <li><a href="gifts.html">礼品中心</a> <span class="divider">/</span></li>
+            <li class="active">兑换成功</li>
         </ul>
     </div><!--/container-->
 </div><!--/breadcrumbs-->
 <!--=== End Breadcrumbs ===-->
 
-<%
- List <Gift> gifts  =(List<Gift>) request.getAttribute("gifts");
- Page giftpage = (Page)request.getAttribute("page");
- Iterator<Gift> it= gifts.iterator();
- Gift gift = null;
- %>
 
 <!--=== Content Part ===-->
-<div class="container"> 	
-	<div class="row-fluid"> 
-        <div id="w">    
-            <div class="sort" id="sort">
-				<ul class="unstyled inline">
-                	<li><a href="gifts.do?method=selectAllGifts" class="all selected">所有礼品</a></li>
-                	<!-- 
-                	<li><a href="#" class="web">常规礼品</a></li>
-                	<li><a href="#" class="ios">项目礼品</a></li>
-                	 -->
-                	<li><a href="gifts.do?method=selectAvailableGifts&usercredit=5000" class="print">可兑换礼品</a></li>
-                </ul>
-            </div>
-            
-            <ul class="portfolio recent-work clearfix"> 
-            
-		<% 
-            for(int i=0;i<10;i++)
-  			{ 
-  				if(!it.hasNext())
-					break;
-					
-				gift=it.next();
-  		%>
-                <li data-id="id-1" class="ios">
-                    <a href="gifts.do?method=selectGift&giftId=<%=gift.getGiftId()%>">
-                    	<em class="overflow-hidden"><img src="assets/plugins/portfolioSorting/img/2.jpg" alt="" /></em>
-                        <span>
-                            <strong><%=gift.getGiftName()%></strong>
-                            <i><%=gift.getGiftCredit()%>积分</i>
-                        </span>
-                    </a>
-                </li> 
-      	<% 
-      		}
-      	%>         
-            </ul>
-            
-        <!-- 导航 start --> 
-        <% 
-            for(int i=0;i<giftpage.getTotalPage();i++)
-  			{ 
-  		%>  
-  				<a href="gifts.do?method=selectPage&pagenow=<%=(1+i)%>"><%=(1+i)%></a>
-  		<%
-  			}
-  		 %>
-  		<!-- 导航end -->  
-            
-        </div>                
-    </div><!--/row-fluid-->         
-</div><!--/container-->	 	
+<div class="container">		
+	<div class="row-fluid ex-fail">
+
+    <p>
+        <i><i class="icon-warning-sign"></i>兑换失败</i>
+        <span><button class="btn btn-large btn-success">返回</button></span>
+    </p>
+
+</div>
+<!--/row-fluid-->
+</div><!--/container-->		
 <!--=== End Content Part ===-->
+
 
 <!--=== Footer ===-->
 <div class="footer">
@@ -222,14 +164,14 @@
 			<div class="span4">
                 <!-- About -->
 		        <div class="headline"><h3>关于</h3></div>	
-				<p class="margin-bottom-25">TCTest全名为吐槽测试网，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见。</p>	
+				<p class="margin-bottom-25">TCTest全名为吐槽测试网的英文，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见。</p>	
 
 				
 			</div><!--/span4-->	
 			
 			<div class="span4">
             <!-- Monthly Newsletter -->
-		        <div class="headline"><h3>联系方式</h3></div>	
+		        <div class="headline"><h3>联系我们</h3></div>	
                 <address>
 					4800号，曹安公路，同济大学软件学院 <br />
 					上海市, 中国 <br />
@@ -257,7 +199,7 @@
 			</div><!--/span4-->
 		</div><!--/row-fluid-->	
 	</div><!--/container-->	
-</div><!--/footer-->	
+</div><!--/footer-->
 <!--=== End Footer ===-->
 
 <!--=== Copyright ===-->
@@ -268,7 +210,7 @@
 	            <p>Copyright &copy; 2014.TCtest All rights reserved.</p>
 			</div>
 			<div class="span4">	
-                <a href="index.html"><img id="logo-footer" src="assets/img/logo2-default.png" class="pull-right" alt="" /></a>
+				<a href="index.html"><img id="logo-footer" src="assets/img/logo2-default.png" class="pull-right" alt="" /></a>
 			</div>
 		</div><!--/row-fluid-->
 	</div><!--/container-->	
@@ -277,26 +219,24 @@
 
 <!-- JS Global Compulsory -->           
 <script type="text/javascript" src="assets/js/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" src="assets/js/modernizr.custom.js"></script>        
+<script type="text/javascript" src="assets/js/modernizr.custom.js"></script> 
+<script type="text/javascript" src="assets/js/morecity.js"></script>       
 <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
 <!-- JS Implementing Plugins -->           
-<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/sequence.jquery-min.js"></script>
-<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/horizontal-parallax.js"></script>
-<script type="text/javascript" src="assets/plugins/bxslider/jquery.bxslider.js"></script>
+<script type="text/javascript" src="assets/plugins/portfolioSorting/js/jquery.quicksand.js"></script>
+<script type="text/javascript" src="assets/plugins/portfolioSorting/js/sorting.js"></script>
 <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
+
 <!-- JS Page Level -->           
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
-        App.initSliders();
-        App.initBxSlider();
     });
+	 BindCity("洛阳");
 </script>
 <!--[if lt IE 9]>
-	<script src="assets/js/respond.js"></script>
-<![endif]-->		
-
+    <script src="assets/js/respond.js"></script>
+<![endif]-->
 </body>
 </html:html>

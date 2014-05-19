@@ -29,6 +29,9 @@ public class ChangeGiftDAO extends BaseHibernateDAO {
 	// property constants
 	public static final String CREDIT = "credit";
 	public static final String SEND_ADDRESS = "sendAddress";
+	public static final String RECEIVER = "receiver";
+	public static final String ZIPCODE = "zipcode";
+	public static final String MOBILE = "mobile";
 
 	public void save(ChangeGift transientInstance) {
 		log.debug("saving ChangeGift instance");
@@ -100,6 +103,18 @@ public class ChangeGiftDAO extends BaseHibernateDAO {
 
 	public List findBySendAddress(Object sendAddress) {
 		return findByProperty(SEND_ADDRESS, sendAddress);
+	}
+
+	public List findByReceiver(Object receiver) {
+		return findByProperty(RECEIVER, receiver);
+	}
+
+	public List findByZipcode(Object zipcode) {
+		return findByProperty(ZIPCODE, zipcode);
+	}
+
+	public List findByMobile(Object mobile) {
+		return findByProperty(MOBILE, mobile);
 	}
 
 	public List findAll() {

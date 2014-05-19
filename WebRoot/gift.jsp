@@ -6,7 +6,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html:html lang="true">
   <head>
     <title>GiftItem</title>
@@ -125,11 +125,11 @@
                         </li>
                         <li><a class="search search-nav"><i class="icon-search search-btn"></i></a></li>                                
                     </ul>
-                    <div class="search-open search-open-inner">
+                    <div class="search-open">
                         <div class="input-append">
-                            <form />
-                                <input type="text" class="span3" placeholder="Search" />
-                                <button type="submit" class="btn-u">Search</button>
+                            <form>
+                                <input type="text" class="span3" placeholder="搜索" />
+                                <button type="submit" class="btn-u">搜索</button>
                             </form>
                         </div>
                     </div>
@@ -168,8 +168,9 @@
                     <a href="#">
                     	<em class="overflow-hidden"><img src="assets/plugins/portfolioSorting/img/2.jpg" alt="" /></em>
                         <span>
+                        	<i>id:<%=gift.getGiftId()%></i>
                             <strong><%=gift.getGiftName()%></strong>
-                            <i><%=gift.getGiftCredit()%></i>
+                            <i><%=gift.getGiftCredit()%>积分</i>
                         </span>
                     </a>
                 </li>                           
@@ -178,7 +179,10 @@
             
             <ul>
             	<li>
-            		<a href="gifts.do?method=getGift&giftId=<%=gift.getGiftId()%>">我要兑换</a>
+            		<form action="gifts.do?method=getGift" method="post">
+                          <input name="giftId" type="hidden" value=<%=gift.getGiftId()%>>
+                          <button type="submit" class="btn-u">我要兑换</button>
+                    </form>
             	</li>
             </ul>
             

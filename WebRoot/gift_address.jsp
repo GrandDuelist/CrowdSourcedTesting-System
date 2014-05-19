@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,java.util.List,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" import="cn.com.crowdsourcedtesting.bean.*;" contentType="text/html; charset=UTF-8"%>
 
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -8,7 +8,7 @@
 
 <!DOCTYPE html>
 <html:html lang="true">
-  <head>
+<head>
     <title>TCTEST</title>
 
     <!-- Meta -->
@@ -73,6 +73,7 @@
         </div>        				
     </div><!--/container-->		
 </div><!--/top-->
+<!--=== End Top ===--> 
 <!--=== End Top ===-->    
 
 <!--=== Header ===-->
@@ -140,80 +141,79 @@
 </div><!--/header -->      
 <!--=== End Header ===-->
 
-
 <!--=== Breadcrumbs ===-->
-<div class="breadcrumbs margin-bottom-40">
+<div class="breadcrumbs">
 	<div class="container">
         <h1 class="color-green pull-left">礼品中心</h1>
         <ul class="pull-right breadcrumb">
             <li><a href="index.html">主页</a> <span class="divider">/</span></li>
-            <li class="active">礼品中心</li>
+            <li><a href="gifts.html">礼品中心</a> <span class="divider">/</span></li>
+            <li class="active">收货地址</li>
         </ul>
     </div><!--/container-->
 </div><!--/breadcrumbs-->
 <!--=== End Breadcrumbs ===-->
 
-<%
- List <Gift> gifts  =(List<Gift>) request.getAttribute("gifts");
- Page giftpage = (Page)request.getAttribute("page");
- Iterator<Gift> it= gifts.iterator();
- Gift gift = null;
- %>
 
 <!--=== Content Part ===-->
-<div class="container"> 	
-	<div class="row-fluid"> 
-        <div id="w">    
-            <div class="sort" id="sort">
-				<ul class="unstyled inline">
-                	<li><a href="gifts.do?method=selectAllGifts" class="all selected">所有礼品</a></li>
-                	<!-- 
-                	<li><a href="#" class="web">常规礼品</a></li>
-                	<li><a href="#" class="ios">项目礼品</a></li>
-                	 -->
-                	<li><a href="gifts.do?method=selectAvailableGifts&usercredit=5000" class="print">可兑换礼品</a></li>
-                </ul>
-            </div>
+<div class="container">		
+	<div class="row-fluid">
+		<div class="span9">
+            <div class="headline"><h3>地址填写</h3></div>
+            <p>请正确填写您的收货地址，有<span class="color-red"> * </span>的项为必填项</p><br />
             
-            <ul class="portfolio recent-work clearfix"> 
+ 
+ <%
+ Gift gift  =(Gift) request.getAttribute("giftitem");
+ %>           
             
-		<% 
-            for(int i=0;i<10;i++)
-  			{ 
-  				if(!it.hasNext())
-					break;
-					
-				gift=it.next();
-  		%>
-                <li data-id="id-1" class="ios">
-                    <a href="gifts.do?method=selectGift&giftId=<%=gift.getGiftId()%>">
-                    	<em class="overflow-hidden"><img src="assets/plugins/portfolioSorting/img/2.jpg" alt="" /></em>
-                        <span>
-                            <strong><%=gift.getGiftName()%></strong>
-                            <i><%=gift.getGiftCredit()%>积分</i>
-                        </span>
-                    </a>
-                </li> 
-      	<% 
-      		}
-      	%>         
+            
+			<form id="changeform" action="gifts.do?method=changeGift" method="post">
+			
+                <label>收件人姓名 <span class="color-red">*</span></label>
+                <input id="receiver_id" name="receiver" type="text" class="span5 border-radius-none" />
+                <label>所在城市 <span class="color-red">*</span></label>
+                <select name="ddlProvince" id="ddlProvince" onChange="selectMoreCity(this)"></select>
+ <select name="ddlCity" id="ddlCity">
+  <option selected value="">城市</option>
+ </select>
+                <label>地区和街道地址： <span class="color-red">*</span></label>
+                <textarea id="ddlStreet" rows="4" class="span10"></textarea>
+                <label>邮政编码 <span class="color-red">*</span></label>
+                <input name="zipcode" type="text" class="span3 border-radius-none" />
+                <label>手机/电话<span class="color-red">*</span></label>
+                <input name="mobile" type="text" class="span5 border-radius-none" />
+            
+            	<input name="giftId" type="hidden" value=<%=gift.getGiftId()%>>
+            	<input name="credit" type="hidden" value=<%=gift.getGiftCredit()%>>
+            	<input name="address" type="hidden" />
+                <p><button id="changebtn" class="btn-u">确认</button></p>
+                
+            </form>
+            
+            
+            
+            
+        </div><!--/span9-->
+        
+		<div class="span3">
+        	<!-- Contacts -->
+            <div class="headline"><h3>地址范例</h3></div>
+            <ul class="unstyled who margin-bottom-20">
+                <li><a href="#"><i class="icon-home"></i>4800号,曹安公路 201804 上海 嘉定 中国</a></li>
+                <li><a href="#"><i class="icon-envelope-alt"></i>Rain222@gmail.com</a></li>
+                <li><a href="#"><i class="icon-phone-sign"></i>1(222) 5x86 x97x</a></li>
+                <li><a href="#"><i class="icon-globe"></i>http://www.tctest.com</a></li>
             </ul>
-            
-        <!-- 导航 start --> 
-        <% 
-            for(int i=0;i<giftpage.getTotalPage();i++)
-  			{ 
-  		%>  
-  				<a href="gifts.do?method=selectPage&pagenow=<%=(1+i)%>"><%=(1+i)%></a>
-  		<%
-  			}
-  		 %>
-  		<!-- 导航end -->  
-            
-        </div>                
-    </div><!--/row-fluid-->         
-</div><!--/container-->	 	
+
+
+
+        	
+        </div><!--/span3-->
+    </div><!--/row-fluid-->        
+</div><!--/container-->		
 <!--=== End Content Part ===-->
+
 
 <!--=== Footer ===-->
 <div class="footer">
@@ -222,14 +222,14 @@
 			<div class="span4">
                 <!-- About -->
 		        <div class="headline"><h3>关于</h3></div>	
-				<p class="margin-bottom-25">TCTest全名为吐槽测试网，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见。</p>	
+				<p class="margin-bottom-25">TCTest全名为吐槽测试网的英文，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见。</p>	
 
 				
 			</div><!--/span4-->	
 			
 			<div class="span4">
             <!-- Monthly Newsletter -->
-		        <div class="headline"><h3>联系方式</h3></div>	
+		        <div class="headline"><h3>联系我们</h3></div>	
                 <address>
 					4800号，曹安公路，同济大学软件学院 <br />
 					上海市, 中国 <br />
@@ -257,7 +257,7 @@
 			</div><!--/span4-->
 		</div><!--/row-fluid-->	
 	</div><!--/container-->	
-</div><!--/footer-->	
+</div><!--/footer-->
 <!--=== End Footer ===-->
 
 <!--=== Copyright ===-->
@@ -268,7 +268,7 @@
 	            <p>Copyright &copy; 2014.TCtest All rights reserved.</p>
 			</div>
 			<div class="span4">	
-                <a href="index.html"><img id="logo-footer" src="assets/img/logo2-default.png" class="pull-right" alt="" /></a>
+				<a href="index.html"><img id="logo-footer" src="assets/img/logo2-default.png" class="pull-right" alt="" /></a>
 			</div>
 		</div><!--/row-fluid-->
 	</div><!--/container-->	
@@ -277,26 +277,32 @@
 
 <!-- JS Global Compulsory -->           
 <script type="text/javascript" src="assets/js/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" src="assets/js/modernizr.custom.js"></script>        
+<script type="text/javascript" src="assets/js/modernizr.custom.js"></script> 
+<script type="text/javascript" src="assets/js/morecity.js"></script>       
 <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
 <!-- JS Implementing Plugins -->           
-<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/sequence.jquery-min.js"></script>
-<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/horizontal-parallax.js"></script>
-<script type="text/javascript" src="assets/plugins/bxslider/jquery.bxslider.js"></script>
+<script type="text/javascript" src="assets/plugins/portfolioSorting/js/jquery.quicksand.js"></script>
+<script type="text/javascript" src="assets/plugins/portfolioSorting/js/sorting.js"></script>
 <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
+
 <!-- JS Page Level -->           
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
-        App.initSliders();
-        App.initBxSlider();
+        
+        $('#changebtn').click(function(e) {
+        	//alert($('#ddlProvince').attr("value")+" "+$('#ddlCity').attr("value")+" "+$('#ddlStreet').attr("value"));
+        	$('form#changeform input[name="address"]').attr("value", $('#ddlProvince').attr("value")+" "+$('#ddlCity').attr("value")+" "+$('#ddlStreet').attr("value"));
+		  	$('#changebtn').attr("disabled",true);
+		  	$('#changeform').submit();
+	 	});  
+	 		
     });
+	 BindCity("洛阳");
 </script>
 <!--[if lt IE 9]>
-	<script src="assets/js/respond.js"></script>
-<![endif]-->		
-
+    <script src="assets/js/respond.js"></script>
+<![endif]-->
 </body>
 </html:html>

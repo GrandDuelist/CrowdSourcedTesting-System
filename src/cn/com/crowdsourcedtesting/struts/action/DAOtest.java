@@ -1,6 +1,9 @@
 package cn.com.crowdsourcedtesting.struts.action;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cn.com.crowdsourcedtesting.DAO.GiftDAO;
@@ -14,36 +17,25 @@ public class DAOtest {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
-
 		int pagenow = 1;
-		List<Recruitment> recruitments = new ArrayList();
-		RecruitmentDAO dao = new RecruitmentDAO();
+		List<Gift> gifts = new ArrayList();
+		GiftDAO dao = new GiftDAO();
+		//一页16个礼品
 		Page page = new Page();
 		page.setCurrentPage(pagenow);
-		page.setPerRows(12);
-		page.setTotalRows(dao.getTotalRows());
+		page.setPerRows(16);
+		page.setTotalRows(dao.getTotalSimilarRows("giftName", "礼"));
+		gifts = dao.findSimilarPropertyByPage(page, "giftName", "礼");
 		
-		recruitments = dao.findByPage(page);
-		System.out.println(recruitments.size());
+		System.out.println(gifts.size());
+		for(int i=0; i<gifts.size(); i++)
+		{
+			System.out.println(gifts.get(i).getGiftName());
+		}
 		
 		
-//		int pagenow = 1;
-//		//session里面拿用户的积分数值
-//		Double creditlimit = 5000.0;
-//		List<Gift> gifts = new ArrayList();
-//		GiftDAO dao = new GiftDAO();
-//		//一页16个礼品
-//		Page page = new Page();
-//		page.setCurrentPage(pagenow);
-//		page.setPerRows(16);
-//		page.setTotalRows(dao.getTotalAvailableRows(creditlimit));
-//		
-//		gifts = dao.findAvailableByPage(creditlimit, page);
-//		System.out.println(gifts.size());
-//		
-//		System.out.println(dao.findById(2).getGiftName());
 	}
 
 }

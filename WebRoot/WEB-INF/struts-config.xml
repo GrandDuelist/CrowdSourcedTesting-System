@@ -52,6 +52,9 @@
       
       <forward name="giftitem" path="/gift.jsp"></forward>
       <forward name="allgifts" path="/gifts.jsp" />
+      <forward name="changegift" path="/gift_address.jsp" />
+      <forward name="changegiftfailed" path="/gift_address_failed.jsp" />
+      <forward name="changegiftsuccess" path="/gift_address_success.jsp" />
     </action>    
     
       <action

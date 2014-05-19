@@ -367,7 +367,7 @@
                   <div class="form-group">
                     <label for="web_url"> 招募地点</label>
                     <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-bookmark"></i> </span>
-                      <input class="form-control" type="text" name="place">
+                      <input id="RecruitmentPlace" class="form-control" type="text" name="place">
                       </input>
                     </div>
                   </div>
@@ -375,7 +375,7 @@
                   <div class="form-group">
                     <label for="web_url"> 招募公司</label>
                     <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-bookmark"></i> </span>
-                      <input class="form-control" type="text" name="company">
+                      <input id="RecruitmentCompany" class="form-control" type="text" name="company">
                       </input>
                     </div>
                   </div>
@@ -462,9 +462,30 @@ jQuery(document).ready(function() {
 	//$('#isOnline').onchange(test);	
 	$('#addRecruitment').click(function(){
 		//alert($('#RecruitmentTitle').val());
+		var s_date = $.trim($('#datepicker1').val()).split('/');
+		var e_date = $.trim($('#datepicker2').val()).split('/');
+		var d1 = new Date();
+  		var d2 = new Date();
+	    if(s_date != null && s_date.length>2){
+	     	d1.setFullYear(Number(s_date[2])) ;
+	     	d1.setMonth(Number(s_date[0])-1);
+	     	d1.setDate(Number(s_date[1])); 
+	    }
+	    if(e_date != null && e_date.length>2){
+	     	d2.setFullYear(Number(e_date[2])) ;
+	     	d2.setMonth(Number(e_date[0])-1);
+	     	d2.setDate(Number(e_date[1])); 
+	    }
+	    //alert(d1.toLocaleString()+"<br>"+d2.toLocaleString());
+		
 		if($.trim($('#RecruitmentTitle').val())=="")
 		{
 			$("#instructor").text("招募标题不能为空");
+			$('#RecruitmentTitle').focus();
+		}
+		else if($.trim($('#RecruitmentTitle').val()).length>=20)
+		{
+			$("#instructor").text("招募标题过长");
 			$('#RecruitmentTitle').focus();
 		}
 		else if($.trim($('#datepicker1').val())=="")
@@ -477,18 +498,41 @@ jQuery(document).ready(function() {
 			$("#instructor").text("截止时间不能为空");
 			$('#datepicker2').focus();
 		}
+		else if(d2.getTime()-d1.getTime()<=0)
+		{
+			$("#instructor").text("招募时间错误");
+			$('#datepicker1').focus();
+		}
 		else if($.trim($('#RecruitmentBrief').val())=="")
 		{
 			$("#instructor").text("招募简介不能为空");
+			$('#RecruitmentBrief').focus();
+		}
+		else if($.trim($('#RecruitmentBrief').val()).length>=250)
+		{
+			$("#instructor").text("招募简介过长");
+			$('#RecruitmentBrief').focus();
+		}
+		else if($.trim($('#RecruitmentPlace').val()).length>=50)
+		{
+			$("#instructor").text("招募地点过长");
+			$('#RecruitmentBrief').focus();
+		}
+		else if($.trim($('#RecruitmentCompany').val()).length>=40)
+		{
+			$("#instructor").text("招募公司过长");
 			$('#RecruitmentBrief').focus();
 		}
 		else if($.trim($('#RecruitmentContent').val())=="")
 		{
 			$("#instructor").text("招募时间不能为空");
 			$('#RecruitmentContent').focus();
-		}
+		}		
 		else
+		{
+			$("#AddRecruitmentForm").attr("disabled",true);
 			$("#AddRecruitmentForm").submit();
+		}
 	});
 });
 

@@ -124,13 +124,10 @@ public class RecruitmentAction extends DispatchAction {
 		
 		String sdate = recruitmentForm.getStartdate();
 		String edate = recruitmentForm.getEnddate();
-		
-		System.out.println(sdate);
+
 		
 		Date startdate = null;
 		Date enddate = null;
-		
-		java.util.Date birthday = new java.util.Date();
 
 		try {
 
@@ -140,9 +137,6 @@ public class RecruitmentAction extends DispatchAction {
 			enddate = sdf.parse(edate);
 
 			
-
-			System.out.println(startdate);
-
 		} catch (ParseException e) {
 
 			System.out.println("String to Date error");
@@ -154,7 +148,7 @@ public class RecruitmentAction extends DispatchAction {
 		
 		handler.addNewRecruitment(title, online, startdate, enddate, place, brief, content, company, publisherId, request);
 		
-		return this.gotoPub(mapping, form, request, response);
+		return this.gotoList(mapping, form, request, response);
 	}
 	
 	
