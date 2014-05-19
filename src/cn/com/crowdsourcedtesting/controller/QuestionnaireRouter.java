@@ -7,6 +7,7 @@ package cn.com.crowdsourcedtesting.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,13 +20,21 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import cn.com.crowdsourcedtesting.model.QuestionnaireHandler;
+import cn.com.crowdsourcedtesting.modelhelper.MethodNumber;
+import cn.com.crowdsourcedtesting.struts.form.CheckQuestionnaireDetailForm;
+import cn.com.crowdsourcedtesting.struts.form.PageIdForm;
 import cn.com.crowdsourcedtesting.struts.form.PublisherQuestionnaireForm;
+import cn.com.crowdsourcedtesting.struts.form.QuestionnaireDetailForm;
+import cn.com.crowdtest.factory.DAOFactory;
+import cn.com.crowdsourcedtesting.DAO.QuestionnaireDAO;
+import cn.com.crowdsourcedtesting.bean.*;
+import cn.com.other.page.Page;
 
-/** 
- * MyEclipse Struts
- * Creation date: 05-02-2014
+/**
+ * MyEclipse Struts Creation date: 05-02-2014
  * 
  * XDoclet definition:
+ * 
  * @struts.action validate="true"
  */
 public class QuestionnaireRouter extends DispatchAction {
@@ -34,9 +43,10 @@ public class QuestionnaireRouter extends DispatchAction {
 	 */
 
 	QuestionnaireHandler myHandler = new QuestionnaireHandler();
-	
+
 	/**
 	 * 跳转到发布页面
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -45,11 +55,13 @@ public class QuestionnaireRouter extends DispatchAction {
 	 */
 	public ActionForward goToPublish(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		
+
 		return mapping.findForward("add");
 	}
+
 	/**
 	 * 添加问卷
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -62,9 +74,10 @@ public class QuestionnaireRouter extends DispatchAction {
 
 		return mapping.findForward("add");
 	}
-	
+
 	/**
 	 * 创建问卷
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -75,22 +88,144 @@ public class QuestionnaireRouter extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 
+		PublisherQuestionnaireForm f = (PublisherQuestionnaireForm) form;
 
+		/*
+		 * PrintWriter out; try { out = response.getWriter();
+		 * out.print(f.getChoices()); } catch (IOException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
+ 
+		HttpSession session  = request.getSession();
 		
-		PublisherQuestionnaireForm f =  (PublisherQuestionnaireForm)form;
+		if(session.getAttribute("Publisher")!=null)
+		{
+			Publisher publisher  = (Publisher)session.getAttribute("Publisher");
+		    
+		     
+		     myHandler.createItem(f, request);
+		    
+		}
+		else
+		{
+			return mapping.findForward("publisherLogin");
+		}
 		
-		/*PrintWriter out;
-		try {
-			out = response.getWriter();
-			out.print(f.getChoices());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
-			
-	   myHandler.createItem(f, request);
-	  return mapping.findForward("add");
+		return mapping.findForward("add");
 	}
-	
+
+	/**
+	 * 审核的列表
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+
+	public ActionForward checkList(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+
+		PageIdForm pageIDForm = (PageIdForm) form;
+
+		// 交给事务处理
+		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodOne);    //调用第一个接口
+
+		return mapping.findForward("list");
+	}
+
+	/**
+	 * 进入要审核的问卷详情
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward checkDetail(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+
+		PageIdForm pageIDForm = (PageIdForm) form;
+
+		// 交给事务处理
+		myHandler.detailHandle(pageIDForm, request, MethodNumber.MethodOne);
+
+		return mapping.findForward("detail");
+	}
+
+	/**
+	 * 审核问卷的处理
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+
+	public ActionForward checkConfirm(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+
+		CheckQuestionnaireDetailForm detailForm = (CheckQuestionnaireDetailForm) form;
+
+		HttpSession session = request.getSession();
+
+		Administrator admin = (Administrator) session    //得到审核者的信息
+				.getAttribute("Administrator");  
+		
+		
+		if (admin == null) {      //审核者未登录
+			              
+			return mapping.findForward("adminLogin");
+			
+			
+			
+		} else if (form == null) {    //如果传过来的表单为空
+
+			
+			//如果表单为空，则直接跳转到列表
+			Page currentPage = (Page) session.getAttribute("currentPage");
+			PageIdForm p = new PageIdForm();
+			p.setPage(currentPage.getCurrentPage() + "");
+
+			return this.checkList(mapping, p, request, response);
+			
+		} else {
+			
+			String subType = detailForm.getSubType();  //通过或者不通过类型
+			
+			
+			
+			int id = Integer.parseInt(detailForm.getId());    //得到要处理的问卷
+			QuestionnaireDAO  qd = DAOFactory.getQuestionnaireDAO();
+			Questionnaire q = qd.findById(id);
+			q.setAdministrator(admin);
+			
+			if ("yes".equals(subType)) { // 审核通过
+								
+				q.setIsPassed(true);
+			
+			
+			} else // 审核不通过
+			{
+				
+				q.setIsPassed(false);				
+			
+			}
+			qd.save(q);    //修改数据库
+			
+			
+			Page currentPage = (Page) session.getAttribute("currentPage");
+			PageIdForm p = new PageIdForm();
+			p.setPage(currentPage.getCurrentPage() + "");
+			return this.checkList(mapping, p, request, response);
+		}
+
+	}
+
 }

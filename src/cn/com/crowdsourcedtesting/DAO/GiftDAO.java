@@ -48,7 +48,7 @@ public class GiftDAO extends BaseHibernateDAO {
 
 
 	public void save(Gift transientInstance) {
-		log.debug("saving Driver instance");
+		log.debug("saving Gift instance");
 		 Session session=getSession();
 		try {
 			session.beginTransaction();

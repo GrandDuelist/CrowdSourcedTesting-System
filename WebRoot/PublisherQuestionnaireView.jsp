@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="vendor/plugins/formswitch/css/bootstrap-switch.css" />
 <link rel="stylesheet" type="text/css" href="vendor/plugins/tags/tagmanager.css" />
 <link rel="stylesheet" type="text/css" href="css/animate.css" />
-<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/css/bootstrap-editable.css" />
+<link rel="stylesheet" type=							·"text/css" href="vendor/editors/xeditable/css/bootstrap-editable.css" />
 <link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/inputs/address/address.css" />
 <link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/inputs/typeaheadjs/lib/typeahead.js-bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="vendor/plugins/gritter/css/jquery.gritter.css" />
@@ -67,6 +67,8 @@ $("#createItem").click(function()
 
 }
 );
+
+
 
 $("div#selectButton").click(function()
 {
@@ -261,7 +263,7 @@ $("div#publishQuetionnaire").click(function()
             </li>
             <li>
               <div class="item-icon"><i style="color: #f0ad4e" class="fa fa-user"></i> </div>
-              <div class="item-message"><a href="#"><b>Marko</b> logged 12 hours</a></div>
+              <div class="item-mI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  essage"><a href="#"><b>Marko</b> logged 12 hours</a></div>
             </li>
           </ul>
         </li>
@@ -563,78 +565,7 @@ $("div#publishQuetionnaire").click(function()
                     
                     
                   <%} }%></div> </li> <%}%>  
-                        <li><label for="web_url"> 你喜欢哪个英雄的造型？ </label>
-                    <div class="text-left">
-                      <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          盖伦 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-                          阿狸 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios3" value="option3" />
-                          琴女 </label>
-                    </div> </li>
-                        <li><label for="web_url"> 你喜欢哪个英雄的造型？ </label>
-                    <div class="text-left">
-                      <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          盖伦 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-                          阿狸 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios3" value="option3" />
-                          琴女 </label>
-                    </div> </li>
-                        <li><label for="web_url"> 你喜欢哪个英雄的造型？ </label>
-                    <div class="text-left">
-                      <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          盖伦 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-                          阿狸 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios3" value="option3" />
-                          琴女 </label>
-                    </div> </li>
-                        <li><label for="web_url"> 你喜欢哪个英雄的造型？ </label>
-                    <div class="text-left">
-                      <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          盖伦 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-                          阿狸 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios3" value="option3" />
-                          琴女 </label>
-                    </div> </li>
-                        <li><label for="web_url"> 你喜欢哪个英雄的造型？ </label>
-                    <div class="text-left">
-                      <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          盖伦 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-                          阿狸 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios3" value="option3" />
-                          琴女 </label>
-                    </div> </li>
-                        <li><label for="web_url"> 你喜欢哪个英雄的造型？ </label>
-                    <div class="text-left">
-                      <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          盖伦 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-                          阿狸 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios3" value="option3" />
-                          琴女 </label>
-                    </div> </li>
+                        
                     </ol>
                   </p>
                 </div>

@@ -13,9 +13,14 @@
     <form-bean name="registrationTesterForm" type="cn.com.crowdsourcedtesting.struts.form.RegistrationTesterForm" />
     <form-bean name="registrationPublisherForm" type="cn.com.crowdsourcedtesting.struts.form.RegistrationPublisherForm" />
     <form-bean name="publisherQuestionnaireForm" type="cn.com.crowdsourcedtesting.struts.form.PublisherQuestionnaireForm" />
-  
-
+    
+    <form-bean name="pageIdForm" type="cn.com.crowdsourcedtesting.struts.form.PageIdForm" />
+    <form-bean name="adminLoginForm" type="cn.com.crowdsourcedtesting.struts.form.AdminLoginForm" />
+    <form-bean name="checkQuestionnaireDetailForm" type="cn.com.crowdsourcedtesting.struts.form.CheckQuestionnaireDetailForm" />
+    <form-bean name="checkRegisterListForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterListForm" />
+    <form-bean name="checkRegisterDetailForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterDetailForm" />
    
+  
   </form-beans>
 
   <global-exceptions />
@@ -35,6 +40,22 @@
       <forward name="login" path="/LoginView.jsp"></forward>
 
     </action>
+    
+    
+      <action
+      attribute="adminLoginForm"
+      parameter = "method"
+      input="/AdminLoginView.jsp"
+      name="adminLoginForm"
+      path="/manage"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.SecurityRouter">
+      <set-property property="cancellable" value="true" />
+     
+      <forward name="adminLogin" path="/AdminLoginView.jsp"></forward>
+      <forward name="home" path="/admin_home.html"></forward>
+    </action>
+        
     
     <action
       attribute="giftForm"
@@ -105,6 +126,20 @@
       <forward name="additem" path="/publisher_hirepub.jsp" />
     </action>
     
+       <action  
+         	 name="checkQuestionnaireDetailForm" 
+          	attribute="checkQuestionnaireDetailForm"
+         	input = "/CheckQuestionnaireDetailView.jsp"
+            path="/checkQuestionnaireDetail" 
+            parameter="method" 
+            scope="request" 
+            type="cn.com.crowdsourcedtesting.controller.QuestionnaireRouter">
+      <set-property property="cancellable" value="true" />
+       <forward name="list" path="/CheckQuestionnaireView.jsp"></forward>
+        <forward name="detail" path="/CheckQuestionnaireDetailView.jsp"></forward>
+        <forward name="adminLogin"  path="/AdminLoginView.jsp"></forward>
+    </action>
+    
     <action  
     name="publisherQuestionnaireForm" 
              input="/PublisherQuestionnaireView.jsp"
@@ -114,9 +149,52 @@
             scope="request" 
             type="cn.com.crowdsourcedtesting.controller.QuestionnaireRouter">
       <set-property property="cancellable" value="true" />
+       <forward name="publisherLogin" path="/PublisherLoginView.jsp"></forward>
        <forward name="add" path="/PublisherQuestionnaireView.jsp"></forward>
     </action>
     
+    
+        <action  
+          name="pageIdForm" 
+           attribute="pageIdForm"
+           input = "/CheckQuestionnaireView.jsp"
+            path="/manageQuestionnaire" 
+            parameter="method" 
+            scope="request" 
+            type="cn.com.crowdsourcedtesting.controller.QuestionnaireRouter">
+      <set-property property="cancellable" value="true" />
+       <forward name="list" path="/CheckQuestionnaireView.jsp"></forward>
+        <forward name="detail" path="/CheckQuestionnaireDetailView.jsp"></forward>
+    </action>
+     
+     <!-- 定义一个审核发布者列表的MVC -->
+     <action  
+          name="checkRegisterListForm" 
+           attribute="checkRegisterListForm"
+           input = "/CheckRegisterListView.jsp"
+            path="/checkRegisterList" 
+            parameter="method" 
+            scope="request" 
+            type="cn.com.crowdsourcedtesting.controller.SecurityRouter">
+      <set-property property="cancellable" value="true" />
+       <forward name="list" path="/CheckRegisterListView.jsp"></forward>
+       <forward name="detail" path="/CheckRegisterDetailView.jsp"></forward>
+    </action>
+     
+     <!-- 定义一个审核发布者细节的MVC -->
+     <action  
+          name="checkRegisterDetailForm" 
+           attribute="checkRegisterDetailForm"
+           input = "/CheckRegisterDetailView.jsp"
+            path="/checkRegisterDetail" 
+            parameter="method" 
+            scope="request" 
+            type="cn.com.crowdsourcedtesting.controller.SecurityRouter">
+      <set-property property="cancellable" value="true" />
+       <forward name="detail" path="/CheckRegisterDetailView.jsp"></forward>
+        <forward name="adminLogin"  path="/AdminLoginView.jsp"></forward>
+    </action>
+     
     
     <action
       attribute="registrationTesterForm"
@@ -130,6 +208,8 @@
       	<forward name="activate" path="/registration_tester_code.jsp"></forward>
       	<forward name="success" path="/registration.html"></forward>
     </action>
+    
+    
     <action
       attribute="registrationPublisherForm"
       parameter = "method"
@@ -141,6 +221,9 @@
       <set-property property="cancellable" value="true" />
       	<forward name="activate" path="/registration_publisher_code.jsp"></forward>
       	<forward name="success" path="/registration.html"></forward>
+    </action>
+    <action path="/checkQuestionnaire" type="cn.com.crowdsourcedtesting.struts.action.CheckQuestionnaireAction">
+      <set-property property="cancellable" value="true" />
     </action>
     
 
