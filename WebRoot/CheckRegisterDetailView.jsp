@@ -23,17 +23,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
+<!-- Plugin CSS -->
+<link rel="stylesheet" type="text/css" href="vendor/plugins/calendar/fullcalendar.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/datatables/css/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/css/bootstrap-editable.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/chosen/chosen.min.css" />
+
 <!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="css/theme.css" />
 <link rel="stylesheet" type="text/css" href="css/pages.css" />
 <link rel="stylesheet" type="text/css" href="css/plugins.css" />
 <link rel="stylesheet" type="text/css" href="css/responsive.css" />
-<link href="css/animate.css" type="text/css">
-<!--Plugins-->
-<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/css/bootstrap-editable.css" />
-<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/inputs/address/address.css" />
-<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/inputs/typeaheadjs/lib/typeahead.js-bootstrap.css" />
-<link rel="stylesheet" type="text/css" href="vendor/plugins/daterange/daterangepicker-bs3.css" />
+
 <!-- Demonstration CSS -->
 <link rel="stylesheet" type="text/css" href="css/demo.css" />
 
@@ -48,18 +49,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/detail_control/questionnaire_control.js"></script>
+<script type="text/javascript" src="js/detail_control/register_control.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 
-<body class="messages-page">
-<% Questionnaire questionnaire = (Questionnaire)session.getAttribute("questionnaire");%>
+<body>
 <!-- Start: Theme Preview Pane -->
+<% Publisher publisher   =  (Publisher)session.getAttribute("publisher"); %>
 
- <form id="idForm"  method="post">
+
+<form id="idForm"  method="post">
  <input type="hidden" name="subType"/>
- <input type="hidden"  value="<%=questionnaire.getQuestionnaireId()%>" name="id">
+ <input type="hidden"  value="<%=publisher.getPublisherId()%>" name="id">
 </form>
 <div id="skin-toolbox">
   <div class="skin-toolbox-toggle"> <i class="fa fa-flask"></i> </div>
@@ -271,7 +273,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- End: Header --> 
 <!-- Start: Main -->
 <div id="main"> 
-   <!-- Start: Sidebar -->
+  <!-- Start: Sidebar -->
   <aside id="sidebar">
     <div id="sidebar-search">
       <form role="search" />
@@ -287,8 +289,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <li class="active"> <a class="accordion-toggle collapsed" href="#examine"><span class="glyphicons glyphicons-check"></span><span class="sidebar-title">审核</span><span class="caret"></span></a>
           <ul id="examine" class="nav sub-nav">
             <li><a href="admin_tasklist.html"><span class="glyphicons glyphicons glyphicons-flag"></span> 审核任务</a></li>
-            <li class="active"><a href="admin_queslist.html"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
-            <li><a href="admin_registerlist.html"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>
+            <li><a href="admin_queslist.html"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
+            <li class="active"><a href="admin_registerlist.html"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>
           </ul>
         </li>
         <li> <a class="accordion-toggle collapsed" href="#user_admin"><span class="glyphicons glyphicons-adress_book"></span><span class="sidebar-title">用户管理</span><span class="caret"></span></a>
@@ -303,75 +305,68 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <!-- End: Sidebar --> 
   <!-- Start: Content -->
   <section id="content">
-    <div id="topbar">
-      <ol class="breadcrumb">
-        <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
-        <li><a href="publisher_home.html">主页</a></li>
-        <li><a href="publisher_taskman.html">问卷管理</a></li>
-        <li class="active">问卷详情</li>
-      </ol>
-    </div>
-    <div class="container">
-      <div class="row">
-      
-      
-        
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="panel">
-                <div class="panel-heading">
-                  <div class="panel-title visible-lg"> <i class="fa fa-info-circle"></i> 问卷详情</div>
-                </div>
-                <div class="panel-body">
-                  <h4 class="panel-body-title"><%=questionnaire.getTitle() %></h4>
-                
-                  
-                  
-                  <hr/>
-                  <p>
-                  		<ol>
-                  	<% Iterator it = questionnaire.getQuestions().iterator();
-                  	while(it.hasNext()){ 
-                  	Question  q =(Question) it.next();
-                  
-                  	%>
-                  	 <li><label for="web_url"> <%=q.getQuestionContent()%>? </label>
-                    <div class="text-left">
-                  	<%
-                  	Iterator it2 = q.getChoices().iterator();
-                  	while(it2.hasNext()){
-                  	Choice choice = (Choice)it2.next();
-                  	%>
-                      <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          <%=choice.getChoiceContent() %> </label>
-                       
-                    
-                    
-                  <%} }%></div> </li> 
-                        
-                    </ol>
-                  </p>
-                  
-                  <h4 class="panel-body-title text-alert">审核操作：</h4>
-                  <div class="text-center btn-group-lg">
-                      <button class="btn btn-primary btn-gradient" data-toggle="modal" data-target="#passAlert"> 通过 </button>
-                      &nbsp;&nbsp;&nbsp;<button class="btn btn-danger btn-gradient" data-toggle="modal" data-target="#failAlert"> 否决 </button>
-                      </div>
-                </div>
-                
-                <hr>
-                </hr>
+  <div id="topbar">
+    <ol class="breadcrumb">
+      <li><a href="admin_home.html"><i class="fa fa-home"></i></a></li>
+      <li><a href="admin_home.html">主页</a></li>
+      <li><a href="admin_registerlist.html">发布者列表</a></li>
+      <li class="active">发布者信息</li>
+    </ol>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel">
+          <div class="panel-heading">
+            <div class="panel-title"> <i class="fa fa-table"></i> 发布者信息表 </div>
+          </div>
+          <div class="panel-body">
+            <h3 class="text-alert text-center">公司发布者信息</h3>
+            <div class="col-md-8 col-xs-offset-2">
+              <table class="table table-hover table-bordered col-md-6" style="clear: both">
+                <tbody>
+                  <tr class="success">
+                    <td class="text-center" width="20%"><i class="fa fa-briefcase fa-lg text-success"></i><strong> 公司名称</strong></td>
+                    <td><%=publisher.getPublisherCompany()==null?"无":publisher.getPublisherCompany() %></td>
+                  </tr>
+                  <tr>
+                    <td class="text-center"><i class="fa fa-envelope fa-lg text-success"></i><strong> 注册邮箱</strong></td>
+                    <td><%=publisher.getPublisherLogEmail() %></td>
+                  </tr>
+                  <tr>
+                    <td class="text-center"><i class="fa fa-credit-card fa-lg text-success"></i><strong> 营业执照</strong></td>
+                    <td><%=publisher.getBusinessLicense()==null?"无":publisher.getBusinessLicense() %></td>
+                  </tr>
+                  <tr class="success">
+                    <td class="text-center"><i class="fa fa-user fa-lg text-success"></i><strong> 公司法人 </strong></td>
+                    <td><%=publisher.getPublisherName() %></td>
+                  </tr>
+                  <tr>
+                    <td class="text-center"><i class="fa fa-link fa-lg text-success"></i><strong> 审核人</strong></td>
+                    <td><%=publisher.getAdministrator()==null?"未审核":publisher.getAdministrator().getAdministratorName()%></td>
+                  </tr>
+                  <tr class="success">
+                    <td class="text-center"><i class="fa fa-bookmark fa-lg text-success"></i><strong> 当前权限</strong></td>
+                    <td><%=publisher.getPublisherAuthority()?"活动":"冻结" %></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h3 class="panel-body-title text-alert">审核操作：</h3>
+              <div class="text-center btn-group-lg">
+                <button class="btn btn-primary btn-gradient" data-toggle="modal" data-target="#passAlert"> 通过 </button>
+                &nbsp;&nbsp;&nbsp;
+                <button class="btn btn-alert btn-gradient" data-toggle="modal" data-target="#failAlert"> 否决 </button>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
-  </section>
-  <!-- End: Content --> 
+    <div class="clearfix"></div>
+  </div>
+</div>
+</section>
+<!-- End: Content -->
 </div>
 <!-- End: Main --> 
 <!--Popups-->
@@ -380,12 +375,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title text-center">确认通过该问卷?</h4>
+        <h4 class="modal-title text-center">确认通过审核?</h4>
       </div>
       <div class="modal-body">
-        <p class="margin-bottom-lg">通过该问卷后，问卷将被发布，您不能再对该问卷进行审核操作，是否确认？ </p>
+        <p class="margin-bottom-lg">通过该审核后本注册者将能发布相应信息，是否确认？ </p>
         <div class="form-group text-center">
-          <button type="button" id="checkConfirm" class="btn btn-success btn-gradient margin-right-sm" data-dismiss="modal"><i  class="fa fa-check"></i> 确认 </button>
+          <button type="button" id="checkConfirm"  class="btn btn-success btn-gradient margin-right-sm" data-dismiss="modal"><i class="fa fa-check"></i> 确认 </button>
           <button type="button" class="btn btn-danger btn-gradient" data-dismiss="modal"><i class="fa fa-warning"></i> 取消 </button>
         </div>
       </div>
@@ -397,185 +392,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title text-center">确认拒绝发布?</h4>
+        <h4 class="modal-title text-center">确认拒绝?</h4>
       </div>
       <div class="modal-body">
-        <p class="margin-bottom-lg"> 选择审核未通过后问卷将不会发布，并会发送给发布者未通过审核消息，是否确认？ </p>
+        <p class="margin-bottom-lg"> 拒绝注册者后将会为注册者发布相应信息，是否确认？ </p>
+       
         <div class="form-group text-center">
           <button type="button" id="checkFail" class="btn btn-success btn-gradient margin-right-sm" data-dismiss="modal"><i class="fa fa-check"></i> 确认</button>
-          <button type="button" class="btn btn-danger btn-gradient" data-dismiss="modal"><i class="fa fa-warning"></i> 取消</button>
+          <button type="button"  class="btn btn-danger btn-gradient" data-dismiss="modal"><i class="fa fa-warning"></i> 取消</button>
         </div>
+   
       </div>
     </div>
   </div>
 </div>
-<!--end of popups-->
 <!-- Core Javascript - via CDN --> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
-<!-- Plugins --> 
-<script type="text/javascript" src="vendor/editors/xeditable/js/bootstrap-editable.js"></script> 
-<script type="text/javascript" src="vendor/editors/xeditable/inputs/address/address.js"></script> 
-<script type="text/javascript" src="vendor/editors/xeditable/inputs/typeaheadjs/lib/typeahead.js"></script> 
-<script type="text/javascript" src="vendor/editors/xeditable/inputs/typeaheadjs/typeaheadjs.js"></script> 
-<script type="text/javascript" src="vendor/plugins/daterange/moment.min.js"></script> 
-<script type="text/javascript" src="vendor/plugins/daterange/daterangepicker.js"></script> 
-<script type="text/javascript" src="vendor/plugins/datepicker/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/flot/0.8.1/jquery.flot.min.js"></script>
-<script type="text/javascript" src="vendor/plugins/jqueryflot/jquery.flot.resize.min.js"></script>
-<script type="text/javascript" src="vendor/plugins/jqueryflot/jquery.flot.pie.min.js"></script>  
-<script type="text/javascript" src="js/charts.js"></script> 
+
 <!-- Theme Javascript --> 
 <script type="text/javascript" src="js/uniform.min.js"></script> 
 <script type="text/javascript" src="js/main.js"></script> 
 <script type="text/javascript" src="js/custom.js"></script> 
 <script type="text/javascript">
-jQuery(document).ready(function() {
-	
+ jQuery(document).ready(function() {
+
 	// Init Theme Core 	  
 	Core.init();
+		
+ });
 	
-	Charts.init();
-	//enable / disable xedit
-	  $('#enable').click(function() {
-		 $('#user .editable').editable('toggleDisabled');
-	  });    
-	  
-	  //editables 
-	  $('#username').editable({
-			 type: 'text',
-			 pk: 1,
-			 name: 'username',
-			 title: 'Enter username'
-	  });
-	  
-	  $('#firstname').editable({
-		  validate: function(value) {
-			 if($.trim(value) == '') return 'This field is required';
-		  }
-	  });
-	  
-	  $('#sex').editable({
-		  prepend: "not selected",
-		  source: [
-			  {value: 1, text: 'Male'},
-			  {value: 2, text: 'Female'}
-		  ],
-		  display: function(value, sourceData) {
-			   var colors = {"": "gray", 1: "green", 2: "blue"},
-				   elem = $.grep(sourceData, function(o){return o.value == value;});
-				   
-			   if(elem.length) {    
-				   $(this).text(elem[0].text).css("color", colors[value]); 
-			   } else {
-				   $(this).empty(); 
-			   }
-		  }   
-	  });    
-	  
-	  $('#status').editable();   
-	  
-	  $('#group').editable({
-		 showbuttons: false 
-	  });   
-  
-	  $('#vacation').editable({
-		  datepicker: { todayBtn: 'linked' } 
-	  });  
-		  
-	  $('#dob').editable();
-			
-	  $('#event').editable({
-		  placement: 'right',
-		  combodate: {
-			  firstItem: 'name'
-		  }
-	  });      
-	  
-	  $('#meeting_start').editable({
-		  format: 'yyyy-mm-dd hh:ii',    
-		  viewformat: 'dd/mm/yyyy hh:ii',
-		  validate: function(v) {
-			 if(v && v.getDate() == 10) return 'Day cant be 10!';
-		  },
-		  datetimepicker: {
-			 todayBtn: 'linked',
-			 weekStart: 1
-		  }        
-	  });            
-	  
-	  $('#comments').editable({
-		  showbuttons: 'bottom'
-	  }); 
-	  
-	  $('#note').editable(); 
-	  $('#pencil').click(function(e) {
-		  e.stopPropagation();
-		  e.preventDefault();
-		  $('#note').editable('toggle');
-	 });   
-	 
-	  $('#state').editable({
-		  source: ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
-	  }); 
-	  
-	  $('#state2').editable({
-		  value: 'California',
-		  typeahead: {
-			  name: 'state',
-			  local: ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
-		  }
-	  });   
-	 
-	 $('#fruits').editable({
-		 pk: 1,
-		 limit: 3,
-		 source: [
-		  {value: 1, text: 'banana'},
-		  {value: 2, text: 'peach'},
-		  {value: 3, text: 'apple'},
-		  {value: 4, text: 'watermelon'},
-		  {value: 5, text: 'orange'}
-		 ]
-	  }); 
-	  
-	  $('#address').editable({
-		  url: '/post',
-		  value: {
-			  city: "Moscow", 
-			  street: "Lenina", 
-			  building: "12"
-		  },
-		  validate: function(value) {
-			  if(value.city == '') return 'city is required!'; 
-		  },
-		  display: function(value) {
-			  if(!value) {
-				  $(this).empty();
-				  return; 
-			  }
-			  var html = '<b>' + $('<div>').text(value.city).html() + '</b>, ' + $('<div>').text(value.street).html() + ' st., bld. ' + $('<div>').text(value.building).html();
-			  $(this).html(html); 
-		  }         
-	  });
-	                
-		   
-	 $('#user .editable').on('hidden', function(e, reason){
-		  if(reason === 'save' || reason === 'nochange') {
-			  var $next = $(this).closest('tr').next().find('.editable');
-			  if($('#autoopen').is(':checked')) {
-				  setTimeout(function() {
-					  $next.editable('show');
-				  }, 300); 
-			  } else {
-				  $next.focus();
-			  } 
-		  }
-	 });
-	 
-});
 </script>
 </body>
 </html>
-

@@ -20,6 +20,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import cn.com.crowdsourcedtesting.model.QuestionnaireHandler;
+import cn.com.crowdsourcedtesting.modelhelper.MethodNumber;
 import cn.com.crowdsourcedtesting.struts.form.CheckQuestionnaireDetailForm;
 import cn.com.crowdsourcedtesting.struts.form.PageIdForm;
 import cn.com.crowdsourcedtesting.struts.form.PublisherQuestionnaireForm;
@@ -130,7 +131,7 @@ public class QuestionnaireRouter extends DispatchAction {
 		PageIdForm pageIDForm = (PageIdForm) form;
 
 		// 交给事务处理
-		myHandler.checkQuestionnaire(pageIDForm, request);
+		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodOne);    //调用第一个接口
 
 		return mapping.findForward("list");
 	}
@@ -151,7 +152,7 @@ public class QuestionnaireRouter extends DispatchAction {
 		PageIdForm pageIDForm = (PageIdForm) form;
 
 		// 交给事务处理
-		myHandler.checkQuestionnaireDetail(pageIDForm, request);
+		myHandler.detailHandle(pageIDForm, request, MethodNumber.MethodOne);
 
 		return mapping.findForward("detail");
 	}

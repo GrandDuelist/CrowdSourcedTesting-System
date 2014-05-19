@@ -29,7 +29,7 @@ import cn.com.other.page.Page;
  * @author 方志晗
  * 
  */
-public class QuestionnaireHandler {
+public class QuestionnaireHandler extends GeneralHandler {
 
 	// 添加问卷
 	public void createItem(PublisherQuestionnaireForm form,
@@ -219,82 +219,56 @@ public class QuestionnaireHandler {
 		}
 	}
 	
-	/**
-	 * 审查问卷列表
-	 * @param form
-	 * @param request
-	 */
-	public void checkQuestionnaire(PageIdForm form,
-			HttpServletRequest request) {
-		String subType = null; //子类型 
-		Page  page = new Page();
+	
+
+	
+	
+	//设置本次要用的目标列表
+	@Override
+	public void setTargetListOne(Page page, HttpServletRequest request) {
+		// TODO Auto-generated method stub
 		page.setTotalRows(DAOFactory.getQuestionnaireDAO().getUncheckedTotalRows());
-		
-		
-		if(form!=null)
-		{
-			
-			subType=form.getSubType();
-		}
-		
-		int currentPage = 1;
-		//根据不同的类型来
-		
-		//类型为空
-		if(subType ==null)
-		{
-			currentPage = 1;
-			
-		}else if(subType.equals("detail"))
-		{
-			currentPage = Integer.parseInt(form.getPage());
-		}else if("checkConfirm".equals(subType))  //审核通过
-		{
-			int id = Integer.parseInt(form.getId());
-			
-		}else if("pageNum".equals(subType))
-		{
-			currentPage  = Integer.parseInt(form.getPage());
-		}else if("previousPage".equals(subType))
-		{
-			currentPage = Integer.parseInt(form.getPage())-1;
-		}else if("nextPage".equals(subType))
-		{
-			currentPage = Integer.parseInt(form.getPage())+1;
-		}
-		
-		
-		page.setCurrentPage(currentPage);
 		List <Questionnaire> questionnaires  = DAOFactory.getQuestionnaireDAO().findByUnCheckedPage(page);
 		HttpSession session  = request.getSession();
 		session.setAttribute("currentPage", page);
 		session.setAttribute("questionnaires", questionnaires);
-		session.setAttribute("questionnaireCurrentPage", currentPage);
+		
 	}
-	
-	
-	/**
-	 * 查看具体的问卷
-	 * @param pageIDForm
-	 * @param request
-	 */
 
-	public void checkQuestionnaireDetail(PageIdForm pageIDForm,
-			HttpServletRequest request) {
+
+	@Override
+	public void setTargetListTwo(Page page, HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		
-		if(pageIDForm!=null&&pageIDForm.getId()!=null&&!pageIDForm.getId().equals(""))
-		{
-		int id  = Integer.parseInt(pageIDForm.getId());
+	}
+
+
+	@Override
+	public void setTargetListThree(Page page, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	//使用detail处理接口
+	@Override
+	public void setTargetDetailOne(int id, HttpServletRequest request) {
+		// TODO Auto-generated method stub
 		
 		Questionnaire questionnaire = DAOFactory.getQuestionnaireDAO().findById(id);
 		HttpSession session  = request.getSession();
 
 		session.setAttribute("questionnaire", questionnaire);
-		}
 		
-		
-		
+	}
+
+	
+	
+	
+	//使用detail处理接口
+	@Override
+	public void setTargetDetailTwo(int id, HttpServletRequest request) {
+		// TODO Auto-generated method stub
 		
 	}
 	

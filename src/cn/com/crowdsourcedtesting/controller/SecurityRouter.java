@@ -13,14 +13,24 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+import cn.com.crowdsourcedtesting.DAO.PublisherDAO;
+import cn.com.crowdsourcedtesting.DAO.QuestionnaireDAO;
 import cn.com.crowdsourcedtesting.bean.Administrator;
 import cn.com.crowdsourcedtesting.bean.Publisher;
+import cn.com.crowdsourcedtesting.bean.Questionnaire;
 import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.crowdsourcedtesting.model.SecurityHandler;
+import cn.com.crowdsourcedtesting.modelhelper.MethodNumber;
 import cn.com.crowdsourcedtesting.modelhelper.UserType;
 import cn.com.crowdsourcedtesting.struts.form.AdminLoginForm;
+import cn.com.crowdsourcedtesting.struts.form.CheckQuestionnaireDetailForm;
+import cn.com.crowdsourcedtesting.struts.form.CheckRegisterDetailForm;
+import cn.com.crowdsourcedtesting.struts.form.CheckRegisterListForm;
 import cn.com.crowdsourcedtesting.struts.form.LoginForm;
+import cn.com.crowdsourcedtesting.struts.form.PageIdForm;
 import cn.com.crowdsourcedtesting.struts.form.PublisherLoginForm;
+import cn.com.crowdtest.factory.DAOFactory;
+import cn.com.other.page.Page;
 
 /**
  * MyEclipse Struts Creation date: 04-29-2014
@@ -34,12 +44,12 @@ public class SecurityRouter extends DispatchAction {
 	/*
 	 * Generated Methods
 	 */
-	
+
 	private SecurityHandler handler = new SecurityHandler();
 
-	
 	/**
 	 * 测试者登陆
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -55,9 +65,8 @@ public class SecurityRouter extends DispatchAction {
 
 		HttpSession session = request.getSession();
 		Tester tester = handler.handleTesterLogin(f);
-		
-		
-		if (tester!=null) {
+
+		if (tester != null) {
 			// 测试者登陆成功
 			session.setAttribute("UserType", UserType.Tester);
 			session.setAttribute("Tester", tester);
@@ -73,6 +82,7 @@ public class SecurityRouter extends DispatchAction {
 
 	/**
 	 * 测试者登出
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -89,9 +99,10 @@ public class SecurityRouter extends DispatchAction {
 		}
 		return mapping.findForward("home");
 	}
-	
+
 	/**
 	 * 跳转到测试者登录页面
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -103,56 +114,50 @@ public class SecurityRouter extends DispatchAction {
 
 		return mapping.findForward("login");
 	}
-	
+
 	/**
 	 * 跳转到管理员的登录页面
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	
+
 	public ActionForward adminLogin(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 
 		return mapping.findForward("adminLogin");
 	}
-	
-	
-	
-	
+
 	/**
 	 * 进入管理者页面
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	
+
 	public ActionForward manage(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 
-		
-		if(form==null)
-		{
+		if (form == null) {
 			System.out.println("failed");
 		}
 
 		AdminLoginForm f = (AdminLoginForm) form;
-		
-	
 
 		HttpSession session = request.getSession();
 		Administrator administrator = handler.handleAdministratorLogin(f);
-		
-		
-		if (administrator!=null) {
+
+		if (administrator != null) {
 			// 管理员登陆成功
 			session.setAttribute("UserType", UserType.Administor);
-			session.setAttribute("Administrator",administrator);
-			
+			session.setAttribute("Administrator", administrator);
+
 			return mapping.findForward("home");
 
 		} else {
@@ -160,11 +165,12 @@ public class SecurityRouter extends DispatchAction {
 			session.setAttribute("a_login", "fail");
 			return mapping.findForward("adminLogin");
 		}
-		
-		
+
 	}
+
 	/**
 	 * 测试者登陆
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -175,18 +181,15 @@ public class SecurityRouter extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 
 		PublisherLoginForm f = (PublisherLoginForm) form;
-		
-	
 
 		HttpSession session = request.getSession();
 		Publisher publisher = handler.handlePublisherLogin(f);
-		
-		
-		if (publisher!=null) {
+
+		if (publisher != null) {
 			// 测试者登陆成功
 			session.setAttribute("UserType", UserType.Publisher);
-			session.setAttribute("Publisher",publisher);
-			
+			session.setAttribute("Publisher", publisher);
+
 			return mapping.findForward("manage");
 
 		} else {
@@ -194,43 +197,147 @@ public class SecurityRouter extends DispatchAction {
 			session.setAttribute("p_login", "fail");
 			return mapping.findForward("login");
 		}
-		
-		
-		
+
 	}
+
 	/**
 	 * 审核注册的列表
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	public ActionForward checklist(ActionMapping mapping, ActionForm form,
+	public ActionForward checkCompanyList(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		CheckRegisterListForm f = (CheckRegisterListForm) form;
+
+		PageIdForm pageIDForm = new PageIdForm();
+		pageIDForm.setId(f.getId());
+		pageIDForm.setPage(f.getPage());
+		pageIDForm.setSubType(f.getSubType());
+		// 交给事务处理
+		handler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接口
+
+		return mapping.findForward("list");
+
+	}
+
+	/**
+	 * 查看注册者细节
+	 */
+	public ActionForward checkDetail(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 
-		PublisherLoginForm f = (PublisherLoginForm) form;
-		
-	
+		CheckRegisterListForm f = (CheckRegisterListForm) form;
+
+		PageIdForm pageIDForm = new PageIdForm();
+		pageIDForm.setId(f.getId());
+		pageIDForm.setPage(f.getPage());
+		pageIDForm.setSubType(f.getSubType());
+		// 交给事务处理
+		handler.detailHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接口
+
+		return mapping.findForward("detail");
+
+	}
+
+	/**
+	 * 审核注册的列表
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward checkPersonList(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		CheckRegisterListForm f = (CheckRegisterListForm) form;
+
+		PageIdForm pageIDForm = new PageIdForm();
+		pageIDForm.setId(f.getId());
+		pageIDForm.setPage(f.getPage());
+		pageIDForm.setSubType(f.getSubType());
+		// 交给事务处理
+		handler.ListHandle(pageIDForm, request, MethodNumber.MethodTwo); // 调用第一个接口
+
+		return mapping.findForward("list");
+
+	}
+/**
+ * 响应审核操作
+ * @param mapping
+ * @param form
+ * @param request
+ * @param response
+ * @return
+ */
+	public ActionForward checkConfirm(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		CheckRegisterDetailForm detailForm = (CheckRegisterDetailForm) form;
 
 		HttpSession session = request.getSession();
-		Publisher publisher = handler.handlePublisherLogin(f);
-		
-		
-		if (publisher!=null) {
-			// 测试者登陆成功
-			session.setAttribute("UserType", UserType.Publisher);
-			session.setAttribute("Publisher",publisher);
-			
-			return mapping.findForward("manage");
+
+		Administrator admin = (Administrator) session // 得到审核者的信息
+				.getAttribute("Administrator");
+
+		String publisherType = (String) session.getAttribute("publisherType");
+
+		if (admin == null) { // 审核者未登录
+
+			return mapping.findForward("adminLogin");
+
+		} else if (form == null) { // 如果传过来的表单为空
+
+			// 如果表单为空，则直接跳转到列表
+			Page currentPage = (Page) session.getAttribute("currentPage");
+			CheckRegisterListForm p = new CheckRegisterListForm();
+			p.setPage(currentPage.getCurrentPage() + "");
+
+			if (publisherType != null && publisherType.equals("Company")) {    //如果是公司，返回公司表单
+				return this.checkCompanyList(mapping, p, request, response);
+			} else {
+				return this.checkPersonList(mapping, p, request, response);    //如果是跟人，返回个人表单
+			}
 
 		} else {
-			// 测试者登录失败
-			session.setAttribute("p_login", "fail");
-			return mapping.findForward("login");
+
+			String subType = detailForm.getSubType(); // 通过或者不通过类型
+
+			int id = Integer.parseInt(detailForm.getId()); // 得到要处理的问卷
+			PublisherDAO qd = DAOFactory.getPublisherDAO();
+			Publisher q = qd.findById(id);
+			q.setAdministrator(admin);
+
+			if ("yes".equals(subType)) { // 审核通过
+
+				q.setIsPassed(true);
+
+			} else // 审核不通过
+			{
+
+				q.setIsPassed(false);
+
+			}
+			qd.save(q); // 修改数据库
+
+			Page currentPage = (Page) session.getAttribute("currentPage");
+			PageIdForm p = new PageIdForm();
+			p.setPage(currentPage.getCurrentPage() + "");
+			
+			if (publisherType != null && publisherType.equals("Company")) {    //如果是公司，返回公司表单
+				return this.checkCompanyList(mapping, p, request, response);
+			} else {
+				return this.checkPersonList(mapping, p, request, response);    //如果是跟人，返回个人表单
+			}
 		}
-		
-		
-		
+
 	}
 }

@@ -25,8 +25,27 @@ public class Publisher implements java.io.Serializable {
 	private Set recruitments = new HashSet(0);
 	private Set testTasks = new HashSet(0);
 	private Set questionnaires = new HashSet(0);
+	private Boolean isPassed;
+	private String businessLicense;
+	
 
 	// Constructors
+
+	public Boolean getIsPassed() {
+		return isPassed;
+	}
+
+	public void setIsPassed(Boolean isPassed) {
+		this.isPassed = isPassed;
+	}
+
+	public String getBusinessLicense() {
+		return businessLicense;
+	}
+
+	public void setBusinessLicense(String businessLicense) {
+		this.businessLicense = businessLicense;
+	}
 
 	/** default constructor */
 	public Publisher() {
