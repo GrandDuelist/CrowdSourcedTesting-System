@@ -70,7 +70,7 @@ public class testing {
 		
 //		List<Recruitment> t=DAOFactory.getRecruitmentDAO().findAll();
 //		System.out.println(t.size());
-		Publisher publisher= new PublisherDAO().findById(8);
+	/*	Publisher publisher= new PublisherDAO().findById(8);
 		Questionnaire q = new Questionnaire(publisher,"问卷",0.0,0);
 		Session sess = HibernateSessionFactory.getSession();
 
@@ -95,6 +95,7 @@ public class testing {
 		sess.close();
 	}
 	
+	}*/
 	}
 
 }

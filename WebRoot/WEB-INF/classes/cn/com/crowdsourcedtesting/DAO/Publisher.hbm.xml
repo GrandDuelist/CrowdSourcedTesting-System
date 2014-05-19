@@ -24,6 +24,19 @@
 			<column length="40" name="PUBLISHER_LOG_EMAIL" not-null="true"
 				unique="true" />
 		</property>
+		
+		<property generated="never" lazy="false" name="isPassed"
+			type="java.lang.Boolean">
+			<column length="1" name="IS_PASSED" not-null="false"
+			 />
+		</property>
+		
+		<property generated="never" lazy="false" name="businessLicense"
+			type="java.lang.String">
+			<column length="255" name="BUSINESS_LICENSE" not-null="false"
+				 />
+		</property>
+		
 		<property generated="never" lazy="false" name="publisherPassword"
 			type="java.lang.String">
 			<column length="40" name="PUBLISHER_PASSWORD" not-null="true" />

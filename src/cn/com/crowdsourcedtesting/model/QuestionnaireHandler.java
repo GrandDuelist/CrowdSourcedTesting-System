@@ -7,17 +7,21 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.struts.action.ActionForward;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
+import cn.com.crowdsourcedtesting.bean.Administrator;
 import cn.com.crowdsourcedtesting.bean.Choice;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Question;
 import cn.com.crowdsourcedtesting.bean.Questionnaire;
+import cn.com.crowdsourcedtesting.struts.form.PageIdForm;
 import cn.com.crowdsourcedtesting.struts.form.PublisherQuestionnaireForm;
 import cn.com.crowdtest.factory.BeanFactory;
 import cn.com.crowdtest.factory.DAOFactory;
+import cn.com.other.page.Page;
 
 /**
  * 处理添加新问卷
@@ -25,7 +29,7 @@ import cn.com.crowdtest.factory.DAOFactory;
  * @author 方志晗
  * 
  */
-public class QuestionnaireHandler {
+public class QuestionnaireHandler extends GeneralHandler {
 
 	// 添加问卷
 	public void createItem(PublisherQuestionnaireForm form,
@@ -98,12 +102,12 @@ public class QuestionnaireHandler {
 			Questionnaire q = (Questionnaire) session
 					.getAttribute("questionnaire");
 			
-			if(session.getAttribute("Publisher")!=null)
-			{
+		
 				Publisher publisher  = (Publisher)session.getAttribute("Publisher");
 			     q.setPublisher(publisher);
 			    
-			}
+			
+			
 			Session sess = HibernateSessionFactory.getSession();
 
 			Transaction tran = null;
@@ -116,7 +120,7 @@ public class QuestionnaireHandler {
 				 q.setCredit(300.00);
 			     q.setQuestionnaireCount(q.getQuestions().size());
 			     
-				
+				q.setIsPassed(false);
 				sess.save(q);
 				
 				Iterator it1 = q.getQuestions().iterator();
@@ -214,4 +218,60 @@ public class QuestionnaireHandler {
 			session.setAttribute("type", "confirm");
 		}
 	}
+	
+	
+
+	
+	
+	//设置本次要用的目标列表
+	@Override
+	public void setTargetListOne(Page page, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		page.setTotalRows(DAOFactory.getQuestionnaireDAO().getUncheckedTotalRows());
+		List <Questionnaire> questionnaires  = DAOFactory.getQuestionnaireDAO().findByUnCheckedPage(page);
+		HttpSession session  = request.getSession();
+		session.setAttribute("currentPage", page);
+		session.setAttribute("questionnaires", questionnaires);
+		
+	}
+
+
+	@Override
+	public void setTargetListTwo(Page page, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void setTargetListThree(Page page, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	//使用detail处理接口
+	@Override
+	public void setTargetDetailOne(int id, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+		Questionnaire questionnaire = DAOFactory.getQuestionnaireDAO().findById(id);
+		HttpSession session  = request.getSession();
+
+		session.setAttribute("questionnaire", questionnaire);
+		
+	}
+
+	
+	
+	
+	//使用detail处理接口
+	@Override
+	public void setTargetDetailTwo(int id, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
 }
