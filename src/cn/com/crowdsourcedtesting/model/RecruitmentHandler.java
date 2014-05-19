@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import cn.com.crowdsourcedtesting.DAO.AdministratorDAO;
+import cn.com.crowdsourcedtesting.DAO.PublisherDAO;
 import cn.com.crowdsourcedtesting.DAO.RecruitmentDAO;
 import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
 import cn.com.crowdsourcedtesting.bean.Publisher;
@@ -23,16 +25,28 @@ public class RecruitmentHandler {
 		RecruitmentDAO dao = new RecruitmentDAO();
 
 		recruitments = dao.findByPage(page);
-		request.setAttribute("hirelist", recruitments);
-		request.setAttribute("page", page);
-		request.setAttribute("isLegal", "legal");
+
+		if(recruitments != null && recruitments.size()>0)
+		{
+			request.setAttribute("hirelist", recruitments);
+			request.setAttribute("page", page);
+			request.setAttribute("isLegal", "legal");
+		}
+		else
+			request.setAttribute("isLegal", "illegal");
 
 	}
 
 	public void selectRecruitment(int id, HttpServletRequest request) {
 		RecruitmentDAO dao = new RecruitmentDAO();
-		request.setAttribute("hireitem", dao.findById(id));
-		request.setAttribute("isLegal", "legal");
+		Recruitment recruitment = dao.findById(id);
+		if(recruitment != null)
+		{
+			request.setAttribute("hireitem", recruitment);
+			request.setAttribute("isLegal", "legal");
+		}
+		else
+			request.setAttribute("isLegal", "illegal");
 	}
 
 	public void selectPage(Page page, HttpServletRequest request) {
@@ -40,8 +54,14 @@ public class RecruitmentHandler {
 		RecruitmentDAO dao = new RecruitmentDAO();
 
 		recruitments = dao.findByPage(page);
-		request.setAttribute("hirelist", recruitments);
-		request.setAttribute("page", page);
+		if(recruitments != null && recruitments.size()>0)
+		{
+			request.setAttribute("hirelist", recruitments);
+			request.setAttribute("page", page);
+			request.setAttribute("isLegal", "legal");
+		}
+		else
+			request.setAttribute("isLegal", "illegal");
 	}
 
 	// 后台调用
@@ -49,6 +69,8 @@ public class RecruitmentHandler {
 			Date enddate, String place, String brief, String content,
 			String company, Publisher publisher, HttpServletRequest request) {
 		RecruitmentDAO dao = new RecruitmentDAO();
+		PublisherDAO pdao = new PublisherDAO();
+		AdministratorDAO adao = new AdministratorDAO();
 		boolean flag = true;
 		if (online != 1)
 			flag = false;
@@ -57,6 +79,7 @@ public class RecruitmentHandler {
 		Transaction tst = session.beginTransaction();
 		Recruitment newrecruitment = new Recruitment(title, startdate, enddate,
 				flag, content, brief, company, place, false, publisher, null);
+
 		session.save(newrecruitment);
 		tst.commit();
 		session.close();
@@ -64,6 +87,22 @@ public class RecruitmentHandler {
 		request.setAttribute("isLegal", "legal");
 	}
 
-	// public void
-
+	
+	public void reviceRecruitment(int id, String title, String place, String brief, String content, String company, HttpServletRequest request){
+		RecruitmentDAO rdao = new RecruitmentDAO();
+		Recruitment oldrecruitment = rdao.findById(id);
+		oldrecruitment.setActivityName(title);
+		oldrecruitment.setBrief(brief);
+		oldrecruitment.setPlace(place);
+		oldrecruitment.setCompany(company);
+		oldrecruitment.setContent(content);
+				
+		Session session = HibernateSessionFactory.getSession();
+		Transaction tst = session.beginTransaction(); 		
+		session.saveOrUpdate(oldrecruitment);
+		tst.commit();
+		session.close();
+		
+		request.setAttribute("isLegal", "legal");
+	}
 }

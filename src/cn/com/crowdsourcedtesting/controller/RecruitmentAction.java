@@ -154,6 +154,30 @@ public class RecruitmentAction extends DispatchAction {
 		
 //		handler.addNewRecruitment(title, online, startdate, enddate, place, brief, content, company, publisherId, request);
 		
+		return this.gotoPub(mapping, form, request, response);
+	}
+	
+	
+	/** 
+	 * Method reviceRecruitment
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return ActionForward
+	 */
+	public ActionForward reviceRecruitment(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		RecruitmentForm recruitmentForm = (RecruitmentForm) form;// TODO Auto-generated method stub
+		int id = recruitmentForm.getId();
+		String title = recruitmentForm.getTitle();
+		String place = recruitmentForm.getPlace();
+		String brief = recruitmentForm.getBrief();
+		String content = recruitmentForm.getContent();		 
+		String company = recruitmentForm.getCompany();		
+		
+		handler.reviceRecruitment(id, title, place, brief, content, company, request);
+		
 		return this.gotoList(mapping, recruitmentForm, request, response);
 	}
 	
@@ -175,13 +199,19 @@ public class RecruitmentAction extends DispatchAction {
 	
 	
 	public ActionForward gotoList(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response) {		
+			HttpServletRequest request, HttpServletResponse response) {	
+		RecruitmentForm recruitmentForm = (RecruitmentForm) form;// TODO Auto-generated method stub
 		RecruitmentDAO dao = new RecruitmentDAO();
+		int perrow = recruitmentForm.getPerrow();
+		if(perrow == 0)
+			perrow = 5;
+		System.out.println(perrow);
 		//后台一页5个招募信息
 		page.setCurrentPage(1);
-		page.setPerRows(5);
+		page.setPerRows(perrow);
 		page.setTotalRows(dao.getTotalRows());
 		handler.selectAllRecruitments(page, request);
+		perrow = 0;
 		
 		return mapping.findForward("checklist");
 	}

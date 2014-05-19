@@ -189,23 +189,7 @@ String flag = (String)request.getAttribute("isLegal");
                         <div class="carousel-caption">
                             <h4><%=recruitment.getBrief()%></h4>
                         </div>
-                    </div>
-                    <!-- 
-                    <div class="item">
-                        <img src="assets/img/carousel/4.jpg" alt="" />
-                        <div class="carousel-caption">
-                            <h4>Second Thumbnail label</h4>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta.</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="assets/img/carousel/3.jpg" alt="" />
-                        <div class="carousel-caption">
-                            <h4>Third Thumbnail label</h4>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta.</p>
-                        </div>
-                    </div>
-                     -->
+                    </div>                  
                 </div>
                 <!--  
                 <div class="carousel-arrow">

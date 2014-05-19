@@ -13,6 +13,7 @@
     <form-bean name="registrationTesterForm" type="cn.com.crowdsourcedtesting.struts.form.RegistrationTesterForm" />
     <form-bean name="registrationPublisherForm" type="cn.com.crowdsourcedtesting.struts.form.RegistrationPublisherForm" />
     <form-bean name="publisherQuestionnaireForm" type="cn.com.crowdsourcedtesting.struts.form.PublisherQuestionnaireForm" />
+    <form-bean name="publishWebTestingForm" type="cn.com.crowdsourcedtesting.struts.form.PublishWebTestingForm" />
   
 
    
@@ -138,6 +139,16 @@
       <set-property property="cancellable" value="true" />
       	<forward name="activate" path="/registration_publisher_code.jsp"></forward>
       	<forward name="success" path="/registration.html"></forward>
+    </action>
+    <action
+      attribute="publishWebTestingForm"
+      input="/form/publishWebTesting.jsp"
+      name="publishWebTestingForm"
+      path="/publishWebTesting"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.PublishWebTestingRouter">
+      <set-property property="cancellable" value="true" />
+      <forward name="success" path="/publisher_taskpub_success.html"></forward>
     </action>
 
   </action-mappings>

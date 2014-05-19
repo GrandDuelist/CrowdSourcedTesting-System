@@ -44,10 +44,20 @@ public class RecruitmentForm extends ActionForm {
 	
 	private String company;
 
+	private int perrow;
+	
 	/*
 	 * Generated Methods
 	 */
 	
+	public int getPerrow() {
+		return perrow;
+	}
+
+	public void setPerrow(int perrow) {
+		this.perrow = perrow;
+	}
+
 	public String getBrief() {
 		return brief;
 	}
