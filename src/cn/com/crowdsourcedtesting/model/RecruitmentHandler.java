@@ -35,6 +35,21 @@ public class RecruitmentHandler {
 			request.setAttribute("isLegal", "illegal");
 	}
 	
+	public void selectRecentRecruitments(Page page, HttpServletRequest request){
+		List<Recruitment> recruitments = new ArrayList();
+		RecruitmentDAO dao = new RecruitmentDAO();
+
+		recruitments = dao.findByPage(page);
+		if(recruitments != null && recruitments.size()>0)
+		{
+			request.setAttribute("hirelist", recruitments);
+			request.setAttribute("page", page);
+			request.setAttribute("isLegal", "legal");
+		}
+		else
+			request.setAttribute("isLegal", "illegal");
+	}
+	
 	public void selectRecruitment(int id, HttpServletRequest request){
 		RecruitmentDAO dao = new RecruitmentDAO();
 		Recruitment recruitment = dao.findById(id);

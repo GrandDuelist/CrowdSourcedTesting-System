@@ -4,6 +4,22 @@
  */
 package cn.com.crowdsourcedtesting.controller;
 
+import java.util.Date;
+import java.util.Properties;
+import java.util.Random;
+
+import javax.mail.Address;
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,12 +29,14 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+
 import cn.com.crowdsourcedtesting.bean.Administrator;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.crowdsourcedtesting.model.SecurityHandler;
 import cn.com.crowdsourcedtesting.modelhelper.UserType;
 import cn.com.crowdsourcedtesting.struts.form.AdminLoginForm;
+import cn.com.crowdsourcedtesting.struts.form.FindPasswordForm;
 import cn.com.crowdsourcedtesting.struts.form.LoginForm;
 import cn.com.crowdsourcedtesting.struts.form.PublisherLoginForm;
 
@@ -36,7 +54,7 @@ public class SecurityRouter extends DispatchAction {
 	 */
 	
 	private SecurityHandler handler = new SecurityHandler();
-
+	
 	
 	/**
 	 * 测试者登陆
@@ -233,4 +251,83 @@ public class SecurityRouter extends DispatchAction {
 		
 		
 	}
+	
+	public ActionForward testerSendCode(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		
+		FindPasswordForm findPasswordForm = (FindPasswordForm) form;
+		
+		RandomCode randomCode = new RandomCode();
+		
+		findPasswordForm.setRandomcode(randomCode.getRandomCode(6));
+		
+		findAuthenticator authenticator = new findAuthenticator("lin1014582610@163.com","zhaoyunting36057");
+		
+		Properties pros = new Properties();
+		pros.put("mail.smtp,host","smtp.163.com");
+		pros.put("mail.smtp.port", "25");
+		pros.put("mail.transport.protocol", "smtp");
+		pros.put("mail.smtp.auth", "true");
+		
+		Session sendMailSession = Session.getDefaultInstance(pros,authenticator);
+		
+		try {
+			Message mailMessage = new MimeMessage(sendMailSession);
+			Address fromAddress = new InternetAddress("lin1014582610@163.com");
+			mailMessage.setFrom(fromAddress);
+			Address toAddress = new InternetAddress(findPasswordForm.getEmail());
+			mailMessage.setRecipient(Message.RecipientType.TO, toAddress);
+			mailMessage.setSubject("密码修改验证码");
+			mailMessage.setSentDate(new Date());
+			Multipart mainpart = new MimeMultipart();
+			BodyPart htmlBodyPart  = new MimeBodyPart();
+			htmlBodyPart.setContent(findPasswordForm.getRandomcode(),"text/html;charset=utf-8");
+			mainpart.addBodyPart(htmlBodyPart);
+			mailMessage.setContent(mainpart);
+			
+			Transport transport = sendMailSession.getTransport("smtp");
+			transport.connect("smtp.163.com","lin1014582610@163.com","zhaoyunting36057");
+			transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
+			transport.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("randomcode", findPasswordForm.getRandomcode());
+		request.setAttribute("email",findPasswordForm.getEmail());
+		return mapping.findForward("findpassword");	
+		
+	}
+	
+	public ActionForward testerFindPassword(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		
+		/*FindPasswordForm findPasswordForm_confirm = (FindPasswordForm)form;
+		
+		if (findPasswordForm_confirm.getRandomcode() == findPasswordForm.getRandomcode()) {
+			handler.handleTesterFindPassword(findPasswordForm_confirm);
+			return mapping.findForward("success");
+		}
+		else {
+			return mapping.findForward("success");
+		}*/
+		System.out.println("test");
+		return mapping.findForward("success");
+	
+	}
 }
+class findAuthenticator extends Authenticator{  
+    String userName=null;  
+    String password=null;  
+       
+    public findAuthenticator(){  
+    }  
+    public findAuthenticator(String username, String password) {   
+        this.userName = username;   
+        this.password = password;   
+    }   
+    protected PasswordAuthentication getPasswordAuthentication(){  
+        return new PasswordAuthentication(userName, password);  
+    }  
+}  

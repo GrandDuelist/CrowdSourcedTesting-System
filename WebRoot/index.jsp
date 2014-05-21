@@ -1,3 +1,4 @@
+
 <%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.modelhelper.*,cn.com.crowdsourcedtesting.bean.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
@@ -36,7 +37,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-2" />    
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head> 
-  
   <body>
     <!--=== Style Switcher ===-->    
 <i class="style-switcher-btn style-switcher-btn-option icon-cogs"></i>
@@ -286,16 +286,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         <!-- Right Sidebar -->        
         <div class="span3">
+        <%
+        	List <Recruitment> recruitments = (List<Recruitment>)request.getAttribute("hirelist");
+        	Iterator<Recruitment> it = recruitments.iterator();
+        	Recruitment recruitment = null; 
+        %>
             <!-- Posts -->
 			<div class="posts margin-bottom-30">
                 <div class="headline"><h3>近期任务</h3></div>
+                <%
+                	while(it.hasNext())
+                	{
+                		recruitment = it.next();
+                %>
                 <dl class="dl-horizontal">
                     <dt><a href="#"><img alt="" src="assets/img/sliders/elastislide/6.jpg" /></a></dt>
                     <dd>
-                        <p><a href="#">baidu云评测任务</a></p> 
+                        <p><a href="#"><%=recruitment.getActivityName()%></a></p> 
                     </dd>
                 </dl>
-                <dl class="dl-horizontal">
+                <%
+                }
+                %>
+                <!--  <dl class="dl-horizontal">
                     <dt><a href="#"><img alt="" src="assets/img/sliders/elastislide/10.jpg" /></a></dt>
                     <dd>
                         <p><a href="#">qq输入法测试任务</a></p> 
@@ -306,7 +319,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <dd>
                         <p><a href="#">安卓客户端测试任务</a></p> 
                     </dd>
-                </dl>
+                </dl> -->
             </div>
             
             <!-- Why Choose Us -->

@@ -17,6 +17,7 @@
     <form-bean name="pageIdForm" type="cn.com.crowdsourcedtesting.struts.form.PageIdForm" />
     <form-bean name="adminLoginForm" type="cn.com.crowdsourcedtesting.struts.form.AdminLoginForm" />
     <form-bean name="checkQuestionnaireDetailForm" type="cn.com.crowdsourcedtesting.struts.form.CheckQuestionnaireDetailForm" />
+    <form-bean name="findPasswordForm" type="cn.com.crowdsourcedtesting.struts.form.FindPasswordForm" />
    
   
   </form-beans>
@@ -39,8 +40,22 @@
 
     </action>
     
+    <action 
+    	attribute = "findPasswordForm"
+    	parameter = "method"
+    	input = "/page_findpassword.jsp"
+    	name="findPasswordForm"
+    	path="/findpassword"
+    	scope = "request"
+    	type = "cn.com.crowdsourcedtesting.controller.SecurityRouter">
+    	<set-property property="cancellable" value="true" />
+     
+     	<forward name="findpassword" path="/page_personal_pwchange.jsp"></forward>
+      	<forward name="success" path="/index.jsp"></forward>
+      	<forward name="fail" path="/page_personal_pwchange.jsp"></forward>
+    </action>
     
-      <action
+    <action
       attribute="adminLoginForm"
       parameter = "method"
       input="/AdminLoginView.jsp"
@@ -119,6 +134,7 @@
       <forward name="checklist" path="/publisher_hirelist.jsp" />
       <forward name="backstage" path="/publisher_hireman.jsp" />
       <forward name="additem" path="/publisher_hirepub.jsp" />
+      <forward name="index" path="/index.jsp" />
     </action>
     
        <action  

@@ -53,9 +53,7 @@ public class RegistrationRouter extends DispatchAction {
 	private RegistrationTesterForm registrationTesterForm;
 	private RegistrationPublisherForm registrationPublisherForm;
 	
-	private char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-			   'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
-			   'X', 'Y', 'Z' ,'1','2','3','4','5','6','7','8','9','0'};
+	
 	
 	/** 
 	 * Method execute
@@ -69,13 +67,9 @@ public class RegistrationRouter extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		registrationTesterForm = (RegistrationTesterForm) form;// TODO Auto-generated method stub
 
-		Random random = new Random();
-		StringBuffer randomcode = new StringBuffer();
-		for (int i = 0; i < 4; i++) {
-			String strRandString =String.valueOf(codeSequence[random.nextInt(36)]);
-			randomcode.append(strRandString.toLowerCase());
-		}
-		registrationTesterForm.setCode(randomcode.toString());
+		RandomCode randomcode = new RandomCode();
+		
+		registrationTesterForm.setCode(randomcode.getRandomCode(4));
 		
 		MyAuthenticator authenticator = new MyAuthenticator("lin1014582610@163.com","zhaoyunting36057");
 		
@@ -133,13 +127,9 @@ public class RegistrationRouter extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		registrationPublisherForm =(RegistrationPublisherForm) form;
 		
-		Random random = new Random();
-		StringBuffer randomcode = new StringBuffer();
-		for (int i = 0; i < 4; i++) {
-			String strRandString =String.valueOf(codeSequence[random.nextInt(36)]);
-			randomcode.append(strRandString.toLowerCase());
-		}
-		registrationPublisherForm.setCode(randomcode.toString());
+		RandomCode randomcode = new RandomCode();
+		
+		registrationPublisherForm.setCode(randomcode.getRandomCode(4));
 		
 		MyAuthenticator authenticator = new MyAuthenticator("lin1014582610@163.com","zhaoyunting36057");
 		

@@ -1,9 +1,20 @@
+<%@ page language="java" pageEncoding="utf-8"%>
+
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+
+
 <!DOCTYPE html>
 <!--[if IE 7]> <html lang="en" class="ie7"> <![endif]-->  
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
-<head>
+<html:html lang="true">
+  <head>
+    <html:base />
+    
     <title>TCTEST</title>
 
     <!-- Meta -->
@@ -24,8 +35,19 @@
     <!-- CSS Theme -->    
     <link rel="stylesheet" href="assets/css/themes/default.css" id="style_color" />
     <link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-1" />    
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+
+  </head>
+  
 <body class="coming-soon-page">
 <!--=== Style Switcher ===-->    
 <i class="style-switcher-btn icon-cogs"></i>
@@ -63,11 +85,17 @@
 
 <div class="row-fluid">
         <div class="span12 coming-soon">
-        
+        <%
+        	if(request.getAttribute("errors") != null)
+        	{
+        %>
            <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                
-            </div> 
+                <html:errors/>
+           </div> 
+        <%
+        	}
+        %>
     </div>
     <!-- Coming Soon Footer -->
     <div class="row-fluid">
@@ -122,4 +150,5 @@
 <![endif]-->
 <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
-</html> 
+
+</html:html>
