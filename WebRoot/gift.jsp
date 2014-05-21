@@ -6,7 +6,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html:html lang="true">
   <head>
     <title>GiftItem</title>
@@ -125,11 +125,11 @@
                         </li>
                         <li><a class="search search-nav"><i class="icon-search search-btn"></i></a></li>                                
                     </ul>
-                    <div class="search-open search-open-inner">
+                    <div class="search-open">
                         <div class="input-append">
-                            <form />
-                                <input type="text" class="span3" placeholder="Search" />
-                                <button type="submit" class="btn-u">Search</button>
+                            <form>
+                                <input type="text" class="span3" placeholder="搜索" />
+                                <button type="submit" class="btn-u">搜索</button>
                             </form>
                         </div>
                     </div>
@@ -168,8 +168,9 @@
                     <a href="#">
                     	<em class="overflow-hidden"><img src="assets/plugins/portfolioSorting/img/2.jpg" alt="" /></em>
                         <span>
+                        	<i>id:<%=gift.getGiftId()%></i>
                             <strong><%=gift.getGiftName()%></strong>
-                            <i><%=gift.getGiftCredit()%></i>
+                            <i><%=gift.getGiftCredit()%>积分</i>
                         </span>
                     </a>
                 </li>                           
@@ -178,7 +179,10 @@
             
             <ul>
             	<li>
-            		<a href="gifts.do?method=getGift&giftId=<%=gift.getGiftId()%>">我要兑换</a>
+            		<form action="gifts.do?method=getGift" method="post">
+                          <input name="giftId" type="hidden" value=<%=gift.getGiftId()%>>
+                          <button type="submit" class="btn-u">我要兑换</button>
+                    </form>
             	</li>
             </ul>
             
@@ -252,23 +256,19 @@
 <script type="text/javascript" src="assets/js/modernizr.custom.js"></script>        
 <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
 <!-- JS Implementing Plugins -->           
-<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/sequence.jquery-min.js"></script>
-<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/horizontal-parallax.js"></script>
-<script type="text/javascript" src="assets/plugins/bxslider/jquery.bxslider.js"></script>
+<script type="text/javascript" src="assets/plugins/portfolioSorting/js/jquery.quicksand.js"></script>
+<script type="text/javascript" src="assets/plugins/portfolioSorting/js/sorting.js"></script>
 <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
 <!-- JS Page Level -->           
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
-        App.initSliders();
-        App.initBxSlider();
     });
 </script>
 <!--[if lt IE 9]>
-	<script src="assets/js/respond.js"></script>
-<![endif]-->		
-
+    <script src="assets/js/respond.js"></script>
+<![endif]-->
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
-</html:html>
+</html:html> 

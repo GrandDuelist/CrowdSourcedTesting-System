@@ -16,6 +16,9 @@ public class ChangeGift implements java.io.Serializable {
 	private Double credit;
 	private Date changeDate;
 	private String sendAddress;
+	private String receiver;
+	private String zipcode;
+	private String mobile;
 
 	// Constructors
 
@@ -23,14 +26,29 @@ public class ChangeGift implements java.io.Serializable {
 	public ChangeGift() {
 	}
 
-	/** full constructor */
+	/** minimal constructor */
 	public ChangeGift(Gift gift, Tester tester, Double credit, Date changeDate,
-			String sendAddress) {
+			String sendAddress, String receiver, String mobile) {
 		this.gift = gift;
 		this.tester = tester;
 		this.credit = credit;
 		this.changeDate = changeDate;
 		this.sendAddress = sendAddress;
+		this.receiver = receiver;
+		this.mobile = mobile;
+	}
+
+	/** full constructor */
+	public ChangeGift(Gift gift, Tester tester, Double credit, Date changeDate,
+			String sendAddress, String receiver, String zipcode, String mobile) {
+		this.gift = gift;
+		this.tester = tester;
+		this.credit = credit;
+		this.changeDate = changeDate;
+		this.sendAddress = sendAddress;
+		this.receiver = receiver;
+		this.zipcode = zipcode;
+		this.mobile = mobile;
 	}
 
 	// Property accessors
@@ -81,6 +99,30 @@ public class ChangeGift implements java.io.Serializable {
 
 	public void setSendAddress(String sendAddress) {
 		this.sendAddress = sendAddress;
+	}
+
+	public String getReceiver() {
+		return this.receiver;
+	}
+
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
+	}
+
+	public String getZipcode() {
+		return this.zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public String getMobile() {
+		return this.mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 
 }

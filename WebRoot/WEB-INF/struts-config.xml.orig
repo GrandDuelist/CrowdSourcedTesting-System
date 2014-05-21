@@ -25,8 +25,10 @@
     <form-bean name="checkRegisterDetailForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterDetailForm" />
 <<<<<<< HEAD
     <form-bean name="questionnaireDisplayForm" type="cn.com.crowdsourcedtesting.struts.form.QuestionnaireDisplayForm" />
+    <form-bean name="taskForm" type="cn.com.crowdsourcedtesting.struts.form.TaskForm" />
 =======
     <form-bean name="changeInformationForm" type="cn.com.crowdsourcedtesting.struts.form.ChangeInformationForm" />
+>>>>>>> 9332983d12b8cd580322705d0dfbb005a965f265
 >>>>>>> 1a9657db90812a6038566d35ad62de31d3b6fe3d
    
   
@@ -121,6 +123,9 @@
       
       <forward name="giftitem" path="/gift.jsp"></forward>
       <forward name="allgifts" path="/gifts.jsp" />
+      <forward name="changegift" path="/gift_address.jsp" />
+      <forward name="changegiftfailed" path="/gift_address_failed.jsp" />
+      <forward name="changegiftsuccess" path="/gift_address_success.jsp" />
     </action>    
     
       <action
@@ -149,6 +154,19 @@
       scope="request"
       type="cn.com.crowdsourcedtesting.controller.TestTaskRouter">
       <set-property property="cancellable" value="true" />
+    </action>
+    
+    <action
+      attribute="taskCommentForm"
+      parameter = "method"
+      input="page_task_item.jsp"
+      name="taskForm"
+      path="/comment"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.TestTaskRouter">
+      <set-property property="cancellable" value="true" />
+      
+      <forward name="allcomment" path="/page_task_item.jsp" />
     </action>
     
     
@@ -386,6 +404,13 @@
       <forward name="taskError" path="/publisher_taskpub_reward.jsp"></forward>
       <forward name="directTo" path="/publisher_taskpub_web.jsp"></forward>
       <forward name="pubWeb" path="/publisher_taskpub_web.jsp"></forward>
+      <forward name="productError" path="/publisher_taskpub_web.jsp"></forward>
+      <forward name="taskSuccess" path="/publisher_taskpub_success.html"></forward>
+      <forward name="taskError" path="/publisher_taskpub_reward.jsp"></forward>
+      <forward name="directTo" path="/publisher_taskpub_web.jsp"></forward>
+    </action>
+    <action path="/checkQuestionnaire" type="cn.com.crowdsourcedtesting.struts.action.CheckQuestionnaireAction">
+      <set-property property="cancellable" value="true" />
       <forward name="pubAndroid" path="/publisher_taskpub_android.jsp"></forward>
       <forward name="pubDesktop" path="/publisher_taskpub_desktop.jsp"></forward>
     </action>

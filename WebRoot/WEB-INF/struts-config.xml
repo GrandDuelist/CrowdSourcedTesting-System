@@ -22,6 +22,7 @@
     <form-bean name="checkRegisterDetailForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterDetailForm" />
     <form-bean name="changeInformationForm" type="cn.com.crowdsourcedtesting.struts.form.ChangeInformationForm" />
     <form-bean name="questionnaireDisplayForm" type="cn.com.crowdsourcedtesting.struts.form.QuestionnaireDisplayForm" />
+    <form-bean name="taskForm" type="cn.com.crowdsourcedtesting.struts.form.TaskForm" />
    
   
   </form-beans>
@@ -115,6 +116,9 @@
       
       <forward name="giftitem" path="/gift.jsp"></forward>
       <forward name="allgifts" path="/gifts.jsp" />
+      <forward name="changegift" path="/gift_address.jsp" />
+      <forward name="changegiftfailed" path="/gift_address_failed.jsp" />
+      <forward name="changegiftsuccess" path="/gift_address_success.jsp" />
     </action>    
     
       <action
@@ -143,6 +147,19 @@
       scope="request"
       type="cn.com.crowdsourcedtesting.controller.TestTaskRouter">
       <set-property property="cancellable" value="true" />
+    </action>
+    
+    <action
+      attribute="taskCommentForm"
+      parameter = "method"
+      input="page_task_item.jsp"
+      name="taskForm"
+      path="/comment"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.TestTaskRouter">
+      <set-property property="cancellable" value="true" />
+      
+      <forward name="allcomment" path="/page_task_item.jsp" />
     </action>
     
     

@@ -1,6 +1,7 @@
 package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.bean.Publisher;
+import cn.com.other.page.Page;
 import cn.com.crowdsourcedtesting.bean.Questionnaire;
 import cn.com.crowdsourcedtesting.modelhelper.TaskType;
 import cn.com.other.page.Page;
@@ -176,6 +177,34 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
+	
+	
+	//模糊搜索
+		public List findSimilarPropertyByPage(Page page, String propertyName, Object value) {
+			log.debug("search label by property limit");
+
+			try {
+				String queryString = "from TestTask as model where model."
+						+ propertyName + " like ?";
+				Query query = getSession().createQuery(queryString);
+				query.setParameter(0, "%"+value+"%");
+				query.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
+				query.setMaxResults(page.getPerRows());
+				return query.list();
+			} catch (RuntimeException re) {
+				log.error("find label by property limit failed", re);
+				throw re;
+			}
+
+		}
+		
+		public int getTotalSimilarRows(String propertyName, Object value)
+		{
+
+			try {					
+				String queryString = "from TestTask as model where model."
+						+ propertyName + " like ?";
+				Query query = getSession().createQuery(queryString);
 
 	public TestTask addTestTask(Product product, Publisher publisher,
 			Date beginTime, Date endTime, double perReward, double wholeCredit) {
@@ -229,7 +258,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 	}
 		
 	}
-	// 得到未审核Web任务的总条�
+	// 得到未审核Web任务的总条�
 		public int getUncheckedWebTotalRows() {
 
 			Number c = (Number) getSession()
@@ -260,9 +289,29 @@ public class TestTaskDAO extends BaseHibernateDAO {
 				throw re;
 			}
 		}
-		// 得到未审核Android任务的总条�
+		// 得到未审核Android任务的总条�
 			public int getUncheckedAndroidTotalRows() {
+			log.debug("add testtask successful");
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			if (trans != null) {
+				trans.rollback();
+			}
+			testTask = null;
+			throw re;
+		}
+		return testTask;
+	}
 
+				query.setParameter(0, "%"+value+"%");
+				return query.list().size();
+			}
+			catch(RuntimeException re) {
+				log.error("find by page failed", re);
+				throw re;
+			}
+
+		}
 				Number c = (Number) getSession()
 						.createQuery(
 								"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and  TASK_TYPE="+TaskType.Android)
@@ -291,7 +340,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 					throw re;
 				}
 			}
-			// 得到未审核Desktop任务的总条�
+			// 得到未审核Desktop任务的总条�
 				public int getUncheckedDesktopTotalRows() {
 
 					Number c = (Number) getSession()
