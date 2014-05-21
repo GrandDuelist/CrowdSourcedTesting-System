@@ -1,16 +1,20 @@
 package cn.com.crowdsourcedtesting.DAO;
 
-import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
-import cn.com.crowdsourcedtesting.bean.TestTask;
-
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
+
 import org.hibernate.LockMode;
 import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
+import cn.com.crowdsourcedtesting.bean.Product;
+import cn.com.crowdsourcedtesting.bean.Publisher;
+import cn.com.crowdsourcedtesting.bean.TestTask;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -163,4 +167,32 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
+
+	public TestTask addTestTask(Product product, Publisher publisher,
+			Date beginTime, Date endTime, double perReward, double wholeCredit) {
+		Session session = getSession();
+		Transaction trans = null;
+		TestTask testTask = null;
+		try {
+			trans = session.beginTransaction();
+
+			testTask = new TestTask(product, publisher, true, perReward,
+					wholeCredit);
+			testTask.setTaskStartTime(beginTime);
+			testTask.setTaskEndTime(endTime);
+			session.save(testTask);
+
+			trans.commit();
+			log.debug("add testtask successful");
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			if (trans != null) {
+				trans.rollback();
+			}
+			testTask = null;
+			throw re;
+		}
+		return testTask;
+	}
+
 }
