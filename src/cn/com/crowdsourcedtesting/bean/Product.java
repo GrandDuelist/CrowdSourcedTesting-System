@@ -25,20 +25,12 @@ public class Product implements java.io.Serializable {
 	private String webLink;
 	private String desktopAddress;
 	private Set testTasks = new HashSet(0);
-    private String productName;
 	// Constructors
 
 	/** default constructor */
 	public Product() {
 	}
 
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
 
 	/** minimal constructor */
 	public Product(Subcategory subcategory, String productName,

@@ -88,13 +88,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="nav-collapse collapse">                                     
                     <ul class="nav">
                         <li>
-                           <a href="index.html">主页
+                           <a href="index.jsp">主页
                             
                             </a>
                            
                       </li>
                         <li>
-                            <a href="gifts.html">礼品中心
+                            <a href="gifts.do?method=selectAllGifts">礼品中心
                                                         
                             </a>
                                        
@@ -104,7 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </a>
                         </li>
                         <li>
-                            <a href="page_hirelist.html">招募帖                          
+                            <a href="recruitment.do?method=selectAllRecruitment">招募帖                          
                             </a>
                         </li>
                         <li>
@@ -112,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       
                         </li>
                        <li class="active">
-                            <a href="page_questionaire.html">问卷调查
+                            <a href="questionnaire.do?method=pageQuestionnaire">问卷调查
                             </a>
                             
                                                     
@@ -206,7 +206,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    Tester tester = (Tester) session.getAttribute("Tester");
                    if(tester==null){
                    %>
-                   <a href="security.do?method=testerLogin">	<button  class="btn btn-large btn-primary"  type="button">请先登录</button></a>
+                   <a href="login.do?method=testerLogin">	<button  class="btn btn-large btn-primary"  type="button">请先登录</button></a>
                    <%}else if(hasjoined==null||hasjoined.equals("false")){ %>
                 	<button id="submitQuestionnaire" class="btn btn-large btn-primary" type="button">提交问卷</button>
                 	<% }else {%>

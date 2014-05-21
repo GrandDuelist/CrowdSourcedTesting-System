@@ -34,11 +34,11 @@
       parameter = "method"
       input="/LoginView.jsp"
       name="loginForm"
-      path="/security"
+      path="/login"
       scope="request"
       type="cn.com.crowdsourcedtesting.controller.SecurityRouter">
       <set-property property="cancellable" value="true" />
-    
+      <forward name="personal_center" path="/page_personal_center.jsp"></forward>
       <forward name="home" path="/index.jsp"></forward>
       <forward name="login" path="/LoginView.jsp"></forward>
 
@@ -205,6 +205,7 @@
       <set-property property="cancellable" value="true" />
        <forward name="publisherLogin" path="/PublisherLoginView.jsp"></forward>
        <forward name="add" path="/PublisherQuestionnaireView.jsp"></forward>
+        <forward name="main" path="/PublisherQuestionnaireMainView.jsp"></forward>
     </action>
     
     
@@ -286,7 +287,7 @@
      <action  
           name="pageIdForm" 
           attribute="pageIdForm"
-          input = "/QuestionnaireListView.jsp"
+         
           path="/questionnaireList" 
           parameter="method" 
           scope="request" 

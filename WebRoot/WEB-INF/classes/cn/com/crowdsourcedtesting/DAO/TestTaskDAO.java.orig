@@ -1,17 +1,26 @@
 package cn.com.crowdsourcedtesting.DAO;
 
+<<<<<<< HEAD
+import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Questionnaire;
+import cn.com.crowdsourcedtesting.bean.TestTask;
 import cn.com.crowdsourcedtesting.modelhelper.TaskType;
 import cn.com.other.page.Page;
+
 import java.util.ArrayList;
+=======
+>>>>>>> 1a9657db90812a6038566d35ad62de31d3b6fe3d
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
+<<<<<<< HEAD
+=======
 import org.hibernate.Transaction;
+>>>>>>> 1a9657db90812a6038566d35ad62de31d3b6fe3d
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -176,40 +185,14 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
-
-	public TestTask addTestTask(Product product, Publisher publisher,
-			Date beginTime, Date endTime, double perReward, double wholeCredit) {
-		Session session = getSession();
-		Transaction trans = null;
-		TestTask testTask = null;
-		try {
-			trans = session.beginTransaction();
-			if (trans != null) {
-				
-			testTask = new TestTask(product, publisher, 1, perReward,wholeCredit);
-			testTask.setTaskStartTime(beginTime);
-			testTask.setTaskEndTime(endTime);
-			session.save(testTask);
-
-			trans.commit();
-			
-			return testTask;
-		
-			
-			}}catch (RuntimeException re){
-			testTask = null;
-			trans.rollback();
-			throw re;
-		}
-		return testTask;
-	}
-
+<<<<<<< HEAD
+	
 	
 	
 	//按页查找未审核Web应用
 	public List<TestTask> findUncheckedWebByPage(Page page) {
 		// TODO Auto-generated method stub
-		try{
+		try {
 			List<TestTask> testTasks = new ArrayList<TestTask>();
 			String queryString = "from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="+TaskType.Web;
 			Query queryObject = getSession().createQuery(queryString);
@@ -220,16 +203,12 @@ public class TestTaskDAO extends BaseHibernateDAO {
 					.setMaxResults(page.getPerRows()).list();
 
 			return testTasks;
-			
-	} catch(RuntimeException re) {
-		
-		log.error("attach failed", re);
-		
-		throw re;
+		} catch (RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
+		}
 	}
-		
-	}
-	// 得到未审核Web任务的总条�
+	// 得到未审核Web任务的总条数
 		public int getUncheckedWebTotalRows() {
 
 			Number c = (Number) getSession()
@@ -260,7 +239,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 				throw re;
 			}
 		}
-		// 得到未审核Android任务的总条�
+		// 得到未审核Android任务的总条数
 			public int getUncheckedAndroidTotalRows() {
 
 				Number c = (Number) getSession()
@@ -291,7 +270,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 					throw re;
 				}
 			}
-			// 得到未审核Desktop任务的总条�
+			// 得到未审核Desktop任务的总条数
 				public int getUncheckedDesktopTotalRows() {
 
 					Number c = (Number) getSession()
@@ -302,4 +281,34 @@ public class TestTaskDAO extends BaseHibernateDAO {
 					return c.intValue();
 
 				}
+=======
+
+	public TestTask addTestTask(Product product, Publisher publisher,
+			Date beginTime, Date endTime, double perReward, double wholeCredit) {
+		Session session = getSession();
+		Transaction trans = null;
+		TestTask testTask = null;
+		try {
+			trans = session.beginTransaction();
+
+			testTask = new TestTask(product, publisher, true, perReward,
+					wholeCredit);
+			testTask.setTaskStartTime(beginTime);
+			testTask.setTaskEndTime(endTime);
+			session.save(testTask);
+
+			trans.commit();
+			log.debug("add testtask successful");
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			if (trans != null) {
+				trans.rollback();
+			}
+			testTask = null;
+			throw re;
+		}
+		return testTask;
+	}
+
+>>>>>>> 1a9657db90812a6038566d35ad62de31d3b6fe3d
 }

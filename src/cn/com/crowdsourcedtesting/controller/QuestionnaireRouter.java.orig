@@ -52,7 +52,7 @@ public class QuestionnaireRouter extends DispatchAction {
 	QuestionnaireHandler myHandler = new QuestionnaireHandler();
 
 	/**
-	 * 跳转到发布页�
+	 * 跳转到发布页面
 	 * 
 	 * @param mapping
 	 * @param form
@@ -107,18 +107,24 @@ public class QuestionnaireRouter extends DispatchAction {
 
 		if (session.getAttribute("Publisher") != null) {
 			Publisher publisher = (Publisher) session.getAttribute("Publisher");
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1a9657db90812a6038566d35ad62de31d3b6fe3d
 			myHandler.createItem(f, request);
 
 		} else {
 			return mapping.findForward("publisherLogin");
 		}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1a9657db90812a6038566d35ad62de31d3b6fe3d
 		return mapping.findForward("add");
 	}
 
 	/**
-	 * 审核的列�
+	 * 审核的列表
 	 * 
 	 * @param mapping
 	 * @param form
@@ -134,7 +140,8 @@ public class QuestionnaireRouter extends DispatchAction {
 		PageIdForm pageIDForm = (PageIdForm) form;
 
 		// 交给事务处理
-		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接�
+		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接口
+<<<<<<< HEAD
 
 		return mapping.findForward("list");
 	}
@@ -163,7 +170,9 @@ public class QuestionnaireRouter extends DispatchAction {
 		}
 
 		// 交给事务处理
-		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodTwo); // 调用第一个接�
+		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodTwo); // 调用第一个接口
+=======
+>>>>>>> 1a9657db90812a6038566d35ad62de31d3b6fe3d
 
 		return mapping.findForward("list");
 	}
@@ -190,7 +199,7 @@ public class QuestionnaireRouter extends DispatchAction {
 	}
 
 	/**
-	 * 发布者要查看的问卷详�
+	 * 发布者要查看的问卷详情
 	 * 
 	 * @param mapping
 	 * @param form
@@ -232,7 +241,7 @@ public class QuestionnaireRouter extends DispatchAction {
 	}
 
 	/**
-	 * 审核问卷的处�
+	 * 审核问卷的处理
 	 * 
 	 * @param mapping
 	 * @param form
@@ -258,7 +267,7 @@ public class QuestionnaireRouter extends DispatchAction {
 
 		} else if (form == null) { // 如果传过来的表单为空
 
-			// 如果表单为空，则直接跳转到列�
+			// 如果表单为空，则直接跳转到列表
 			Page currentPage = (Page) session.getAttribute("currentPage");
 			PageIdForm p = new PageIdForm();
 			p.setPage(currentPage.getCurrentPage() + "");
@@ -284,7 +293,7 @@ public class QuestionnaireRouter extends DispatchAction {
 				q.setIsPassed(false);
 
 			}
-			qd.save(q); // 修改数据�
+			qd.save(q); // 修改数据库
 
 			Page currentPage = (Page) session.getAttribute("currentPage");
 			PageIdForm p = new PageIdForm();
@@ -305,14 +314,14 @@ public class QuestionnaireRouter extends DispatchAction {
 		PageIdForm pageIDForm = (PageIdForm) form;
 
 		// 交给事务处理
-		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodThree); // 调用第一个接�
+		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodThree); // 调用第一个接口
 
 		return mapping.findForward("list");
 
 	}
 
 	/**
-	 * 前台的问卷内�
+	 * 前台的问卷内容
 	 */
 
 	public ActionForward pageDetail(ActionMapping mapping, ActionForm form,
@@ -320,7 +329,13 @@ public class QuestionnaireRouter extends DispatchAction {
 		// TODO Auto-generated method stub
 
 		
-	
+		HttpSession session = request.getSession();
+
+		Tester tester = (Tester) session.getAttribute("Tester");
+		
+		if(tester==null){
+			return mapping.findForward("testerLogin");
+		}
 		PageIdForm pageIDForm = (PageIdForm) form;
 
 		// 交给事务处理
@@ -331,7 +346,7 @@ public class QuestionnaireRouter extends DispatchAction {
 	}
 
 	/**
-	 * 提交问卷的处�
+	 * 提交问卷的处理
 	 * 
 	 * @param mapping
 	 * @param form

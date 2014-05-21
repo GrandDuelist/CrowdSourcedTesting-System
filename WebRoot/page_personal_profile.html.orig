@@ -1,20 +1,9 @@
-<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.modelhelper.*,cn.com.crowdsourcedtesting.bean.*" pageEncoding="UTF-8"%>
-
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
-<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
-<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
-
-
 <!DOCTYPE html>
 <!--[if IE 7]> <html lang="en" class="ie7"> <![endif]-->  
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
-<html:html lang="true">
-  <head>
-    <html:base />
-    
+<head>
     <title>TCTEST</title>
 
     <!-- Meta -->
@@ -41,27 +30,8 @@
     <!-- CSS Theme -->    
     <link rel="stylesheet" href="assets/css/themes/default.css" id="style_color" />
     <link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-1" />    
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head> 
 
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-
-  </head>
- <%
- 	UserType userType = (UserType)session.getAttribute("UserType");
-	Tester tester  = (Tester)session.getAttribute("Tester");
-	if(tester == null)
-	{
-		response.sendRedirect("security.do?method=goToLogin");
-		return;
-	}
- %>
 <body>
 <!--=== Style Switcher ===-->    
 <i class="style-switcher-btn style-switcher-btn-option icon-cogs"></i>
@@ -85,8 +55,7 @@
             <ul class="loginbar inline">
                 <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i> chengran327@gmail.com</a></li>	
                 <li><a><i class="icon-phone-sign"></i> 021 4202 2656</a></li>	
-                <li><a href="security.do?method=testerLogout"><i class="icon-user"></i>注销</a></li>
-                <li><%=tester.getTesterName()%></li>	
+                <li><a href="page_login.html"><i class="icon-user"></i> 登录</a></li>	
             </ul>
         </div>        				
     </div><!--/container-->		
@@ -112,13 +81,13 @@
                 <div class="nav-collapse collapse">                                     
                     <ul class="nav">
                         <li class="active">
-                           <a href="index.jsp">主页
+                           <a href="index.html">主页
                             
                             </a>
                            
                       </li>
                         <li>
-                            <a href="gifts.do?method=selectAllGifts">礼品中心
+                            <a href="gifts.html">礼品中心
                                                         
                             </a>
                                        
@@ -128,7 +97,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="recruitment.do?method=selectAllRecruitment">招募帖                          
+                            <a href="page_hirelist.html">招募帖                          
                             </a>
                         </li>
                         <li>
@@ -136,7 +105,7 @@
       
                         </li>
                        <li>
-                            <a href="questionnaire.do?method=pageQuestionnaire">问卷调查
+                            <a href="page_questionaire.html">问卷调查
                             </a>
                             
                                                     
@@ -177,7 +146,7 @@
         <div class="headline"><h3>个人信息</h3></div>
            <div class="thumbnail-style">
                 <img src="assets/img/others/6.jpg" alt="" />
-                <h3><a><%=tester.getTesterName() %></a> <small>资深会员</small></h3>
+                <h3><a>程冉</a> <small>资深会员</small></h3>
                 做任务领奖励，前往<a class="text-success">这里</a>开始您的任务之旅
                 <ul class="unstyled inline team">
                 	<li><a href="#"><i class="icon-star"></i> 50 </a></li>
@@ -189,10 +158,16 @@
         </div>
     	<div class="span9">
         <div class="headline"><h3>资料修改</h3>
+<<<<<<< HEAD
+        <button type="button" class="pull-right btn-u">修改密码</button>
         </div>
         	<p class="hero">认真填写以下资料是你加入众测的第一步，方便体验更多乐趣。</p>
-        	<form action="security.do?method=testerChangeInformation" method="post">
+            <table data-id="id-1" class="table table-bordered basic">
+=======
+        </div>
+        	<p class="hero">认真填写以下资料是你加入众测的第一步，方便体验更多乐趣。</p>
             <table class="table table-bordered">
+>>>>>>> 1a9657db90812a6038566d35ad62de31d3b6fe3d
             <thead>
             <tr>
             	<th width="30%" style="border-top: 2px solid #E5E5E5;"></th>
@@ -202,7 +177,18 @@
             <tbody>
             <tr class="success">
             	<td><strong>登录邮箱</strong></td>
-                <td><%=tester.getTesterEmail() %></td>
+                <td>752050943@qq.com</td>
+            </tr>
+            <tr>
+            	<td><strong>性别</strong></td>
+                <td>
+                <label class="radio inline">
+                	<input id="question1" type="radio" name="gender" value="option1" checked=""></input>男
+                </label>
+                <label class="radio inline">
+                	<input id="question1" type="radio" name="gender" value="option2" checked=""></input>女
+                </label>
+                </td>
             </tr>
             <tr >
             	<td><strong>生日</strong></td>
@@ -210,33 +196,31 @@
             </tr>
             <tr>
             	<td><strong>昵称</strong></td>
-                <td><input class="input-xlarge" type="text" name="name" value="<%=tester.getTesterName() %>" /></td>
+                <td><input class="input-xlarge" type="text" value="土贼12号" /></td>
             </tr>
             <tr>
+<<<<<<< HEAD
+            	<td><strong>照片</strong></td>
+                <td><input type="file" accept="image/jpg,image/png"/>
+                </td>
+=======
             	<td><strong>原密码</strong></td>
-                <td><input class="input-xlarge" readonly="readonly" type="text" value="<%=tester.getTesterPassword() %>"/></td>
+                <td><input class="input-xlarge" type="password" value="123456"/></td>
             </tr>
             <tr>
             	<td><strong>新密码</strong></td>
-                <td><input id="newPassword" type="password" name="password" value="" required onblur="checkPass();"/>
-                	<span class="text-error" id="nonempty1" style="display:none;">字段不能为空</span>
-                </td>
+                <td><input type="password" value=""/></td>
             </tr>
             <tr>
             	<td><strong>确认密码</strong></td>
-                <td><input id="newPassword_check" name="password_comfirm" type="password" value="" required onblur="checkVcode();"/>
-                <span class="text-error" id="nonempty2" style="display:none;">字段不能为空</span>
-                <span class="text-error" id="errorpwd" style="display:none;">两次输入密码不一致</span>
-                
-                </td>
+                <td><input type="password" value=""/></td>
+>>>>>>> 1a9657db90812a6038566d35ad62de31d3b6fe3d
             </tr>
             </tbody>
             </table>
 			<div class="text-center">
-            	<button class="btn-u" id="comfirm" type="submit" >确认</button>
+            	<button class="btn-u" type="button">确认</button>
             </div><!--end of div submit-->
-            <input type="text" name="email" value=<%=tester.getTesterEmail() %> style="display:none;"/>
-            </form>
         </div><!--end of div-9-->
     </div><!--/row-fluid-->
 
@@ -336,110 +320,9 @@
 			})
 });          
     });
-    function checkVcode(){
-    	var pwd1=document.getElementById("newPassword").value;
-    	var pwd2=document.getElementById("newPassword_check").value;
-    	if(pwd1 == "")
-    	 {
-    		document.getElementById("nonempty1").style.display = "block";
-    		return false;
-    	 }
-    	 else
-    	 {
-    	 	document.getElementById("nonempty1").style.display = "none";
-    	 }
-    	if(pwd2 == "")
-    	 {
-    		 document.getElementById("nonempty2").style.display = "block";
-    		 return false;
-    	 }
-    	 else
-    	 {
-    	 	document.getElementById("nonempty2").style.display = "none";
-    	 }
-    	if(pwd1!=pwd2){
-    	    document.getElementById("nonempty1").style.display = "none";
-    	    document.getElementById("nonempty2").style.display = "none";
-    	    document.getElementById("errorpwd").style.display = "block";
-
-    	}
-
-
-    	 else{
-    	   	document.getElementById("errorpwd").style.display = "none";
-    	    document.getElementById("nonempty1").style.display = "none";
-    	    document.getElementById("nonempty2").style.display = "none";
-
-
-
-    	 }
-    if(pwd2 == "")
-     {
-    	 document.getElementById("nonempty2").style.display = "block";
-    	 return false;
-    }
-    else{
-    	document.getElementById("nonempty2").style.display = "none";
-    	if(checkAllEmpty()){
-    		document.getElementById("confirm").disabled="";
-    	}
-        return true;
-    	}
-    }
-    function checkAllEmpty(){
-      var pwd1=document.getElementById("newPassword").value;
-      var pwd2=document.getElementById("newPassword_check").value;
-     
-      if((pwd1&&pwd2)!=""){
-    	  return true;
-      }
-      else{
-      	return false;
-      }
-    }
-
-    function checkPass(){
-      var pwd1=document.getElementById("newPassword").value;
-      var pwd2=document.getElementById("newPassword_check").value;
-      
-     if(pwd1 == "")
-     {
-    	document.getElementById("nonempty1").style.display = "block";
-    	return false;
-     }
-     else
-     {
-     	document.getElementById("nonempty1").style.display = "none";
-     }
-    if(pwd2 == "")
-     {
-    	 document.getElementById("nonempty2").style.display = "block";
-    	 return false;
-     }
-     else
-     {
-     	document.getElementById("nonempty2").style.display = "none";
-     }
-    if(pwd1!=pwd2){
-    	document.getElementById("nonempty1").style.display = "none";
-    	document.getElementById("nonempty2").style.display = "none";
-        document.getElementById("errorpwd").style.display = "block";
-        return false;
-     }
-
-
-     else{
-    	document.getElementById("errorpwd").style.display = "none";
-    	document.getElementById("nonempty1").style.display = "none";
-    	document.getElementById("nonempty2").style.display = "none";
-
-
-        return true;
-    	}
-    }    
 </script>
 <!--[if lt IE 9]>
     <script src="assets/js/respond.js"></script>
 <![endif]-->
 </body>
-</html:html>
+</html> 

@@ -234,17 +234,22 @@ var Charts = function () {
                    var data = [
                   <%
                     int jj = 0;
-                    Iterator i2 = question1.getChoices().iterator();
+                    Boolean b = true;
                     int  max  = question1.getChoices().size();
+                    Iterator i2 = question1.getChoices().iterator();
                   	while(i2.hasNext()){
                   	Choice choice = (Choice)i2.next();
+                  	if(choice.getSelectCount()>0) b=false; }
                   	
+                  	i2 = question1.getChoices().iterator();
+                   	while(i2.hasNext()){
+                   	Choice choice = (Choice)i2.next();
                   	%>
                   	
                   	
                   	 {
                     label: '<%=choice.getChoiceContent()%>',
-                    data: <%=choice.getSelectCount()==0?1:choice.getSelectCount()%>,
+                    data: <%=b?1:choice.getSelectCount()%>,
                     color: Colors[<%=jj%>]
                      }
                      
@@ -1030,10 +1035,10 @@ var Charts = function () {
     </div>
     <div id="sidebar-menu">
       <ul class="nav sidebar-nav">
-        <li> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
+      <li> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
         <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
-        <li class="active"> <a href="publisher_questionnaire_man.html"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>
-        <li> <a href="publisher_hireman.html"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
+        <li class="active"> <a href="PublisherQuestionnaireMainView.jsp"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
+        <li> <a href="recruitment.do?method=gotoBackStage"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
       </ul>
       </li>
       </ul>

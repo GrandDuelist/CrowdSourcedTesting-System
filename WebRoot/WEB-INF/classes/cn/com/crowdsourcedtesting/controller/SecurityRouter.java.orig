@@ -91,7 +91,7 @@ public class SecurityRouter extends DispatchAction {
 			// 测试者登陆成�
 			session.setAttribute("UserType", UserType.Tester);
 			session.setAttribute("Tester", tester);
-			return this.testerFindAllQuestionnaire(mapping, form, request, response);
+			return mapping.findForward("home");
 
 		} else {
 			// 测试者登录失�
@@ -388,7 +388,11 @@ public class SecurityRouter extends DispatchAction {
 			mailMessage.setFrom(fromAddress);
 			Address toAddress = new InternetAddress(findPasswordForm.getEmail());
 			mailMessage.setRecipient(Message.RecipientType.TO, toAddress);
+<<<<<<< HEAD
+			mailMessage.setSubject("密码修改验证码");
+=======
 			mailMessage.setSubject("密码修改验证");
+>>>>>>> a4ab95480a941b68e13b5f5ba7f232139918a709
 			mailMessage.setSentDate(new Date());
 			Multipart mainpart = new MimeMultipart();
 			BodyPart htmlBodyPart  = new MimeBodyPart();

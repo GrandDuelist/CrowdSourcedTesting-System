@@ -286,9 +286,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <ul class="nav sidebar-nav">
         <li class="active"> <a class="accordion-toggle collapsed" href="#examine"><span class="glyphicons glyphicons-check"></span><span class="sidebar-title">审核</span><span class="caret"></span></a>
           <ul id="examine" class="nav sub-nav">
-            <li><a href="admin_tasklist.html"><span class="glyphicons glyphicons glyphicons-flag"></span> 审核任务</a></li>
-            <li class="active"><a href="admin_queslist.html"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
-            <li><a href="admin_registerlist.html"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>
+            <li><a href="checkTestTaskList.do?method=checkWebList"><span class="glyphicons glyphicons glyphicons-flag"></span> 审核任务</a></li>
+            <li class="active"><a href="manageQuestionnaire.do?method=checkList"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
+            <li><a href="checkRegisterList.do?method=checkCompanyList"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>
           </ul>
         </li>
         <li> <a class="accordion-toggle collapsed" href="#user_admin"><span class="glyphicons glyphicons-adress_book"></span><span class="sidebar-title">用户管理</span><span class="caret"></span></a>

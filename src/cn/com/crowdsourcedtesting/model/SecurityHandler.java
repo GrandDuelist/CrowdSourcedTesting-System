@@ -31,7 +31,7 @@ import cn.com.other.page.Page;
 
 public class SecurityHandler extends GeneralHandler {
 
-	// 测试用户的登�
+	// 测试用户的登�
 	public Tester handleTesterLogin(LoginForm form)
 	{
 		Tester tester=DAOFactory.getTesterDAO().isTester(form.getUsername(), form.getPassword());
@@ -179,7 +179,7 @@ public class SecurityHandler extends GeneralHandler {
 		}
 
 		
-		//DetailHandle的处理接�
+		//DetailHandle的处理接�
 		@Override
 		public void setTargetDetailOne(int id, HttpServletRequest request) {
 			// TODO Auto-generated method stub
@@ -190,7 +190,7 @@ public class SecurityHandler extends GeneralHandler {
 			session.setAttribute("publisherType", "Company");
 			
 		}
-		//DetailHandle的处理接�
+		//DetailHandle的处理接�
 		@Override
 		public void setTargetDetailTwo(int id, HttpServletRequest request) {
 			// TODO Auto-generated method stub
@@ -205,14 +205,14 @@ public class SecurityHandler extends GeneralHandler {
 		@Override
 		public void setTargetDetailThree(int id, HttpServletRequest request) {
 			// TODO Auto-generated method stub
-		public void findAllTask(Tester tester) {
-			
-			List <Task> tasks= new ArrayList<Task>();
+	
 			
 		}
 		
 		
-		
+	public void findAllTask(Tester tester) {
+			
+			List <Task> tasks= new ArrayList<Task>();
 	
 			
 		}

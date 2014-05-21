@@ -290,32 +290,26 @@ int lastPage = (currentPage.getTotalPage()+1)<(firstPage+currentPage.DEFAULT_MAX
       <div class="sidebar-toggle"> <i class="fa fa-bars"></i> </div>
     </div>
     <div id="sidebar-menu">
-      <ul class="nav sidebar-nav">
-        <li class="active"> <a class="accordion-toggle collapsed" href="#examine"><span class="glyphicons glyphicons-check"></span><span class="sidebar-title">审核</span><span class="caret"></span></a>
-          <ul id="examine" class="nav sub-nav">
-            <li><a href="admin_tasklist.html"><span class="glyphicons glyphicons glyphicons-flag"></span> 审核任务</a></li>
-            <li class="active"><a href="admin_queslist.html"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
-            <li><a href="admin_registerlist.html"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>
-          </ul>
-        </li>
-        <li> <a class="accordion-toggle collapsed" href="#user_admin"><span class="glyphicons glyphicons-adress_book"></span><span class="sidebar-title">用户管理</span><span class="caret"></span></a>
-          <ul id="user_admin" class="nav sub-nav">
-            <li><a href="admin_testerlist.html"><span class="glyphicons glyphicons-cleaning"></span> 维护测试者信息</a></li>
-            <li><a href="admin_publisherlist.html"><span class="glyphicons glyphicons-lightbulb"></span> 维护发布者信息</a></li>
-          </ul>
-        </li>
+       <ul class="nav sidebar-nav">
+      <li> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
+        <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
+        <li class="active"> <a href="PublisherQuestionnaireMainView.jsp"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
+        <li> <a href="recruitment.do?method=gotoBackStage"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
+      </ul>
+      </li>
       </ul>
     </div>
   </aside>
   <!-- End: Sidebar --> 
   <!-- Start: Content -->
   <section id="content">
-    <div id="topbar">
-      <ol class="breadcrumb">
-        <li><a href="admin_home.html"><i class="fa fa-home"></i></a></li>
-        <li><a href="admin_home.html">主页</a></li>
-        <li class="active">问卷列表</li>
-      </ol>
+  <div id="topbar">
+    <ol class="breadcrumb">
+      <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
+      <li><a href="publisher_home.html">主页</a></li>
+      <li><a href="publisher_questionnaire_man.html">问卷管理</a></li>
+      <li class="active">问卷列表</li>
+    </ol>
     </div>
     <div class="container">
       <div class="row">

@@ -1,0 +1,23 @@
+<<<<<<< HEAD
+#Wed May 21 19:20:38 CST 2014
+=======
+#Tue May 20 01:01:38 CST 2014
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=e56aa4734543af662cd0ebf93e3bf6f8999ad7a8
+>>>>>>> 1a9657db90812a6038566d35ad62de31d3b6fe3d
+eclipse.preferences.version=1
+encoding//WebRoot/AdminLoginView.jsp=UTF-8
+encoding//WebRoot/CheckQuestionnaireDetailView.jsp=UTF-8
+encoding//WebRoot/CheckQuestionnaireView.jsp=UTF-8
+encoding//WebRoot/LoginView.jsp=UTF-8
+encoding//WebRoot/PageQuestionnaireInfoView.jsp=UTF-8
+encoding//WebRoot/QuestionnaireDetailView.jsp=UTF-8
+encoding//WebRoot/QuestionnaireListView.jsp=UTF-8
+encoding//WebRoot/WEB-INF/struts-config.xml=UTF-8
+encoding//WebRoot/WEB-INF/struts-html.tld=UTF-8
+encoding//WebRoot/index.jsp=UTF-8
+encoding//WebRoot/js/charts.js=UTF-8
+encoding//src/cn/com/crowdsourcedtesting/controller/QuestionnaireRouter.java=UTF-8
+encoding//src/cn/com/crowdsourcedtesting/controller/SecurityRouter.java=UTF-8
+encoding/<project>=UTF-8

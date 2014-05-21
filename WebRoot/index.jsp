@@ -103,13 +103,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="nav-collapse collapse">                                     
                     <ul class="nav">
                         <li class="active">
-                           <a href="index.html">主页
+                           <a href="index.jsp">主页
                             
                             </a>
                            
                       </li>
                         <li>
-                            <a href="gifts.html">礼品中心
+                            <a href="gifts.do?method=selectAllGifts">礼品中心
                                                         
                             </a>
                                        
@@ -119,15 +119,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </a>
                         </li>
                         <li>
-                            <a href="page_hirelist.html">招募帖                          
+                            <a href="recruitment.do?method=selectAllRecruitment">招募帖                          
                             </a>
                         </li>
                         <li>
                             <a href="page_clients.html">合作伙伴</a>
       
                         </li>
-                        <li>
-                            <a href="page_contact.html">联系我们
+                       <li>
+                            <a href="questionnaire.do?method=pageQuestionnaire">问卷调查
                             </a>
                             
                                                     

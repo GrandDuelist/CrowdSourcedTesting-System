@@ -343,8 +343,6 @@ public class QuestionnaireDAO extends BaseHibernateDAO {
 			public int getcheckedTotalRows() {
 				 Number c= (Number) getSession().createQuery("select count(*) from Questionnaire where IS_PASSED=1")
 							.uniqueResult();
-							 
-							
 							 return c.intValue();
 			}
 			

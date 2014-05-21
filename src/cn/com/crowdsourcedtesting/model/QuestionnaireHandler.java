@@ -246,7 +246,7 @@ public class QuestionnaireHandler extends GeneralHandler {
 	public void setTargetListThree(Page page, HttpServletRequest request) {
 		// TODO Auto-generated method stub
 
-		page.setPerRows(1);
+		page.setPerRows(10);
 		page.setTotalRows(DAOFactory.getQuestionnaireDAO()
 				.getcheckedTotalRows());
 		
@@ -282,7 +282,7 @@ public class QuestionnaireHandler extends GeneralHandler {
 		HttpSession session = request.getSession();
 
 		Tester tester = (Tester) session.getAttribute("Tester");
-		if(DAOFactory.getJoinQuestionnaireDAO().hasJoined(tester.getTesterId(), id)>0){
+		if(tester!=null&&DAOFactory.getJoinQuestionnaireDAO().hasJoined(tester.getTesterId(), id)>0){
 			session.setAttribute("hasJoined", "true");
 		}else{
 			session.setAttribute("hasJoined", "false");
