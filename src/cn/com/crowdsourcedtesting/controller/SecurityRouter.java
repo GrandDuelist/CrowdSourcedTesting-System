@@ -4,9 +4,28 @@
  */
 package cn.com.crowdsourcedtesting.controller;
 
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Properties;
+import java.util.Random;
+
+import javax.mail.Address;
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.ChangedCharSetException;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -23,6 +42,8 @@ import cn.com.crowdsourcedtesting.model.SecurityHandler;
 import cn.com.crowdsourcedtesting.modelhelper.MethodNumber;
 import cn.com.crowdsourcedtesting.modelhelper.UserType;
 import cn.com.crowdsourcedtesting.struts.form.AdminLoginForm;
+import cn.com.crowdsourcedtesting.struts.form.ChangeInformationForm;
+import cn.com.crowdsourcedtesting.struts.form.FindPasswordForm;
 import cn.com.crowdsourcedtesting.struts.form.CheckQuestionnaireDetailForm;
 import cn.com.crowdsourcedtesting.struts.form.CheckRegisterDetailForm;
 import cn.com.crowdsourcedtesting.struts.form.CheckRegisterListForm;
@@ -46,9 +67,9 @@ public class SecurityRouter extends DispatchAction {
 	 */
 
 	private SecurityHandler handler = new SecurityHandler();
-
+	
 	/**
-	 * 测试者登陆
+	 * 测试者登�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -67,13 +88,13 @@ public class SecurityRouter extends DispatchAction {
 		Tester tester = handler.handleTesterLogin(f);
 
 		if (tester != null) {
-			// 测试者登陆成功
+			// 测试者登陆成�
 			session.setAttribute("UserType", UserType.Tester);
 			session.setAttribute("Tester", tester);
 			return mapping.findForward("home");
 
 		} else {
-			// 测试者登录失败
+			// 测试者登录失�
 			session.setAttribute("login", "fail");
 			return mapping.findForward("login");
 		}
@@ -81,7 +102,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 测试者登出
+	 * 测试者登�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -101,7 +122,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 跳转到测试者登录页面
+	 * 跳转到测试者登录页�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -116,7 +137,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 跳转到管理员的登录页面
+	 * 跳转到管理员的登录页�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -132,7 +153,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 进入管理者页面
+	 * 进入管理者页�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -145,6 +166,7 @@ public class SecurityRouter extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 
 		if (form == null) {
+
 			System.out.println("failed");
 		}
 
@@ -154,14 +176,14 @@ public class SecurityRouter extends DispatchAction {
 		Administrator administrator = handler.handleAdministratorLogin(f);
 
 		if (administrator != null) {
-			// 管理员登陆成功
+			// 管理员登陆成�
 			session.setAttribute("UserType", UserType.Administor);
 			session.setAttribute("Administrator", administrator);
 
 			return mapping.findForward("home");
 
 		} else {
-			// 测试者登录失败
+			// 测试者登录失�
 			session.setAttribute("a_login", "fail");
 			return mapping.findForward("adminLogin");
 		}
@@ -169,7 +191,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 测试者登陆
+	 * 测试者登�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -186,14 +208,14 @@ public class SecurityRouter extends DispatchAction {
 		Publisher publisher = handler.handlePublisherLogin(f);
 
 		if (publisher != null) {
-			// 测试者登陆成功
+			// 测试者登陆成�
 			session.setAttribute("UserType", UserType.Publisher);
 			session.setAttribute("Publisher", publisher);
 
 			return mapping.findForward("manage");
 
 		} else {
-			// 测试者登录失败
+			// 测试者登录失�
 			session.setAttribute("p_login", "fail");
 			return mapping.findForward("login");
 		}
@@ -201,7 +223,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 审核注册的列表
+	 * 审核注册的列�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -220,14 +242,14 @@ public class SecurityRouter extends DispatchAction {
 		pageIDForm.setPage(f.getPage());
 		pageIDForm.setSubType(f.getSubType());
 		// 交给事务处理
-		handler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接口
+		handler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接�
 
 		return mapping.findForward("list");
 
 	}
 
 	/**
-	 * 查看注册者细节
+	 * 查看注册者细�
 	 */
 	public ActionForward checkDetail(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -239,14 +261,14 @@ public class SecurityRouter extends DispatchAction {
 		pageIDForm.setPage(f.getPage());
 		pageIDForm.setSubType(f.getSubType());
 		// 交给事务处理
-		handler.detailHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接口
+		handler.detailHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接�
 
 		return mapping.findForward("detail");
 
 	}
 
 	/**
-	 * 审核注册的列表
+	 * 审核注册的列�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -265,7 +287,7 @@ public class SecurityRouter extends DispatchAction {
 		pageIDForm.setPage(f.getPage());
 		pageIDForm.setSubType(f.getSubType());
 		// 交给事务处理
-		handler.ListHandle(pageIDForm, request, MethodNumber.MethodTwo); // 调用第一个接口
+		handler.ListHandle(pageIDForm, request, MethodNumber.MethodTwo); // 调用第一个接�
 
 		return mapping.findForward("list");
 
@@ -296,7 +318,7 @@ public class SecurityRouter extends DispatchAction {
 
 		} else if (form == null) { // 如果传过来的表单为空
 
-			// 如果表单为空，则直接跳转到列表
+			// 如果表单为空，则直接跳转到列�
 			Page currentPage = (Page) session.getAttribute("currentPage");
 			CheckRegisterListForm p = new CheckRegisterListForm();
 			p.setPage(currentPage.getCurrentPage() + "");
@@ -326,7 +348,7 @@ public class SecurityRouter extends DispatchAction {
 				q.setIsPassed(false);
 
 			}
-			qd.save(q); // 修改数据库
+			qd.save(q); // 修改数据�
 
 			Page currentPage = (Page) session.getAttribute("currentPage");
 			PageIdForm p = new PageIdForm();
@@ -340,4 +362,109 @@ public class SecurityRouter extends DispatchAction {
 		}
 
 	}
+	
+	public ActionForward testerSendCode(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		
+		FindPasswordForm findPasswordForm = (FindPasswordForm) form;
+		
+		RandomCode randomCode = new RandomCode();
+		
+		findPasswordForm.setRandomcode(randomCode.getRandomCode(6));
+		
+		findAuthenticator authenticator = new findAuthenticator("lin1014582610@163.com","zhaoyunting36057");
+		
+		Properties pros = new Properties();
+		pros.put("mail.smtp,host","smtp.163.com");
+		pros.put("mail.smtp.port", "25");
+		pros.put("mail.transport.protocol", "smtp");
+		pros.put("mail.smtp.auth", "true");
+		
+		Session sendMailSession = Session.getDefaultInstance(pros,authenticator);
+		
+		try {
+			Message mailMessage = new MimeMessage(sendMailSession);
+			Address fromAddress = new InternetAddress("lin1014582610@163.com");
+			mailMessage.setFrom(fromAddress);
+			Address toAddress = new InternetAddress(findPasswordForm.getEmail());
+			mailMessage.setRecipient(Message.RecipientType.TO, toAddress);
+			mailMessage.setSubject("密码修改验证");
+			mailMessage.setSentDate(new Date());
+			Multipart mainpart = new MimeMultipart();
+			BodyPart htmlBodyPart  = new MimeBodyPart();
+			htmlBodyPart.setContent(findPasswordForm.getRandomcode(),"text/html;charset=utf-8");
+			mainpart.addBodyPart(htmlBodyPart);
+			mailMessage.setContent(mainpart);
+			
+			Transport transport = sendMailSession.getTransport("smtp");
+			transport.connect("smtp.163.com","lin1014582610@163.com","zhaoyunting36057");
+			transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
+			transport.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("randomcode", findPasswordForm.getRandomcode());
+		request.setAttribute("email",findPasswordForm.getEmail());
+		return mapping.findForward("findpassword");	
+		
+	}
+	
+	public ActionForward testerFindPassword(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		
+		FindPasswordForm findPasswordForm_confirm = (FindPasswordForm)form;
+		
+		handler.handleTesterFindPassword(findPasswordForm_confirm);
+
+		return mapping.findForward("success");
+	
+	}
+	
+	public ActionForward testerChangeInformation(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		
+		ChangeInformationForm changeInformationForm = (ChangeInformationForm) form;
+		
+		handler.handleTesterChangeInformation(changeInformationForm,request);
+
+		return mapping.findForward("success");
+	
+	}
+	
+	public ActionForward testerFindAllQuestionnaire(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		Tester tester = (Tester)session.getAttribute("Tester");
+		
+		if (tester == null) {
+			return mapping.findForward("login");
+		}
+		
+		else {
+			handler.findAllQuestionnair(tester,request);	
+			List<Questionnaire> questionnaires = (List<Questionnaire>)session.getAttribute("Questionnaires");
+			Iterator iterator = questionnaires.iterator();
+			while (iterator.hasNext()) {
+				Questionnaire questionnaire = (Questionnaire)iterator.next();
+			}
+			return mapping.findForward("personal_center");		
+		}	
+	}
 }
+class findAuthenticator extends Authenticator{  
+    String userName=null;  
+    String password=null;  
+       
+    public findAuthenticator(){  
+    }  
+    public findAuthenticator(String username, String password) {   
+        this.userName = username;   
+        this.password = password;   
+    }   
+    protected PasswordAuthentication getPasswordAuthentication(){  
+        return new PasswordAuthentication(userName, password);  
+    }  
+}  

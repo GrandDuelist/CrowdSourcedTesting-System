@@ -1,16 +1,19 @@
 package cn.com.crowdsourcedtesting.DAO;
 
-import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
-import cn.com.crowdsourcedtesting.bean.Product;
-
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
+
 import org.hibernate.LockMode;
 import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
+import cn.com.crowdsourcedtesting.bean.Product;
+import cn.com.crowdsourcedtesting.bean.Subcategory;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -176,5 +179,83 @@ public class ProductDAO extends BaseHibernateDAO {
 			log.error("attach failed", re);
 			throw re;
 		}
+	}
+
+	public Product addWebProduct(String productName, String icon,
+			String webLink, String description) {
+		Session session = getSession();
+		Transaction trans = null;
+		Product product = null;
+		try {
+			trans = session.beginTransaction();
+			SubcategoryDAO subCategoryDAO = new SubcategoryDAO();
+			Subcategory subcategory = subCategoryDAO.findById(1);
+			product = new Product(subcategory, productName, new Date(), "1",
+					true, description, icon);
+			product.setWebLink(webLink);
+			session.save(product);
+			trans.commit();
+			log.debug("add web product successful");
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			if (trans != null) {
+				trans.rollback();
+			}
+			product = null;
+			throw re;
+		}
+		return product;
+	}
+	
+	public Product addAndroidProduct(String productName, String icon,
+			String appLocation, String description) {
+		Session session = getSession();
+		Transaction trans = null;
+		Product product = null;
+		try {
+			trans = session.beginTransaction();
+			SubcategoryDAO subCategoryDAO = new SubcategoryDAO();
+			Subcategory subcategory = subCategoryDAO.findById(1);
+			product = new Product(subcategory, productName, new Date(), "1",
+					true, description, icon);
+			product.setApkAddress(appLocation);
+			session.save(product);
+			trans.commit();
+			log.debug("add web product successful");
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			if (trans != null) {
+				trans.rollback();
+			}
+			product = null;
+			throw re;
+		}
+		return product;
+	}
+	
+	public Product addDesktopProduct(String productName, String icon,
+			String desktopAddress, String description) {
+		Session session = getSession();
+		Transaction trans = null;
+		Product product = null;
+		try {
+			trans = session.beginTransaction();
+			SubcategoryDAO subCategoryDAO = new SubcategoryDAO();
+			Subcategory subcategory = subCategoryDAO.findById(1);
+			product = new Product(subcategory, productName, new Date(), "1",
+					true, description, icon);
+			product.setDesktopAddress(desktopAddress);
+			session.save(product);
+			trans.commit();
+			log.debug("add desktop product successful");
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			if (trans != null) {
+				trans.rollback();
+			}
+			product = null;
+			throw re;
+		}
+		return product;
 	}
 }

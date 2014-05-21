@@ -97,7 +97,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="page_hirelist.html">招募帖                          
+                            <a href="page_hirelist.html">招募�                         
                             </a>
                         </li>
                         <li>
@@ -147,14 +147,14 @@
            <div class="thumbnail-style">
                 <img src="assets/img/others/6.jpg" alt="" />
                 <h3><a>程冉</a> <small>资深会员</small></h3>
-                感受编程的快乐，和学习的动力。
+                感受编程的快乐，和学习的动力�
                 
             </div>
         </div>
     	<div class="span9">
         <div class="headline"><h3>密码修改</h3>
         </div>
-        	<p class="hero">您的基本信息会显示在这里，请填写您的新密码，注意，新密码不能与老密码相同。</p>
+        	<p class="hero">您的基本信息会显示在这里，请填写您的新密码，注意，新密码不能与老密码相同�/p>
             <table class="table table-bordered">
             <thead>
             <tr>
@@ -165,24 +165,32 @@
             <tbody>
             <tr class="success">
             	<td><strong>登录邮箱</strong></td>
-                <td><label class="inline">752050943@qq.com &nbsp;&nbsp;<button class="btn-u" type="button">发送验证邮件</button></label></td>
+                <td><label class="inline">752050943@qq.com &nbsp;&nbsp;<button class="btn-u" type="button">发送验证邮�/button></label></td>
             </tr>
-            <tr>
-            	<td><strong>新密码</strong></td>
-                <td><input type="password" value=""/></td>
+             <tr>
+            	<td><strong>新密�/strong></td>
+                <td><input id="newPassword" type="password" value="" required onblur="checkPass();"/>
+                	<span class="text-error" id="nonempty1" style="display:none;">字段不能为空</span>
+                </td>
             </tr>
             <tr>
             	<td><strong>确认密码</strong></td>
-                <td><input type="password" value=""/></td>
+                <td><input id="newPassword_check" type="password" value="" required onblur="checkPass();"/>
+                <span class="text-error" id="nonempty2" style="display:none;">字段不能为空</span>
+                <span class="text-error" id="errorpwd" style="display:none;">两次输入密码不一�/span>
+                
+                </td>
             </tr>
             <tr>
-            	<td><strong>验证码</strong></td>
-                <td><input type="text" value=""/></td>
+            	<td><strong>验证�/strong></td>
+                <td><input type="text" id="vcode" value="" required onblur="checkVcode();"/>
+					<span class="text-error" id="nonempty3" style="display:none;">字段不能为空</span>
+                </td>
             </tr>
             </tbody>
             </table>
 			<div class="text-center">
-            	<button class="btn-u" type="button">确认</button>
+            	<button class="btn-u" id="confirm" type="button" disabled="disabled">确认</button>
             </div><!--end of div submit-->
         </div><!--end of div-9-->
     </div><!--/row-fluid-->
@@ -198,7 +206,7 @@
 			<div class="span4">
                 <!-- About -->
 		        <div class="headline"><h3>关于</h3></div>	
-				<p class="margin-bottom-25">TCTest全名为吐槽测试网的英文，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见。</p>	
+				<p class="margin-bottom-25">TCTest全名为吐槽测试网的英文，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见�/p>	
 
 				
 			</div><!--/span4-->	
@@ -207,8 +215,8 @@
             <!-- Monthly Newsletter -->
 		        <div class="headline"><h3>联系我们</h3></div>	
                 <address>
-					4800号，曹安公路，同济大学软件学院 <br />
-					上海市, 中国 <br />
+					4800号，曹安公路，同济大学软件学�<br />
+					上海� 中国 <br />
 					电话: 131 6293 7287 <br />
 					传真: 800 123 3456 <br />
 					Email: <a href="mailto:info@anybiz.com" class="">chengran327@gmail.com</a>
@@ -257,6 +265,7 @@
 <script type="text/javascript" src="assets/js/Date.js"></script>  
 <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
 <!-- JS Implementing Plugins -->           
+<script type="text/javascript" src="vendor/plugins/validate/jquery.validate.js"></script> 
 <script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
 <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
 <!-- JS Page Level --> 
@@ -275,14 +284,82 @@
         App.initSliders();
 		$(document).ready(function() { 
 			$('.datepicker').pickadate({
-				monthsFull: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+				monthsFull: ['一�, '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一�, '十二�],
 				weekdaysShort: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
 				today: '确认',
 				clear: '清除',
 				formatSubmit: 'yyyy/mm/dd'
 			})
-});          
+		
+}); 
+     
     });
+function checkVcode(){
+	var pwd3=document.getElementById("vcode").value;
+if(pwd3 == "")
+ {
+	 document.getElementById("nonempty3").style.display = "block";
+	 return false;
+}
+else{
+	document.getElementById("nonempty3").style.display = "none";
+	if(checkAllEmpty()){
+		document.getElementById("confirm").disabled="";
+	}
+    return true;
+	}
+}
+function checkAllEmpty(){
+	var pwd1=document.getElementById("newPassword").value;
+  var pwd2=document.getElementById("newPassword_check").value;
+  var pwd3=document.getElementById("vcode").value;
+  if((pwd1&&pwd2&&pwd3)!=""){
+	  return true;
+  }
+  else{
+  	return false;
+  }
+}
+
+function checkPass(){
+  var pwd1=document.getElementById("newPassword").value;
+  var pwd2=document.getElementById("newPassword_check").value;
+  
+ if(pwd1 == "")
+ {
+	document.getElementById("nonempty1").style.display = "block";
+	return false;
+ }
+ else
+ {
+ 	document.getElementById("nonempty1").style.display = "none";
+ }
+if(pwd2 == "")
+ {
+	 document.getElementById("nonempty2").style.display = "block";
+	 return false;
+ }
+ else
+ {
+ 	document.getElementById("nonempty2").style.display = "none";
+ }
+if(pwd1!=pwd2){
+	document.getElementById("nonempty1").style.display = "none";
+	document.getElementById("nonempty2").style.display = "none";
+    document.getElementById("errorpwd").style.display = "block";
+    return false;
+ }
+
+
+ else{
+	document.getElementById("errorpwd").style.display = "none";
+	document.getElementById("nonempty1").style.display = "none";
+	document.getElementById("nonempty2").style.display = "none";
+
+
+    return true;
+	}
+}
 </script>
 <!--[if lt IE 9]>
     <script src="assets/js/respond.js"></script>

@@ -1,22 +1,25 @@
 package cn.com.crowdsourcedtesting.DAO;
 
-import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Questionnaire;
-import cn.com.crowdsourcedtesting.bean.TestTask;
 import cn.com.crowdsourcedtesting.modelhelper.TaskType;
 import cn.com.other.page.Page;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
+
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
+import cn.com.crowdsourcedtesting.bean.Product;
+import cn.com.crowdsourcedtesting.bean.Publisher;
+import cn.com.crowdsourcedtesting.bean.TestTask;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -173,6 +176,12 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
+
+	public TestTask addTestTask(Product product, Publisher publisher,
+			Date beginTime, Date endTime, double perReward, double wholeCredit) {
+		Session session = getSession();
+		Transaction trans = null;
+		TestTask testTask = null;
 	
 	
 	
@@ -180,6 +189,16 @@ public class TestTaskDAO extends BaseHibernateDAO {
 	public List<TestTask> findUncheckedWebByPage(Page page) {
 		// TODO Auto-generated method stub
 		try {
+			trans = session.beginTransaction();
+
+			testTask = new TestTask(product, publisher, true, perReward,
+					wholeCredit);
+			testTask.setTaskStartTime(beginTime);
+			testTask.setTaskEndTime(endTime);
+			session.save(testTask);
+
+			trans.commit();
+			log.debug("add testtask successful");
 			List<TestTask> testTasks = new ArrayList<TestTask>();
 			String queryString = "from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="+TaskType.Web;
 			Query queryObject = getSession().createQuery(queryString);
@@ -195,12 +214,22 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
-	// 得到未审核Web任务的总条数
+	// 得到未审核Web任务的总条�
 		public int getUncheckedWebTotalRows() {
 
 			Number c = (Number) getSession()
 					.createQuery(
 							"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="+TaskType.Web)
+			log.error("attach failed", re);
+			if (trans != null) {
+				trans.rollback();
+			}
+			testTask = null;
+			throw re;
+		}
+		return testTask;
+	}
+
 					.uniqueResult();
 
 			return c.intValue();
@@ -226,7 +255,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 				throw re;
 			}
 		}
-		// 得到未审核Android任务的总条数
+		// 得到未审核Android任务的总条�
 			public int getUncheckedAndroidTotalRows() {
 
 				Number c = (Number) getSession()
@@ -257,7 +286,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 					throw re;
 				}
 			}
-			// 得到未审核Desktop任务的总条数
+			// 得到未审核Desktop任务的总条�
 				public int getUncheckedDesktopTotalRows() {
 
 					Number c = (Number) getSession()

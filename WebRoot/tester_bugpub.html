@@ -260,25 +260,23 @@
 <!-- End: Header --> 
 <!-- Start: Main -->
 <div id="main"> 
-  <!-- Start: Sidebar -->
+    <!-- Start: Sidebar -->
   <aside id="sidebar">
     <div id="sidebar-search">
       <form role="search" />
-      
-      <input type="text" class="search-bar form-control" placeholder="搜索" />
-      <i class="fa fa-search field-icon-right"></i>
-      <button type="submit" class="btn btn-default hidden"></button>
+        <input type="text" class="search-bar form-control" placeholder="Search" />
+        <i class="fa fa-search field-icon-right"></i>
+        <button type="submit" class="btn btn-default hidden"></button>
       </form>
       <div class="sidebar-toggle"> <i class="fa fa-bars"></i> </div>
     </div>
     <div id="sidebar-menu">
       <ul class="nav sidebar-nav">
-        <li class="active"> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
-        <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
-        <li> <a href="publisher_questionnaire_man.html"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
-        <li> <a href="publisher_hireman.html"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
-      </ul>
-      </li>
+        <li> <a href="tester_tasklist.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">测试任务</span></a> </li>
+        <li class="active"> <a href="tester_tasklist_feedback.html"><span class="glyphicons glyphicons-comments"></span><span class="sidebar-title">测试反馈</span></a> </li>
+        <li> <a href="tester_queslist.html"><span class="glyphicons glyphicons-pie_chart"></span><span class="sidebar-title">填写问卷</span></a> </li>		
+          </ul>
+        </li>
       </ul>
     </div>
   </aside>
@@ -287,11 +285,10 @@
   <section id="content">
     <div id="topbar">
       <ol class="breadcrumb">
-        <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
-        <li><a href="publisher_home.html">主页</a></li>
-        <li><a href="publisher_taskman.html">任务管理</a></li>
-        <li><a href="publisher_taskpub.html">发布任务</a></li>
-        <li class="active">桌面任务</li>
+        <li><a href="tester_home.html"><i class="fa fa-home"></i></a></li>
+        <li><a href="tester_home.html">主页</a></li>
+        <li><a href="tester_tasklist_feedback.html">测试反馈</a></li>
+        <li class="active">BUG发布</li>
       </ol>
     </div>
     <div class="container">
@@ -299,50 +296,50 @@
         <div class="col-md-12">
           <div class="panel">
             <div class="panel-heading">
-            	<div class="panel-title"><i class="fa fa-laptop"></i>桌面应用测试</div>
+            	<div class="panel-title"><i class="fa fa-cloud-upload"></i>提交测试报告</div>
             </div>
             <div class="panel-body">
               <h2 class="text-primary"> 请填写详细信息 </h2>
               <hr/>
               <div class="row">
                 <div class="col-md-8 col-md-offset-2">
+
                   <p class="alert alert-success">请<b>正确填写</b>信息</p>
                   <div class="form-group">
-                    <label for="web_url"> 下载链接 </label>
-                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-link"></i> </span>
-                      <input class="form-control" type="text" required placeholder="thunder://QUFodHRwOi8vZ" name="web_url">
+                    <label for="web_url"> 报告标题 </label>
+                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-bookmark"></i> </span>
+                      <input class="form-control" type="text" required placeholder="" value="" name="web_url">
                       </input>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="web_url"> 上传图标 </label>
+                    <label for="web_url"> 报告类型 </label>
+                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-tags"></i> </span>
+                      <input class="form-control" type="text" required placeholder="" value="" name="web_url">
+                      </input>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="web_url"> 提交图片 </label>
                     <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-picture-o"></i> </span>
-                      <input class="form-control" type="text" required placeholder="" name="icon">
+                      <input class="form-control" type="text" required placeholder="" value="" name="web_url">
                       </input>
                     </div>
                   </div>
                   <div class="form-group">
-                      <label for="textArea">任务描述</label>
+                      <label for="textArea">操作</label>
                       <div class="input-group">
-                        <textarea class="form-control" id="textArea" cols="80" rows="3"></textarea>
+                        <textarea class="form-control" id="textArea" cols="80" rows="6"></textarea>
                       </div>
                   </div>
-                   <div class="form-group">
-                    <label for="web_url"> 是否需要测试帐号 </label>
-                    <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          需要 </label>
-                    <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked="" />
-                          不需要 </label>
+                  <div class="form-group">
+                      <label for="textArea">操作结果</label>
+                      <div class="input-group">
+                        <textarea class="form-control" id="textArea" cols="80" rows="6"></textarea>
+                      </div>
                   </div>
-                   <div class="form-group">
-                    <label for="web_url"> 上传测试帐号信息 </label>
-                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-cloud-upload"></i> </span>
-                      <input class="form-control" type="text" required placeholder="TesterAccountData.xml" name="icon" disabled="">
-                      </input>
-                    </div>
-                  </div>
+                  
+                  
                   <hr></hr>
                   <div class="pull-left">
                   	<button class="btn btn-gradient btn-lg btn-green" type="button">返回</button>

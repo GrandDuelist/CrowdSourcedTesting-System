@@ -52,7 +52,7 @@ public class QuestionnaireRouter extends DispatchAction {
 	QuestionnaireHandler myHandler = new QuestionnaireHandler();
 
 	/**
-	 * 跳转到发布页面
+	 * 跳转到发布页�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -118,7 +118,7 @@ public class QuestionnaireRouter extends DispatchAction {
 	}
 
 	/**
-	 * 审核的列表
+	 * 审核的列�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -134,7 +134,7 @@ public class QuestionnaireRouter extends DispatchAction {
 		PageIdForm pageIDForm = (PageIdForm) form;
 
 		// 交给事务处理
-		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接口
+		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接�
 
 		return mapping.findForward("list");
 	}
@@ -163,7 +163,7 @@ public class QuestionnaireRouter extends DispatchAction {
 		}
 
 		// 交给事务处理
-		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodTwo); // 调用第一个接口
+		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodTwo); // 调用第一个接�
 
 		return mapping.findForward("list");
 	}
@@ -190,7 +190,7 @@ public class QuestionnaireRouter extends DispatchAction {
 	}
 
 	/**
-	 * 发布者要查看的问卷详情
+	 * 发布者要查看的问卷详�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -232,7 +232,7 @@ public class QuestionnaireRouter extends DispatchAction {
 	}
 
 	/**
-	 * 审核问卷的处理
+	 * 审核问卷的处�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -258,7 +258,7 @@ public class QuestionnaireRouter extends DispatchAction {
 
 		} else if (form == null) { // 如果传过来的表单为空
 
-			// 如果表单为空，则直接跳转到列表
+			// 如果表单为空，则直接跳转到列�
 			Page currentPage = (Page) session.getAttribute("currentPage");
 			PageIdForm p = new PageIdForm();
 			p.setPage(currentPage.getCurrentPage() + "");
@@ -284,7 +284,7 @@ public class QuestionnaireRouter extends DispatchAction {
 				q.setIsPassed(false);
 
 			}
-			qd.save(q); // 修改数据库
+			qd.save(q); // 修改数据�
 
 			Page currentPage = (Page) session.getAttribute("currentPage");
 			PageIdForm p = new PageIdForm();
@@ -305,14 +305,14 @@ public class QuestionnaireRouter extends DispatchAction {
 		PageIdForm pageIDForm = (PageIdForm) form;
 
 		// 交给事务处理
-		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodThree); // 调用第一个接口
+		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodThree); // 调用第一个接�
 
 		return mapping.findForward("list");
 
 	}
 
 	/**
-	 * 前台的问卷内容
+	 * 前台的问卷内�
 	 */
 
 	public ActionForward pageDetail(ActionMapping mapping, ActionForm form,
@@ -337,7 +337,7 @@ public class QuestionnaireRouter extends DispatchAction {
 	}
 
 	/**
-	 * 提交问卷的处理
+	 * 提交问卷的处�
 	 * 
 	 * @param mapping
 	 * @param form

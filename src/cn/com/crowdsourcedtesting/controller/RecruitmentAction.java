@@ -85,6 +85,18 @@ public class RecruitmentAction extends DispatchAction {
 		return mapping.findForward("hirelist");
 	}
 	
+	public ActionForward selectRecentRecruitment(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {	
+		
+		page.setCurrentPage(1);
+		page.setPerRows(3);
+		page.setTotalRows(3);
+		handler.selectRecentRecruitments(page, request);
+		
+		request.setAttribute("flag", "success");
+		
+		return mapping.findForward("index");
+	}
 	
 	/** 
 	 * Method selectRecruitment
@@ -152,7 +164,7 @@ public class RecruitmentAction extends DispatchAction {
 		String company = recruitmentForm.getCompany();
 		int publisherId = 8;		
 		
-		handler.addNewRecruitment(title, online, startdate, enddate, place, brief, content, company, publisherId, request);
+//		handler.addNewRecruitment(title, online, startdate, enddate, place, brief, content, company, publisherId, request);
 		
 		return this.gotoPub(mapping, form, request, response);
 	}

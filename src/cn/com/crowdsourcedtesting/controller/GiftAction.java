@@ -54,6 +54,26 @@ public class GiftAction extends DispatchAction {
 		return mapping.findForward("giftitem");
 	}
 	
+	public ActionForward selectRecentGift(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		GiftForm giftForm = (GiftForm) form;// TODO Auto-generated method stub
+		int pagenow = 1;
+		this.gifttype = "all";
+		System.out.println("Page Now: "+1);
+		List<Gift> gifts = new ArrayList();
+		GiftDAO dao = new GiftDAO();
+		//一页16个礼品
+		Page page = new Page();
+		page.setCurrentPage(pagenow);
+		page.setPerRows(16);
+		page.setTotalRows(dao.getTotalRows());
+		
+		gifts = dao.findByPage(page);
+		request.setAttribute("gifts", gifts);
+		request.setAttribute("page", page);
+		request.setAttribute("isLegal", "legal");
+		return mapping.findForward("allgifts");
+	}
 	/** 
 	 * Method selectPage
 	 * @param mapping
