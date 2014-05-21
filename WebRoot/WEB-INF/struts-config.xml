@@ -373,6 +373,8 @@
       scope="request"
       type="cn.com.crowdsourcedtesting.controller.PublishWebTestingRouter">
       <set-property property="cancellable" value="true" />
+      <forward name="taskPub" path="/publisher_taskpub_reward.jsp"></forward>
+      <forward name="productSuccess" path="/publisher_taskpub_reward.jsp"></forward>
       <forward name="productSuccess" path="/publisher_taskpub_reward.jsp"></forward>
       <forward name="webProductError" path="/publisher_taskpub_web.jsp"></forward>
       <forward name="androidProductError" path="/publisher_taskpub_android.jsp"></forward>
