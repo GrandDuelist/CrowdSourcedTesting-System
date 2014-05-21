@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -18,15 +24,10 @@
 <link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
 <!-- Plugin CSS -->
-<link rel="stylesheet" type="text/css" href="vendor/plugins/mfpopup/dist/magnific-popup.css" media="screen" />
-<link rel="stylesheet" href="vendor/plugins/dropzone/downloads/css/dropzone.css" />
-<link rel="stylesheet" href="vendor/plugins/jqueryupload/plugins/blueimp/css/blueimp-gallery.min.css" />
-<link rel="stylesheet" href="vendor/plugins/jqueryupload/css/jquery.fileupload.css" />
-<link rel="stylesheet" href="vendor/plugins/jqueryupload/css/jquery.fileupload-ui.css" />
-
-<!-- No Script CSS -->
-<noscript><link rel="stylesheet" href="vendor/plugins/jqueryupload/css/jquery.fileupload-noscript.css" /></noscript>
-<noscript><link rel="stylesheet" href="vendor/plugins/jqueryupload/css/jquery.fileupload-ui-noscript.css" /></noscript>
+<link rel="stylesheet" type="text/css" href="vendor/plugins/calendar/fullcalendar.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/datatables/css/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/css/bootstrap-editable.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/chosen/chosen.min.css" />
 
 <!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="css/theme.css" />
@@ -48,54 +49,65 @@
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/detail_control/register_control.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
 
 <body>
 <!-- Start: Theme Preview Pane -->
+<% Publisher publisher   =  (Publisher)session.getAttribute("publisher"); %>
+
+
+<form id="idForm"  method="post">
+ <input type="hidden" name="subType"/>
+ <input type="hidden"  value="<%=publisher.getPublisherId()%>" name="id">
+</form>
 <div id="skin-toolbox">
   <div class="skin-toolbox-toggle"> <i class="fa fa-flask"></i> </div>
   <div class="skin-toolbox-panel">
     <h4 class="padding-left-sm">主题选择</h4>
     <form id="skin-toolbox-form" />
-      <div class="form-group">
-        <label class="checkbox-inline">
-          <input id="header-option" class="checkbox" type="checkbox" checked="" />
-          定制 <b>标题</b> </label>
-      </div>
-      <div class="form-group">
-        <label class="checkbox-inline">
-          <input id="sidebar-option" class="checkbox" type="checkbox" />
-          定制 <b>侧边栏</b> </label>
-      </div>
-      <div class="form-group">
-        <label class="checkbox-inline option-disabled">
-          <input id="breadcrumb-option" class="checkbox" type="checkbox" disabled="" />
-          定制 <b>Breadcrumbs</b> </label>
-      </div>
-      <hr class="short" style="margin: 7px 10px;" />
-      <div class="form-group">
-        <label class="checkbox-inline">
-          <input id="breadcrumb-hidden" class="checkbox" type="checkbox" />
-          隐藏 <b>Breadcrumbs</b> </label>
-      </div>
-      <div class="form-group margin-bottom-lg">
-        <label class="checkbox-inline">
-          <input id="searchbar-hidden" class="checkbox" type="checkbox" />
-          隐藏 <b>搜索框</b> </label>
-      </div>
-      <h4 class="padding-left-sm">布局选择</h4>
-      <div class="form-group">
-        <label class="radio-inline">
-          <input class="radio" type="radio" name="optionsRadios" id="fullwidth-option" checked="" />
-          全屏 </label>
-      </div>
-      <div class="form-group">
-        <label class="radio-inline">
-          <input class="radio" type="radio" name="optionsRadios" id="boxed-option" />
-          局部</label>
-      </div>
-      <hr class="short" />
-      <div class="form-group"> <a href="customizer.html" id="customizer-link" class="btn btn-warning btn-gradient btn-block padding-bottom padding-top">定制</a> </div>
+    
+    <div class="form-group">
+      <label class="checkbox-inline">
+        <input id="header-option" class="checkbox" type="checkbox" checked="" />
+        定制 <b>标题</b> </label>
+    </div>
+    <div class="form-group">
+      <label class="checkbox-inline">
+        <input id="sidebar-option" class="checkbox" type="checkbox" />
+        定制 <b>侧边栏</b> </label>
+    </div>
+    <div class="form-group">
+      <label class="checkbox-inline option-disabled">
+        <input id="breadcrumb-option" class="checkbox" type="checkbox" disabled="" />
+        定制 <b>Breadcrumbs</b> </label>
+    </div>
+    <hr class="short" style="margin: 7px 10px;" />
+    <div class="form-group">
+      <label class="checkbox-inline">
+        <input id="breadcrumb-hidden" class="checkbox" type="checkbox" />
+        隐藏 <b>Breadcrumbs</b> </label>
+    </div>
+    <div class="form-group margin-bottom-lg">
+      <label class="checkbox-inline">
+        <input id="searchbar-hidden" class="checkbox" type="checkbox" />
+        隐藏 <b>搜索框</b> </label>
+    </div>
+    <h4 class="padding-left-sm">布局选择</h4>
+    <div class="form-group">
+      <label class="radio-inline">
+        <input class="radio" type="radio" name="optionsRadios" id="fullwidth-option" checked="" />
+        全屏 </label>
+    </div>
+    <div class="form-group">
+      <label class="radio-inline">
+        <input class="radio" type="radio" name="optionsRadios" id="boxed-option" />
+        局部</label>
+    </div>
+    <hr class="short" />
+    <div class="form-group"> <a href="customizer.html" id="customizer-link" class="btn btn-warning btn-gradient btn-block padding-bottom padding-top">定制</a> </div>
     </form>
   </div>
 </div>
@@ -265,18 +277,26 @@
   <aside id="sidebar">
     <div id="sidebar-search">
       <form role="search" />
-        <input type="text" class="search-bar form-control" placeholder="搜索" />
-        <i class="fa fa-search field-icon-right"></i>
-        <button type="submit" class="btn btn-default hidden"></button>
+      
+      <input type="text" class="search-bar form-control" placeholder="搜索" />
+      <i class="fa fa-search field-icon-right"></i>
+      <button type="submit" class="btn btn-default hidden"></button>
       </form>
       <div class="sidebar-toggle"> <i class="fa fa-bars"></i> </div>
     </div>
     <div id="sidebar-menu">
       <ul class="nav sidebar-nav">
-        <li class="active"> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
-        <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
-        <li> <a href="publisher_questionnaire_man.html"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
-        <li> <a href="publisher_hireman.html"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
+        <li class="active"> <a class="accordion-toggle collapsed" href="#examine"><span class="glyphicons glyphicons-check"></span><span class="sidebar-title">审核</span><span class="caret"></span></a>
+          <ul id="examine" class="nav sub-nav">
+            <li><a href="admin_tasklist.html"><span class="glyphicons glyphicons glyphicons-flag"></span> 审核任务</a></li>
+            <li><a href="admin_queslist.html"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
+            <li class="active"><a href="admin_registerlist.html"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>
+          </ul>
+        </li>
+        <li> <a class="accordion-toggle collapsed" href="#user_admin"><span class="glyphicons glyphicons-adress_book"></span><span class="sidebar-title">用户管理</span><span class="caret"></span></a>
+          <ul id="user_admin" class="nav sub-nav">
+            <li><a href="admin_testerlist.html"><span class="glyphicons glyphicons-cleaning"></span> 维护测试者信息</a></li>
+            <li><a href="admin_publisherlist.html"><span class="glyphicons glyphicons-lightbulb"></span> 维护发布者信息</a></li>
           </ul>
         </li>
       </ul>
@@ -285,133 +305,124 @@
   <!-- End: Sidebar --> 
   <!-- Start: Content -->
   <section id="content">
-    <div id="topbar">
-      <ol class="breadcrumb">
-        <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
-        <li><a href="publisher_home.html">主页</a></li>
-        <li><a href="publisher_taskman.html">任务管理</a></li>
-        <li class="active">发布任务</li>
-      </ol>
-    </div>
-<div class="container">
-
+  <div id="topbar">
+    <ol class="breadcrumb">
+      <li><a href="admin_home.html"><i class="fa fa-home"></i></a></li>
+      <li><a href="admin_home.html">主页</a></li>
+      <li><a href="admin_registerlist.html">发布者列表</a></li>
+      <li class="active">发布者信息</li>
+    </ol>
+  </div>
+  <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <div class="panel">
-                <div class="panel-heading"></div>
-                <div class="panel-body">
-                    <form id="dropZone" class="dropzone dz-clickable" action="">
-                        <div class="dz-default dz-message">
-                            <span>
-                                <i class="fa fa-globe"></i>
-                                <span class="main-text">
-                                    <b>
-                                        网站任务
-                                   </b>
-                                     
-                                </span>
-                                <br></br>
-                                <span class="sub-text">
-                                    <a href="publisher_taskpub_web.html">请单击</a>
-                                </span>
-                            </span>
-                        </div>
-                    </form>
-                </div>
+      <div class="col-md-12">
+        <div class="panel">
+          <div class="panel-heading">
+            <div class="panel-title"> <i class="fa fa-table"></i> 发布者信息表 </div>
+          </div>
+          <div class="panel-body">
+            <h3 class="text-alert text-center">公司发布者信息</h3>
+            <div class="col-md-8 col-xs-offset-2">
+              <table class="table table-hover table-bordered col-md-6" style="clear: both">
+                <tbody>
+                  <tr class="success">
+                    <td class="text-center" width="20%"><i class="fa fa-briefcase fa-lg text-success"></i><strong> 公司名称</strong></td>
+                    <td><%=publisher.getPublisherCompany()==null?"无":publisher.getPublisherCompany() %></td>
+                  </tr>
+                  <tr>
+                    <td class="text-center"><i class="fa fa-envelope fa-lg text-success"></i><strong> 注册邮箱</strong></td>
+                    <td><%=publisher.getPublisherLogEmail() %></td>
+                  </tr>
+                  <tr>
+                    <td class="text-center"><i class="fa fa-credit-card fa-lg text-success"></i><strong> 营业执照</strong></td>
+                    <td><%=publisher.getBusinessLicense()==null?"无":publisher.getBusinessLicense() %></td>
+                  </tr>
+                  <tr class="success">
+                    <td class="text-center"><i class="fa fa-user fa-lg text-success"></i><strong> 公司法人 </strong></td>
+                    <td><%=publisher.getPublisherName() %></td>
+                  </tr>
+                  <tr>
+                    <td class="text-center"><i class="fa fa-link fa-lg text-success"></i><strong> 审核人</strong></td>
+                    <td><%=publisher.getAdministrator()==null?"未审核":publisher.getAdministrator().getAdministratorName()%></td>
+                  </tr>
+                  <tr class="success">
+                    <td class="text-center"><i class="fa fa-bookmark fa-lg text-success"></i><strong> 当前权限</strong></td>
+                    <td><%=publisher.getPublisherAuthority()?"活动":"冻结" %></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h3 class="panel-body-title text-alert">审核操作：</h3>
+              <div class="text-center btn-group-lg">
+                <button class="btn btn-primary btn-gradient" data-toggle="modal" data-target="#passAlert"> 通过 </button>
+                &nbsp;&nbsp;&nbsp;
+                <button class="btn btn-alert btn-gradient" data-toggle="modal" data-target="#failAlert"> 否决 </button>
+              </div>
             </div>
+          </div>
         </div>
-        <div class="col-md-4">
-            <div class="panel">
-                <div class="panel-heading"></div>
-                <div class="panel-body">
-                    <form id="dropZone" class="dropzone dz-clickable" action="index.html">
-                        <div class="dz-default dz-message">
-                            <span>
-                                <i class="fa fa-android"></i>
-                                <span class="main-text">
-                                    <b>
-                                        安卓任务
-                                    </b>
-                                     
-                                </span>
-                                <br></br>
-                                <span class="sub-text">
-                                    <a href="publisher_taskpub_android.html">请单击</a>
-                                </span>
-                            </span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-            <div class="col-md-4">
-            <div class="panel">
-                <div class="panel-heading"></div>
-                <div class="panel-body">
-                    <form id="dropZone" class="dropzone dz-clickable" action="index.html">
-                        <div class="dz-default dz-message">
-                            <span>
-                                <i class="fa fa-laptop"></i>
-                                <span class="main-text">
-                                    <b>
-                                        桌面任务
-                                    </b>
-                                     
-                                </span>
-                                <br></br>
-                                <span class="sub-text">
-                                    <a href="publisher_taskpub_desktop.html">请单击</a>
-                                </span>
-                            </span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-
+    <div class="clearfix"></div>
+  </div>
 </div>
-  </section>
-  <!-- End: Content --> 
+</section>
+<!-- End: Content -->
 </div>
 <!-- End: Main --> 
-
+<!--Popups-->
+<div class="modal fade" id="passAlert" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title text-center">确认通过审核?</h4>
+      </div>
+      <div class="modal-body">
+        <p class="margin-bottom-lg">通过该审核后本注册者将能发布相应信息，是否确认？ </p>
+        <div class="form-group text-center">
+          <button type="button" id="checkConfirm"  class="btn btn-success btn-gradient margin-right-sm" data-dismiss="modal"><i class="fa fa-check"></i> 确认 </button>
+          <button type="button" class="btn btn-danger btn-gradient" data-dismiss="modal"><i class="fa fa-warning"></i> 取消 </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="failAlert" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title text-center">确认拒绝?</h4>
+      </div>
+      <div class="modal-body">
+        <p class="margin-bottom-lg"> 拒绝注册者后将会为注册者发布相应信息，是否确认？ </p>
+       
+        <div class="form-group text-center">
+          <button type="button" id="checkFail" class="btn btn-success btn-gradient margin-right-sm" data-dismiss="modal"><i class="fa fa-check"></i> 确认</button>
+          <button type="button"  class="btn btn-danger btn-gradient" data-dismiss="modal"><i class="fa fa-warning"></i> 取消</button>
+        </div>
+   
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Core Javascript - via CDN --> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 
-<!-- Plugins - Via CDN -->
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
-<!--<script type="text/javascript" src="vendor/plugins/datatables/jquery.dataTables.min.js"></script> Local Option -->
-
-<!-- Plugins -->
-<script type="text/javascript" src="vendor/plugins/datatables/js/datatables.js"></script><!-- Datatable Bootstrap Addon -->
-<script type="text/javascript" src="vendor/editors/xeditable/js/bootstrap-editable.js"></script> 
-<script type="text/javascript" src="vendor/plugins/chosen/chosen.jquery.min.js"></script> 
-
 <!-- Theme Javascript --> 
 <script type="text/javascript" src="js/uniform.min.js"></script> 
-<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/main.js"></script> 
 <script type="text/javascript" src="js/custom.js"></script> 
 <script type="text/javascript">
-jQuery(document).ready(function() {
+ jQuery(document).ready(function() {
 
-  Core.init();
-
-  $('#datatable').dataTable( {
-	"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ -1 ] }],
-	"oLanguage": { "oPaginate": {"sPrevious": "", "sNext": ""} },
-	"iDisplayLength": 6,
-	"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-  });	
-  
-  $("select[name='datatable_length']").chosen();	
-  $.fn.editable.defaults.mode = 'popup';
-  $('.xedit').editable();
-
-});
+	// Init Theme Core 	  
+	Core.init();
+		
+ });
+	
 </script>
 </body>
 </html>

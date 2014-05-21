@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,cn.com.other.page.*,cn.com.crowdsourcedtesting.bean.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,11 +8,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
-<m/>
+<meta charset="utf-8" />
 <title>TCTEST</title>
 <meta name="keywords" content="TCTEST" />
 <meta name="description" content="TCTEST" />
-<meta name="author" content="Holladay" />
+<meta name="author" content="Rain Cheng" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- Font CSS  -->
@@ -24,6 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
 <!-- Plugin CSS -->
+<link rel="stylesheet" type="text/css" href="vendor/plugins/calendar/fullcalendar.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="vendor/plugins/datatables/css/datatables.min.css" />
 <link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/css/bootstrap-editable.css" />
 <link rel="stylesheet" type="text/css" href="vendor/plugins/chosen/chosen.min.css" />
@@ -43,31 +44,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- Favicon -->
 <link rel="shortcut icon" href="img/favicon.ico" />
 <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/list_control/list_control.js"></script>
+<script type="text/javascript" src="js/list_control/register_list_control.js"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
 
 <body>
+
 <%
-List<Questionnaire> questionnaires =(List <Questionnaire>)session.getAttribute("questionnaires");
+List<Publisher> registers =(List <Publisher>)session.getAttribute("registers");
 Page currentPage = (Page)session.getAttribute("currentPage");
 int firstPage = (int)(currentPage.getCurrentPage()-1)/currentPage.DEFAULT_MAX_PAGE;
 firstPage = firstPage*currentPage.DEFAULT_MAX_PAGE+1;
 int lastPage = (currentPage.getTotalPage()+1)<(firstPage+currentPage.DEFAULT_MAX_PAGE)? (currentPage.getTotalPage()+1):(firstPage+currentPage.DEFAULT_MAX_PAGE);
 
  %>
- 
+<!-- Start: Theme Preview Pane -->
+
  <form id="selectForm"  method="post">
  <input type="hidden" name="id"/>
  <input type="hidden" name="subType">
  <input type="hidden" name="page">
 </form>
- 
-<!-- Start: Theme Preview Pane -->
 <div id="skin-toolbox">
   <div class="skin-toolbox-toggle"> <i class="fa fa-flask"></i> </div>
   <div class="skin-toolbox-panel">
@@ -278,7 +280,7 @@ int lastPage = (currentPage.getTotalPage()+1)<(firstPage+currentPage.DEFAULT_MAX
 <!-- End: Header --> 
 <!-- Start: Main -->
 <div id="main"> 
-  <!-- Start: Sidebar -->
+   <!-- Start: Sidebar -->
   <aside id="sidebar">
     <div id="sidebar-search">
       <form role="search" />
@@ -294,8 +296,8 @@ int lastPage = (currentPage.getTotalPage()+1)<(firstPage+currentPage.DEFAULT_MAX
         <li class="active"> <a class="accordion-toggle collapsed" href="#examine"><span class="glyphicons glyphicons-check"></span><span class="sidebar-title">审核</span><span class="caret"></span></a>
           <ul id="examine" class="nav sub-nav">
             <li><a href="admin_tasklist.html"><span class="glyphicons glyphicons glyphicons-flag"></span> 审核任务</a></li>
-            <li class="active"><a href="admin_queslist.html"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
-            <li><a href="admin_registerlist.html"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>
+            <li><a href="admin_queslist.html"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
+            <li class="active"><a href="admin_registerlist.html"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>
           </ul>
         </li>
         <li> <a class="accordion-toggle collapsed" href="#user_admin"><span class="glyphicons glyphicons-adress_book"></span><span class="sidebar-title">用户管理</span><span class="caret"></span></a>
@@ -307,55 +309,80 @@ int lastPage = (currentPage.getTotalPage()+1)<(firstPage+currentPage.DEFAULT_MAX
       </ul>
     </div>
   </aside>
-  <!-- End: Sidebar --> 
+  <!-- End: Sidebar -->
   <!-- Start: Content -->
   <section id="content">
-    <div id="topbar">
-      <ol class="breadcrumb">
-        <li><a href="admin_home.html"><i class="fa fa-home"></i></a></li>
-        <li><a href="admin_home.html">主页</a></li>
-        <li class="active">问卷列表</li>
-      </ol>
+  <div id="topbar">
+    <ol class="breadcrumb">
+      <li><a href="admin_home.html"><i class="fa fa-home"></i></a></li>
+      <li><a href="admin_home.html">主页</a></li>
+      <li class="active">新注册发布者列表</li>
+    </ol>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"> </div>
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="panel panel-visible">
-            <div class="panel-heading">
-              <div class="panel-title"> <i class="fa fa-table"></i> 问卷列表</div>
-            </div>
-            <div class="panel-body">
-              <table  style="font-size:13px" class="table table-striped" id="datatable">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel">
+              <div class="panel-heading">
+                <div class="panel-title"> <i class="fa fa-tasks"></i> 新注册发布者列表 </div>
+                <ul class="nav panel-tabs">
+                   <%String publisherType = (String)session.getAttribute("publisherType"); 
+                if(publisherType==null||"Company".equals(publisherType)){%>
+                
+                  <li class="active"><a ><i class="fa fa-briefcase"></i> 公司发布者</a></li>
+                  <li><a href="checkRegisterList.do?method=checkPersonList" ><i class="fa fa-user"></i> 个人发布者</a></li>
+                  <%}else{ %>
+                   <li ><a href="checkRegisterList.do?method=checkCompanyList" ><i class="fa fa-user"></i> 公司发布者</a></li>
+                  <li class="active"><a  data-toggle="tab"><i class="fa fa-briefcase"></i> 个人发布者</a></li>
+                  <%} %>
+                </ul>
+              </div>
+              <div class="panel-body">
+                <div class="tab-content padding-none border-none">
+                
+                <!-- 企业发布者 -->
+                <% 
+                if(publisherType==null||"Company".equals(publisherType)){
+                %>
+                  <div id="tab1" class="tab-pane active">
+                    <table class="table table-striped" id="datatable">
                       <thead>
                         <tr>
-                          
-                          <th>项目名称</th>
-                          <th class="hidden-xs">热度</th>
-                          <th>参与人数</th>
-                          <th>简介</th>
+                          <th></th>
+                          <th>公司名称</th>
+                          <th class="hidden-xs">联络邮箱</th>
+                          <th>当前状态</th>
+                          <th>营业执照</th>
                           <th style="width: 70px;" class="text-right">操作</th>
                         </tr>
                       </thead>
                       <tbody>
-                      <%for(int i = 0;i<questionnaires.size();i++){
-                       Questionnaire questionnaire  = questionnaires.get(i);
-                       %>
+                      <%for(int i=0; i<registers.size();i++) {
+                      Publisher publisher  =  registers.get(i);
+                      
+                      %>
                         <tr>
-                          
-                          <td class="info"><b> <%=questionnaire.getTitle() %></b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i> <%=questionnaire.getPublisher().getPublisherName() %></span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-half-empty text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> <%=questionnaire.getQuestionnaireCount()%></td>
-                          <td><span class="label label-inverse margin-right-sm">测试问卷</span></td>
-                          <td id="detail" class="text-right text-center"><a  id="<%=questionnaire.getQuestionnaireId() %>" class="btn btn-primary btn-gradient" type="button"><span  class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
+                          <td class="text-center"><img src="img/avatars/2.png" width="50" height="50" alt="avatar" /></td>
+                          <td class="info"><b><%=publisher.getPublisherName() %></b><br />
+                            <span class="text-muted"><i class="fa fa-home"></i> <%=publisher.getPublisherCompany() %></span></td>
+                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> <%=publisher.getPublisherLogEmail() %></td>
+                          <td><i class="fa fa-link fa-lg text-blue padding-right-sm"></i><%=publisher.getPublisherAuthority()?"活跃":"封锁"%></td>
+                          <td><i class="fa fa-credit-card fa-lg text-blue padding-right-sm"></i><%=publisher.getBusinessLicense()==null?"无":publisher.getBusinessLicense()==null %></td>
+                          <td class="text-right text-center" id="detail"><a class="btn btn-primary btn-gradient" id=<%=publisher.getPublisherId() %> type="button" ><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
                         </tr>
-                       <%} %>
+                        <%} %>
+                
                       </tbody>
                     </table>
-                  <div class="row">
-           <div class="col-sm-12 datatables-footer">
-                  <div class="pull-right"><div class="dataTables_paginate paging_bs_normal"><ul class="pagination">
-                 <%if( currentPage.getCurrentPage()==1){ %>
+                    <div class="text-right">
+                    	
+                      <ul class="pagination pagination-alt margin-bottom">
+                        <%if( currentPage.getCurrentPage()==1){ %>
                   <li class="prev disabled"><a><i class="fa fa-caret-left"></i> &nbsp;</a></li>
                   <%} else{%>
                   
@@ -379,15 +406,91 @@ int lastPage = (currentPage.getTotalPage()+1)<(firstPage+currentPage.DEFAULT_MAX
                    <li class="next" id="nextPage"><a id="<%=currentPage.getCurrentPage()%>">&nbsp;<i class="fa fa-caret-right"></i> </a></li>
                 <%} %>
                 
-                 </ul></div></div>
-                  <div class="clearfix"></div></div></div>
+                      </ul>
+                    
+                    </div>
+                    
+                  </div>
+                  <!-- 企业发布者   end -->
+                  <%}else{%>
+                  <!-- 个人发布者 -->
+                  <div id="tab1" class="tab-pane active">
+                    <table class="table table-striped" id="datatable">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>公司名称</th>
+                          <th class="hidden-xs">联络邮箱</th>
+                          <th>当前状态</th>
+                          <th>营业执照</th>
+                          <th style="width: 70px;" class="text-right">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <%for(int i=0; i<registers.size();i++) {
+                      Publisher publisher  =  registers.get(i);
+                      
+                      %>
+                        <tr>
+                          <td class="text-center"><img src="img/avatars/2.png" width="50" height="50" alt="avatar" /></td>
+                          <td class="info"><b><%=publisher.getPublisherName() %></b><br />
+                            <span class="text-muted"><i class="fa fa-home"></i> <%=publisher.getPublisherCompany() %></span></td>
+                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> <%=publisher.getPublisherLogEmail() %></td>
+                          <td><i class="fa fa-link fa-lg text-blue padding-right-sm"></i><%=publisher.getPublisherAuthority()?"活跃":"冻结"%></td>
+                          <td><i class="fa fa-credit-card fa-lg text-blue padding-right-sm"></i><%=publisher.getBusinessLicense()==null?"无": publisher.getBusinessLicense()==null%></td>
+                          <td class="text-right text-center" id="detail"><a class="btn btn-primary btn-gradient" id="<%=publisher.getPublisherId() %>" type="button" ><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
+                        </tr>
+                        <%} %>
+                
+                      </tbody>
+                    </table>
+                    <div class="text-right">
+                    	
+                      <ul class="pagination pagination-alt margin-bottom">
+                        <%if( currentPage.getCurrentPage()==1){ %>
+                  <li class="prev disabled"><a><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                  <%} else{%>
+                  
+                    <li class="prev" id="previouPage2"><a id = "<%=currentPage.getCurrentPage()%>"><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                <%} %>
+                
+                
+                <%for (int i=firstPage; i<lastPage;i++) 
+                {  if(i == currentPage.getCurrentPage())
+                {%>
+                <li class="active" id="pageNum2"><a id="<%=i%>"><%=i %></a></li>
+                  
+                 <%}else { %>
+                  <li id="pageNum2"><a id="<%=i%>"><%=i %></a></li>
+                 <%}} %>
+                
+                 <%if( currentPage.getCurrentPage()==currentPage.getTotalPage()){ %>
+                 <li class="next disabled"><a >&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                  <%} else{%>
+                  
+                   <li class="next" id="nextPage2"><a id="<%=currentPage.getCurrentPage()%>">&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                <%} %>
+                
+                      </ul>
+                    
+                    </div>
+                    
+                  </div>
+                  <!-- 个人发布者     end -->
+                  <%} %>
+                 <!--End:tabs-->
+                </div>
+              </div>
             </div>
           </div>
+          <!--End: col-md-12--> 
         </div>
       </div>
     </div>
-  </section>
-  <!-- End: Content --> 
+  </div>
+</div>
+</section>
+<!-- End: Content -->
 </div>
 <!-- End: Main --> 
 
@@ -396,31 +499,197 @@ int lastPage = (currentPage.getTotalPage()+1)<(firstPage+currentPage.DEFAULT_MAX
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 
-<!-- Plugins - Via CDN -->
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
-<!--<script type="text/javascript" src="vendor/plugins/datatables/jquery.dataTables.min.js"></script> Local Option -->
+<!-- Plugins - Via CDN --> 
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="vendor/plugins/datatables/js/datatables.js"></script> 
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/flot/0.8.1/jquery.flot.min.js"></script> 
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script> 
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.min.js"></script> 
 
-<!-- Plugins -->
-<script type="text/javascript" src="vendor/plugins/datatables/js/datatables.js"></script><!-- Datatable Bootstrap Addon -->
-<script type="text/javascript" src="vendor/editors/xeditable/js/bootstrap-editable.js"></script> 
-<script type="text/javascript" src="vendor/plugins/chosen/chosen.jquery.min.js"></script> 
+<!-- Plugins - Via Local Storage
+<script type="text/javascript" src="vendor/plugins/jqueryflot/jquery.flot.min"></script>
+<script type="text/javascript" src="vendor/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script type="text/javascript" src="vendor/plugins/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="vendor/plugins/calendar/fullcalendar.min.js"></script>
+--> 
+
+<!-- Plugins --> 
+<script type="text/javascript" src="vendor/plugins/calendar/gcal.js"></script><!-- Calendar Addon --> 
+<script type="text/javascript" src="vendor/plugins/jqueryflot/jquery.flot.resize.min.js"></script><!-- Flot Charts Addon --> 
+<script type="text/javascript" src="vendor/plugins/datatables/js/datatables.js"></script><!-- Datatable Bootstrap Addon --> 
+<script type="text/javascript" src="vendor/plugins/chosen/chosen.jquery.min.js"></script>
 
 <!-- Theme Javascript --> 
 <script type="text/javascript" src="js/uniform.min.js"></script> 
-<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/main.js"></script> 
 <script type="text/javascript" src="js/custom.js"></script> 
 <script type="text/javascript">
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
 
-  Core.init();
+	// Init Theme Core   
+	Core.init();
+	
 
+	
+	// Init Calendar Plugin
+	var runFullCalendar = function () {
 
-  
-  $("select[name='datatable_length']").chosen();	
-  $.fn.editable.defaults.mode = 'popup';
-  $('.xedit').editable();
+		var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			editable: true,
+			events: [{
+				title: 'Business Event',
+				start: new Date(y, m, 3),
+				end: new Date(y, m, 6),
+				color: '#428bca'
+			}, {
+				title: 'Thanksgiving Party',
+				start: new Date(y, m, 14),
+				end: new Date(y, m, 16),
+				color: '#6DB54B'
+			}, {
+				title: 'Birthday Weekend',
+				start: new Date(y, m, 25),
+				end: new Date(y, m, 29)
+			}]
+		});
+
+	}
+	
+
+	// Init Flot Charts Plugin
+	var runFlotCharts = function () {
+
+		//define chart clolors ( add more colors if you want or flot will do it automatically )
+		var chartColours = ['#62aeef', '#d8605f', '#72c380', '#6f7a8a', '#f7cb38', '#5a8022', '#2c7282'];
+
+		//generate random number for charts
+		randNum = function () {
+			return (Math.floor(Math.random() * (1 + 40 - 20))) + 20;
+		}
+
+		//check if element exist and draw auto updating chart
+		if ($(".chart-updating").length) {
+			$(function () {
+				// we use an inline data source in the example, usually data would
+				// be fetched from a server
+				var data = [],
+					totalPoints = 50;
+
+				function getRandomData() {
+					if (data.length > 0)
+						data = data.slice(1);
+
+					// do a random walk
+					while (data.length < totalPoints) {
+						var prev = data.length > 0 ? data[data.length - 1] : 50;
+						var y = prev + Math.random() * 10 - 5;
+						if (y < 0)
+							y = 0;
+						if (y > 100)
+							y = 100;
+						data.push(y);
+					}
+
+					// zip the generated y values with the x values
+					var res = [];
+					for (var i = 0; i < data.length; ++i)
+						res.push([i, data[i]])
+					return res;
+				}
+
+				// Update interval
+				var updateInterval = 250;
+
+				// setup plot
+				var options = {
+					series: {
+						shadowSize: 0, // drawing is faster without shadows
+						lines: {
+							show: true,
+							fill: true,
+							lineWidth: 2,
+							steps: false
+						},
+						points: {
+							show: true,
+							radius: 2.8,
+							symbol: "circle",
+							lineWidth: 2.5
+						}
+					},
+					grid: {
+						show: true,
+						aboveData: false,
+						color: "#3f3f3f",
+						labelMargin: 5,
+						axisMargin: 0,
+						borderWidth: 0,
+						borderColor: null,
+						minBorderMargin: 5,
+						clickable: true,
+						hoverable: true,
+						autoHighlight: false,
+						mouseActiveRadius: 20
+					},
+					colors: chartColours,
+					tooltip: true, //activate tooltip
+					tooltipOpts: {
+						content: "Value is : %y.0",
+						shifts: {
+							x: -30,
+							y: -50
+						}
+					},
+					yaxis: {
+						min: 0,
+						max: 100
+					},
+					xaxis: {
+						show: true
+					}
+				};
+				var plot = $.plot($(".chart-updating"), [getRandomData()], options);
+
+				function update() {
+					plot.setData([getRandomData()]);
+					// since the axes don't change, we don't need to call plot.setupGrid()
+					plot.draw();
+
+					setTimeout(update, updateInterval);
+				}
+
+				update();
+			});
+		}
+	}
+
+	runFullCalendar();
+	runFlotCharts();
+	
+	// Init Datatables
+	$('#datatable, #datatable_2, #datatable_3').dataTable( {
+	  "bSort": true,
+	  "bPaginate": false,
+	  "bLengthChange": false,
+	  "bFilter": false,
+	  "bInfo": false,
+	  "bAutoWidth": false,
+	  "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ -1 ] }]
+	});
 
 });
 </script>
 </body>
 </html>
+

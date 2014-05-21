@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+#Thu May 08 13:13:26 CST 2014
+=======
 #Wed May 14 13:52:23 CST 2014
+>>>>>>> e56aa4734543af662cd0ebf93e3bf6f8999ad7a8
 eclipse.preferences.version=1
 encoding//WebRoot/AdminLoginView.jsp=UTF-8
 encoding//WebRoot/CheckQuestionnaireDetailView.jsp=UTF-8

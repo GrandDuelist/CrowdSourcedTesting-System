@@ -39,7 +39,6 @@ public class StaticTest {
 			Recruitment recruitment = new Recruitment("TEST", false, false,
 					publisher);
 			session.save(recruitment);
-
 			tx.commit();
 		} catch (RuntimeException e) {
 			e.printStackTrace();

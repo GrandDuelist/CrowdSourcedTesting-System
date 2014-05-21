@@ -20,7 +20,7 @@ import cn.com.other.page.Page;
 
 public class SecurityHandler extends GeneralHandler {
 
-	// 测试用户的登�
+	// 测试用户的登录
 	public Tester handleTesterLogin(LoginForm form)
 	{
 		Tester tester=DAOFactory.getTesterDAO().isTester(form.getUsername(), form.getPassword());
@@ -46,6 +46,7 @@ public class SecurityHandler extends GeneralHandler {
 			Administrator administrator = DAOFactory.getAdministratorDAO().isAdministrator(form.getUsername(), form.getPassword());
 			return administrator;
 		}
+<<<<<<< HEAD
 		
 		public void handleTesterFindPassword(FindPasswordForm form) {
 			
@@ -58,6 +59,8 @@ public class SecurityHandler extends GeneralHandler {
 			
 			
 		}
+}
+=======
 
 		
 	//第一个列表接口： 得到企业注册用户
@@ -96,7 +99,7 @@ public class SecurityHandler extends GeneralHandler {
 		}
 
 		
-		//DetailHandle的处理接�
+		//DetailHandle的处理接口1
 		@Override
 		public void setTargetDetailOne(int id, HttpServletRequest request) {
 			// TODO Auto-generated method stub
@@ -107,7 +110,7 @@ public class SecurityHandler extends GeneralHandler {
 			session.setAttribute("publisherType", "Company");
 			
 		}
-		//DetailHandle的处理接�
+		//DetailHandle的处理接口2
 		@Override
 		public void setTargetDetailTwo(int id, HttpServletRequest request) {
 			// TODO Auto-generated method stub
@@ -122,3 +125,4 @@ public class SecurityHandler extends GeneralHandler {
 		
 		
 		}
+>>>>>>> 81cced6a3148acef5050965baee7b6bb8c0f944d

@@ -2,8 +2,10 @@ package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.Publisher;
+import cn.com.crowdsourcedtesting.bean.Questionnaire;
+import cn.com.other.page.Page;
 
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.hibernate.LockMode;
@@ -187,21 +189,82 @@ public class PublisherDAO extends BaseHibernateDAO {
 	public Publisher isPublisher(String email, String password) {
 		// TODO Auto-generated method stub
 
-		Publisher publisher=null;
-		
-		List<Publisher>publishers=(List<Publisher>)this.findByProperty(PUBLISHER_LOG_EMAIL,email);
-		
-	    if(publishers!=null&&publishers.size()!=0)
-	    {
-	    	publisher = publishers.get(0);
-	    	if(!publisher.getPublisherPassword().equals(password))
-	    	{
-	    		publisher=null;
-	    	}
-	    }
-	    
-	   
-		
+		Publisher publisher = null;
+
+		List<Publisher> publishers = (List<Publisher>) this.findByProperty(
+				PUBLISHER_LOG_EMAIL, email);
+
+		if (publishers != null && publishers.size() != 0) {
+			publisher = publishers.get(0);
+			if (!publisher.getPublisherPassword().equals(password)) {
+				publisher = null;
+			}
+		}
+
 		return publisher;
+	}
+
+	// 按页查找企业用户
+	public List<Publisher> findUncheckedCompanyByPage(Page page) {
+		// TODO Auto-generated method stub
+		try {
+			List<Publisher> publishers = new ArrayList<Publisher>();
+			String queryString = "from Publisher where CHECK_ADMINISTRATOR_ID=null and PUBLISHER_TYPE=1";
+			Query queryObject = getSession().createQuery(queryString);
+
+			publishers = queryObject
+					.setFirstResult(
+							(page.getCurrentPage() - 1) * page.getPerRows())
+					.setMaxResults(page.getPerRows()).list();
+
+			return publishers;
+		} catch (RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
+		}
+	}
+
+	// 按页查找个人用户
+	public List<Publisher> findUncheckedPersonByPage(Page page) {
+		// TODO Auto-generated method stub
+		try {
+			List<Publisher> publishers = new ArrayList<Publisher>();
+			String queryString = "from Publisher where CHECK_ADMINISTRATOR_ID=null and PUBLISHER_TYPE=0";
+			Query queryObject = getSession().createQuery(queryString);
+
+			publishers = queryObject
+					.setFirstResult(
+							(page.getCurrentPage() - 1) * page.getPerRows())
+					.setMaxResults(page.getPerRows()).list();
+
+			return publishers;
+		} catch (RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
+		}
+	}
+
+	// 得到未审核公司的总条数
+	public int getUncheckedCompanyTotalRows() {
+
+		Number c = (Number) getSession()
+				.createQuery(
+						"select count(*) from Publisher where CHECK_ADMINISTRATOR_ID=null and  PUBLISHER_TYPE=1")
+				.uniqueResult();
+
+		return c.intValue();
+
+	}
+
+	// 得到未审核个人的总条数
+	public int getUncheckedPersonTotalRows() {
+
+		Number c = (Number) getSession()
+				.createQuery(
+						"select count(*) from Publisher where CHECK_ADMINISTRATOR_ID=null and  PUBLISHER_TYPE=0")
+				.uniqueResult();
+
+		return c.intValue();
+
 	}
 }

@@ -50,40 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <![endif]-->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-
-$("#checkConfirm").click(function()
-{
-     
-
-      
-      $("form#idForm input[name='subType']").attr("value","yes");
-     
-    $("form#idForm").attr("action","checkQuestionnaireDetail.do?method=checkConfirm");
-    $("form#idForm").submit();
-      
-
-}
-);
-
-
-$("#checkFail").click(function()
-{
-     
-
-      
-      $("form#idForm input[name='subType']").attr("value","no");
-     
-    $("form#idForm").attr("action","checkQuestionnaireDetail.do?method=checkConfirm");
-    $("form#idForm").submit();
-      
-
-}
-);
-
-});
-</script>
+<script type="text/javascript" src="js/detail_control/questionnaire_control.js"></script>
 </head>
 
 <body class="messages-page">
