@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
@@ -133,6 +134,7 @@ public class GiftHandler {
 			request.setAttribute("isLegal", "illegal");
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void selectSimilarGifts(String searchgift, HttpServletRequest request){
 		int pagenow = 1;
 		List<Gift> gifts = new ArrayList();
@@ -164,7 +166,10 @@ public class GiftHandler {
 			return false;
 		
 		Double creditneeded = gift.getGiftCredit();
-		Double usercredit = 5000.0;
+		//Double usercredit = 5000.0;
+		HttpSession session  = request.getSession();
+		Tester tester = (Tester)session.getAttribute("Tester");
+		Double usercredit = tester.getTesterCredit();
 		System.out.println("礼物所需积分："+creditneeded);
 		//判断用户积分和所需积分大小
 		if(usercredit >= creditneeded)

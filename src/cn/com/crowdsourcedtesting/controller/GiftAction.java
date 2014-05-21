@@ -31,6 +31,7 @@ import cn.com.other.page.Page;
 public class GiftAction extends DispatchAction {
 	
 	private String gifttype = "all";
+	private String searchvalue = "";
 	
 	private Page page = new Page();
 	
@@ -70,9 +71,8 @@ public class GiftAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		GiftForm giftForm = (GiftForm) form;// TODO Auto-generated method stub
 		int pagenow = giftForm.getPagenow();
-		String value = giftForm.getSearchinput();
 
-		handler.selectPage(gifttype, value, request, pagenow);
+		handler.selectPage(gifttype, this.searchvalue, request, pagenow);
 		
 		return mapping.findForward("allgifts");
 	}
@@ -126,6 +126,7 @@ public class GiftAction extends DispatchAction {
 		GiftForm giftForm = (GiftForm) form;// TODO Auto-generated method stub
 		String value = giftForm.getSearchinput();
 		this.gifttype = "similar";
+		this.searchvalue = value;
 		
 		handler.selectSimilarGifts(value, request);
 		

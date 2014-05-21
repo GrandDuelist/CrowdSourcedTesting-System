@@ -4,13 +4,30 @@
  */
 package cn.com.crowdsourcedtesting.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.actions.DispatchAction;
+
+import com.sun.jmx.snmp.tasks.Task;
+
+import cn.com.crowdsourcedtesting.DAO.GiftDAO;
+import cn.com.crowdsourcedtesting.DAO.TaskCommentDAO;
+import cn.com.crowdsourcedtesting.DAO.TestTaskDAO;
+import cn.com.crowdsourcedtesting.bean.TestTask;
+import cn.com.crowdsourcedtesting.bean.Gift;
+import cn.com.crowdsourcedtesting.bean.TaskComment;
+
+import cn.com.crowdsourcedtesting.struts.form.GiftForm;
 import cn.com.crowdsourcedtesting.struts.form.ManageTestTaskForm;
+import cn.com.crowdsourcedtesting.struts.form.TaskForm;
+import cn.com.other.page.Page;
 
 /** 
  * MyEclipse Struts
@@ -19,22 +36,64 @@ import cn.com.crowdsourcedtesting.struts.form.ManageTestTaskForm;
  * XDoclet definition:
  * @struts.action path="/manageTestTask" name="manageTestTaskForm" input="ManageTestTaskView.jsp" scope="request" validate="true"
  */
-public class TestTaskRouter extends Action {
+public class TestTaskRouter extends DispatchAction {
 	/*
 	 * Generated Methods
 	 */
 
 	/** 
-	 * Method execute
+	 * Method addNewComment
 	 * @param mapping
 	 * @param form
 	 * @param request
 	 * @param response
 	 * @return ActionForward
 	 */
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
+	public ActionForward addNewComment(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		ManageTestTaskForm ManageTestTaskForm = (ManageTestTaskForm) form;// TODO Auto-generated method stub
-		return null;
+		TaskForm giftForm = (TaskForm) form;// TODO Auto-generated method stub
+		String comment = giftForm.getComment();
+		System.out.println("add comment: "+comment);
+		
+		return mapping.findForward("allcomment");
+	}
+	
+	
+	/** 
+	 * Method checkComment
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return ActionForward
+	 */
+	public ActionForward checkComment(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		TaskForm giftForm = (TaskForm) form;
+		int task_id = giftForm.getTaskId();
+		System.out.println("check comment list...");
+		
+		int pagenow = 1;
+		List<TaskComment> comments = new ArrayList();
+		TestTaskDAO tdao = new TestTaskDAO();
+		TestTask task = tdao.findById(task_id);
+		TaskCommentDAO dao = new TaskCommentDAO();
+		
+		Page page = new Page();
+		page.setCurrentPage(pagenow);
+		page.setPerRows(20);
+		page.setTotalRows(task.getTaskComments().size());
+		
+		comments = dao.findByPage(page, task_id);
+		if(comments != null && comments.size()>0)
+		{
+			request.setAttribute("comments", comments);
+			request.setAttribute("page", page);
+			request.setAttribute("isLegal", "legal");
+		}
+		else
+			request.setAttribute("isLegal", "illegal");
+		
+		return mapping.findForward("allcomment");
 	}
 }

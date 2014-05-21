@@ -7,8 +7,12 @@
 
 
 <!DOCTYPE html>
-<html:html lang="true">
-  <head>
+<!--[if IE 7]> <html lang="en" class="ie7"> <![endif]-->  
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> 
+<html:html lang="en"> <!--<![endif]-->  
+<head>
     <title>TCTEST</title>
 
     <!-- Meta -->
@@ -127,8 +131,8 @@
                     </ul>
                     <div class="search-open">
                         <div class="input-append">
-                            <form>
-                                <input type="text" class="span3" placeholder="搜索" />
+                            <form action="gifts.do?method=selectSimilarGifts" method="post">
+                                <input name="searchinput" type="text" class="span3" placeholder="搜索" />
                                 <button type="submit" class="btn-u">搜索</button>
                             </form>
                         </div>
@@ -178,7 +182,7 @@
             <ul class="portfolio recent-work clearfix"> 
             
 		<% 
-            for(int i=0;i<10;i++)
+            for(int i=0;i<giftpage.getPerRows();i++)
   			{ 
   				if(!it.hasNext())
 					break;
@@ -280,23 +284,19 @@
 <script type="text/javascript" src="assets/js/modernizr.custom.js"></script>        
 <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
 <!-- JS Implementing Plugins -->           
-<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/sequence.jquery-min.js"></script>
-<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/horizontal-parallax.js"></script>
-<script type="text/javascript" src="assets/plugins/bxslider/jquery.bxslider.js"></script>
+<script type="text/javascript" src="assets/plugins/portfolioSorting/js/jquery.quicksand.js"></script>
+<script type="text/javascript" src="assets/plugins/portfolioSorting/js/sorting.js"></script>
 <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
 <!-- JS Page Level -->           
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
-        App.initSliders();
-        App.initBxSlider();
     });
 </script>
 <!--[if lt IE 9]>
-	<script src="assets/js/respond.js"></script>
-<![endif]-->		
-
+    <script src="assets/js/respond.js"></script>
+<![endif]-->
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
-</html:html>
+</html:html> 

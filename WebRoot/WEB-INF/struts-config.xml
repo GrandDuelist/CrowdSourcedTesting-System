@@ -19,6 +19,7 @@
     <form-bean name="checkQuestionnaireDetailForm" type="cn.com.crowdsourcedtesting.struts.form.CheckQuestionnaireDetailForm" />
     <form-bean name="checkRegisterListForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterListForm" />
     <form-bean name="checkRegisterDetailForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterDetailForm" />
+    <form-bean name="taskForm" type="cn.com.crowdsourcedtesting.struts.form.TaskForm" />
    
   
   </form-beans>
@@ -104,6 +105,19 @@
       scope="request"
       type="cn.com.crowdsourcedtesting.controller.TestTaskRouter">
       <set-property property="cancellable" value="true" />
+    </action>
+    
+    <action
+      attribute="taskCommentForm"
+      parameter = "method"
+      input="page_task_item.jsp"
+      name="taskForm"
+      path="/comment"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.TestTaskRouter">
+      <set-property property="cancellable" value="true" />
+      
+      <forward name="allcomment" path="/page_task_item.jsp" />
     </action>
     
     

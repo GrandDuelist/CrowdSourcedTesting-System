@@ -6,7 +6,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html:html lang="true">
   <head>
     <title>TCTEST</title>
@@ -147,8 +147,10 @@
 	<div class="row-fluid ex-fail">
 
     <p>
-        <i><i class="icon-warning-sign"></i>兑换失败</i>
-        <span><button class="btn btn-large btn-success">返回</button></span>
+        <i><i class="icon-ok"></i>兑换失败</i>
+        <form action="gifts.do?method=selectAllGifts" method="post">
+        	<span><button class="btn btn-large btn-success">返回</button></span>
+        </form>
     </p>
 
 </div>

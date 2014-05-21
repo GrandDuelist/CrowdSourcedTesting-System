@@ -17,7 +17,7 @@ import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
 import cn.com.crowdsourcedtesting.bean.Recruitment;
 import cn.com.other.page.Page;
 
-public class RecruitmentHandler {
+public class RecruitmentHandler extends GeneralHandler {
 
 	//前端调用
 	public void selectAllRecruitments(Page page, HttpServletRequest request){
@@ -99,5 +99,36 @@ public class RecruitmentHandler {
 		
 		request.setAttribute("isLegal", "legal");
 	}
+
+	@Override
+	public void setTargetListOne(Page page, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTargetListTwo(Page page, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTargetListThree(Page page, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTargetDetailOne(int id, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTargetDetailTwo(int id, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }
