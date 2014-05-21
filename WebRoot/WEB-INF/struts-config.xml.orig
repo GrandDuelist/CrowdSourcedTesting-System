@@ -17,12 +17,14 @@
     <form-bean name="pageIdForm" type="cn.com.crowdsourcedtesting.struts.form.PageIdForm" />
     <form-bean name="adminLoginForm" type="cn.com.crowdsourcedtesting.struts.form.AdminLoginForm" />
     <form-bean name="checkQuestionnaireDetailForm" type="cn.com.crowdsourcedtesting.struts.form.CheckQuestionnaireDetailForm" />
-<<<<<<< HEAD
     <form-bean name="findPasswordForm" type="cn.com.crowdsourcedtesting.struts.form.FindPasswordForm" />
-=======
     <form-bean name="checkRegisterListForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterListForm" />
     <form-bean name="checkRegisterDetailForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterDetailForm" />
->>>>>>> 81cced6a3148acef5050965baee7b6bb8c0f944d
+<<<<<<< HEAD
+    <form-bean name="taskForm" type="cn.com.crowdsourcedtesting.struts.form.TaskForm" />
+=======
+    <form-bean name="changeInformationForm" type="cn.com.crowdsourcedtesting.struts.form.ChangeInformationForm" />
+>>>>>>> 9332983d12b8cd580322705d0dfbb005a965f265
    
   
   </form-beans>
@@ -45,6 +47,18 @@
 
     </action>
     
+	<action
+	parameter="method" 
+	input="/index.jsp"
+	path="/personal_center"
+	scope="request"
+	type="cn.com.crowdsourcedtesting.controller.SecurityRouter">
+	<set-property property="cancellable" value="true" />
+    
+      <forward name="login" path="/LoginView.jsp.jsp"></forward>
+      <forward name="personal_center" path="/page_personal_center.jsp"></forward>
+	</action>
+    
     <action 
     	attribute = "findPasswordForm"
     	parameter = "method"
@@ -56,8 +70,21 @@
     	<set-property property="cancellable" value="true" />
      
      	<forward name="findpassword" path="/page_personal_pwchange.jsp"></forward>
-      	<forward name="success" path="/index.jsp"></forward>
+      	<forward name="success" path="/page_personal_center.jsp"></forward>
       	<forward name="fail" path="/page_personal_pwchange.jsp"></forward>
+    </action>
+    
+    <action 
+    	attribute = "changeInformationForm"
+    	parameter = "method"
+    	input = "/page_personal_profile.jsp"
+    	name="changeInformationForm"
+    	path="/security"
+    	scope = "request"
+    	type = "cn.com.crowdsourcedtesting.controller.SecurityRouter">
+    	<set-property property="cancellable" value="true" />
+     
+     	<forward name="success" path="/page_personal_center.jsp"></forward>
     </action>
     
     <action
@@ -91,6 +118,9 @@
       
       <forward name="giftitem" path="/gift.jsp"></forward>
       <forward name="allgifts" path="/gifts.jsp" />
+      <forward name="changegift" path="/gift_address.jsp" />
+      <forward name="changegiftfailed" path="/gift_address_failed.jsp" />
+      <forward name="changegiftsuccess" path="/gift_address_success.jsp" />
     </action>    
     
       <action
@@ -119,6 +149,19 @@
       scope="request"
       type="cn.com.crowdsourcedtesting.controller.TestTaskRouter">
       <set-property property="cancellable" value="true" />
+    </action>
+    
+    <action
+      attribute="taskCommentForm"
+      parameter = "method"
+      input="page_task_item.jsp"
+      name="taskForm"
+      path="/comment"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.TestTaskRouter">
+      <set-property property="cancellable" value="true" />
+      
+      <forward name="allcomment" path="/page_task_item.jsp" />
     </action>
     
     
@@ -240,13 +283,21 @@
     </action>
     <action
       attribute="publishWebTestingForm"
+      parameter="method"
       input="/form/publishWebTesting.jsp"
       name="publishWebTestingForm"
       path="/publishWebTesting"
       scope="request"
       type="cn.com.crowdsourcedtesting.controller.PublishWebTestingRouter">
       <set-property property="cancellable" value="true" />
-      <forward name="success" path="/publisher_taskpub_success.html"></forward>
+      <forward name="productSuccess" path="/publisher_taskpub_reward.jsp"></forward>
+      <forward name="productError" path="/publisher_taskpub_web.jsp"></forward>
+      <forward name="taskSuccess" path="/publisher_taskpub_success.html"></forward>
+      <forward name="taskError" path="/publisher_taskpub_reward.jsp"></forward>
+      <forward name="directTo" path="/publisher_taskpub_web.jsp"></forward>
+    </action>
+    <action path="/checkQuestionnaire" type="cn.com.crowdsourcedtesting.struts.action.CheckQuestionnaireAction">
+      <set-property property="cancellable" value="true" />
     </action>
     <action path="/checkQuestionnaire" type="cn.com.crowdsourcedtesting.struts.action.CheckQuestionnaireAction">
       <set-property property="cancellable" value="true" />
