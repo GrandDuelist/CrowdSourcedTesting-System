@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i> chengran327@gmail.com</a></li>	
                 <li><a><i class="icon-phone-sign"></i> 021 4202 2656</a></li>	
                 <%if(userType==null){ %>
-                <li><a href="security.do?method=goToLogin"><i class="icon-user"></i> 登录</a></li>	
+                <li><a href="login.do?method=testerLogin"><i class="icon-user"></i> 登录</a></li>	
                 <%}else if(userType.equals(UserType.Tester)) {%>
                   <li><a href="security.do?method=testerLogout"><i class="icon-user"></i>注销</a></li>
                    <li><a href="personal_center.do?method=testerFindAllQuestionnaire"><%=tester.getTesterName()%></a></li>	
