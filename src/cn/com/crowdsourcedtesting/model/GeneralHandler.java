@@ -29,6 +29,7 @@ public abstract class GeneralHandler {
 	//DetailHandle的接口
 	abstract public void  setTargetDetailOne(int id,HttpServletRequest request);
 	abstract public void  setTargetDetailTwo(int id,HttpServletRequest request);
+	abstract public void  setTargetDetailThree(int id,HttpServletRequest request);
 	
 	
 	//通用的列表处理
@@ -95,6 +96,7 @@ public abstract class GeneralHandler {
 		switch(method){
 		case MethodOne:setTargetDetailOne(id,request);break;
 		case MethodTwo:setTargetDetailTwo(id,request);break;
+		case MethodThree:setTargetDetailThree(id,request);break;
 		
 		}
 		

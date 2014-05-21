@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -49,13 +49,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/list_control/test_task_control_list.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 
 <body>
+<%
+List<TestTask> testTasks =(List <TestTask>)session.getAttribute("testTasks");
+Page currentPage = (Page)session.getAttribute("currentPage");
+int firstPage = (int)(currentPage.getCurrentPage()-1)/currentPage.DEFAULT_MAX_PAGE;
+firstPage = firstPage*currentPage.DEFAULT_MAX_PAGE+1;
+int lastPage = (currentPage.getTotalPage()+1)<(firstPage+currentPage.DEFAULT_MAX_PAGE)? (currentPage.getTotalPage()+1):(firstPage+currentPage.DEFAULT_MAX_PAGE);
 
+ %>
 <%String taskType = (String) session.getAttribute("taskType"); %>
 <!-- Start: Theme Preview Pane -->
+
+ <form id="selectForm"  method="post">
+ <input type="hidden" name="id"/>
+ <input type="hidden" name="subType">
+ <input type="hidden" name="page">
+</form>
 <div id="skin-toolbox">
   <div class="skin-toolbox-toggle"> <i class="fa fa-flask"></i> </div>
   <div class="skin-toolbox-panel">
@@ -317,9 +332,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="panel-heading">
                 <div class="panel-title"> <i class="fa fa-tasks"></i> 任务列表 </div>
                 <ul class="nav panel-tabs">
-                  <li class="active"><a href="#tab1" data-toggle="tab"><i class="fa fa-globe"></i> Web任务</a></li>
-                  <li><a href="#tab2" data-toggle="tab"><i class="fa fa-android"></i> Android任务</a></li>
-                  <li><a href="#tab3" data-toggle="tab"><i class="fa fa-laptop"></i> 桌面任务</a></li>
+                 <%if("Web".equals(taskType)){ %>
+                  <li class="active"><a ><i class="fa fa-globe"></i> Web任务</a></li>
+                  <li><a href="checkTestTaskList.do?method=checkAndroidList"><i class="fa fa-android"></i> Android任务</a></li>
+                  <li><a href="checkTestTaskList.do?method=checkDesktopList" ><i class="fa fa-laptop"></i> 桌面任务</a></li>
+                  <%}else if("Android".equals(taskType)) { %>
+                  <li ><a href="checkTestTaskList.do?method=checkWebList" ><i class="fa fa-globe"></i> Web任务</a></li>
+                  <li class="active"><a  ><i class="fa fa-android"></i> Android任务</a></li>
+                  <li><a href="checkTestTaskList.do?method=checkDesktopList" ><i class="fa fa-laptop"></i> 桌面任务</a></li>
+                  <%}else if("Desktop".equals(taskType)) { %>
+                  
+                   <li ><a href="checkTestTaskList.do?method=checkWebList" ><i class="fa fa-globe"></i> Web任务</a></li>
+                  <li ><a href="checkTestTaskList.do?method=checkAndroidList" ><i class="fa fa-android"></i> Android任务</a></li>
+                  <li class="active"><a ><i class="fa fa-laptop"></i> 桌面任务</a></li>
+                  <%} %>
                 </ul>
               </div>
               <div class="panel-body">
@@ -335,60 +361,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                           <th></th>
                           <th>项目名称</th>
                           <th class="hidden-xs">发布者</th>
-                          <th>奖励金额</th>
+                          <th>奖励分数</th>
                           <th>当前状态</th>
                           <th style="width: 70px;" class="text-right">操作</th>
                         </tr>
                       </thead>
                       <tbody>
+                      <%for(int i=0;i<testTasks.size();i++){ 
+                      
+                      TestTask testTask = testTasks.get(i);
+                      %>
                         <tr>
-                          <td class="text-center"><img src="img/avatars/2.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> Web百度管家测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i> 百度公司</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 500</td>
-                          <td><i class="fa fa-circle text-green"></i> 已通过</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
+                          <td class="text-center"><img src="<%=testTask.getProduct().getIcon() %>" width="50" height="50" alt="avatar" /></td>
+                          <td class="info"><b> <%=testTask.getProduct().getProductName() %></b><br />
+                            <span class="text-muted"><i class="fa fa-home"></i>Vesion <%=testTask.getProduct().getVersion()==null?"":testTask.getProduct().getVersion() %></span></td>
+                          <td><i class="fa fa-user text-blue"></i><%=testTask.getPublisher().getPublisherName() %></td>
+                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> <%=testTask.getWholeCredit() %></td>
+                        <%if(testTask.getAdministrator()==null){ %>
+                        <td><i class="fa fa-circle text-info"></i> 待审核</td>
+                        <%}else if(!testTask.getIsPassed()) {%>
+                          <td><i class="fa fa-circle text-green"></i>未通过</td>
+                          <%} else{%>
+                          <td><i class="fa fa-circle text-info"></i> 通过</td>
+                          <%} %>
+                         <td class="text-right text-center" id="detail1"><a class="btn btn-primary btn-gradient" id=<%=testTask.getTaskId() %> type="button" ><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
                         </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/1.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 百词斩测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>超有爱</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 520</td>
-                          <td><i class="fa fa-circle text-info"></i> 待审核</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/4.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 人人网站测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>人人公司</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 30</td>
-                          <td><i class="fa fa-circle text-danger"></i> 未通过</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/5.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 火狐桌面浏览器测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 370</td>
-                          <td><i class="fa fa-circle text-green"></i> 已通过</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
+                        <%} %>
                       </tbody>
                     </table>
                     <div class="text-right">
                       <ul class="pagination pagination-alt margin-bottom">
-                        <li><a href="#"><i class="fa fa-caret-left"></i> </a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#"><i class="fa fa-caret-right"></i> </a></li>
-                      </ul>
+                        <%if( currentPage.getCurrentPage()==1){ %>
+                  <li class="prev disabled"><a><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                  <%} else{%>
+                  
+                    <li class="prev" id="previouPage1"><a id = "<%=currentPage.getCurrentPage()%>"><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                <%} %>
+                
+                
+                <%for (int i=firstPage; i<lastPage;i++) 
+                {  if(i == currentPage.getCurrentPage())
+                {%>
+                <li class="active" id="pageNum1"><a id="<%=i%>"><%=i %></a></li>
+                  
+                 <%}else { %>
+                  <li id="pageNum1"><a id="<%=i%>"><%=i %></a></li>
+                 <%}} %>
+                
+                 <%if( currentPage.getCurrentPage()==currentPage.getTotalPage()){ %>
+                 <li class="next disabled"><a >&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                  <%} else{%>
+                  
+                   <li class="next" id="nextPage1"><a id="<%=currentPage.getCurrentPage()%>">&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                <%} %>
                     </div>
                   </div>
                   <!-- Web任务 -->
@@ -407,54 +432,53 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </tr>
                       </thead>
                       <tbody>
+                         <%for(int i=0;i<testTasks.size();i++){ 
+                      
+                      TestTask testTask = testTasks.get(i);
+                      %>
                         <tr>
-                          <td class="text-center"><img src="img/avatars/2.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> Android百度管家测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i> 百度公司</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 500</td>
-                          <td><i class="fa fa-circle text-green"></i> 已通过</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
+                          <td class="text-center"><img src="<%=testTask.getProduct().getIcon() %>" width="50" height="50" alt="avatar" /></td>
+                          <td class="info"><b> <%=testTask.getProduct().getProductName() %></b><br />
+                            <span class="text-muted"><i class="fa fa-home"></i>Vesion <%=testTask.getProduct().getVersion()==null?"":testTask.getProduct().getVersion() %></span></td>
+                          <td><i class="fa fa-user text-blue"></i><%=testTask.getPublisher().getPublisherName() %></td>
+                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> <%=testTask.getWholeCredit() %></td>
+                            <%if(testTask.getAdministrator()==null){ %>
+                        <td><i class="fa fa-circle text-info"></i> 待审核</td>
+                        <%}else if(!testTask.getIsPassed()) {%>
+                          <td><i class="fa fa-circle text-green"></i>未通过</td>
+                          <%} else{%>
+                          <td><i class="fa fa-circle text-info"></i> 通过</td>
+                          <%} %>
+                        <td class="text-right text-center" id="detail2"><a class="btn btn-primary btn-gradient" id=<%=testTask.getTaskId() %> type="button" ><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
                         </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/1.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 百词斩测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>超有爱</span></td>
-                         <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 520</td>
-                          <td><i class="fa fa-circle text-info"></i> 待审核</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/4.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 人人网站测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>人人公司</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 30</td>
-                          <td><i class="fa fa-circle text-info"></i> 待审核</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/5.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 火狐桌面浏览器测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 370</td>
-                          <td><i class="fa fa-circle text-danger"></i> 未通过</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
+                        <%} %>
                       </tbody>
                     </table>
                     <div class="text-right">
-                      <ul class="pagination pagination-alt margin-bottom">
-                        <li><a href="#"><i class="fa fa-caret-left"></i> </a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#"><i class="fa fa-caret-right"></i> </a></li>
-                      </ul>
+                     <ul class="pagination pagination-alt margin-bottom">
+                        <%if( currentPage.getCurrentPage()==1){ %>
+                  <li class="prev disabled"><a><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                  <%} else{%>
+                  
+                    <li class="prev" id="previouPage2"><a id = "<%=currentPage.getCurrentPage()%>"><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                <%} %>
+                
+                
+                <%for (int i=firstPage; i<lastPage;i++) 
+                {  if(i == currentPage.getCurrentPage())
+                {%>
+                <li class="active" id="pageNum2"><a id="<%=i%>"><%=i %></a></li>
+                  
+                 <%}else { %>
+                  <li id="pageNum2"><a id="<%=i%>"><%=i %></a></li>
+                 <%}} %>
+                
+                 <%if( currentPage.getCurrentPage()==currentPage.getTotalPage()){ %>
+                 <li class="next disabled"><a >&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                  <%} else{%>
+                  
+                   <li class="next" id="nextPage2"><a id="<%=currentPage.getCurrentPage()%>">&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                <%} %>
                     </div>
                   </div>
                   <!-- 安卓测试任务 -->
@@ -473,54 +497,56 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </tr>
                       </thead>
                       <tbody>
+                          <%for(int i=0;i<testTasks.size();i++){ 
+                      
+                      TestTask testTask = testTasks.get(i);
+                      %>
                         <tr>
-                          <td class="text-center"><img src="img/avatars/2.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 桌面测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i> 百度公司</span></td>
-                         <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 500</td>
-                          <td><i class="fa fa-circle text-green"></i> 已通过</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
+                          <td class="text-center"><img src="<%=testTask.getProduct().getIcon() %>" width="50" height="50" alt="avatar" /></td>
+                          <td class="info"><b> <%=testTask.getProduct().getProductName() %></b><br />
+                            <span class="text-muted"><i class="fa fa-home"></i>Vesion <%=testTask.getProduct().getVersion()==null?"":testTask.getProduct().getVersion() %></span></td>
+                          <td><i class="fa fa-user text-blue"></i><%=testTask.getPublisher().getPublisherName() %></td>
+                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> <%=testTask.getWholeCredit() %></td>
+                        
+                             <%if(testTask.getAdministrator()==null){ %>
+                        <td><i class="fa fa-circle text-info"></i> 待审核</td>
+                        <%}else if(!testTask.getIsPassed()) {%>
+                          <td><i class="fa fa-circle text-green"></i>未通过</td>
+                          <%} else{%>
+                          <td><i class="fa fa-circle text-info"></i> 通过</td>
+                          <%} %>
+                          <td class="text-right text-center" id="detail3"><a class="btn btn-primary btn-gradient" id=<%=testTask.getTaskId() %> type="button" ><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
+                         
                         </tr>
-                        <tr>
-                          <td cl`ss="text-center"><img src="img/avatars/1.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 百词斩测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>超有爱</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 520</td>
-                          <td><i class="fa fa-circle text-info"></i> 待审核</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/4.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 人人网站测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>人人公司</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 30</td>
-                          <td><i class="fa fa-circle text-danger"></i> 未通过</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/5.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 火狐桌面浏览器测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 370</td>
-                          <td><i class="fa fa-circle text-green"></i> 已通过</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
+                        <%} %>
+                       
                       </tbody>
                     </table>
                     <div class="text-right">
-                      <ul class="pagination pagination-alt margin-bottom">
-                        <li><a href="#"><i class="fa fa-caret-left"></i> </a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#"><i class="fa fa-caret-right"></i> </a></li>
-                      </ul>
+                     <ul class="pagination pagination-alt margin-bottom">
+                        <%if( currentPage.getCurrentPage()==1){ %>
+                  <li class="prev disabled"><a><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                  <%} else{%>
+                  
+                    <li class="prev" id="previouPage3"><a id = "<%=currentPage.getCurrentPage()%>"><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                <%} %>
+                
+                
+                <%for (int i=firstPage; i<lastPage;i++) 
+                {  if(i == currentPage.getCurrentPage())
+                {%>
+                <li class="active" id="pageNum3"><a id="<%=i%>"><%=i %></a></li>
+                  
+                 <%}else { %>
+                  <li id="pageNum3"><a id="<%=i%>"><%=i %></a></li>
+                 <%}} %>
+                
+                 <%if( currentPage.getCurrentPage()==currentPage.getTotalPage()){ %>
+                 <li class="next disabled"><a >&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                  <%} else{%>
+                  
+                   <li class="next" id="nextPage3"><a id="<%=currentPage.getCurrentPage()%>">&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                <%} %>
                     </div>
                   </div>
                   <%} %>

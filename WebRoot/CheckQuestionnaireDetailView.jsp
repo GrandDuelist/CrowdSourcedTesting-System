@@ -331,7 +331,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <hr/>
                   <p>
                   		<ol>
-                  	<% Iterator it = questionnaire.getQuestions().iterator();
+                  	<%
+                  	Iterator it = questionnaire.getQuestions().iterator();
                   	while(it.hasNext()){ 
                   	Question  q =(Question) it.next();
                   
@@ -344,7 +345,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   	Choice choice = (Choice)it2.next();
                   	%>
                       <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
+                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" />
                           <%=choice.getChoiceContent() %> </label>
                        
                     

@@ -460,7 +460,7 @@ body.upload-tools-page #fileupload table td:last-child {
     background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.45), rgba(241, 241, 241, 0.45));
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.45), rgba(241, 241, 241, 0.45));
 }
-.console-btn:hover .console-icon { color: #d9534f }
+.console-btn:hover .console-icon { color: #6DB54B }
 .console-btn .console-icon {
     height: 40px;
     display: inline-block;

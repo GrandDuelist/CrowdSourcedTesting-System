@@ -2,6 +2,7 @@ package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.JoinQuestionnaire;
+import cn.com.crowdsourcedtesting.modelhelper.TaskType;
 
 import java.util.Date;
 import java.util.List;
@@ -139,5 +140,16 @@ public class JoinQuestionnaireDAO extends BaseHibernateDAO {
 			log.error("attach failed", re);
 			throw re;
 		}
+	}
+	
+	
+	public int hasJoined(int testerID, int questionnaireID)
+	{
+		Number c = (Number) getSession()
+				.createQuery(
+						"select count(*) from JoinQuestionnaire where TESTER_ID="+ testerID+ " and QUESTIONNAIRE_ID="+questionnaireID)
+				.uniqueResult();
+
+		return c.intValue();
 	}
 }

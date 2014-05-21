@@ -35,6 +35,14 @@
 			</key>
 			<one-to-many class="cn.com.crowdsourcedtesting.bean.Recruitment" />
 		</set>
+		
+	   <set name="testTasks" inverse="true">
+			<key>
+				<column name="CHECK_ADMINISTRATOR_ID" precision="9" scale="0" />
+			</key>
+			<one-to-many class="cn.com.crowdsourcedtesting.bean.TestTask" />
+		</set>
+
 		<set name="publishers" inverse="true">
 			<key>
 				<column name="CHECK_ADMINISTRATOR_ID" precision="9" scale="0" />

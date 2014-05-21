@@ -52,6 +52,10 @@
 			type="java.lang.String">
 			<column length="256" name="DESKTOP_ADDRESS" />
 		</property>
+		<property generated="never" lazy="false" name="productName"
+			type="java.lang.String">
+			<column length="100" name="PRODUCT_NAME" />
+		</property>
 		<set inverse="true" name="testTasks" sort="unsorted">
 			<key>
 				<column name="PRODUCT_ID" not-null="true" precision="9"

@@ -7,11 +7,12 @@ import cn.com.crowdsourcedtesting.DAO.PublisherDAO;
 import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Recruitment;
+import cn.com.crowdsourcedtesting.modelhelper.TaskType;
 
 public class StaticTest {
 	public static void main(String[] argv) {
 
-		Session session = HibernateSessionFactory.getSession();
+	/*	Session session = HibernateSessionFactory.getSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
@@ -48,7 +49,9 @@ public class StaticTest {
 			}
 		} finally {
 			session.close();
-		}
+		}*/
+
+	
 
 	}
 

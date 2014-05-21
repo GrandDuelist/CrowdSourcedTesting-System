@@ -106,6 +106,15 @@ public class SecurityHandler extends GeneralHandler {
 			
 		}
 
+		@Override
+		public void setTargetDetailThree(int id, HttpServletRequest request) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		
+		
+	
 		
 		
 		}

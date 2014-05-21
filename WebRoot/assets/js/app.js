@@ -80,7 +80,7 @@ var App = function () {
                 $('#logo-header').attr("src", "assets/img/logo1-" + color + ".png");
                 $('#logo-footer').attr("src", "assets/img/logo2-" + color + ".png");
             } else if(data_header == 'dark'){
-                $('#style_color-header-2').attr("href", "assets/css/themes/headers/header2-" + color + ".css");
+                $('#style_color-header-2').attr("href", "assets/css/themes/headers/header1-" + color + ".css");
                 $('#logo-header').attr("src", "assets/img/logo2-" + color + ".png");
                 $('#logo-footer').attr("src", "assets/img/logo2-" + color + ".png");
             }
