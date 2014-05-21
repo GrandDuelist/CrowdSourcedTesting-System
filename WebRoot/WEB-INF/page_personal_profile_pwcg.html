@@ -130,10 +130,10 @@
 <!--=== Breadcrumbs ===-->
 <div class="row-fluid breadcrumbs margin-bottom-40">
 	<div class="container">
-        <h1 class="pull-left">找回密码</h1>
+        <h1 class="pull-left">个人中心</h1>
         <ul class="pull-right breadcrumb">
             <li><a href="index.html">主页</a> <span class="divider">/</span></li>
-            <li class="active">找回密码</li>
+            <li class="active">个人中心</li>
         </ul>
     </div><!--/container-->
 </div><!--/breadcrumbs-->
@@ -147,15 +147,21 @@
            <div class="thumbnail-style">
                 <img src="assets/img/others/6.jpg" alt="" />
                 <h3><a>程冉</a> <small>资深会员</small></h3>
-                感受编程的快乐，和学习的动力。
+                做任务领奖励，前往<a class="text-success">这里</a>开始您的任务之旅
+                <ul class="unstyled inline team">
+                	<li><a href="#"><i class="icon-star"></i> 50 </a></li>
+                	<li><a href="#"><i class="icon-trophy"></i> 10 </a></li>
+                	<li><a href="#"><i class="icon-money"></i> 2 </a></li>
+                </ul>
                 
             </div>
         </div>
     	<div class="span9">
-        <div class="headline"><h3>密码修改</h3>
+        <div class="headline"><h3>修改密码</h3>
+        <button type="button" class="pull-right btn-u">返回</button>
         </div>
-        	<p class="hero">您的基本信息会显示在这里，请填写您的新密码，注意，新密码不能与老密码相同。</p>
-            <table class="table table-bordered">
+        	<p class="hero">认真填写以下资料是你加入众测的第一步，方便体验更多乐趣。</p>
+            <table data-id="id-1" class="table table-bordered basic">
             <thead>
             <tr>
             	<th width="30%" style="border-top: 2px solid #E5E5E5;"></th>
@@ -165,32 +171,38 @@
             <tbody>
             <tr class="success">
             	<td><strong>登录邮箱</strong></td>
-                <td><label class="inline">752050943@qq.com &nbsp;&nbsp;<button class="btn-u" type="button">发送验证邮件</button></label></td>
+                <td>752050943@qq.com</td>
             </tr>
-             <tr>
-            	<td><strong>新密码</strong></td>
-                <td><input id="newPassword" type="password" value="" required onblur="checkPass();"/>
-                	<span class="text-error" id="nonempty1" style="display:none;">字段不能为空</span>
+            <tr>
+            	<td><strong>性别</strong></td>
+                <td>
+                 男
                 </td>
+            </tr>
+            <tr >
+            	<td><strong>生日</strong></td>
+                <td>1993-9-18</td>
+            </tr>
+            <tr>
+            	<td><strong>昵称</strong></td>
+                <td><input class="input-xlarge" type="text" value="土贼12号" readonly/></td>
+            </tr>
+            <tr>
+            	<td><strong>原密码</strong></td>
+                <td><input class="input-xlarge" type="password" value="123456"/></td>
+            </tr>
+            <tr>
+            	<td><strong>新密码</strong></td>
+                <td><input id="newPassword" type="password" value=""/></td>
             </tr>
             <tr>
             	<td><strong>确认密码</strong></td>
-                <td><input id="newPassword_check" type="password" value="" required onblur="checkPass();"/>
-                <span class="text-error" id="nonempty2" style="display:none;">字段不能为空</span>
-                <span class="text-error" id="errorpwd" style="display:none;">两次输入密码不一致</span>
-                
-                </td>
-            </tr>
-            <tr>
-            	<td><strong>验证码</strong></td>
-                <td><input type="text" id="vcode" value="" required onblur="checkVcode();"/>
-					<span class="text-error" id="nonempty3" style="display:none;">字段不能为空</span>
-                </td>
+                <td><input id="newPassword_check" type="password" value="" required onblur="checkPass();"/><span class="text-error" id="errorpwd" style="display:none;">两次输入密码不一致</span></td>
             </tr>
             </tbody>
             </table>
 			<div class="text-center">
-            	<button class="btn-u" id="confirm" type="button" disabled="disabled">确认</button>
+            	<button class="btn-u" type="button">确认</button>
             </div><!--end of div submit-->
         </div><!--end of div-9-->
     </div><!--/row-fluid-->
@@ -265,7 +277,6 @@
 <script type="text/javascript" src="assets/js/Date.js"></script>  
 <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
 <!-- JS Implementing Plugins -->           
-<script type="text/javascript" src="vendor/plugins/validate/jquery.validate.js"></script> 
 <script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
 <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
 <!-- JS Page Level --> 
@@ -290,74 +301,18 @@
 				clear: '清除',
 				formatSubmit: 'yyyy/mm/dd'
 			})
-		
-}); 
-     
+});          
     });
-function checkVcode(){
-	var pwd3=document.getElementById("vcode").value;
-if(pwd3 == "")
- {
-	 document.getElementById("nonempty3").style.display = "block";
-	 return false;
-}
-else{
-	document.getElementById("nonempty3").style.display = "none";
-	if(checkAllEmpty()){
-		document.getElementById("confirm").disabled="";
-	}
-    return true;
-	}
-}
-function checkAllEmpty(){
-	var pwd1=document.getElementById("newPassword").value;
-  var pwd2=document.getElementById("newPassword_check").value;
-  var pwd3=document.getElementById("vcode").value;
-  if((pwd1&&pwd2&&pwd3)!=""){
-	  return true;
-  }
-  else{
-  	return false;
-  }
-}
-
 function checkPass(){
   var pwd1=document.getElementById("newPassword").value;
   var pwd2=document.getElementById("newPassword_check").value;
-  
- if(pwd1 == "")
- {
-	document.getElementById("nonempty1").style.display = "block";
-	return false;
- }
- else
- {
- 	document.getElementById("nonempty1").style.display = "none";
- }
-if(pwd2 == "")
- {
-	 document.getElementById("nonempty2").style.display = "block";
-	 return false;
- }
- else
- {
- 	document.getElementById("nonempty2").style.display = "none";
- }
-if(pwd1!=pwd2){
-	document.getElementById("nonempty1").style.display = "none";
-	document.getElementById("nonempty2").style.display = "none";
+ if(pwd1!=pwd2){
     document.getElementById("errorpwd").style.display = "block";
     return false;
  }
-
-
  else{
 	document.getElementById("errorpwd").style.display = "none";
-	document.getElementById("nonempty1").style.display = "none";
-	document.getElementById("nonempty2").style.display = "none";
-
-
-    return true;
+    return false;
 	}
 }
 </script>

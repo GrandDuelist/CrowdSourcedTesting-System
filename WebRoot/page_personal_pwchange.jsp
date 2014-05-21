@@ -193,20 +193,29 @@
             </tr>
             <tr>
             	<td><strong>新密码</strong></td>
-                <td><input type="password" name="password" onblur="isNull()" value=""/><label class="inline" id="isNull"></label></td>
+                <td><input id="newPassword" type="password" name="password" value="" required onblur="checkPass();"/>
+                	<span class="text-error" id="nonempty1" style="display:none;">字段不能为空</span>
+                </td>
             </tr>
             <tr>
             	<td><strong>确认密码</strong></td>
-                <td><input type="password" name="password_comfirm" onblur="isComfirm()" value=""/><label class="inline" id="isComfirm"></label></td>
+                <td><input id="newPassword_check" name="password_comfirm" type="password" value="" required onblur="checkPass();"/>
+                <span class="text-error" id="nonempty2" style="display:none;">字段不能为空</span>
+                <span class="text-error" id="errorpwd" style="display:none;">两次输入密码不一致</span>
+                
+                </td>
             </tr>
             <tr>
             	<td><strong>验证码</strong></td>
-                <td><input type="text" name="randomcode" onblur="isRight()" value=""/><label class="inline" id="isRight"></label></td>
+                <td><input type="text" id="vcode" name="randomcode" value="" required onblur="checkVcode();"/>
+					<span class="text-error" id="nonempty3" style="display:none;">字段不能为空</span>
+					<span class="text-error" id="error" style="display:none;">验证码输入错误</span>
+                </td>
             </tr>
             </tbody>
             </table>
 			<div class="text-center">
-            	<button class="btn-u" type="submit">确认</button>
+            	<button class="btn-u" id="confirm" type="submit" disabled="disabled">确认</button>
             </div><!--end of div submit-->
                     	<input type="text" name="email" value=<%= request.getAttribute("email") %> style="display:none;"/>
             </form>
@@ -309,83 +318,83 @@
 			})
 });          
     });
-</script>
-<script type="text/javascript">
-	function isNull()
-	{
-		var password = document.getElementsByTagName('input')[1].value;
-		var password_comfirm = document.getElementsByTagName('input')[2].value;
-		if(password == "")
-		{
-			document.getElementById("isNull").innerHTML = "请输入密码";
-		}
-		else if(password != password_comfirm)
-		{
-			document.getElementById("isComfirm").innerHTML = "两次密码输入不一致";
-		}
-		else
-		{
-			document.getElementById("isNull").innerHTML = "";
-			document.getElementById("isComfirm").innerHTML = "";
-		}
+function checkVcode(){
+	var pwd3=document.getElementById("vcode").value;
+if(pwd3 == "")
+ {
+	 document.getElementById("nonempty3").style.display = "block";
+	 return false;
+}
+else{
+	document.getElementById("nonempty3").style.display = "none";
+	if(checkAllEmpty()){
+		document.getElementById("confirm").disabled="";
 	}
-</script>
-<script type="text/javascript">
-	function isComfirm()
-	{
-		var password = document.getElementsByTagName('input')[1].value;
-		var password_comfirm = document.getElementsByTagName('input')[2].value;
-		if(password_comfirm == "")
-		{
-			document.getElementById("isComfirm").innerHTML = "请确认密码";
-		}
-		else if(password != password_comfirm)
-		{
-			document.getElementById("isComfirm").innerHTML = "两次密码输入不一致";
-		}
-		else
-		{
-			document.getElementById("isComfirm").innerHTML = "";
-		}
+    return true;
 	}
-</script>
-<script type="text/javascript">
-	function isRight()
-	{
-		var randomcode_comfirm = document.getElementsByTagName('input')[3].value;
-		var randomcode = '<%=request.getAttribute("randomcode")%>';
-		if(randomcode_comfirm == "")
-		{
-			document.getElementById("isRight").innerHTML = "请输入验证码";
-		}
-		else if(randomcode_comfirm != randomcode)
-		{
-			document.getElementById("isRight").innerHTML = "验证码错误,请重新输入";
-		}
-		else
-		{
-			document.getElementById("isRight").innerHTML = "";
-		}
+}
+function checkAllEmpty(){
+  var pwd1=document.getElementById("newPassword").value;
+  var pwd2=document.getElementById("newPassword_check").value;
+  var pwd3=document.getElementById("vcode").value;
+  
+  var randomcode = "<%=request.getAttribute("randomcode")%>";
+  
+  if(randomcode != pwd3)
+  {
+  	document.getElementById("error").style.display = "block";
+  }
+  else
+  {
+  	document.getElementById("error").style.display = "none";
+  }
+  if(((pwd1&&pwd2&&pwd3)!="")&&(randomcode == pwd3)){
+	  return true;
+  }
+  else{
+  	return false;
+  }
+}
+
+function checkPass(){
+  var pwd1=document.getElementById("newPassword").value;
+  var pwd2=document.getElementById("newPassword_check").value;
+  
+ if(pwd1 == "")
+ {
+	document.getElementById("nonempty1").style.display = "block";
+	return false;
+ }
+ else
+ {
+ 	document.getElementById("nonempty1").style.display = "none";
+ }
+if(pwd2 == "")
+ {
+	 document.getElementById("nonempty2").style.display = "block";
+	 return false;
+ }
+ else
+ {
+ 	document.getElementById("nonempty2").style.display = "none";
+ }
+if(pwd1!=pwd2){
+	document.getElementById("nonempty1").style.display = "none";
+	document.getElementById("nonempty2").style.display = "none";
+    document.getElementById("errorpwd").style.display = "block";
+    return false;
+ }
+
+
+ else{
+	document.getElementById("errorpwd").style.display = "none";
+	document.getElementById("nonempty1").style.display = "none";
+	document.getElementById("nonempty2").style.display = "none";
+
+
+    return true;
 	}
-</script>
-<script type="text/javascript">
-	function check()
-	{
-		var isNull = document.getElementById("isNull").innerHTML;
-		var isComfirm = document.getElementById("isComfirm").innerHTML;
-		var isRight = document.getElementById("isRight").innerHTML;
-		if((isNull == "")&&(isComfirm == "")&&(isRight == ""))
-		{
-			return true;
-		}
-		else
-		{
-			alert(isNull);
-			alert(isComfirm);
-			alert(isRight);
-			return false;
-		}
-	}
+}
 </script>
 <!--[if lt IE 9]>
     <script src="assets/js/respond.js"></script>

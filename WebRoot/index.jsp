@@ -37,6 +37,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-2" />    
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head> 
+  <%
+  	String flag = (String)request.getAttribute("flag");
+  	if(flag == null || flag != "success")
+  	{
+  		response.sendRedirect("recruitment.do?method=selectRecentRecruitment");
+  		return;
+  	}
+  	else
+  	{
+  		request.removeAttribute("flag");
+  	}
+  %>
   <body>
     <!--=== Style Switcher ===-->    
 <i class="style-switcher-btn style-switcher-btn-option icon-cogs"></i>
@@ -64,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li><a href="security.do?method=goToLogin"><i class="icon-user"></i> 登录</a></li>	
                 <%}else if(userType.equals(UserType.Tester)) {%>
                   <li><a href="security.do?method=testerLogout"><i class="icon-user"></i>注销</a></li>
-                   <li><%=tester.getTesterName()%></li>	
+                   <li><a href="personal_center.do?method=testerFindAllQuestionnaire"><%=tester.getTesterName()%></a></li>	
                <% }%>
             </ul>
         </div>        				
