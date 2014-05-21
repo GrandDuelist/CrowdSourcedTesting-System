@@ -245,10 +245,15 @@
       type="cn.com.crowdsourcedtesting.controller.PublishWebTestingRouter">
       <set-property property="cancellable" value="true" />
       <forward name="productSuccess" path="/publisher_taskpub_reward.jsp"></forward>
-      <forward name="productError" path="/publisher_taskpub_web.jsp"></forward>
+      <forward name="webProductError" path="/publisher_taskpub_web.jsp"></forward>
+      <forward name="androidProductError" path="/publisher_taskpub_android.jsp"></forward>
+      <forward name="desktopProductError" path="/publisher_taskpub_desktop.jsp"></forward>
       <forward name="taskSuccess" path="/publisher_taskpub_success.html"></forward>
       <forward name="taskError" path="/publisher_taskpub_reward.jsp"></forward>
       <forward name="directTo" path="/publisher_taskpub_web.jsp"></forward>
+      <forward name="pubWeb" path="/publisher_taskpub_web.jsp"></forward>
+      <forward name="pubAndroid" path="/publisher_taskpub_android.jsp"></forward>
+      <forward name="pubDesktop" path="/publisher_taskpub_desktop.jsp"></forward>
     </action>
     <action path="/checkQuestionnaire" type="cn.com.crowdsourcedtesting.struts.action.CheckQuestionnaireAction">
       <set-property property="cancellable" value="true" />
