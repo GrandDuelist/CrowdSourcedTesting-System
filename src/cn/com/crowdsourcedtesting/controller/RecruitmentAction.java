@@ -88,12 +88,12 @@ public class RecruitmentAction extends DispatchAction {
 	public ActionForward selectRecentRecruitment(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {	
 		
-		RecruitmentDAO dao =new RecruitmentDAO();
-		
 		page.setCurrentPage(1);
 		page.setPerRows(3);
 		page.setTotalRows(3);
 		handler.selectRecentRecruitments(page, request);
+		
+		request.setAttribute("flag", "success");
 		
 		return mapping.findForward("index");
 	}

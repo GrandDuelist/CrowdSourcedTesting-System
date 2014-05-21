@@ -8,18 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
 
 /** 
  * MyEclipse Struts
- * Creation date: 05-18-2014
+ * Creation date: 05-22-2014
  * 
  * XDoclet definition:
- * @struts.form name="findPasswordForm"
+ * @struts.form name="changeInformationForm"
  */
-public class FindPasswordForm extends ActionForm {
+public class ChangeInformationForm extends ActionForm {
 	/*
 	 * Generated fields
 	 */
@@ -27,14 +25,18 @@ public class FindPasswordForm extends ActionForm {
 	/** email property */
 	private String email;
 
-	private String password;
-	
-	private String password_comfirm;
+	/** name property */
+	private String name;
 
-	private String randomcode;
+	/** password property */
+	private String password;
+
+	private String password_comfirm;
 	/*
 	 * Generated Methods
 	 */
+
+	
 
 	/** 
 	 * Method validate
@@ -45,20 +47,12 @@ public class FindPasswordForm extends ActionForm {
 	public ActionErrors validate(ActionMapping mapping,
 			HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		ActionErrors errors = new ActionErrors();
-		if (!(this.email.equals("null"))) {
-			if(this.email.equals(""))
-			{
-				errors.add("email",new ActionMessage("email.null"));
-				request.setAttribute("errors", "null");
-			}
-			else if (!(this.email.matches("\\w+@\\w+\\.(com\\.cn)|\\w+@\\w+\\.(com|cn)"))) 
-			{
-				errors.add("email",new ActionMessage("email.wrongformat"));
-				request.setAttribute("errors", "wrongformat");
-			}
+		if (!(this.password.equals(this.password_comfirm))) {
+			System.out.println(this.password);
+			System.out.println(this.password_comfirm);
+			this.password = null;
 		}
-		return errors;
+		return null;
 	}
 
 	/** 
@@ -85,21 +79,37 @@ public class FindPasswordForm extends ActionForm {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	/** 
+	 * Returns the name.
+	 * @return String
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/** 
+	 * Set the name.
+	 * @param name The name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/** 
+	 * Returns the password.
+	 * @return String
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+	/** 
+	 * Set the password.
+	 * @param password The password to set
+	 */
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	
-	public String getRandomcode() {
-		return randomcode;
-	}
-
-	public void setRandomcode(String randomcode) {
-		this.randomcode = randomcode;
 	}
 	
 	public String getPassword_comfirm() {

@@ -20,6 +20,7 @@
     <form-bean name="findPasswordForm" type="cn.com.crowdsourcedtesting.struts.form.FindPasswordForm" />
     <form-bean name="checkRegisterListForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterListForm" />
     <form-bean name="checkRegisterDetailForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterDetailForm" />
+    <form-bean name="changeInformationForm" type="cn.com.crowdsourcedtesting.struts.form.ChangeInformationForm" />
    
   
   </form-beans>
@@ -42,6 +43,18 @@
 
     </action>
     
+	<action
+	parameter="method" 
+	input="/index.jsp"
+	path="/personal_center"
+	scope="request"
+	type="cn.com.crowdsourcedtesting.controller.SecurityRouter">
+	<set-property property="cancellable" value="true" />
+    
+      <forward name="login" path="/LoginView.jsp.jsp"></forward>
+      <forward name="personal_center" path="/page_personal_center.jsp"></forward>
+	</action>
+    
     <action 
     	attribute = "findPasswordForm"
     	parameter = "method"
@@ -53,8 +66,21 @@
     	<set-property property="cancellable" value="true" />
      
      	<forward name="findpassword" path="/page_personal_pwchange.jsp"></forward>
-      	<forward name="success" path="/index.jsp"></forward>
+      	<forward name="success" path="/page_personal_center.jsp"></forward>
       	<forward name="fail" path="/page_personal_pwchange.jsp"></forward>
+    </action>
+    
+    <action 
+    	attribute = "changeInformationForm"
+    	parameter = "method"
+    	input = "/page_personal_profile.jsp"
+    	name="changeInformationForm"
+    	path="/security"
+    	scope = "request"
+    	type = "cn.com.crowdsourcedtesting.controller.SecurityRouter">
+    	<set-property property="cancellable" value="true" />
+     
+     	<forward name="success" path="/page_personal_center.jsp"></forward>
     </action>
     
     <action

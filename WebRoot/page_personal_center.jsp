@@ -1,5 +1,5 @@
-<%@ page language="java" pageEncoding="utf-8"%>
 
+<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.modelhelper.*,cn.com.crowdsourcedtesting.bean.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
@@ -50,7 +50,15 @@
 	-->
 
   </head>
-  
+<% 
+	UserType userType = (UserType)session.getAttribute("UserType");
+  	Tester tester  = (Tester)session.getAttribute("Tester");
+  	if(tester == null)
+  	{
+  		response.sendRedirect("security.do?method=goToLogin");
+   		return;
+  	}
+%>  
 <body>
 <!--=== Style Switcher ===-->    
 <i class="style-switcher-btn style-switcher-btn-option icon-cogs"></i>
@@ -74,12 +82,20 @@
             <ul class="loginbar inline">
                 <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i> chengran327@gmail.com</a></li>	
                 <li><a><i class="icon-phone-sign"></i> 021 4202 2656</a></li>	
-                <li><a href="page_login.html"><i class="icon-user"></i> 登录</a></li>	
+                <li><a href="security.do?method=testerLogout"><i class="icon-user"></i>注销</a></li>
+                <li><%=tester.getTesterName()%></li>	
             </ul>
         </div>        				
     </div><!--/container-->		
 </div><!--/top-->
 <!--=== End Top ===-->    
+
+<%
+	HttpSession session2 = request.getSession();
+	List<Questionnaire> questionnaires = (List<Questionnaire>)session2.getAttribute("Questionnaires");
+	Iterator<Questionnaire> iterator = questionnaires.iterator();
+	Questionnaire questionnaire = null;
+%>
 
 <!--=== Header ===-->
 <div class="header">               
@@ -167,7 +183,7 @@
                 <img src="assets/img/others/6.jpg" alt="" />
                 <h3><a>程冉</a> <small>资深会员</small></h3>
                 做任务领奖励，前往<a class="text-success">这里</a>开始您的任务之旅
-                 <p class="text-right"><button class="btn-u" type="button">修改资料</button>
+                 <p class="text-right"><button class="btn-u" type="button" onclick="javascript:window.location.href='page_personal_profile.jsp'">修改资料</button>
                  </p>
                 <ul class="unstyled inline team">
                 	<li><a href="#"><i class="icon-star"></i> 50 </a></li>
@@ -181,83 +197,121 @@
         <div class="headline"><h3>近期问卷</h3>
         	<a class="pull-right btn-u" href="page_questionaire.html">更多</a>
         </div>
+        <%
+        	if(iterator.hasNext())
+        	{
+        		questionnaire = (Questionnaire)iterator.next();
+        	
+        %>
             <div class="span5">
     		<div class="service clearfix">
                 <i class="icon-group"></i>
     			<div class="desc">
-    				<h4>项目评估</h4>
-                    <p>对众测项目的调查投票</p>
+    				<h4><%=questionnaire.getTitle() %></h4>
     			</div>
     		</div>	
     	</div>
+    	<%
+    	}
+    		if(iterator.hasNext())
+        	{
+        		questionnaire = (Questionnaire)iterator.next();
+    	%>
     	<div class="span6">
     		<div class="service clearfix">
                 <i class="icon-desktop"></i>
     			<div class="desc">
-    				<h4>界面调查</h4>
-                    <p>对腾讯游戏lol的英雄形象调查</p>
-                    
+    				<h4><%=questionnaire.getTitle() %></h4>                  
     			</div>
     		</div>	
     	</div>
+    	<%
+    	}
+    		if(iterator.hasNext())
+        	{
+        		questionnaire = (Questionnaire)iterator.next();
+    	%>
     	<div class="span5">
     		<div class="service clearfix">
                 <i class="icon-bullhorn"></i>
     			<div class="desc">
-    				<h4>用户满意度</h4>
-                    <p>百度云的用户满意度调查</p>
+    				<h4><%=questionnaire.getTitle() %></h4>
     			</div>
     		</div>	
-    	</div>	
+    	</div>
+    	<%
+    	}
+    		if(iterator.hasNext())
+        	{
+        		questionnaire = (Questionnaire)iterator.next();
+    	%>	
         <div class="span6">
     		<div class="service clearfix">
                 <i class="icon-globe"></i>
     			<div class="desc">
-    				<h4>需求调查</h4>
-                    <p>360手机助手需求愿景调查</p>
+    				<h4><%=questionnaire.getTitle() %></h4>
                 </div>
     		</div>	
     	</div>	
+    	<%
+    	}
+    		if(iterator.hasNext())
+        	{
+        		questionnaire = (Questionnaire)iterator.next();
+    	%>
         <div class="span5">
     		<div class="service clearfix">
                 <i class="icon-resize-small"></i>
     			<div class="desc">
-    				<h4>用户满意度</h4>
-                    <p>百度云的用户满意度调查</p>
-                    
+    				<h4><%=questionnaire.getTitle() %></h4>                   
     			</div>
     		</div>	
     	</div>	
+    	<%
+    	}
+    		if(iterator.hasNext())
+        	{
+        		questionnaire = (Questionnaire)iterator.next();
+    	%>
         <div class="span6">
     		<div class="service clearfix">
                 <i class="icon-plane"></i>
     			<div class="desc">
-    				<h4>需求调查</h4>
-                    <p>360手机助手需求愿景调查</p>
-                    
+    				<h4><%=questionnaire.getTitle() %></h4>
     			</div>
     		</div>	
     	</div>	
+    	<%
+    	}
+    		if(iterator.hasNext())
+        	{
+        		questionnaire = (Questionnaire)iterator.next();
+    	%>
          <div class="span5">
     		<div class="service clearfix">
                 <i class="icon-filter"></i>
     			<div class="desc">
-    				<h4>用户满意度</h4>
-                    <p>百度云的用户满意度调查</p>
-                    
+    				<h4><%=questionnaire.getTitle() %></h4>
     			</div>
     		</div>	
-    	</div>	
+    	</div>
+    	<%
+    	}
+    		if(iterator.hasNext())
+        	{
+        		questionnaire = (Questionnaire)iterator.next();
+    	%>	
         <div class="span6">
     		<div class="service clearfix">
                 <i class="icon-fire"></i>
     			<div class="desc">
-    				<h4>需求调查</h4>
-                    <p>360手机助手需求愿景调查</p>
-                    
+    				<h4><%=questionnaire.getTitle() %></h4>
     			</div>
     		</div>	
     	</div>
+    	<%
+    	}
+    	%>
         </div><!--end of div-9-->
     </div><!--/row-fluid-->
 	

@@ -167,30 +167,26 @@
             	<td><strong>登录邮箱</strong></td>
                 <td><label class="inline">752050943@qq.com &nbsp;&nbsp;<button class="btn-u" type="button">发送验证邮件</button></label></td>
             </tr>
-             <tr>
+            <tr>
             	<td><strong>新密码</strong></td>
-                <td><input id="newPassword" type="password" value="" required onblur="checkPass();"/>
-                	<span class="text-error" id="nonempty1" style="display:none;">字段不能为空</span>
-                </td>
+                <td><input id="newPassword" type="password" value="" required/></td>
             </tr>
             <tr>
             	<td><strong>确认密码</strong></td>
-                <td><input id="newPassword_check" type="password" value="" required onblur="checkPass();"/>
-                <span class="text-error" id="nonempty2" style="display:none;">字段不能为空</span>
-                <span class="text-error" id="errorpwd" style="display:none;">两次输入密码不一致</span>
-                
-                </td>
+                <td><input id="newPassword_check" type="password" value="" required onblur="checkPass();"/><span class="text-error" id="errorpwd" style="display:none;">两次输入密码不一致</span></td>
             </tr>
             <tr>
             	<td><strong>验证码</strong></td>
-                <td><input type="text" id="vcode" value="" required onblur="checkVcode();"/>
-					<span class="text-error" id="nonempty3" style="display:none;">字段不能为空</span>
+                <td><input type="text" value=""/>
+、
+                
+                
                 </td>
             </tr>
             </tbody>
             </table>
 			<div class="text-center">
-            	<button class="btn-u" id="confirm" type="button" disabled="disabled">确认</button>
+            	<button class="btn-u" type="button">确认</button>
             </div><!--end of div submit-->
         </div><!--end of div-9-->
     </div><!--/row-fluid-->
@@ -294,70 +290,18 @@
 }); 
      
     });
-function checkVcode(){
-	var pwd3=document.getElementById("vcode").value;
-if(pwd3 == "")
- {
-	 document.getElementById("nonempty3").style.display = "block";
-	 return false;
-}
-else{
-	document.getElementById("nonempty3").style.display = "none";
-	if(checkAllEmpty()){
-		document.getElementById("confirm").disabled="";
-	}
-    return true;
-	}
-}
-function checkAllEmpty(){
-	var pwd1=document.getElementById("newPassword").value;
-  var pwd2=document.getElementById("newPassword_check").value;
-  var pwd3=document.getElementById("vcode").value;
-  if((pwd1&&pwd2&&pwd3)!=""){
-	  return true;
-  }
-  else{
-  	return false;
-  }
-}
+
 
 function checkPass(){
   var pwd1=document.getElementById("newPassword").value;
   var pwd2=document.getElementById("newPassword_check").value;
-  
- if(pwd1 == "")
- {
-	document.getElementById("nonempty1").style.display = "block";
-	return false;
- }
- else
- {
- 	document.getElementById("nonempty1").style.display = "none";
- }
-if(pwd2 == "")
- {
-	 document.getElementById("nonempty2").style.display = "block";
-	 return false;
- }
- else
- {
- 	document.getElementById("nonempty2").style.display = "none";
- }
-if(pwd1!=pwd2){
-	document.getElementById("nonempty1").style.display = "none";
-	document.getElementById("nonempty2").style.display = "none";
+ if(pwd1!=pwd2){
     document.getElementById("errorpwd").style.display = "block";
     return false;
  }
-
-
  else{
 	document.getElementById("errorpwd").style.display = "none";
-	document.getElementById("nonempty1").style.display = "none";
-	document.getElementById("nonempty2").style.display = "none";
-
-
-    return true;
+    return false;
 	}
 }
 </script>
