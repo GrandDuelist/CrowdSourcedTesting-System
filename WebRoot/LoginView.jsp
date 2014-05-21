@@ -133,7 +133,7 @@
 <!--=== Content Part ===-->
 <div class="container">		
 	<div class="row-fluid">
-        <form  action="security.do?method=testerLogin" class="log-page" method="post" >
+        <form  action="login.do?method=testerLogin" class="log-page" method="post" >
         <h3>帐号登录
         <%if(session.getAttribute("login")!=null&&session.getAttribute("login").equals("fail")){
         session.setAttribute("login", null);

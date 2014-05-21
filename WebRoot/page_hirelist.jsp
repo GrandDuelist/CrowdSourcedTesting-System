@@ -67,7 +67,7 @@ String flag = (String)request.getAttribute("isLegal");
             <ul class="loginbar inline">
                 <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i> chengran327@gmail.com</a></li>	
                 <li><a><i class="icon-phone-sign"></i> 021 4202 2656</a></li>	
-                <li><a href="page_login.html"><i class="icon-user"></i> 登录</a></li>	
+                <li><a href="login.do?method=testerLogin"><i class="icon-user"></i> 登录</a></li>	
             </ul>
         </div>        				
     </div><!--/container-->		
@@ -92,15 +92,15 @@ String flag = (String)request.getAttribute("isLegal");
                     <span class="icon-bar"></span>
                 </a><!-- /nav-collapse -->                                  
                 <div class="nav-collapse collapse">                                     
-                    <ul class="nav top-2">
+                  <ul class="nav">
                         <li>
-                           <a href="index.html">主页
+                           <a href="index.jsp">主页
                             
                             </a>
                            
                       </li>
                         <li>
-                            <a href="gifts.jsp">礼品中心
+                            <a href="gifts.do?method=selectAllGifts">礼品中心
                                                         
                             </a>
                                        
@@ -110,15 +110,15 @@ String flag = (String)request.getAttribute("isLegal");
                             </a>
                         </li>
                         <li class="active">
-                            <a href="page_hirelist.jsp">招募帖                          
+                            <a  href="recruitment.do?method=selectAllRecruitment">招募帖                          
                             </a>
                         </li>
                         <li>
                             <a href="page_clients.html">合作伙伴</a>
       
                         </li>
-                        <li>
-                            <a href="page_contact.html">联系我们
+                       <li >
+                            <a href="questionnaire.do?method=pageQuestionnaire">问卷调查
                             </a>
                             
                                                     

@@ -13,6 +13,10 @@
    <param name="sequence">TEST_TASK_SEQUENCE</param>
    </generator>
   </id>
+ 	<many-to-one class="cn.com.crowdsourcedtesting.bean.Administrator"
+	fetch="select" name="administrator">
+	<column name="CHECK_ADMINISTRATOR_ID" precision="9" scale="0" />
+	</many-to-one>
   <many-to-one class="cn.com.crowdsourcedtesting.bean.Product"
    fetch="select" name="product">
    <column name="PRODUCT_ID" not-null="true" precision="9" scale="0"/>
@@ -27,15 +31,17 @@
   <property generated="never" lazy="false" name="taskEndTime" type="java.util.Date">
    <column length="7" name="TASK_END_TIME"/>
   </property>
-  <property generated="never" lazy="false" name="taskType" type="java.lang.Boolean">
+  <property generated="never" lazy="false" name="taskType" type="java.lang.Integer">
    <column name="TASK_TYPE" not-null="true" precision="1" scale="0"/>
-  </property>
-  <property generated="never" lazy="false" name="checkedAdministratorId" type="java.lang.Integer">
-   <column name="CHECKED_ADMINISTRATOR_ID" precision="9" scale="0"/>
   </property>
   <property generated="never" lazy="false" name="taskEnvironment" type="java.lang.String">
    <column length="256" name="TASK_ENVIRONMENT"/>
   </property>
+  <property generated="never" lazy="false" name="isPassed"
+  type="java.lang.Boolean">
+<column name="IS_PASSED" not-null="false" precision="1"
+scale="0" />
+</property>
   <property generated="never" lazy="false" name="perReward" type="java.lang.Double">
    <column name="PER_REWARD" not-null="true" precision="9"/>
   </property>

@@ -223,7 +223,7 @@ public class QuestionnaireDAO extends BaseHibernateDAO {
 		public int getUncheckedTotalRows()
 		{
 		
-					 Number c= (Number) getSession().createQuery("select count(*) from Questionnaire  where CHECK_ADMINISTATOR_ID=null")
+					 Number c= (Number) getSession().createQuery("select count(*) from Questionnaire where CHECK_ADMINISTATOR_ID=null")
 					.uniqueResult();
 					 
 					
@@ -266,6 +266,87 @@ public class QuestionnaireDAO extends BaseHibernateDAO {
 					throw re;
 				}
 		}
+		
+		
+		
+		
+		//得到总的参与分数
+				public int getPublisherJoinCounts()
+				{
+				
+							 Number c= (Number) getSession().createQuery("select count(*) from JoinQuestionnaire")
+							.uniqueResult();
+							 
+							
+							 return c.intValue();
+							
+							
+					//return this.findAll().size();
+				}
+
+				
+				//得到总的条数
+				public int getCheckedTotalRowsByPublisher(int publisherId)
+				{
+				
+							 Number c= (Number) getSession().createQuery("select count(*) from Questionnaire where IS_PASSED=1 and PUBLISHER_ID="+publisherId)
+							.uniqueResult();
+							 
+							
+							 return c.intValue();
+							
+							
+					//return this.findAll().size();
+				}
+				//按页查找问卷
+			public List<Questionnaire> findCheckedByPublisherPage(Page page,int publisherId) {
+					// TODO Auto-generated method stub
+					try {
+						List<Questionnaire> gifts = new ArrayList<Questionnaire>();
+						String queryString = "from Questionnaire where IS_PASSED=1 and PUBLISHER_ID="+publisherId;
+						Query queryObject = getSession().createQuery(queryString);
+						
+						 gifts=queryObject
+						.setFirstResult((page.getCurrentPage()-1)*page.getPerRows())
+						.setMaxResults(page.getPerRows())
+						.list();
+						
+						return gifts;
+						}
+						catch(RuntimeException re) {
+							log.error("find by page failed", re);
+							throw re;
+						}
+				}
+
+
+			public List<Questionnaire> findByCheckedPage(Page page) {
+				try {
+					List<Questionnaire> gifts = new ArrayList<Questionnaire>();
+					String queryString = "from Questionnaire where IS_PASSED=1";
+					Query queryObject = getSession().createQuery(queryString);
+					
+					 gifts=queryObject
+					.setFirstResult((page.getCurrentPage()-1)*page.getPerRows())
+					.setMaxResults(page.getPerRows())
+					.list();
+					
+					return gifts;
+					}
+					catch(RuntimeException re) {
+						log.error("find by page failed", re);
+						throw re;
+					}
+			}
+
+
+			public int getcheckedTotalRows() {
+				 Number c= (Number) getSession().createQuery("select count(*) from Questionnaire where IS_PASSED=1")
+							.uniqueResult();
+							 return c.intValue();
+			}
+			
+			
 	
 		
 		//模糊搜索

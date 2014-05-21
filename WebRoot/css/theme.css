@@ -172,7 +172,7 @@ body {
 ul, ol { padding-left: 30px }
 li { margin-bottom: 7px }
 a { color: #666 }
-a:hover { color: #d9534f }
+a:hover { color: #6DB54B }
 a:focus { outline: none }
 p {
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
@@ -356,9 +356,9 @@ ul.dropdown-items > li a:hover {
 	color: #666;
 }
 /* Special on-hover styles for user dropdown menu */
-.user-menu ul.dropdown-items > li:hover i.fa { color: #d9534f; }
+.user-menu ul.dropdown-items > li:hover i.fa { color: #6DB54B; }
 .user-menu ul.dropdown-items > li:last-child:hover i.fa { color: #888; }
-.user-menu ul.dropdown-items > li:last-child > div:hover i.fa { color: #d9534f; }
+.user-menu ul.dropdown-items > li:last-child > div:hover i.fa { color: #6DB54B; }
 
 /* Header Menu Dropdown - Footer */
 .header-btns .dropdown-footer {
@@ -556,7 +556,7 @@ ul.sidebar-nav > li > a {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f5f5f5',GradientType=0);
     filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
-ul.sidebar-nav li.active > a .glyphicons { color: #d9534f }
+ul.sidebar-nav li.active > a .glyphicons { color: #6DB54B }
 /* Side Nav Icon */
 ul.sidebar-nav > li > a .glyphicons {
     width: 40px;
@@ -585,7 +585,7 @@ ul.sidebar-nav > li > a.collapsed span.caret {
     border-top: 0;
     border-bottom: 5px solid;
 }
-ul.sidebar-nav > li.active > a span.caret { color: #d9534f }
+ul.sidebar-nav > li.active > a span.caret { color: #6DB54B }
 /* Sub-menu */
 ul.sidebar-nav ul.sub-nav.menu-open { display: block }
 ul.sidebar-nav ul.sub-nav {
@@ -603,7 +603,7 @@ ul.sidebar-nav ul.sub-nav li span {
 	float: left;
 	
 }
-ul.sidebar-nav ul.sub-nav > li > a:hover .glyphicons { color: #d9534f }
+ul.sidebar-nav ul.sub-nav > li > a:hover .glyphicons { color: #6DB54B }
 
 /* SIDE MENU COLLAPSED STATE 
  * Activated via JS. A ".sidebar-collapsed" class is added to
@@ -737,7 +737,7 @@ body.sidebar-collapsed ul.sidebar-nav li:hover ul.sub-nav, body.sidebar-collapse
     font-size: 95%;
 }
 label.error {
-    color: #d9534f;
+    color: #6DB54B;
     font-size: 12px;
     font-weight: 600;
 }
@@ -2107,7 +2107,7 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
 .badge-success { background-color: #5cb85c }
 .badge-info { background-color: #5bc0de }
 .badge-warning { background-color: #f0ad4e }
-.badge-danger { background-color: #d9534f }
+.badge-danger { background-color: #6DB54B }
 .badge-alert { background-color: #7857ca }
 .badge-inverse, .label-inverse { background-color: #444 }
 /* COLORS FOR BADGES - CUSTOM THEMED */

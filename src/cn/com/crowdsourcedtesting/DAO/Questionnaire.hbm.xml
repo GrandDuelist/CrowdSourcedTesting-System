@@ -31,7 +31,7 @@
 		</property>
 		<property generated="never" lazy="false" name="isPassed"
 			type="java.lang.Boolean">
-			<column name="IS_PASSED" not-null="true" precision="1"
+			<column name="IS_PASSED" not-null="false" precision="1"
 				scale="0" />
 		</property>
 		<property generated="never" lazy="false" name="questionnaireCount"

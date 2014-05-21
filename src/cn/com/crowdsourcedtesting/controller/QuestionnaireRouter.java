@@ -7,6 +7,7 @@ package cn.com.crowdsourcedtesting.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,13 +23,19 @@ import org.apache.struts.actions.DispatchAction;
 import cn.com.crowdsourcedtesting.model.QuestionnaireHandler;
 import cn.com.crowdsourcedtesting.modelhelper.MethodNumber;
 import cn.com.crowdsourcedtesting.struts.form.CheckQuestionnaireDetailForm;
+import cn.com.crowdsourcedtesting.struts.form.CheckRegisterDetailForm;
 import cn.com.crowdsourcedtesting.struts.form.PageIdForm;
 import cn.com.crowdsourcedtesting.struts.form.PublisherQuestionnaireForm;
 import cn.com.crowdsourcedtesting.struts.form.QuestionnaireDetailForm;
+import cn.com.crowdsourcedtesting.struts.form.QuestionnaireDisplayForm;
 import cn.com.crowdtest.factory.DAOFactory;
+import cn.com.crowdtest.factory.HibernateSessionFactory;
 import cn.com.crowdsourcedtesting.DAO.QuestionnaireDAO;
 import cn.com.crowdsourcedtesting.bean.*;
 import cn.com.other.page.Page;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  * MyEclipse Struts Creation date: 05-02-2014
@@ -45,7 +52,7 @@ public class QuestionnaireRouter extends DispatchAction {
 	QuestionnaireHandler myHandler = new QuestionnaireHandler();
 
 	/**
-	 * 跳转到发布页面
+	 * 跳转到发布页�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -100,16 +107,18 @@ public class QuestionnaireRouter extends DispatchAction {
 
 		if (session.getAttribute("Publisher") != null) {
 			Publisher publisher = (Publisher) session.getAttribute("Publisher");
+
 			myHandler.createItem(f, request);
 
 		} else {
 			return mapping.findForward("publisherLogin");
 		}
+
 		return mapping.findForward("add");
 	}
 
 	/**
-	 * 审核的列表
+	 * 审核的列�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -125,7 +134,36 @@ public class QuestionnaireRouter extends DispatchAction {
 		PageIdForm pageIDForm = (PageIdForm) form;
 
 		// 交给事务处理
-		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接口
+		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接�
+
+		return mapping.findForward("list");
+	}
+
+	/**
+	 * 发布者查看的列表
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+
+	public ActionForward questionnaireList(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+		// TODO Auto-generated method stub
+
+		PageIdForm pageIDForm = (PageIdForm) form;
+		HttpSession session = request.getSession();
+		Publisher publisher = (Publisher) session.getAttribute("Publisher");
+
+		if (publisher == null) {
+			return mapping.findForward("publisherLogin");
+		}
+
+		// 交给事务处理
+		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodTwo); // 调用第一个接�
 
 		return mapping.findForward("list");
 	}
@@ -152,7 +190,49 @@ public class QuestionnaireRouter extends DispatchAction {
 	}
 
 	/**
-	 * 审核问卷的处理
+	 * 发布者要查看的问卷详�
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward questionnaireDetail(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+		// TODO Auto-generated method stub
+
+		PageIdForm pageIDForm = (PageIdForm) form;
+
+		// 交给事务处理
+		myHandler.detailHandle(pageIDForm, request, MethodNumber.MethodOne);
+
+		return mapping.findForward("detail");
+	}
+
+	/**
+	 * 显示动态效果图
+	 */
+	public ActionForward display(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+
+		QuestionnaireDisplayForm f = (QuestionnaireDisplayForm) form;
+
+		// 交给事务处理
+		HttpSession session = request.getSession();
+		System.out.println("_---------------------" + f.getQuestionID());
+		session.setAttribute("questionID", f.getQuestionID());
+		PageIdForm p = new PageIdForm();
+		p.setId(f.getQuestionnaireID());
+
+		return this.questionnaireDetail(mapping, p, request, response);
+
+	}
+
+	/**
+	 * 审核问卷的处�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -178,7 +258,7 @@ public class QuestionnaireRouter extends DispatchAction {
 
 		} else if (form == null) { // 如果传过来的表单为空
 
-			// 如果表单为空，则直接跳转到列表
+			// 如果表单为空，则直接跳转到列�
 			Page currentPage = (Page) session.getAttribute("currentPage");
 			PageIdForm p = new PageIdForm();
 			p.setPage(currentPage.getCurrentPage() + "");
@@ -204,7 +284,7 @@ public class QuestionnaireRouter extends DispatchAction {
 				q.setIsPassed(false);
 
 			}
-			qd.save(q); // 修改数据库
+			qd.save(q); // 修改数据�
 
 			Page currentPage = (Page) session.getAttribute("currentPage");
 			PageIdForm p = new PageIdForm();
@@ -214,4 +294,126 @@ public class QuestionnaireRouter extends DispatchAction {
 
 	}
 
+	/**
+	 * 前台问卷列表显示
+	 */
+	public ActionForward pageQuestionnaire(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+		// TODO Auto-generated method stub
+
+		PageIdForm pageIDForm = (PageIdForm) form;
+
+		// 交给事务处理
+		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodThree); // 调用第一个接�
+
+		return mapping.findForward("list");
+
+	}
+
+	/**
+	 * 前台的问卷内�
+	 */
+
+	public ActionForward pageDetail(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+
+		
+	
+		PageIdForm pageIDForm = (PageIdForm) form;
+
+		// 交给事务处理
+		myHandler.detailHandle(pageIDForm, request, MethodNumber.MethodTwo);
+
+		return mapping.findForward("detail");
+
+	}
+
+	/**
+	 * 提交问卷的处�
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward subQuestionnaire(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+		// TODO Auto-generated method stub
+
+		HttpSession session = request.getSession();
+		Tester tester = (Tester) session.getAttribute("Tester");
+
+		if (tester == null) {
+			return mapping.findForward("testerLogin");
+		}
+
+		CheckQuestionnaireDetailForm detailForm = (CheckQuestionnaireDetailForm) form;
+
+		if (detailForm == null) {
+			return mapping.findForward("page_detail");
+		}
+
+		String result = detailForm.getSubType(); // 编码格式：||54-34||32-44
+		String id = detailForm.getId();
+
+		Session sess = HibernateSessionFactory.getSession();
+		Transaction tx = null;
+		try {
+			tx = sess.beginTransaction();
+			
+			result = result.substring(result.indexOf("||")+2,result.length());
+			while (result != null && !result.equals("")) {
+				String item = null;
+				System.out.println("result:"+result);
+				
+				
+				if (result.indexOf("||")>-1) {
+					item = result.substring(result.indexOf("-")+1
+							,result.indexOf("||"));
+					
+					result = result.substring(result.indexOf("||") + 2,
+							result.length());
+				} else{
+					item = result.substring(result.indexOf("-")+1
+						, result.length());
+					result = null;
+				}
+				
+				int choiceID = Integer.parseInt(item);
+				Choice choice = DAOFactory.getChoiceDAO().findById(choiceID);
+				choice.setSelectCount(choice.getSelectCount()+1);
+			    sess.saveOrUpdate(choice);
+				
+			}
+			
+			int questionnaireID = Integer.parseInt(id);
+			Questionnaire questionnaire = DAOFactory.getQuestionnaireDAO()
+					.findById(questionnaireID);
+			questionnaire.setQuestionnaireCount(questionnaire.getQuestionnaireCount()+1);
+			sess.saveOrUpdate(questionnaire);
+			JoinQuestionnaire join = new JoinQuestionnaire();
+			join.setJoinTime(new Date());
+			join.setQuestionnaire(questionnaire);
+			join.setTester(tester);
+            sess.save(join);
+			tx.commit();
+			session.setAttribute("hasJoined", "true");
+
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			if (tx != null) {
+				tx.rollback();
+			}
+		} finally {
+			sess.close();
+		}
+
+		
+		return mapping.findForward("page_detail");
+
+	}
 }

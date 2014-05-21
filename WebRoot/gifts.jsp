@@ -98,13 +98,14 @@
                 <div class="nav-collapse collapse">                                     
                     <ul class="nav top-2">
                         <li>
-                           <a href="index.html">主页
+                           <a href="index.jsp">主页
                             
                             </a>
                            
                       </li>
                         <li class="active">
                             <a href="gifts.html">礼品中心
+                            <a href="gifts.do?method=selectAllGifts">礼品中心
                                                         
                             </a>
                                        
@@ -114,15 +115,16 @@
                             </a>
                         </li>
                         <li>
-                            <a href="page_hirelist.html">招募帖                          
+                            <a href="page_hirelist.html">招募�                         
+                            <a href="recruitment.do?method=selectAllRecruitment">招募�                         
                             </a>
                         </li>
                         <li>
                             <a href="page_clients.html">合作伙伴</a>
       
                         </li>
-                        <li>
-                            <a href="page_contact.html">联系我们
+                       <li>
+                            <a href="questionnaire.do?method=pageQuestionnaire">问卷调查
                             </a>
                             
                                                     
@@ -170,12 +172,12 @@
         <div id="w">    
             <div class="sort" id="sort">
 				<ul class="unstyled inline">
-                	<li><a href="gifts.do?method=selectAllGifts" class="all selected">所有礼品</a></li>
+                	<li><a href="gifts.do?method=selectAllGifts" class="all selected">所有礼�/a></li>
                 	<!-- 
                 	<li><a href="#" class="web">常规礼品</a></li>
                 	<li><a href="#" class="ios">项目礼品</a></li>
                 	 -->
-                	<li><a href="gifts.do?method=selectAvailableGifts&usercredit=5000" class="print">可兑换礼品</a></li>
+                	<li><a href="gifts.do?method=selectAvailableGifts&usercredit=5000" class="print">可兑换礼�/a></li>
                 </ul>
             </div>
             
@@ -226,7 +228,7 @@
 			<div class="span4">
                 <!-- About -->
 		        <div class="headline"><h3>关于</h3></div>	
-				<p class="margin-bottom-25">TCTest全名为吐槽测试网，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见。</p>	
+				<p class="margin-bottom-25">TCTest全名为吐槽测试网，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见�/p>	
 
 				
 			</div><!--/span4-->	
@@ -235,8 +237,8 @@
             <!-- Monthly Newsletter -->
 		        <div class="headline"><h3>联系方式</h3></div>	
                 <address>
-					4800号，曹安公路，同济大学软件学院 <br />
-					上海市, 中国 <br />
+					4800号，曹安公路，同济大学软件学�<br />
+					上海� 中国 <br />
 					电话: 131 6293 7287 <br />
 					传真: 800 123 3456 <br />
 					Email: <a href="mailto:info@anybiz.com" class="">chengran327@gmail.com</a>

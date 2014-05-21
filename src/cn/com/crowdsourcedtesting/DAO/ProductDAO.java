@@ -208,6 +208,7 @@ public class ProductDAO extends BaseHibernateDAO {
 		return product;
 	}
 	
+	
 	//模糊搜索
 		public List findSimilarPropertyByPage(Page page, String propertyName, Object value) {
 			log.debug("search label by property limit");
@@ -243,4 +244,55 @@ public class ProductDAO extends BaseHibernateDAO {
 			}
 
 		}
+	public Product addAndroidProduct(String productName, String icon,
+			String appLocation, String description) {
+		Session session = getSession();
+		Transaction trans = null;
+		Product product = null;
+		try {
+			trans = session.beginTransaction();
+			SubcategoryDAO subCategoryDAO = new SubcategoryDAO();
+			Subcategory subcategory = subCategoryDAO.findById(1);
+			product = new Product(subcategory, productName, new Date(), "1",
+					true, description, icon);
+			product.setApkAddress(appLocation);
+			session.save(product);
+			trans.commit();
+			log.debug("add web product successful");
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			if (trans != null) {
+				trans.rollback();
+			}
+			product = null;
+			throw re;
+		}
+		return product;
+	}
+	
+	public Product addDesktopProduct(String productName, String icon,
+			String desktopAddress, String description) {
+		Session session = getSession();
+		Transaction trans = null;
+		Product product = null;
+		try {
+			trans = session.beginTransaction();
+			SubcategoryDAO subCategoryDAO = new SubcategoryDAO();
+			Subcategory subcategory = subCategoryDAO.findById(1);
+			product = new Product(subcategory, productName, new Date(), "1",
+					true, description, icon);
+			product.setDesktopAddress(desktopAddress);
+			session.save(product);
+			trans.commit();
+			log.debug("add desktop product successful");
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			if (trans != null) {
+				trans.rollback();
+			}
+			product = null;
+			throw re;
+		}
+		return product;
+	}
 }

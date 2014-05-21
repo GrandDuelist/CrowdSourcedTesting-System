@@ -69,7 +69,7 @@ public class SecurityRouter extends DispatchAction {
 	private SecurityHandler handler = new SecurityHandler();
 	
 	/**
-	 * 测试者登�
+	 * 测试者登�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -88,13 +88,13 @@ public class SecurityRouter extends DispatchAction {
 		Tester tester = handler.handleTesterLogin(f);
 
 		if (tester != null) {
-			// 测试者登陆成�
+			// 测试者登陆成�
 			session.setAttribute("UserType", UserType.Tester);
 			session.setAttribute("Tester", tester);
-			return mapping.findForward("home");
+			return this.testerFindAllQuestionnaire(mapping, form, request, response);
 
 		} else {
-			// 测试者登录失�
+			// 测试者登录失�
 			session.setAttribute("login", "fail");
 			return mapping.findForward("login");
 		}
@@ -102,7 +102,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 测试者登�
+	 * 测试者登�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -122,7 +122,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 跳转到测试者登录页�
+	 * 跳转到测试者登录页�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -137,7 +137,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 跳转到管理员的登录页�
+	 * 跳转到管理员的登录页�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -153,7 +153,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 进入管理者页�
+	 * 进入管理者页�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -176,14 +176,14 @@ public class SecurityRouter extends DispatchAction {
 		Administrator administrator = handler.handleAdministratorLogin(f);
 
 		if (administrator != null) {
-			// 管理员登陆成�
+			// 管理员登陆成�
 			session.setAttribute("UserType", UserType.Administor);
 			session.setAttribute("Administrator", administrator);
 
 			return mapping.findForward("home");
 
 		} else {
-			// 测试者登录失�
+			// 测试者登录失�
 			session.setAttribute("a_login", "fail");
 			return mapping.findForward("adminLogin");
 		}
@@ -191,7 +191,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 测试者登�
+	 * 测试者登�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -208,14 +208,14 @@ public class SecurityRouter extends DispatchAction {
 		Publisher publisher = handler.handlePublisherLogin(f);
 
 		if (publisher != null) {
-			// 测试者登陆成�
+			// 测试者登陆成�
 			session.setAttribute("UserType", UserType.Publisher);
 			session.setAttribute("Publisher", publisher);
 
 			return mapping.findForward("manage");
 
 		} else {
-			// 测试者登录失�
+			// 测试者登录失�
 			session.setAttribute("p_login", "fail");
 			return mapping.findForward("login");
 		}
@@ -223,7 +223,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 审核注册的列�
+	 * 审核注册的列�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -242,14 +242,14 @@ public class SecurityRouter extends DispatchAction {
 		pageIDForm.setPage(f.getPage());
 		pageIDForm.setSubType(f.getSubType());
 		// 交给事务处理
-		handler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接�
+		handler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接�
 
 		return mapping.findForward("list");
 
 	}
 
 	/**
-	 * 查看注册者细�
+	 * 查看注册者细�
 	 */
 	public ActionForward checkDetail(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -261,14 +261,14 @@ public class SecurityRouter extends DispatchAction {
 		pageIDForm.setPage(f.getPage());
 		pageIDForm.setSubType(f.getSubType());
 		// 交给事务处理
-		handler.detailHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接�
+		handler.detailHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接�
 
 		return mapping.findForward("detail");
 
 	}
 
 	/**
-	 * 审核注册的列�
+	 * 审核注册的列�
 	 * 
 	 * @param mapping
 	 * @param form
@@ -287,7 +287,7 @@ public class SecurityRouter extends DispatchAction {
 		pageIDForm.setPage(f.getPage());
 		pageIDForm.setSubType(f.getSubType());
 		// 交给事务处理
-		handler.ListHandle(pageIDForm, request, MethodNumber.MethodTwo); // 调用第一个接�
+		handler.ListHandle(pageIDForm, request, MethodNumber.MethodTwo); // 调用第一个接�
 
 		return mapping.findForward("list");
 
@@ -318,7 +318,7 @@ public class SecurityRouter extends DispatchAction {
 
 		} else if (form == null) { // 如果传过来的表单为空
 
-			// 如果表单为空，则直接跳转到列�
+			// 如果表单为空，则直接跳转到列�
 			Page currentPage = (Page) session.getAttribute("currentPage");
 			CheckRegisterListForm p = new CheckRegisterListForm();
 			p.setPage(currentPage.getCurrentPage() + "");
@@ -348,7 +348,7 @@ public class SecurityRouter extends DispatchAction {
 				q.setIsPassed(false);
 
 			}
-			qd.save(q); // 修改数据�
+			qd.save(q); // 修改数据�
 
 			Page currentPage = (Page) session.getAttribute("currentPage");
 			PageIdForm p = new PageIdForm();

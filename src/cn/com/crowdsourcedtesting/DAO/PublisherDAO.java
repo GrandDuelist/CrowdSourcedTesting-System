@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,15 +43,18 @@ public class PublisherDAO extends BaseHibernateDAO {
 
 	public void save(Publisher transientInstance) {
 		log.debug("saving Publisher instance");
+		 Session session=getSession();
 		try {
+			session.beginTransaction();
 			getSession().save(transientInstance);
+			session.beginTransaction().commit();
 			log.debug("save successful");
 		} catch (RuntimeException re) {
 			log.error("save failed", re);
+			session.beginTransaction().rollback();
 			throw re;
 		}
 	}
-
 	public void delete(Publisher persistentInstance) {
 		log.debug("deleting Publisher instance");
 		try {

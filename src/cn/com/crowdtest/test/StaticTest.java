@@ -9,6 +9,7 @@ import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
 import cn.com.crowdsourcedtesting.bean.Product;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.TestTask;
+import cn.com.crowdsourcedtesting.modelhelper.TaskType;
 
 public class StaticTest {
 
@@ -57,7 +58,6 @@ public class StaticTest {
 		// productDAO.addWebProduct("name", "icon", "http://www.baidu.com",
 		// "测试百度");
 
-		Session session = HibernateSessionFactory.getSession();
 		Transaction trans = null;
 		TestTask testTask = null;
 		try {
@@ -78,7 +78,9 @@ public class StaticTest {
 			}
 			testTask = null;
 			throw re;
-		}
+		}*/
+
+	
 
 	}
 }
