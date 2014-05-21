@@ -1,6 +1,5 @@
 package cn.com.crowdsourcedtesting.model;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,7 +36,8 @@ public class RecruitmentHandler {
 			request.setAttribute("isLegal", "illegal");
 
 	}
-
+<<<<<<< HEAD
+	
 	public void selectRecentRecruitments(Page page, HttpServletRequest request){
 		List<Recruitment> recruitments = new ArrayList();
 		RecruitmentDAO dao = new RecruitmentDAO();
@@ -53,7 +53,11 @@ public class RecruitmentHandler {
 			request.setAttribute("isLegal", "illegal");
 	}
 	
+	public void selectRecruitment(int id, HttpServletRequest request){
+=======
+
 	public void selectRecruitment(int id, HttpServletRequest request) {
+>>>>>>> 81cced6a3148acef5050965baee7b6bb8c0f944d
 		RecruitmentDAO dao = new RecruitmentDAO();
 		Recruitment recruitment = dao.findById(id);
 		if(recruitment != null)

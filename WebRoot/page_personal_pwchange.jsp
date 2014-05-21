@@ -1,0 +1,394 @@
+<%@ page language="java" pageEncoding="utf-8"%>
+
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+
+
+<!DOCTYPE html>
+<!--[if IE 7]> <html lang="en" class="ie7"> <![endif]-->  
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<html:html lang="true">
+  <head>
+    <html:base />
+    
+    <title>TCTEST</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="rain" />
+
+
+	<!-- date picker-->'
+    <link rel="stylesheet" href="assets/js/lib/themes/default.css" id="theme_base">
+    <link rel="stylesheet" href="assets/js/lib/themes/default.date.css" id="theme_date">
+    <link rel="stylesheet" href="assets/js/lib/themes/default.time.css" id="theme_time">
+    <!-- CSS Global Compulsory-->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/headers/header1.css" />
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="assets/css/style_responsive.css" />
+    <link rel="shortcut icon" href="favicon.ico" />        
+    <!-- CSS Implementing Plugins -->    
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/plugins/flexslider/flexslider.css" type="text/css" media="screen" />          
+    <!-- CSS Theme -->    
+    <link rel="stylesheet" href="assets/css/themes/default.css" id="style_color" />
+    <link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-1" />    
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head> 
+
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+
+  </head>
+  
+<body>
+<!--=== Style Switcher ===-->    
+<i class="style-switcher-btn style-switcher-btn-option icon-cogs"></i>
+<div class="style-switcher style-switcher-inner">
+    <div class="theme-close"><i class="icon-remove"></i></div>
+    <div class="theme-heading">主题颜色</div>
+    <ul class="unstyled">
+        <li class="theme-default theme-active" data-style="default" data-header="dark"></li>
+        <li class="theme-blue" data-style="blue" data-header="dark"></li>
+        <li class="theme-orange" data-style="orange" data-header="dark"></li>
+        <li class="theme-red" data-style="red" data-header="dark"></li>
+        <li class="theme-light" data-style="light" data-header="dark"></li>
+    </ul>
+</div><!--/style-switcher-->
+<!--=== End Style Switcher ===-->    
+
+<!--=== Top ===-->    
+<div class="top">
+    <div class="container">			        
+        <div class="row-fluid">
+            <ul class="loginbar inline">
+                <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i> chengran327@gmail.com</a></li>	
+                <li><a><i class="icon-phone-sign"></i> 021 4202 2656</a></li>	
+                <li><a href="page_login.html"><i class="icon-user"></i> 登录</a></li>	
+            </ul>
+        </div>        				
+    </div><!--/container-->		
+</div><!--/top-->
+<!--=== End Top ===-->    
+
+<!--=== Header ===-->
+<div class="header">               
+    <div class="container"> 
+        <!-- Logo -->       
+        <div class="logo">                                             
+            <a href="index.html"><img id="logo-header" src="assets/img/logo2-default.png" alt="Logo" /></a>
+        </div><!-- /logo -->        
+                                    
+        <!-- Menu -->       
+        <div class="navbar">                                
+            <div class="navbar-inner">                                  
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a><!-- /nav-collapse -->                                  
+                <div class="nav-collapse collapse">                                     
+                    <ul class="nav">
+                        <li class="active">
+                           <a href="index.html">主页
+                            
+                            </a>
+                           
+                      </li>
+                        <li>
+                            <a href="gifts.html">礼品中心
+                                                        
+                            </a>
+                                       
+                        </li>
+                        <li>
+                            <a href="page_list.html">任务广场                            
+                            </a>
+                        </li>
+                        <li>
+                            <a href="page_hirelist.html">招募帖                          
+                            </a>
+                        </li>
+                        <li>
+                            <a href="page_clients.html">合作伙伴</a>
+      
+                        </li>
+                       <li>
+                            <a href="page_questionaire.html">问卷调查
+                            </a>
+                            
+                                                    
+                        </li>
+                        <li><a class="search search-nav"><i class="icon-search search-btn"></i></a></li>                                
+                    </ul>
+                    <div class="search-open search-open-inner">
+                        <div class="input-append">
+                            <form />
+                                <input type="text" class="span3" placeholder="搜索" />
+                                <button type="submit" class="btn-u">搜索</button>
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- /nav-collapse -->                                
+            </div><!-- /navbar-inner -->
+        </div><!-- /navbar -->                          
+    </div><!-- /container -->               
+</div><!--/header -->      
+<!--=== End Header ===-->
+
+<!--=== Breadcrumbs ===-->
+<div class="row-fluid breadcrumbs margin-bottom-40">
+	<div class="container">
+        <h1 class="pull-left">找回密码</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="index.html">主页</a> <span class="divider">/</span></li>
+            <li class="active">找回密码</li>
+        </ul>
+    </div><!--/container-->
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+
+<!--=== Content Part ===-->
+<div class="container">		
+	<div class="row-fluid margin-bottom-30">
+    	<div class="span3 thumbnails team">
+        <div class="headline"><h3>个人信息</h3></div>
+           <div class="thumbnail-style">
+                <img src="assets/img/others/6.jpg" alt="" />
+                <h3><a>程冉</a> <small>资深会员</small></h3>
+                感受编程的快乐，和学习的动力。
+                
+            </div>
+        </div>
+    	<div class="span9">
+        <div class="headline"><h3>密码修改</h3>
+        </div>
+        	<p class="hero">您的基本信息会显示在这里，请填写您的新密码，注意，新密码不能与老密码相同。</p>
+        	<form action="findpassword.do?method=testerFindPassword" method="post">
+            <table class="table table-bordered">
+            <thead>
+            <tr>
+            	<th width="30%" style="border-top: 2px solid #E5E5E5;"></th>
+                <th style="border-top: 2px solid #E5E5E5;">信息</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="success">
+            	<td><strong>登录邮箱</strong></td>
+                <td><label class="inline"><%=request.getAttribute("email") %></label></td>
+                
+            </tr>
+            <tr>
+            	<td><strong>新密码</strong></td>
+                <td><input type="password" name="password" onblur="isNull()" value=""/><label class="inline" id="isNull"></label></td>
+            </tr>
+            <tr>
+            	<td><strong>确认密码</strong></td>
+                <td><input type="password" name="password_comfirm" onblur="isComfirm()" value=""/><label class="inline" id="isComfirm"></label></td>
+            </tr>
+            <tr>
+            	<td><strong>验证码</strong></td>
+                <td><input type="text" name="randomcode" onblur="isRight()" value=""/><label class="inline" id="isRight"></label></td>
+            </tr>
+            </tbody>
+            </table>
+			<div class="text-center">
+            	<button class="btn-u" type="submit">确认</button>
+            </div><!--end of div submit-->
+                    	<input type="text" name="email" value=<%= request.getAttribute("email") %> style="display:none;"/>
+            </form>
+        </div><!--end of div-9-->
+    </div><!--/row-fluid-->
+
+
+</div><!--/container-->		
+<!--=== End Content Part ===-->
+
+<!--=== Footer ===-->
+<div class="footer">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span4">
+                <!-- About -->
+		        <div class="headline"><h3>关于</h3></div>	
+				<p class="margin-bottom-25">TCTest全名为吐槽测试网的英文，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见。</p>	
+
+				
+			</div><!--/span4-->	
+			
+			<div class="span4">
+            <!-- Monthly Newsletter -->
+		        <div class="headline"><h3>联系我们</h3></div>	
+                <address>
+					4800号，曹安公路，同济大学软件学院 <br />
+					上海市, 中国 <br />
+					电话: 131 6293 7287 <br />
+					传真: 800 123 3456 <br />
+					Email: <a href="mailto:info@anybiz.com" class="">chengran327@gmail.com</a>
+                </address>
+			</div><!--/span4-->
+
+			<div class="span4">
+	
+
+                <!-- Stay Connected -->
+		        <div class="headline">
+		          <h3>关注我们</h3></div>	
+                <ul class="social-icons">
+                    <li><a href="#" data-original-title="Feed" class="social_rss"></a></li>
+                    <li><a href="#" data-original-title="Facebook" class="social_picasa"></a></li>
+                    <li><a href="#" data-original-title="Twitter" class="social_twitter"></a></li>
+                    <li><a href="#" data-original-title="Goole Plus" class="social_tumblr"></a></li>
+                    <li><a href="#" data-original-title="Pinterest" class="social_pintrest"></a></li>
+                    <li><a href="#" data-original-title="Linkedin" class="social_linkedin"></a></li>
+                    <li><a href="#" data-original-title="Vimeo" class="social_vimeo"></a></li>
+                </ul>
+			</div><!--/span4-->
+		</div><!--/row-fluid-->	
+	</div><!--/container-->	
+</div><!--/footer-->	
+<!--=== End Footer ===-->
+
+<!--=== Copyright ===-->
+<div class="copyright">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span7">						
+	            <p>Copyright &copy; 2014.TCtest All rights reserved.</p>
+			</div>
+			<div class="span4">	
+                <a href="index.html"><img id="logo-footer" src="assets/img/logo2-default.png" class="pull-right" alt="" /></a>
+			</div>
+		</div><!--/row-fluid-->
+	</div><!--/container-->	
+</div><!--/copyright-->	
+<!--=== End Copyright ===-->
+
+<!-- JS Global Compulsory -->           
+<script type="text/javascript" src="assets/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="assets/js/modernizr.custom.js"></script>       
+<script type="text/javascript" src="assets/js/Date.js"></script>  
+<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
+<!-- JS Implementing Plugins -->           
+<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
+<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
+<!-- JS Page Level --> 
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script>window.jQuery||document.write('<script src="tests/jquery.2.0.0.js"><\/script>')</script>
+<script src="assets/js/lib/picker.js"></script>
+<script src="assets/js/lib/picker.date.js"></script>
+<script src="assets/js/lib/picker.time.js"></script>
+<script src="assets/js/lib/legacy.js"></script>
+<script src="assets/js/demo/scripts/demo.js"></script>
+<script src="assets/js/demo/scripts/rainbow.js"></script>         
+<script type="text/javascript" src="assets/js/app.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        App.init();
+        App.initSliders();
+		$(document).ready(function() { 
+			$('.datepicker').pickadate({
+				monthsFull: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+				weekdaysShort: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+				today: '确认',
+				clear: '清除',
+				formatSubmit: 'yyyy/mm/dd'
+			})
+});          
+    });
+</script>
+<script type="text/javascript">
+	function isNull()
+	{
+		var password = document.getElementsByTagName('input')[1].value;
+		var password_comfirm = document.getElementsByTagName('input')[2].value;
+		if(password == "")
+		{
+			document.getElementById("isNull").innerHTML = "请输入密码";
+		}
+		else if(password != password_comfirm)
+		{
+			document.getElementById("isComfirm").innerHTML = "两次密码输入不一致";
+		}
+		else
+		{
+			document.getElementById("isNull").innerHTML = "";
+			document.getElementById("isComfirm").innerHTML = "";
+		}
+	}
+</script>
+<script type="text/javascript">
+	function isComfirm()
+	{
+		var password = document.getElementsByTagName('input')[1].value;
+		var password_comfirm = document.getElementsByTagName('input')[2].value;
+		if(password_comfirm == "")
+		{
+			document.getElementById("isComfirm").innerHTML = "请确认密码";
+		}
+		else if(password != password_comfirm)
+		{
+			document.getElementById("isComfirm").innerHTML = "两次密码输入不一致";
+		}
+		else
+		{
+			document.getElementById("isComfirm").innerHTML = "";
+		}
+	}
+</script>
+<script type="text/javascript">
+	function isRight()
+	{
+		var randomcode_comfirm = document.getElementsByTagName('input')[3].value;
+		var randomcode = '<%=request.getAttribute("randomcode")%>';
+		if(randomcode_comfirm == "")
+		{
+			document.getElementById("isRight").innerHTML = "请输入验证码";
+		}
+		else if(randomcode_comfirm != randomcode)
+		{
+			document.getElementById("isRight").innerHTML = "验证码错误,请重新输入";
+		}
+		else
+		{
+			document.getElementById("isRight").innerHTML = "";
+		}
+	}
+</script>
+<script type="text/javascript">
+	function check()
+	{
+		var isNull = document.getElementById("isNull").innerHTML;
+		var isComfirm = document.getElementById("isComfirm").innerHTML;
+		var isRight = document.getElementById("isRight").innerHTML;
+		if((isNull == "")&&(isComfirm == "")&&(isRight == ""))
+		{
+			return true;
+		}
+		else
+		{
+			alert(isNull);
+			alert(isComfirm);
+			alert(isRight);
+			return false;
+		}
+	}
+</script>
+<!--[if lt IE 9]>
+    <script src="assets/js/respond.js"></script>
+<![endif]-->
+</body>
+</html:html>

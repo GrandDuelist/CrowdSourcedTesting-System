@@ -85,6 +85,18 @@ public class RecruitmentAction extends DispatchAction {
 		return mapping.findForward("hirelist");
 	}
 	
+	public ActionForward selectRecentRecruitment(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {	
+		
+		RecruitmentDAO dao =new RecruitmentDAO();
+		
+		page.setCurrentPage(1);
+		page.setPerRows(3);
+		page.setTotalRows(3);
+		handler.selectRecentRecruitments(page, request);
+		
+		return mapping.findForward("index");
+	}
 	
 	/** 
 	 * Method selectRecruitment

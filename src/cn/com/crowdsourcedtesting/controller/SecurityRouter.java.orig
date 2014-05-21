@@ -29,8 +29,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+<<<<<<< HEAD
+
+=======
 import cn.com.crowdsourcedtesting.DAO.PublisherDAO;
 import cn.com.crowdsourcedtesting.DAO.QuestionnaireDAO;
+>>>>>>> 81cced6a3148acef5050965baee7b6bb8c0f944d
 import cn.com.crowdsourcedtesting.bean.Administrator;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Questionnaire;
@@ -39,10 +43,13 @@ import cn.com.crowdsourcedtesting.model.SecurityHandler;
 import cn.com.crowdsourcedtesting.modelhelper.MethodNumber;
 import cn.com.crowdsourcedtesting.modelhelper.UserType;
 import cn.com.crowdsourcedtesting.struts.form.AdminLoginForm;
+<<<<<<< HEAD
 import cn.com.crowdsourcedtesting.struts.form.FindPasswordForm;
+=======
 import cn.com.crowdsourcedtesting.struts.form.CheckQuestionnaireDetailForm;
 import cn.com.crowdsourcedtesting.struts.form.CheckRegisterDetailForm;
 import cn.com.crowdsourcedtesting.struts.form.CheckRegisterListForm;
+>>>>>>> 81cced6a3148acef5050965baee7b6bb8c0f944d
 import cn.com.crowdsourcedtesting.struts.form.LoginForm;
 import cn.com.crowdsourcedtesting.struts.form.PageIdForm;
 import cn.com.crowdsourcedtesting.struts.form.PublisherLoginForm;
@@ -63,9 +70,14 @@ public class SecurityRouter extends DispatchAction {
 	 */
 
 	private SecurityHandler handler = new SecurityHandler();
+<<<<<<< HEAD
 	
+	
+=======
+
+>>>>>>> 81cced6a3148acef5050965baee7b6bb8c0f944d
 	/**
-	 * 测试者登�
+	 * 测试者登陆
 	 * 
 	 * @param mapping
 	 * @param form
@@ -84,13 +96,13 @@ public class SecurityRouter extends DispatchAction {
 		Tester tester = handler.handleTesterLogin(f);
 
 		if (tester != null) {
-			// 测试者登陆成�
+			// 测试者登陆成功
 			session.setAttribute("UserType", UserType.Tester);
 			session.setAttribute("Tester", tester);
 			return mapping.findForward("home");
 
 		} else {
-			// 测试者登录失�
+			// 测试者登录失败
 			session.setAttribute("login", "fail");
 			return mapping.findForward("login");
 		}
@@ -98,7 +110,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 测试者登�
+	 * 测试者登出
 	 * 
 	 * @param mapping
 	 * @param form
@@ -118,7 +130,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 跳转到测试者登录页�
+	 * 跳转到测试者登录页面
 	 * 
 	 * @param mapping
 	 * @param form
@@ -133,7 +145,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 跳转到管理员的登录页�
+	 * 跳转到管理员的登录页面
 	 * 
 	 * @param mapping
 	 * @param form
@@ -149,7 +161,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 进入管理者页�
+	 * 进入管理者页面
 	 * 
 	 * @param mapping
 	 * @param form
@@ -162,7 +174,6 @@ public class SecurityRouter extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 
 		if (form == null) {
-
 			System.out.println("failed");
 		}
 
@@ -172,14 +183,14 @@ public class SecurityRouter extends DispatchAction {
 		Administrator administrator = handler.handleAdministratorLogin(f);
 
 		if (administrator != null) {
-			// 管理员登陆成�
+			// 管理员登陆成功
 			session.setAttribute("UserType", UserType.Administor);
 			session.setAttribute("Administrator", administrator);
 
 			return mapping.findForward("home");
 
 		} else {
-			// 测试者登录失�
+			// 测试者登录失败
 			session.setAttribute("a_login", "fail");
 			return mapping.findForward("adminLogin");
 		}
@@ -187,7 +198,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 测试者登�
+	 * 测试者登陆
 	 * 
 	 * @param mapping
 	 * @param form
@@ -204,14 +215,14 @@ public class SecurityRouter extends DispatchAction {
 		Publisher publisher = handler.handlePublisherLogin(f);
 
 		if (publisher != null) {
-			// 测试者登陆成�
+			// 测试者登陆成功
 			session.setAttribute("UserType", UserType.Publisher);
 			session.setAttribute("Publisher", publisher);
 
 			return mapping.findForward("manage");
 
 		} else {
-			// 测试者登录失�
+			// 测试者登录失败
 			session.setAttribute("p_login", "fail");
 			return mapping.findForward("login");
 		}
@@ -219,7 +230,7 @@ public class SecurityRouter extends DispatchAction {
 	}
 
 	/**
-	 * 审核注册的列�
+	 * 审核注册的列表
 	 * 
 	 * @param mapping
 	 * @param form
@@ -238,14 +249,14 @@ public class SecurityRouter extends DispatchAction {
 		pageIDForm.setPage(f.getPage());
 		pageIDForm.setSubType(f.getSubType());
 		// 交给事务处理
-		handler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接�
+		handler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接口
 
 		return mapping.findForward("list");
 
 	}
 
 	/**
-	 * 查看注册者细�
+	 * 查看注册者细节
 	 */
 	public ActionForward checkDetail(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -257,14 +268,14 @@ public class SecurityRouter extends DispatchAction {
 		pageIDForm.setPage(f.getPage());
 		pageIDForm.setSubType(f.getSubType());
 		// 交给事务处理
-		handler.detailHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接�
+		handler.detailHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接口
 
 		return mapping.findForward("detail");
 
 	}
 
 	/**
-	 * 审核注册的列�
+	 * 审核注册的列表
 	 * 
 	 * @param mapping
 	 * @param form
@@ -283,7 +294,7 @@ public class SecurityRouter extends DispatchAction {
 		pageIDForm.setPage(f.getPage());
 		pageIDForm.setSubType(f.getSubType());
 		// 交给事务处理
-		handler.ListHandle(pageIDForm, request, MethodNumber.MethodTwo); // 调用第一个接�
+		handler.ListHandle(pageIDForm, request, MethodNumber.MethodTwo); // 调用第一个接口
 
 		return mapping.findForward("list");
 
@@ -314,7 +325,7 @@ public class SecurityRouter extends DispatchAction {
 
 		} else if (form == null) { // 如果传过来的表单为空
 
-			// 如果表单为空，则直接跳转到列�
+			// 如果表单为空，则直接跳转到列表
 			Page currentPage = (Page) session.getAttribute("currentPage");
 			CheckRegisterListForm p = new CheckRegisterListForm();
 			p.setPage(currentPage.getCurrentPage() + "");
@@ -344,7 +355,7 @@ public class SecurityRouter extends DispatchAction {
 				q.setIsPassed(false);
 
 			}
-			qd.save(q); // 修改数据�
+			qd.save(q); // 修改数据库
 
 			Page currentPage = (Page) session.getAttribute("currentPage");
 			PageIdForm p = new PageIdForm();
@@ -384,7 +395,7 @@ public class SecurityRouter extends DispatchAction {
 			mailMessage.setFrom(fromAddress);
 			Address toAddress = new InternetAddress(findPasswordForm.getEmail());
 			mailMessage.setRecipient(Message.RecipientType.TO, toAddress);
-			mailMessage.setSubject("密码修改验证");
+			mailMessage.setSubject("密码修改验证码");
 			mailMessage.setSentDate(new Date());
 			Multipart mainpart = new MimeMultipart();
 			BodyPart htmlBodyPart  = new MimeBodyPart();
