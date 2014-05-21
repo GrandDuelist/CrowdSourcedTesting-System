@@ -21,6 +21,7 @@
     <form-bean name="checkRegisterListForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterListForm" />
     <form-bean name="checkRegisterDetailForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterDetailForm" />
     <form-bean name="changeInformationForm" type="cn.com.crowdsourcedtesting.struts.form.ChangeInformationForm" />
+    <form-bean name="bugReportPublishForm" type="cn.com.crowdsourcedtesting.struts.form.BugReportPublishForm" />
    
   
   </form-beans>
@@ -33,7 +34,7 @@
       parameter = "method"
       input="/LoginView.jsp"
       name="loginForm"
-      path="/security"
+      path="/login"
       scope="request"
       type="cn.com.crowdsourcedtesting.controller.SecurityRouter">
       <set-property property="cancellable" value="true" />
@@ -270,6 +271,8 @@
       scope="request"
       type="cn.com.crowdsourcedtesting.controller.PublishWebTestingRouter">
       <set-property property="cancellable" value="true" />
+      <forward name="taskManagement" path="/publisher_taskman.html"></forward>
+      <forward name="pubTask" path="/publisher_taskpub.jsp"></forward>
       <forward name="productSuccess" path="/publisher_taskpub_reward.jsp"></forward>
       <forward name="webProductError" path="/publisher_taskpub_web.jsp"></forward>
       <forward name="androidProductError" path="/publisher_taskpub_android.jsp"></forward>
@@ -286,6 +289,18 @@
     </action>
     <action path="/checkQuestionnaire" type="cn.com.crowdsourcedtesting.struts.action.CheckQuestionnaireAction">
       <set-property property="cancellable" value="true" />
+    </action>
+    <action
+      attribute="bugReportPublishForm"
+      parameter="method"
+      input="/form/bugReportPublish.jsp"
+      name="bugReportPublishForm"
+      path="/bugReportPublish"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.BugReportPublishAction">
+      <set-property property="cancellable" value="true" />
+      <forward name="bugPubSuccess" path="/publisher_taskpub_desktop.jsp"></forward>
+      <forward name="bugPubError" path="/tester_bugpub.jsp"></forward>
     </action>
 
   </action-mappings>
