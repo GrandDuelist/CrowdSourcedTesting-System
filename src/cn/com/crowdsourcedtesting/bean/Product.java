@@ -13,6 +13,7 @@ public class Product implements java.io.Serializable {
 	// Fields
 
 	private Integer productId;
+	private String productName;
 	private Subcategory subcategory;
 	private Date releaseTime;
 	private String version;
@@ -32,9 +33,11 @@ public class Product implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Product(Subcategory subcategory, Date releaseTime, String version,
-			Boolean status, String description, String icon) {
+	public Product(Subcategory subcategory, String productName,
+			Date releaseTime, String version, Boolean status,
+			String description, String icon) {
 		this.subcategory = subcategory;
+		this.productName = productName;
 		this.releaseTime = releaseTime;
 		this.version = version;
 		this.status = status;
@@ -43,11 +46,13 @@ public class Product implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Product(Subcategory subcategory, Date releaseTime, String version,
-			Boolean status, String description, String loginXmlFile,
-			String icon, String apkAddress, String webLink,
-			String desktopAddress, Set testTasks) {
+	public Product(Subcategory subcategory, String productName,
+			Date releaseTime, String version, Boolean status,
+			String description, String loginXmlFile, String icon,
+			String apkAddress, String webLink, String desktopAddress,
+			Set testTasks) {
 		this.subcategory = subcategory;
+		this.productName = productName;
 		this.releaseTime = releaseTime;
 		this.version = version;
 		this.status = status;
@@ -68,6 +73,14 @@ public class Product implements java.io.Serializable {
 
 	public void setProductId(Integer productId) {
 		this.productId = productId;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 	public Subcategory getSubcategory() {

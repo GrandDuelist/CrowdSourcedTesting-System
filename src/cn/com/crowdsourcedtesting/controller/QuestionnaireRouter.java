@@ -95,22 +95,16 @@ public class QuestionnaireRouter extends DispatchAction {
 		 * out.print(f.getChoices()); } catch (IOException e) { // TODO
 		 * Auto-generated catch block e.printStackTrace(); }
 		 */
- 
-		HttpSession session  = request.getSession();
-		
-		if(session.getAttribute("Publisher")!=null)
-		{
-			Publisher publisher  = (Publisher)session.getAttribute("Publisher");
-		    
-		     
-		     myHandler.createItem(f, request);
-		    
-		}
-		else
-		{
+
+		HttpSession session = request.getSession();
+
+		if (session.getAttribute("Publisher") != null) {
+			Publisher publisher = (Publisher) session.getAttribute("Publisher");
+			myHandler.createItem(f, request);
+
+		} else {
 			return mapping.findForward("publisherLogin");
 		}
-		
 		return mapping.findForward("add");
 	}
 
@@ -131,7 +125,7 @@ public class QuestionnaireRouter extends DispatchAction {
 		PageIdForm pageIDForm = (PageIdForm) form;
 
 		// 交给事务处理
-		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodOne);    //调用第一个接口
+		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接口
 
 		return mapping.findForward("list");
 	}
@@ -175,51 +169,43 @@ public class QuestionnaireRouter extends DispatchAction {
 
 		HttpSession session = request.getSession();
 
-		Administrator admin = (Administrator) session    //得到审核者的信息
-				.getAttribute("Administrator");  
-		
-		
-		if (admin == null) {      //审核者未登录
-			              
-			return mapping.findForward("adminLogin");
-			
-			
-			
-		} else if (form == null) {    //如果传过来的表单为空
+		Administrator admin = (Administrator) session // 得到审核者的信息
+				.getAttribute("Administrator");
 
-			
-			//如果表单为空，则直接跳转到列表
+		if (admin == null) { // 审核者未登录
+
+			return mapping.findForward("adminLogin");
+
+		} else if (form == null) { // 如果传过来的表单为空
+
+			// 如果表单为空，则直接跳转到列表
 			Page currentPage = (Page) session.getAttribute("currentPage");
 			PageIdForm p = new PageIdForm();
 			p.setPage(currentPage.getCurrentPage() + "");
 
 			return this.checkList(mapping, p, request, response);
-			
+
 		} else {
-			
-			String subType = detailForm.getSubType();  //通过或者不通过类型
-			
-			
-			
-			int id = Integer.parseInt(detailForm.getId());    //得到要处理的问卷
-			QuestionnaireDAO  qd = DAOFactory.getQuestionnaireDAO();
+
+			String subType = detailForm.getSubType(); // 通过或者不通过类型
+
+			int id = Integer.parseInt(detailForm.getId()); // 得到要处理的问卷
+			QuestionnaireDAO qd = DAOFactory.getQuestionnaireDAO();
 			Questionnaire q = qd.findById(id);
 			q.setAdministrator(admin);
-			
+
 			if ("yes".equals(subType)) { // 审核通过
-								
+
 				q.setIsPassed(true);
-			
-			
+
 			} else // 审核不通过
 			{
-				
-				q.setIsPassed(false);				
-			
+
+				q.setIsPassed(false);
+
 			}
-			qd.save(q);    //修改数据库
-			
-			
+			qd.save(q); // 修改数据库
+
 			Page currentPage = (Page) session.getAttribute("currentPage");
 			PageIdForm p = new PageIdForm();
 			p.setPage(currentPage.getCurrentPage() + "");

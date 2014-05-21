@@ -3,53 +3,82 @@ package cn.com.crowdtest.test;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import cn.com.crowdsourcedtesting.DAO.ProductDAO;
 import cn.com.crowdsourcedtesting.DAO.PublisherDAO;
 import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
+import cn.com.crowdsourcedtesting.bean.Product;
 import cn.com.crowdsourcedtesting.bean.Publisher;
-import cn.com.crowdsourcedtesting.bean.Recruitment;
+import cn.com.crowdsourcedtesting.bean.TestTask;
 
 public class StaticTest {
+
 	public static void main(String[] argv) {
 
+		// Session session = HibernateSessionFactory.getSession();
+		// Transaction tx = null;
+		// try {
+		// tx = session.beginTransaction();
+		// PublisherDAO publisherDAO = new PublisherDAO();
+		// Publisher publisher = publisherDAO.findById(8);
+		// System.out.println(publisher.getPublisherLogEmail() + " "
+		// + publisher.getPublisherName());
+		// // Questionnaire questionnaire = new Questionnaire(publisher,
+		// // "测试问卷",
+		// // 0.0, 0);
+		// // session.save(questionnaire);
+		// //
+		// // Question question = new Question(questionnaire, false, "测试问题",
+		// // 0);
+		// // session.save(question);
+		// // Choice choice = new Choice(question, "测试回答1", 0);
+		// // session.save(choice);
+		// // choice = new Choice(question, "测试回答2", 0);
+		// // session.save(choice);
+		// // choice = new Choice(question, "测试回答3", 0);
+		// // session.save(choice);
+		// // choice = new Choice(question, "测试回答4", 0);
+		// // session.save(choice);
+		//
+		// Recruitment recruitment = new Recruitment("TEST", false, false,
+		// publisher);
+		// session.save(recruitment);
+		// tx.commit();
+		// } catch (RuntimeException e) {
+		// e.printStackTrace();
+		// if (tx != null) {
+		// tx.rollback();
+		// }
+		// } finally {
+		// session.close();
+		// }
+		//
+		// ProductDAO productDAO = new ProductDAO();
+		// Product product = new Product();
+		// productDAO.addWebProduct("name", "icon", "http://www.baidu.com",
+		// "测试百度");
+
 		Session session = HibernateSessionFactory.getSession();
-		Transaction tx = null;
+		Transaction trans = null;
+		TestTask testTask = null;
 		try {
-			tx = session.beginTransaction();
+			trans = session.beginTransaction();
+
+			ProductDAO productDAO = new ProductDAO();
 			PublisherDAO publisherDAO = new PublisherDAO();
+			Product product = productDAO.findById(30);
 			Publisher publisher = publisherDAO.findById(8);
-			System.out.println(publisher.getPublisherLogEmail() + " "
-					+ publisher.getPublisherName());
-			// Questionnaire questionnaire = new Questionnaire(publisher,
-			// "测试问卷",
-			// 0.0, 0);
-			// session.save(questionnaire);
-			//
-			// Question question = new Question(questionnaire, false, "测试问题",
-			// 0);
-			// session.save(question);
-			// Choice choice = new Choice(question, "测试回答1", 0);
-			// session.save(choice);
-			// choice = new Choice(question, "测试回答2", 0);
-			// session.save(choice);
-			// choice = new Choice(question, "测试回答3", 0);
-			// session.save(choice);
-			// choice = new Choice(question, "测试回答4", 0);
-			// session.save(choice);
 
-			Recruitment recruitment = new Recruitment("TEST", false, false,
-					publisher);
-			session.save(recruitment);
+			testTask = new TestTask(product, publisher, true, 300.0, 300.0);
+			session.save(testTask);
 
-			tx.commit();
-		} catch (RuntimeException e) {
-			e.printStackTrace();
-			if (tx != null) {
-				tx.rollback();
+			trans.commit();
+		} catch (RuntimeException re) {
+			if (trans != null) {
+				trans.rollback();
 			}
-		} finally {
-			session.close();
+			testTask = null;
+			throw re;
 		}
 
 	}
-
 }
