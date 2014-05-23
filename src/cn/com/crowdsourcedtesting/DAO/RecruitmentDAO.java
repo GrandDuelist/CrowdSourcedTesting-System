@@ -1,6 +1,7 @@
 package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
+import cn.com.crowdsourcedtesting.bean.Questionnaire;
 import cn.com.crowdsourcedtesting.bean.Recruitment;
 import cn.com.other.page.Page;
 
@@ -263,4 +264,44 @@ public class RecruitmentDAO extends BaseHibernateDAO {
 			}
 
 		}
+		
+		
+		
+
+		//得到特定发布者的招募条数
+		public int getCheckedTotalRowsByPublisher(int publisherId)
+		{
+		
+					 Number c= (Number) getSession().createQuery("select count(*) from Recruitment where PUBLISHER_ID="+publisherId)
+					.uniqueResult();
+					 
+					
+					 
+					 return c.intValue();
+					
+					
+			//return this.findAll().size();
+		}
+		//按页查找招募信息
+	public List<Recruitment> findCheckedByPublisherPage(Page page,int publisherId) {
+			// TODO Auto-generated method stub
+			try {
+				List<Recruitment> recruitments = new ArrayList<Recruitment>();
+				String queryString = "from Recruitment where PUBLISHER_ID="+publisherId;
+				Query queryObject = getSession().createQuery(queryString);
+				
+				 recruitments=queryObject
+				.setFirstResult((page.getCurrentPage()-1)*page.getPerRows())
+				.setMaxResults(page.getPerRows())
+				.list();
+				
+				return recruitments;
+				}
+				catch(RuntimeException re) {
+					log.error("find by page failed", re);
+					throw re;
+				}
+		}
+		
+		
 }

@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -15,7 +16,9 @@ import cn.com.crowdsourcedtesting.DAO.PublisherDAO;
 import cn.com.crowdsourcedtesting.DAO.RecruitmentDAO;
 import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
 import cn.com.crowdsourcedtesting.bean.Publisher;
+import cn.com.crowdsourcedtesting.bean.Questionnaire;
 import cn.com.crowdsourcedtesting.bean.Recruitment;
+import cn.com.crowdtest.factory.DAOFactory;
 import cn.com.other.page.Page;
 
 public class RecruitmentHandler extends GeneralHandler {
@@ -126,6 +129,14 @@ public class RecruitmentHandler extends GeneralHandler {
 	public void setTargetListOne(Page page, HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		
+		HttpSession session = request.getSession();
+		Publisher publisher  = (Publisher)session.getAttribute("Publisher");
+		page.setTotalRows(DAOFactory.getRecruitmentDAO()
+				.getCheckedTotalRowsByPublisher(publisher.getPublisherId()));
+		List<Recruitment> recruitments = DAOFactory.getRecruitmentDAO().findCheckedByPublisherPage(page, publisher.getPublisherId());
+		request.setAttribute("currentPage", page);
+		request.setAttribute("recruitments", recruitments);
+		
 	}
 
 	@Override
@@ -143,6 +154,11 @@ public class RecruitmentHandler extends GeneralHandler {
 	@Override
 	public void setTargetDetailOne(int id, HttpServletRequest request) {
 		// TODO Auto-generated method stub
+		Recruitment recruitment = DAOFactory.getRecruitmentDAO()
+				.findById(id);
+		HttpSession session = request.getSession();
+
+		request.setAttribute("recruitment", recruitment);
 		
 	}
 

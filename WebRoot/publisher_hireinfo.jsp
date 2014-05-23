@@ -4,8 +4,14 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
-
-
+<%
+ Recruitment recruitment = (Recruitment)request.getAttribute("recruitment");
+ if(recruitment == null)
+ {
+ 	response.sendRedirect("recruitment.do?method=publisherList");
+ 	return;
+ }
+ %>
 <!DOCTYPE html>
 <html:html lang="true">
   <head>
@@ -317,12 +323,7 @@ String flag = (String)request.getAttribute("isLegal");
     
     
  <%
- Recruitment recruitment = (Recruitment)request.getAttribute("hireitem");
- if(recruitment == null)
- {
- 	response.sendRedirect("recruitment.do?method=gotoList");
- 	return;
- }
+
  String type = "线下";
  if(recruitment.getOnline())
  type = "线上";

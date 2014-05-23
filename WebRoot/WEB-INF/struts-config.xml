@@ -162,7 +162,7 @@
       <forward name="allcomment" path="/page_task_item.jsp" />
     </action>
     
-    
+    <!-- 定义招募信息的ACTION -->
     <action
       attribute="recruitmentForm"
       input="/page_hirelist.jsp"
@@ -175,12 +175,12 @@
       
       <forward name="hireitem" path="/page_hireitem.jsp"></forward>
       <forward name="hirelist" path="/page_hirelist.jsp" />
-      
       <forward name="edititem" path="/publisher_hireinfo.jsp" />
       <forward name="checklist" path="/publisher_hirelist.jsp" />
       <forward name="backstage" path="/publisher_hireman.jsp" />
       <forward name="additem" path="/publisher_hirepub.jsp" />
       <forward name="index" path="/index.jsp" />
+      <forward name="publisherLogin" path="/PublisherLoginView.jsp"></forward>
     </action>
     
        <action  
