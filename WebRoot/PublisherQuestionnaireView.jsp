@@ -1,13 +1,9 @@
 <%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*"  pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8" />
 <title>TCTEST</title>
 <meta name="keywords" content="TCTEST" />
 <meta name="description" content="TCTEST" />
@@ -31,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="vendor/plugins/formswitch/css/bootstrap-switch.css" />
 <link rel="stylesheet" type="text/css" href="vendor/plugins/tags/tagmanager.css" />
 <link rel="stylesheet" type="text/css" href="css/animate.css" />
-<link rel="stylesheet" type=							·"text/css" href="vendor/editors/xeditable/css/bootstrap-editable.css" />
+<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/css/bootstrap-editable.css" />
 <link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/inputs/address/address.css" />
 <link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/inputs/typeaheadjs/lib/typeahead.js-bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="vendor/plugins/gritter/css/jquery.gritter.css" />
@@ -55,6 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -89,9 +86,9 @@ $("div#selectButton").click(function()
 
 $("div#confirm").click(function()
 {
-
+   
+   
     $("form#selectForm input[name='currentOne']").attr("value",$("div#currentQuestion h3").attr("id"));
-    
      $("form#selectForm input[name='subType']").attr("value","confirmQuestion");
     $("form#selectForm").attr("action","questionnaire.do?method=createItem");
     $("form#selectForm").submit();
@@ -134,23 +131,21 @@ $("div#publishQuetionnaire").click(function()
 });
 </script>
 </head>
+
+<body>
 <%
  
  List<Question> questions = (List<Question>) session.getAttribute("questions");
  String type = (String)session.getAttribute("type");
  Questionnaire questionnaire = (Questionnaire)session.getAttribute("questionnaire");
  String currentID =(String)session.getAttribute("currentID");
- 
  System.out.println(currentID);
 
   %>
-  
-  <%try{ %>
-<body>
-
+<%try{ %>
 <form id="selectForm"  method="post">
- <input type="hidden" name="currentOne"/>
- <input type="hidden" name="subType">
+  <input type="hidden" name="currentOne"/>
+  <input type="hidden" name="subType">
 </form>
 
 <!-- Start: Theme Preview Pane -->
@@ -377,10 +372,10 @@ $("div#publishQuetionnaire").click(function()
     </div>
     <div id="sidebar-menu">
       <ul class="nav sidebar-nav">
-        <li> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
+      <li> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
         <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
-        <li class="active"> <a href="publisher_questionnaire_man.html"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>
-        <li> <a href="publisher_hireman.html"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
+        <li class="active"> <a href="PublisherQuestionnaireMainView.jsp"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
+        <li> <a href="recruitment.do?method=gotoBackStage"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
       </ul>
       </li>
       </ul>
@@ -389,90 +384,77 @@ $("div#publishQuetionnaire").click(function()
   <!-- End: Sidebar --> 
   <!-- Start: Content -->
   <section id="content">
-    <div id="topbar">
-      <ol class="breadcrumb">
-        <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
-        <li><a href="publisher_home.html">主页</a></li>
-        <li><a href="publisher_questionnaire_man.html">问卷管理</a></li>
-        <li class="active">发布问卷</li>
-      </ol>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="hidden-xs hidden-sm col-md-6">
-          <div class="panel panel-visible">
-            <div class="panel-heading">
-              <div class="panel-title"> <i class="fa fa-pencil"></i> 创建问卷 </div>
-            </div>
-              <form id="create-event-form" method="post" class="create" action="questionnaire.do?method=createItem">
+  <div id="topbar">
+    <ol class="breadcrumb">
+      <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
+      <li><a href="publisher_home.html">主页</a></li>
+      <li><a href="publisher_questionnaire_man.html">问卷管理</a></li>
+      <li class="active">发布问卷</li>
+    </ol>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="hidden-xs hidden-sm col-md-6">
+        <div class="panel panel-visible">
+          <div class="panel-heading">
+            <div class="panel-title"> <i class="fa fa-pencil"></i> 创建问卷 </div>
+          </div>
+          <form id="create-event-form" method="post" class="create" action="questionnaire.do?method=createItem">
             <div class="panel-body">
-            
               <div class="form-group">
                 <label for="web_url"> 问卷名称 </label>
                 <%if(type==null||questionnaire==null||questionnaire.getTitle()==null||"".equals(questionnaire.getTitle())) {%>
                 <input type="text" class="form-control event-name"  name="questionnaireName" placeholder="游戏兴趣调查？" />
                 <%}else {  %>
-                 <input type="text" class="form-control event-name" disabled=true value="<%=questionnaire.getTitle() %>" />
+                <input type="text" class="form-control event-name" disabled=true value="<%=questionnaire.getTitle() %>" />
                 <%} %>
               </div>
-             
-             
-             
-             
               <div id="external-events">
-              <%if(questions!=null){
+                <%if(questions!=null){
               
               for(int i=0;i<questions.size();i++)
               {
                  Question question = questions.get(i);
               %>
-                
                 <div class='external-event' id="selectButton" title="<%=i %>" data-length="2"><%=question.getQuestionContent() %></div>
-              <%} } %>
-              
+                <%} } %>
               </div>
             </div>
             <div class="panel-footer">
-
-                <div class="form-group">
-                  <label for="web_url"> 题目名称 </label>
-                  
-                  <input type="text" name="questionName" class="form-control event-name" placeholder="你喜欢那个Button？" />
-                </div>
-                <div class="form-group">
-                  <label for="tagmanager">选项</label>
-                  <div>
-                    <input type="text" id="tagmanager" class="form-control tm-input" placeholder="创建选项" />
-                    <div class="tag-container"> </div>
-                  </div>
-                </div>
-                
-                <div class="form-group margin-bottom-none pull-right">
-              
-                  <button type="button" class="btn btn-success btn-gradient margin-bottom margin-right-sm" id="createItem">创建题目</button>
-                 
-                </div>
-                <div class="clearfix"></div>
-                </form>
+            <div class="form-group">
+              <label for="web_url"> 题目名称 </label>
+              <input type="text" name="questionName" class="form-control event-name" placeholder="你喜欢那个Button？" />
+            </div>
+            <div class="form-group">
+              <label for="tagmanager">选项</label>
+              <div>
+                <input type="text" id="tagmanager" class="form-control tm-input" placeholder="创建选项" />
+                <div class="tag-container"> </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="panel">
-            <div class="panel-heading">
-              <div class="panel-title"><i class="fa fa-book" ></i>问卷发布</div>
-              <div class="pull-right"  id="publishQuetionnaire"><a class="btn btn-success btn-gradient margin-bottom margin-right-sm">确认问卷</a></div>
+            <div class="form-group margin-bottom-none pull-right">
+              <button type="button" class="btn btn-success btn-gradient margin-bottom margin-right-sm" id="createItem">创建题目</button>
             </div>
-            <div class="panel-body">
-              <h2 class="text-primary"> 题目预览 </h2>
-              <hr/>
-              <div class="row">
-                <div class="col-md-12">
-                  <p class="alert alert-success">问卷<b>未填写完整</b>确定提交？</p>
-                  <div class="form-group">
-                    <label for="web_url"> 标题 </label>
-                    <%int current=-1;
+            <div class="clearfix"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel">
+        <div class="panel-heading">
+          <div class="panel-title"><i class="fa fa-book" ></i>问卷发布</div>
+          <div class="pull-right"  id="publishQuetionnaire"><a class="btn btn-success btn-gradient margin-bottom margin-right-sm">确认问卷</a></div>
+        </div>
+        <div class="panel-body">
+          <h2 class="text-primary"> 题目预览 </h2>
+          <hr/>
+          <div class="row">
+            <div class="col-md-12">
+              <p class="alert alert-success">问卷<b>未填写完整</b>确定提交？</p>
+              <div class="form-group">
+                <label for="web_url"> 标题 </label>
+                <%int current=-1;
                     if(questions!=null&&questions.size()!=0){ 
                     Question question=new Question();
                     if(currentID!=null&&!"".equals(currentID)){
@@ -496,56 +478,55 @@ $("div#publishQuetionnaire").click(function()
                     
                    
                      %>
-                    <div class="text-center" id="currentQuestion">
-                      <h3 class="text-alert" id="<%=current%>"><%=question.getQuestionContent() %></h3>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="textArea">详细内容</label>
-                  
-                  </div>
-                  <div class="text-left">
-                    <ol>
-                    <%Iterator it = question.getChoices().iterator();
+                <div class="text-center" id="currentQuestion">
+                  <h3 class="text-alert" id="<%=current%>"><%=question.getQuestionContent() %></h3>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="textArea">详细内容</label>
+              </div>
+              <div class="text-left">
+                <ol>
+                  <%Iterator it = question.getChoices().iterator();
                     int i=0;
                     while(it.hasNext()) {
                      i++;
                       Choice choice =(Choice)it.next();
                     %>
-                      <li><a id='<%="answer"+i %>' data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" data-title='<%="修改选项"+i %>' class="editable editable-click editable-empty"><%=choice.getChoiceContent() %></a></li>
-                     <%} %>
-                    </ol>
-                  </div>
-                  <% }%>
-                  <hr>
-                  </hr>
-                  <div class="pull-left" id="deleteQuestion"> <a class="btn btn-alert btn-gradient btn-lg" data-test="bounceInDown">抛弃题目</a> </div>
-                  <div class="pull-right" id="confirm"> <a class="btn btn-info btn-gradient btn-lg margin-bottom margin-right-sm" >确认题目</a> </div>
-                </div>
+                  <li><a id='<%="answer"+i %>' data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" data-title='<%="修改选项"+i %>' class="editable editable-click editable-empty"><%=choice.getChoiceContent() %></a></li>
+                  <%} %>
+                </ol>
               </div>
-              <div class="row">
-                <hr>
-                </hr>
-              </div>
+              <% }%>
+              <hr>
+              </hr>
+              <div class="pull-left" id="deleteQuestion"> <a class="btn btn-alert btn-gradient btn-lg" data-test="bounceInDown">抛弃题目</a> </div>
+              <div class="pull-right" id="confirm"> <a class="btn btn-info btn-gradient btn-lg margin-bottom margin-right-sm" >确认题目</a> </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-12">
           <div class="row">
-            <div class="col-md-12">
-              <div class="panel animated" id="animate-me-panel">
-                <div class="panel-heading">
-                  <div class="panel-title"><i class="fa fa-star"></i> 问卷预览 </div>
-                </div>
-                <div class="panel-body"> 
-                <%if(questionnaire!=null){ %>
-                  <h4 class="panel-body-title"><%=questionnaire.getTitle() %></h4>
-                
-                  
-                  
-                  <hr/>
-                  <p>
-                  	<ol>
+            <hr>
+            </hr>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel animated" id="animate-me-panel">
+            <div class="panel-heading">
+              <div class="panel-title"><i class="fa fa-star"></i> 问卷预览 </div>
+            </div>
+            <div class="panel-body">
+              <%if(questionnaire!=null){ %>
+              <h4 class="panel-body-title"><%=questionnaire.getTitle() %></h4>
+              <hr/>
+            
+               <p>
+                  		<ol>
                   	<% Iterator it = questionnaire.getQuestions().iterator();
                   	while(it.hasNext()){ 
                   	Question  q =(Question) it.next();
@@ -559,24 +540,26 @@ $("div#publishQuetionnaire").click(function()
                   	Choice choice = (Choice)it2.next();
                   	%>
                       <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
+                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" />
                           <%=choice.getChoiceContent() %> </label>
                        
                     
                     
-                  <%} }%></div> </li> <%}%>  
+                  <%} }%></div> </li> <%}%>
                         
                     </ol>
                   </p>
-                </div>
-              </div>
+              
+              
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  <!-- End: Content --> 
+  </div>
+</div>
+</section>
+<!-- End: Content -->
 </div>
 <!-- End: Main --> 
 

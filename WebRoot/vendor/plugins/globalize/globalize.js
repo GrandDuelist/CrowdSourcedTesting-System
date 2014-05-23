@@ -179,15 +179,15 @@ Globalize.cultures[ "default" ] = {
 			firstDay: 0,
 			days: {
 				// full day names
-				names: [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ],
+				names: [ "周日", "周一", "周二", "周三", "周四", "周五", "周六" ],
 				// abbreviated day names
-				namesAbbr: [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ],
+				namesAbbr: [ "日", "一", "二", "三", "四", "五", "六" ],
 				// shortest day names
 				namesShort: [ "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa" ]
 			},
 			months: {
 				// full month names (13 months for lunar calendards -- 13th month should be "" if not lunar)
-				names: [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "" ],
+				names: [ "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月", "" ],
 				// abbreviated month names
 				namesAbbr: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "" ]
 			},

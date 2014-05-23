@@ -6,7 +6,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html:html lang="true">
   <head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -295,8 +295,8 @@ String flag = (String)request.getAttribute("isLegal");
         <li> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
         <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
         <li> <a href="publisher_questionnaire_man.html"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>
-        <li class="active"> <a href="publisher_hireman.html"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
-        <li> <a href="publisher_hireman.html"><span class="glyphicons glyphicons-cogwheel"></span><span class="sidebar-title">招募信息</span></a> </li>
+        <li class="active"> <a href="publisher_hireman.jsp"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
+        <li> <a href="publisher_hireman.jsp"><span class="glyphicons glyphicons-cogwheel"></span><span class="sidebar-title">招募信息</span></a> </li>
       </ul>
       </li>
       </ul>
@@ -345,7 +345,7 @@ String flag = (String)request.getAttribute("isLegal");
                       
             <div class="panel-body">
             
-            <form action="recruitment.do?method=reviceRecruitment" method="post">
+            <form id="ReviceForm" action="recruitment.do?method=reviceRecruitment" method="post">
             	<input name="id" type="hidden" value=<%=recruitment.getActivityId()%>>
             
             
@@ -390,7 +390,7 @@ String flag = (String)request.getAttribute("isLegal");
                 </tbody>
               </table>
               <div class="text-center">
-              <button type="submit" class="btn btn-info btn-gradient">提交修改</button></div>
+              <button id="revicebtn" class="btn btn-info btn-gradient">提交修改</button></div>
               <hr/>
               
               </form>
@@ -433,7 +433,6 @@ String flag = (String)request.getAttribute("isLegal");
 	  //enable / disable xedit
 	  $('#enable').click(function() {
 		 //alert("shit");
-		 var arrRevice=$('.revice');
 		 var idsContainer = $(".revice");  //获取所有节点的dom数组
 		 var len = idsContainer.length; 
          for(var i=0;i<len;i++){
@@ -448,10 +447,16 @@ String flag = (String)request.getAttribute("isLegal");
              }
              $container.attr("readonly",false);
              $container.css("background", "red");
-             //var id  = $container.val();
-    		 //alert(id);
+             
          }
 	  });    
+
+
+	  $('#revicebtn').click(function(e) {
+		  $('#revicebtn').attr("disabled",true);
+		  $("#ReviceForm").submit();
+	 });   
+		
 
 	  $('#pencil').click(function(e) {
 		  e.stopPropagation();

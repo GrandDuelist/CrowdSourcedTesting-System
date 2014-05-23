@@ -66,6 +66,11 @@ public class DAOFactory {
 		return new QuestionnaireDAO();
 	}
 	
+	public static TestTaskDAO getTestTaskDAO()
+	{
+		return new TestTaskDAO();
+	}
+	
 	
 	public static void sessionSaveOrUpdate(Object q )
 	{

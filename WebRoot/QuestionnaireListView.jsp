@@ -1,12 +1,18 @@
-﻿<!DOCTYPE html>
+<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
-<meta charset="utf-8" />
+<m/>
 <title>TCTEST</title>
 <meta name="keywords" content="TCTEST" />
 <meta name="description" content="TCTEST" />
-<meta name="author" content="Rain Cheng" />
+<meta name="author" content="Holladay" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- Font CSS  -->
@@ -18,13 +24,9 @@
 <link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
 <!-- Plugin CSS -->
+<link rel="stylesheet" type="text/css" href="vendor/plugins/datatables/css/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/css/bootstrap-editable.css" />
 <link rel="stylesheet" type="text/css" href="vendor/plugins/chosen/chosen.min.css" />
-<link rel="stylesheet" type="text/css" href="vendor/plugins/timepicker/bootstrap-timepicker.min.css" />
-<link rel="stylesheet" type="text/css" href="vendor/plugins/colorpicker/colorpicker.css" />
-<link rel="stylesheet" type="text/css" href="vendor/plugins/datepicker/datepicker.css" />
-<link rel="stylesheet" type="text/css" href="vendor/plugins/daterange/daterangepicker.css" />
-<link rel="stylesheet" type="text/css" href="vendor/plugins/formswitch/css/bootstrap-switch.css" />
-<link rel="stylesheet" type="text/css" href="vendor/plugins/tags/tagmanager.css" />
 
 <!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="css/theme.css" />
@@ -40,15 +42,31 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="img/favicon.ico" />
-
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/list_control/publisher_questionnaire_list_control.js"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
-</head>
+
 <body>
+<%
+List<Questionnaire> questionnaires =(List <Questionnaire>)session.getAttribute("questionnaires");
+Page currentPage = (Page)session.getAttribute("currentPage");
+int firstPage = (int)(currentPage.getCurrentPage()-1)/currentPage.DEFAULT_MAX_PAGE;
+firstPage = firstPage*currentPage.DEFAULT_MAX_PAGE+1;
+int lastPage = (currentPage.getTotalPage()+1)<(firstPage+currentPage.DEFAULT_MAX_PAGE)? (currentPage.getTotalPage()+1):(firstPage+currentPage.DEFAULT_MAX_PAGE);
+
+ %>
+ 
+ <form id="selectForm"  method="post">
+ <input type="hidden" name="id"/>
+ <input type="hidden" name="subType">
+ <input type="hidden" name="page">
+</form>
+ 
 <!-- Start: Theme Preview Pane -->
 <div id="skin-toolbox">
   <div class="skin-toolbox-toggle"> <i class="fa fa-flask"></i> </div>
@@ -272,11 +290,11 @@
       <div class="sidebar-toggle"> <i class="fa fa-bars"></i> </div>
     </div>
     <div id="sidebar-menu">
-      <ul class="nav sidebar-nav">
-        <li class="active"> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
+       <ul class="nav sidebar-nav">
+      <li> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
         <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
-        <li> <a href="publisher_questionnaire_man.html"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
-        <li> <a href="publisher_hireman.html"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
+        <li class="active"> <a href="PublisherQuestionnaireMainView.jsp"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
+        <li> <a href="recruitment.do?method=gotoBackStage"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
       </ul>
       </li>
       </ul>
@@ -285,77 +303,79 @@
   <!-- End: Sidebar --> 
   <!-- Start: Content -->
   <section id="content">
-    <div id="topbar">
-      <ol class="breadcrumb">
-        <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
-        <li><a href="publisher_home.html">主页</a></li>
-        <li><a href="publisher_taskman.html">任务管理</a></li>
-        <li><a href="publisher_taskpub.html">发布任务</a></li>
-        <li class="active">Android任务</li>
-      </ol>
+  <div id="topbar">
+    <ol class="breadcrumb">
+      <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
+      <li><a href="publisher_home.html">主页</a></li>
+      <li><a href="publisher_questionnaire_man.html">问卷管理</a></li>
+      <li class="active">问卷列表</li>
+    </ol>
     </div>
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <div class="panel">
+          <div class="panel panel-visible">
             <div class="panel-heading">
-            	<div class="panel-title"><i class="fa fa-android"></i>Android测试</div>
+              <div class="panel-title"> <i class="fa fa-table"></i> 问卷列表</div>
             </div>
             <div class="panel-body">
-              <h2 class="text-primary"> 请填写详细信息 </h2>
-              <hr/>
-              <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                  <p class="alert alert-warning">请上传<b>合法</b>Android程序</p>
-                  <div class="form-group">
-                    <label for="web_url"> 上传APK文件 </label>
-                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-cloud-upload"></i> </span>
-                      <input class="form-control" type="text" required placeholder="BaiduZC.apk" name="web_url">
-                      </input>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="web_url"> 上传图标 </label>
-                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-picture-o"></i> </span>
-                      <input class="form-control" type="text" required placeholder="" name="icon">
-                      </input>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="textArea">任务描述</label>
-                      <div class="input-group">
-                        <textarea class="form-control" id="textArea" cols="80" rows="3"></textarea>
-                      </div>
-                  </div>
-                   <div class="form-group">
-                    <label for="web_url"> 是否需要测试帐号 </label>
-                    <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          需要 </label>
-                    <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked="" />
-                          不需要 </label>
-                  </div>
-                   <div class="form-group">
-                    <label for="web_url"> 上传测试帐号信息 </label>
-                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-cloud-upload"></i> </span>
-                      <input class="form-control" type="text" required placeholder="TesterAccountData.xml" name="icon" disabled="">
-                      </input>
-                    </div>
-                  </div>
-                  <hr></hr>
-                  <div class="pull-left">
-                  	<button class="btn btn-gradient btn-lg btn-green" type="button">返回</button>
-                  </div>
-                  <div class="pull-right">
-                  	<button class="btn btn-info btn-gradient btn-lg" type="button">下一步</button>
-                  </div>
+              <table  style="font-size:13px" class="table table-striped" id="datatable">
+                      <thead>
+                        <tr>
+                          
+                          <th>项目名称</th>
+                          <th class="hidden-xs">热度</th>
+                          <th>参与人数</th>
+                          <th>简介</th>
+                          <th style="width: 70px;" class="text-right">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <%for(int i = 0;i<questionnaires.size();i++){
+                       Questionnaire questionnaire  = questionnaires.get(i);
+                       %>
+                        <tr>
+                          
+                          <td class="info"><b> <%=questionnaire.getTitle() %></b><br />
+                            <span class="text-muted"><i class="fa fa-home"></i> <%=questionnaire.getPublisher().getPublisherName() %></span></td>
+                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-half-empty text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
+                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> <%=questionnaire.getQuestionnaireCount()%></td>
+                          <td><span class="label label-inverse margin-right-sm">测试问卷</span></td>
+                          <td id="detail" class="text-right text-center"><a  id="<%=questionnaire.getQuestionnaireId() %>" class="btn btn-primary btn-gradient" type="button"><span  class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
+                        </tr>
+                       <%} %>
+                      </tbody>
+                    </table>
+                  <div class="row">
+           <div class="col-sm-12 datatables-footer">
+                  <div class="pull-right"><div class="dataTables_paginate paging_bs_normal"><ul class="pagination">
+                 <%if( currentPage.getCurrentPage()==1){ %>
+                  <li class="prev disabled"><a><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                  <%} else{%>
                   
-                </div>
-              </div>
-              <div class="row"><hr></hr></div>
+                    <li class="prev" id="previouPage"><a id = "<%=currentPage.getCurrentPage()%>"><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                <%} %>
+                
+                
+                <%for (int i=firstPage; i<lastPage;i++) 
+                {  if(i == currentPage.getCurrentPage())
+                {%>
+                <li class="active" id="pageNum"><a id="<%=i%>"><%=i %></a></li>
+                  
+                 <%}else { %>
+                  <li id="pageNum"><a id="<%=i%>"><%=i %></a></li>
+                 <%}} %>
+                
+                 <%if( currentPage.getCurrentPage()==currentPage.getTotalPage()){ %>
+                 <li class="next disabled"><a >&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                  <%} else{%>
+                  
+                   <li class="next" id="nextPage"><a id="<%=currentPage.getCurrentPage()%>">&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                <%} %>
+                
+                 </ul></div></div>
+                  <div class="clearfix"></div></div></div>
             </div>
-            
           </div>
         </div>
       </div>
@@ -370,30 +390,25 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 
-<!-- Plugins - Via CDN --> 
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script> 
-<!--<script type="text/javascript" src="vendor/plugins/datatables/jquery.dataTables.min.js"></script> Local Option --> 
+<!-- Plugins - Via CDN -->
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+<!--<script type="text/javascript" src="vendor/plugins/datatables/jquery.dataTables.min.js"></script> Local Option -->
 
-<!-- Plugins --> 
-<script type="text/javascript" src="vendor/plugins/datatables/js/datatables.js"></script><!-- Datatable Bootstrap Addon --> 
+<!-- Plugins -->
+<script type="text/javascript" src="vendor/plugins/datatables/js/datatables.js"></script><!-- Datatable Bootstrap Addon -->
 <script type="text/javascript" src="vendor/editors/xeditable/js/bootstrap-editable.js"></script> 
 <script type="text/javascript" src="vendor/plugins/chosen/chosen.jquery.min.js"></script> 
 
 <!-- Theme Javascript --> 
 <script type="text/javascript" src="js/uniform.min.js"></script> 
-<script type="text/javascript" src="js/main.js"></script> 
+<script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/custom.js"></script> 
 <script type="text/javascript">
 jQuery(document).ready(function() {
 
   Core.init();
 
-  $('#datatable').dataTable( {
-	"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ -1 ] }],
-	"oLanguage": { "oPaginate": {"sPrevious": "", "sNext": ""} },
-	"iDisplayLength": 6,
-	"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-  });	
+
   
   $("select[name='datatable_length']").chosen();	
   $.fn.editable.defaults.mode = 'popup';

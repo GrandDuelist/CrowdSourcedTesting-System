@@ -16,6 +16,8 @@ import org.apache.struts.actions.DispatchAction;
 
 import cn.com.crowdsourcedtesting.DAO.GiftDAO;
 import cn.com.crowdsourcedtesting.bean.Gift;
+import cn.com.crowdsourcedtesting.model.GiftHandler;
+import cn.com.crowdsourcedtesting.model.RecruitmentHandler;
 import cn.com.crowdsourcedtesting.struts.form.GiftForm;
 import cn.com.other.page.Page;
 
@@ -29,7 +31,11 @@ import cn.com.other.page.Page;
 public class GiftAction extends DispatchAction {
 	
 	private String gifttype = "all";
+	private String searchvalue = "";
 	
+	private Page page = new Page();
+	
+	private GiftHandler handler = new GiftHandler();
 	
 	/*
 	 * Generated Methods
@@ -47,10 +53,9 @@ public class GiftAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		GiftForm giftForm = (GiftForm) form;// TODO Auto-generated method stub
 		int id = giftForm.getGiftId();
-		System.out.println("gift id: "+id);
-		GiftDAO dao = new GiftDAO();
-		request.setAttribute("giftitem", dao.findById(id));
-		request.setAttribute("isLegal", "legal");
+
+		handler.selectGift(request, id);
+		
 		return mapping.findForward("giftitem");
 	}
 	
@@ -86,34 +91,8 @@ public class GiftAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		GiftForm giftForm = (GiftForm) form;// TODO Auto-generated method stub
 		int pagenow = giftForm.getPagenow();
-		System.out.println("Page Now: "+pagenow);
-		List<Gift> gifts = new ArrayList();
-		GiftDAO dao = new GiftDAO();
-		Page page = new Page();
-		//一页16个礼品
-		if(this.gifttype.equals("all"))
-		{
-			page.setCurrentPage(pagenow);
-			page.setPerRows(16);
-			page.setTotalRows(dao.getTotalRows());
 
-			gifts = dao.findByPage(page);
-			request.setAttribute("gifts", gifts);
-			request.setAttribute("page", page);
-			request.setAttribute("isLegal", "legal");
-		}
-		if(this.gifttype.equals("available"))
-		{
-			page.setCurrentPage(pagenow);
-			page.setPerRows(16);
-			Double userCredit = 5000.0;
-			page.setTotalRows(dao.getTotalAvailableRows(userCredit));
-
-			gifts = dao.findAvailableByPage(userCredit, page);
-			request.setAttribute("gifts", gifts);
-			request.setAttribute("page", page);
-			request.setAttribute("isLegal", "legal");
-		}
+		handler.selectPage(gifttype, this.searchvalue, request, pagenow);
 		
 		return mapping.findForward("allgifts");
 	}
@@ -129,21 +108,10 @@ public class GiftAction extends DispatchAction {
 	public ActionForward selectAllGifts(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		GiftForm giftForm = (GiftForm) form;// TODO Auto-generated method stub
-		int pagenow = 1;
 		this.gifttype = "all";
-		System.out.println("Page Now: "+1);
-		List<Gift> gifts = new ArrayList();
-		GiftDAO dao = new GiftDAO();
-		//一页16个礼品
-		Page page = new Page();
-		page.setCurrentPage(pagenow);
-		page.setPerRows(16);
-		page.setTotalRows(dao.getTotalRows());
+
+		handler.selectAllGifts(request);
 		
-		gifts = dao.findByPage(page);
-		request.setAttribute("gifts", gifts);
-		request.setAttribute("page", page);
-		request.setAttribute("isLegal", "legal");
 		return mapping.findForward("allgifts");
 	}
 	
@@ -158,23 +126,30 @@ public class GiftAction extends DispatchAction {
 	public ActionForward selectAvailableGifts(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		GiftForm giftForm = (GiftForm) form;// TODO Auto-generated method stub
-		int pagenow = 1;
 		this.gifttype = "available";
-		//session里面拿用户的积分数值
-		Double creditlimit = 5000.0;
-		System.out.println("Page Now: "+pagenow);
-		List<Gift> gifts = new ArrayList();
-		GiftDAO dao = new GiftDAO();
-		//一页16个礼品
-		Page page = new Page();
-		page.setCurrentPage(pagenow);
-		page.setPerRows(16);
-		page.setTotalRows(dao.getTotalAvailableRows(creditlimit));
 		
-		gifts = dao.findAvailableByPage(creditlimit, page);
-		request.setAttribute("gifts", gifts);
-		request.setAttribute("page", page);
-		request.setAttribute("isLegal", "legal");
+		handler.selectAvailableGifts(request);
+		
+		return mapping.findForward("allgifts");
+	}
+	
+	/** 
+	 * Method selectSimilarGifts
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return ActionForward
+	 */
+	public ActionForward selectSimilarGifts(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		GiftForm giftForm = (GiftForm) form;// TODO Auto-generated method stub
+		String value = giftForm.getSearchinput();
+		this.gifttype = "similar";
+		this.searchvalue = value;
+		
+		handler.selectSimilarGifts(value, request);
+		
 		return mapping.findForward("allgifts");
 	}
 	
@@ -189,32 +164,39 @@ public class GiftAction extends DispatchAction {
 	public ActionForward getGift(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		GiftForm giftForm = (GiftForm) form;// TODO Auto-generated method stub
+		//int id = giftForm.getGiftId();
+		//System.out.println("now:"+id);
 		
-		System.out.println("兑换1");
-		Gift gift = new Gift();
-		int id = giftForm.getGiftId();
-		System.out.println("兑换2:"+id);
-		GiftDAO dao = new GiftDAO();
-		Double creditneeded = dao.findById(id).getGiftCredit();
-		Double usercredit = 5000.0;
-		//判断用户积分和所需积分大小
-		if(usercredit >= creditneeded)
+		if(handler.getGift(mapping, giftForm, request, response))
 		{
-			System.out.println("兑换3");
-			return this.selectAllGifts(mapping, giftForm, request, response);
+			System.out.println("跳入adrress界面");
+			return mapping.findForward("changegift");
 		}
 		else
 		{
-			System.out.println("兑换4");
-			return this.selectAllGifts(mapping, giftForm, request, response);
+			return mapping.findForward("changegiftfailed");
 		}
+	}
+	
+	
+	/** 
+	 * Method changeGift
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return ActionForward
+	 */
+	public ActionForward changeGift(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		GiftForm giftForm = (GiftForm) form;// TODO Auto-generated method stub
+		
+		if(handler.changeGift(mapping, giftForm, request, response))
+			return mapping.findForward("changegiftsuccess");
+		else
+			return mapping.findForward("changegiftfailed");
 		
 	}
 	
-	
-	private ActionForward gotoGifts(ActionMapping mapping, HttpServletRequest request, HttpServletResponse response)
-	{
-		return null;
-	}
 	
 }

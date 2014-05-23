@@ -26,11 +26,70 @@ public class GiftForm extends ActionForm {
 
 	private int pagenow;
 	
+	private Double credit;
+	
+	private String address;
+	
+	private String receiver;
+	
+	private String zipcode;
+	
+	private String mobile;
+	
+	private String searchinput;
 	
 	/*
 	 * Generated Methods
 	 */
 	
+	public String getSearchinput() {
+		return searchinput;
+	}
+
+	public void setSearchinput(String searchinput) {
+		this.searchinput = searchinput;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public Double getCredit() {
+		return credit;
+	}
+
+	public void setCredit(Double credit) {
+		this.credit = credit;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getReceiver() {
+		return receiver;
+	}
+
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
 	public int getPagenow() {
 		return pagenow;
 	}

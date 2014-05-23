@@ -17,13 +17,14 @@ public class TestTask implements java.io.Serializable {
 	private Publisher publisher;
 	private Date taskStartTime;
 	private Date taskEndTime;
-	private Boolean taskType;
-	private Integer checkedAdministratorId;
+	private Integer taskType;
+	private Administrator administrator;
 	private String taskEnvironment;
 	private Double perReward;
 	private Double wholeCredit;
 	private Set bugReports = new HashSet(0);
 	private Set taskComments = new HashSet(0);
+	private Boolean isPassed ;
 
 	// Constructors
 
@@ -32,7 +33,7 @@ public class TestTask implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public TestTask(Product product, Publisher publisher, Boolean taskType,
+	public TestTask(Product product, Publisher publisher, Integer taskType,
 			Double perReward, Double wholeCredit) {
 		this.product = product;
 		this.publisher = publisher;
@@ -43,7 +44,7 @@ public class TestTask implements java.io.Serializable {
 
 	/** full constructor */
 	public TestTask(Product product, Publisher publisher, Date taskStartTime,
-			Date taskEndTime, Boolean taskType, Integer checkedAdministratorId,
+			Date taskEndTime, Integer taskType, Administrator administrator,
 			String taskEnvironment, Double perReward, Double wholeCredit,
 			Set bugReports, Set taskComments) {
 		this.product = product;
@@ -51,7 +52,7 @@ public class TestTask implements java.io.Serializable {
 		this.taskStartTime = taskStartTime;
 		this.taskEndTime = taskEndTime;
 		this.taskType = taskType;
-		this.checkedAdministratorId = checkedAdministratorId;
+		this.administrator = administrator;
 		this.taskEnvironment = taskEnvironment;
 		this.perReward = perReward;
 		this.wholeCredit = wholeCredit;
@@ -60,7 +61,13 @@ public class TestTask implements java.io.Serializable {
 	}
 
 	// Property accessors
+	public Boolean getIsPassed() {
+		return isPassed;
+	}
 
+	public void setIsPassed(Boolean isPassed) {
+		this.isPassed = isPassed;
+	}
 	public Integer getTaskId() {
 		return this.taskId;
 	}
@@ -101,20 +108,20 @@ public class TestTask implements java.io.Serializable {
 		this.taskEndTime = taskEndTime;
 	}
 
-	public Boolean getTaskType() {
+	public Integer getTaskType() {
 		return this.taskType;
 	}
 
-	public void setTaskType(Boolean taskType) {
+	public void setTaskType(Integer taskType) {
 		this.taskType = taskType;
 	}
 
-	public Integer getCheckedAdministratorId() {
-		return this.checkedAdministratorId;
+	public Administrator getAdministrator() {
+		return this.administrator;
 	}
 
-	public void setCheckedAdministratorId(Integer checkedAdministratorId) {
-		this.checkedAdministratorId = checkedAdministratorId;
+	public void setAdministrator(Administrator administrator) {
+		this.administrator = administrator;
 	}
 
 	public String getTaskEnvironment() {

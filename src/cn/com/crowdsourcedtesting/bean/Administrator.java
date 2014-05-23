@@ -20,8 +20,17 @@ public class Administrator implements java.io.Serializable {
 	private Set recruitments = new HashSet(0);
 	private Set publishers = new HashSet(0);
 	private Set questionnaires = new HashSet(0);
+	private Set testTasks = new HashSet(0);
 
 	// Constructors
+
+	public Set getTestTasks() {
+		return testTasks;
+	}
+
+	public void setTestTasks(Set testTasks) {
+		this.testTasks = testTasks;
+	}
 
 	/** default constructor */
 	public Administrator() {

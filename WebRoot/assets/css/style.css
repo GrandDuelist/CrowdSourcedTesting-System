@@ -1060,6 +1060,44 @@ blockquote:hover {
 	border:solid 1px #eee;
 	box-shadow:0 0 7px #eee;
 }
+/*success Page
+------------------------------------*/
+.ex-success p {
+	top: 70px;
+	color: #3C0;
+	line-height: 180px;
+	text-align: center;
+	position: relative;
+}
+.ex-success p i {
+	font-size:60px;
+	font-style:normal;
+	text-shadow:0 0 3px;
+}
+.ex-success p span {
+	display:block;
+	font-size:32px;
+	position:relative;
+}
+/*fail Page
+------------------------------------*/
+.ex-fail p {
+	top: 70px;
+	color: #F60;
+	line-height: 180px;
+	text-align: center;
+	position: relative;
+}
+.ex-fail p i {
+	font-size:60px;
+	font-style:normal;
+	text-shadow:0 0 3px;
+}
+.ex-fail p span {
+	display:block;
+	font-size:32px;
+	position:relative;
+}
 /*404 Page
 ------------------------------------*/
 .page-404 p {

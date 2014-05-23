@@ -5,7 +5,7 @@ var Charts = function () {
     var runCharts = function () {
 		
         // Add a series of colors to be used in the charts and pie graphs
-        var Colors = ['#5bc0de', '#428bca', '#5cb85c', '#d9534f', '#f0ad4e', '#7857ca', '#efcf1d'];
+        var Colors = ['#5bc0de', '#428bca', '#5cb85c', '#6DB54B', '#f0ad4e', '#7857ca', '#efcf1d'];
 		
         // Typical random Number generator
         var randNum = function () {return (Math.floor(Math.floor((Math.random() * 5) + 1) + 5));}
@@ -124,31 +124,31 @@ var Charts = function () {
                     }
                 };
                 var data = [{
-                    label: "USA",
+                    label: "盖伦",
                     data: 38,
                     color: Colors[0]
                 }, {
-                    label: "Brazil",
+                    label: "安妮",
                     data: 23,
                     color: Colors[1]
                 }, {
-                    label: "India",
+                    label: "琴女",
                     data: 15,
                     color: Colors[2]
                 }, {
-                    label: "Turkey",
+                    label: "狐狸",
                     data: 9,
                     color: Colors[3]
                 }, {
-                    label: "France",
+                    label: "男枪",
                     data: 7,
                     color: Colors[4]
                 }, {
-                    label: "China",
+                    label: "暗夜猎手",
                     data: 5,
                     color: Colors[5]
                 }, {
-                    label: "Germany",
+                    label: "稻草人",
                     data: 3,
                     color: Colors[6]
                 }];

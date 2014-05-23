@@ -1,5 +1,6 @@
 package cn.com.crowdsourcedtesting.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +18,7 @@ import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Recruitment;
 import cn.com.other.page.Page;
 
-public class RecruitmentHandler {
+public class RecruitmentHandler extends GeneralHandler {
 
 	// 前端调用
 	public void selectAllRecruitments(Page page, HttpServletRequest request) {
@@ -37,7 +38,7 @@ public class RecruitmentHandler {
 
 	}
 <<<<<<< HEAD
-	
+
 	public void selectRecentRecruitments(Page page, HttpServletRequest request){
 		List<Recruitment> recruitments = new ArrayList();
 		RecruitmentDAO dao = new RecruitmentDAO();
@@ -53,7 +54,7 @@ public class RecruitmentHandler {
 			request.setAttribute("isLegal", "illegal");
 	}
 	
-	public void selectRecruitment(int id, HttpServletRequest request){
+	public void selectRecruitment(int id, HttpServletRequest request) {
 =======
 
 	public void selectRecruitment(int id, HttpServletRequest request) {
@@ -125,4 +126,39 @@ public class RecruitmentHandler {
 		
 		request.setAttribute("isLegal", "legal");
 	}
+<<<<<<< HEAD
+
+	@Override
+	public void setTargetListOne(Page page, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTargetListTwo(Page page, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTargetListThree(Page page, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTargetDetailOne(int id, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTargetDetailTwo(int id, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+=======
+>>>>>>> 9332983d12b8cd580322705d0dfbb005a965f265
 }

@@ -114,15 +114,15 @@
                     <span class="icon-bar"></span>
                 </a><!-- /nav-collapse -->                                  
                 <div class="nav-collapse collapse">                                     
-                    <ul class="nav">
+                     <ul  class="nav">
                         <li class="active">
-                           <a href="index.html">主页
+                           <a href="index.jsp">主页
                             
                             </a>
                            
                       </li>
                         <li>
-                            <a href="gifts.html">礼品中心
+                            <a href="gifts.do?method=selectAllGifts">礼品中心
                                                         
                             </a>
                                        
@@ -132,15 +132,15 @@
                             </a>
                         </li>
                         <li>
-                            <a href="page_hirelist.html">招募帖                          
+                            <a href="recruitment.do?method=selectAllRecruitment">招募帖                          
                             </a>
                         </li>
                         <li>
                             <a href="page_clients.html">合作伙伴</a>
       
                         </li>
-                       <li>
-                            <a href="page_questionaire.html">问卷调查
+                       <li >
+                            <a href="questionnaire.do?method=pageQuestionnaire">问卷调查
                             </a>
                             
                                                     
@@ -195,7 +195,7 @@
         </div>
     	<div class="span9">
         <div class="headline"><h3>近期问卷</h3>
-        	<a class="pull-right btn-u" href="page_questionaire.html">更多</a>
+        	<a class="pull-right btn-u" href="questionnaire.do?method=pageQuestionnaire">更多</a>
         </div>
         <%
         	if(iterator.hasNext())

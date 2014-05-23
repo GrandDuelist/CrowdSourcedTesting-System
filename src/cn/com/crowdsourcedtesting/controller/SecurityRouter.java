@@ -91,7 +91,7 @@ public class SecurityRouter extends DispatchAction {
 			// 测试者登陆成�
 			session.setAttribute("UserType", UserType.Tester);
 			session.setAttribute("Tester", tester);
-			return mapping.findForward("home");
+			return this.testerFindAllQuestionnaire(mapping, form, request, response);
 
 		} else {
 			// 测试者登录失�
