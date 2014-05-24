@@ -9,6 +9,7 @@
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.hibernate.MYECLIPSE_HIBERNATE3_3_CORE"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/Oracle+11g+11.2.0.1.0+JDBC_ojdbc6.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/javassist-3.0.jar"/>
+	<classpathentry kind="lib" path="commons-io-2.4.jar"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.cross.easystruts.eclipse.STRUTS12_CONTAINER"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.core-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.context-3.0.5.RELEASE.jar"/>

@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
+
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -47,7 +53,7 @@
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
-
+</head>
 <body>
 <!-- Start: Theme Preview Pane -->
 <div id="skin-toolbox">
@@ -289,171 +295,73 @@
       <ol class="breadcrumb">
         <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
         <li><a href="publisher_home.html">主页</a></li>
+        <li><a href="publisher_taskman.html">任务管理</a></li>
         <li><a href="publisher_taskpub.html">发布任务</a></li>
-        <li class="active">充值</li>
+        <li class="active">Android任务</li>
       </ol>
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
-          <div class="pricing-tables margin-top-lg text-center">
-            <div class="col-sm-4">
-              <div class="pricing-plan">
-                <div class="pricing-title btn-light2">
-                  <h3>基本会员</h3>
-                </div>
-                <div class="pricing-info"> <span class="currency-sign">￥</span>
-                  <h2>39</h2>
-                  <h6>每月</h6>
-                </div>
-                <div class="pricing-features">
-                  <ul>
-                    <li><i class="fa fa-hdd-o"></i> <b>20</b> 个任务发布</li>
-                    <li><i class="fa fa-exchange"></i> <b>20</b> 个账户限额</li>
-                    <li><i class="fa fa-refresh"></i> <b>5</b> 只测试团队</li>
-                  </ul>
-                </div>
-                <div class="pricing-icons">
-                  <ul>
-                    <li><i class="fa fa-times"></i> </li>
-                    <li><i class="fa fa-times"></i> </li>
-                    <li><i class="fa fa-times"></i> </li>
-                    <li><i class="fa fa-ellipsis-h"></i> </li>
-                  </ul>
-                </div>
-                <a class="btn btn-large btn-dark" href="#">加入</a> </div>
+        <div class="col-md-12">
+          <div class="panel">
+            <div class="panel-heading">
+            	<div class="panel-title"><i class="fa fa-android"></i>Android测试</div>
             </div>
-            <div class="col-sm-4 hero-plan">
-              <div class="pricing-plan">
-                <div class="pricing-title btn-blue">
-                  <h3>合作伙伴</h3>
-                  <span class="pricing-subtitle text-blue4">最佳选择</span> </div>
-                <div class="pricing-info"> <span class="currency-sign">￥</span>
-                  <h2>59</h2>
-                  <h6>Per Month</h6>
+            <div class="panel-body">
+              <h2 class="text-primary"> 请填写详细信息 </h2>
+              <hr/>
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                  <p class="alert alert-warning">请上传<b>合法</b>Android程序</p>
+                  <div class="form-group">
+                    <label for="web_url"> 上传APK文件 </label>
+                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-cloud-upload"></i> </span>
+                      <input class="form-control" type="text" required placeholder="BaiduZC.apk" name="web_url">
+                      </input>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="web_url"> 上传图标 </label>
+                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-picture-o"></i> </span>
+                      <input class="form-control" type="text" required placeholder="" name="icon">
+                      </input>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="textArea">任务描述</label>
+                      <div class="input-group">
+                        <textarea class="form-control" id="textArea" cols="80" rows="3"></textarea>
+                      </div>
+                  </div>
+                   <div class="form-group">
+                    <label for="web_url"> 是否需要测试帐号 </label>
+                    <label class="radio-inline">
+                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
+                          需要 </label>
+                    <label class="radio-inline">
+                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked="" />
+                          不需要 </label>
+                  </div>
+                   <div class="form-group">
+                    <label for="web_url"> 上传测试帐号信息 </label>
+                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-cloud-upload"></i> </span>
+                      <input class="form-control" type="text" required placeholder="TesterAccountData.xml" name="icon" disabled="">
+                      </input>
+                    </div>
+                  </div>
+                  <hr></hr>
+                  <div class="pull-left">
+                  	<button class="btn btn-gradient btn-lg btn-green" type="button">返回</button>
+                  </div>
+                  <div class="pull-right">
+                  	<button class="btn btn-info btn-gradient btn-lg" type="button">下一步</button>
+                  </div>
+                  
                 </div>
-                <div class="pricing-features">
-                  <ul>
-                    <li><i class="fa fa-hdd-o"></i> <b>2GB</b> Disk Space</li>
-                    <li><i class="fa fa-exchange"></i> <b>20GB</b> Bandwidth</li>
-                    <li><i class="fa fa-refresh"></i> <b>5</b> Email Accounts</li>
-                  </ul>
-                </div>
-                <div class="pricing-icons">
-                  <ul>
-                    <li><i class="fa fa-check text-blue"></i> </li>
-                    <li><i class="fa fa-times"></i> </li>
-                    <li><i class="fa fa-check text-blue"></i> </li>
-                    <li><i class="fa fa-ellipsis-h"></i> </li>
-                  </ul>
-                </div>
-                <a class="btn btn-blue" href="#">加入</a> </div>
+              </div>
+              <div class="row"><hr></hr></div>
             </div>
-            <div class="col-sm-4">
-              <div class="pricing-plan">
-                <div class="pricing-title btn-light2">
-                  <h3>战略合伙人</h3>
-                </div>
-                <div class="pricing-info"> <span class="currency-sign">￥</span>
-                  <h2>99</h2>
-                  <h6>Per Month</h6>
-                </div>
-                <div class="pricing-features">
-                  <ul>
-                    <li><i class="fa fa-hdd-o"></i> <b>2GB</b> Disk Space</li>
-                    <li><i class="fa fa-exchange"></i> <b>20GB</b> Bandwidth</li>
-                    <li><i class="fa fa-refresh"></i> <b>5</b> Email Accounts</li>
-                  </ul>
-                </div>
-                <div class="pricing-icons">
-                  <ul>
-                    <li><i class="fa fa-check text-blue"></i> </li>
-                    <li><i class="fa fa-check text-blue"></i> </li>
-                    <li><i class="fa fa-times"></i> </li>
-                    <li><i class="fa fa-ellipsis-h"></i> </li>
-                  </ul>
-                </div>
-                <a class="btn btn-dark" href="#">加入</a> </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
-          <hr class="alt" />
-          <div class="pricing-tables margin-top-lg text-center row">
-            <div class="col-sm-4 col-md-3 hero-plan">
-              <div class="pricing-plan margin-none">
-                <div class="pricing-title btn-blue4">
-                  <h3>Standard</h3>
-                  <span class="pricing-subtitle">Most Popular</span> </div>
-                <div class="pricing-info"> <span class="currency-sign">￥</span>
-                  <h2>59</h2>
-                  <h6>Per Month</h6>
-                </div>
-                <div class="pricing-features">
-                  <ul>
-                    <li><i class="fa fa-hdd-o"></i> <b>2GB</b> Disk Space</li>
-                    <li><i class="fa fa-exchange"></i> <b>20GB</b> Bandwidth</li>
-                    <li><i class="fa fa-refresh"></i> <b>5</b> Email Accounts</li>
-                  </ul>
-                </div>
-                <a class="btn btn-blue4" href="#">Sign up</a> </div>
-            </div>
-            <div class="col-sm-4 col-md-3 hero-plan">
-              <div class="pricing-plan margin-none">
-                <div class="pricing-title btn-blue">
-                  <h3>Standard</h3>
-                  <span class="pricing-subtitle">Most Popular</span> </div>
-                <div class="pricing-info"> <span class="currency-sign">$</span>
-                  <h2>59</h2>
-                  <h6>Per Month</h6>
-                </div>
-                <div class="pricing-features">
-                  <ul>
-                    <li><i class="fa fa-hdd-o"></i> <b>2GB</b> Disk Space</li>
-                    <li><i class="fa fa-exchange"></i> <b>20GB</b> Bandwidth</li>
-                    <li><i class="fa fa-refresh"></i> <b>5</b> Email Accounts</li>
-                  </ul>
-                </div>
-                <a class="btn btn-blue" href="#">Sign up</a> </div>
-            </div>
-            <div class="col-sm-4 col-md-3 hero-plan">
-              <div class="pricing-plan margin-none">
-                <div class="pricing-title btn-green">
-                  <h3>Standard</h3>
-                  <span class="pricing-subtitle">Most Popular</span> </div>
-                <div class="pricing-info"> <span class="currency-sign">$</span>
-                  <h2>59</h2>
-                  <h6>Per Month</h6>
-                </div>
-                <div class="pricing-features">
-                  <ul>
-                    <li><i class="fa fa-hdd-o"></i> <b>2GB</b> Disk Space</li>
-                    <li><i class="fa fa-exchange"></i> <b>20GB</b> Bandwidth</li>
-                    <li><i class="fa fa-refresh"></i> <b>5</b> Email Accounts</li>
-                  </ul>
-                </div>
-                <a class="btn btn-green" href="#">Sign up</a> </div>
-            </div>
-            <div class="hidden-sm col-md-3 hero-plan">
-              <div class="pricing-plan margin-none">
-                <div class="pricing-title btn-alert">
-                  <h3>Standard</h3>
-                  <span class="pricing-subtitle">Most Popular</span> </div>
-                <div class="pricing-info"> <span class="currency-sign">$</span>
-                  <h2>59</h2>
-                  <h6>Per Month</h6>
-                </div>
-                <div class="pricing-features">
-                  <ul>
-                    <li><i class="fa fa-hdd-o"></i> <b>2GB</b> Disk Space</li>
-                    <li><i class="fa fa-exchange"></i> <b>20GB</b> Bandwidth</li>
-                    <li><i class="fa fa-refresh"></i> <b>5</b> Email Accounts</li>
-                  </ul>
-                </div>
-                <a class="btn btn-alert" href="#">Sign up</a> </div>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -468,114 +376,35 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 
+<!-- Plugins - Via CDN --> 
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script> 
+<!--<script type="text/javascript" src="vendor/plugins/datatables/jquery.dataTables.min.js"></script> Local Option --> 
+
 <!-- Plugins --> 
-<script type="text/javascript" src="vendor/plugins/globalize/globalize.js"></script> 
+<script type="text/javascript" src="vendor/plugins/datatables/js/datatables.js"></script><!-- Datatable Bootstrap Addon --> 
+<script type="text/javascript" src="vendor/editors/xeditable/js/bootstrap-editable.js"></script> 
 <script type="text/javascript" src="vendor/plugins/chosen/chosen.jquery.min.js"></script> 
-<script type="text/javascript" src="vendor/plugins/daterange/moment.min.js"></script> 
-<script type="text/javascript" src="vendor/plugins/daterange/daterangepicker.js"></script> 
-<script type="text/javascript" src="vendor/plugins/colorpicker/bootstrap-colorpicker.js"></script> 
-<script type="text/javascript" src="vendor/plugins/timepicker/bootstrap-timepicker.min.js"></script> 
-<script type="text/javascript" src="vendor/plugins/datepicker/bootstrap-datepicker.js"></script> 
-<script type="text/javascript" src="vendor/plugins/formswitch/js/bootstrap-switch.min.js"></script> 
-<script type="text/javascript" src="vendor/plugins/jquerymask/jquery.maskedinput.min.js"></script> 
-<script type="text/javascript" src="vendor/plugins/tags/tagmanager.js"></script> 
 
 <!-- Theme Javascript --> 
 <script type="text/javascript" src="js/uniform.min.js"></script> 
-<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/main.js"></script> 
 <script type="text/javascript" src="js/custom.js"></script> 
 <script type="text/javascript">
- jQuery(document).ready(function() {
+jQuery(document).ready(function() {
 
-	 // Init Theme Core
-	 Core.init();
+  Core.init();
 
-	 //Init jquery Date Picker
-	 $('.datepicker').datepicker()
-	 
-	 //Init jquery Date Range Picker
-	 $('input[name="daterange"]').daterangepicker();
-	 
-	 //Init jquery Color Picker
-	 $('.colorpicker').colorpicker() 
-	 $('.rgbapicker').colorpicker() 
-	 
-	 //Init jquery Time Picker
-	 $('.timepicker').timepicker();
-	  
-	 //Init jquery Tags Manager 
-	 $(".tm-input").tagsManager({
-        tagsContainer: '.tag-container',
-		prefilled: ["Miley Cyrus", "Apple", "Wow This is a really Long tag", "Na uh"],
-		tagClass: 'tm-tag-info',
-     });
+  $('#datatable').dataTable( {
+	"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ -1 ] }],
+	"oLanguage": { "oPaginate": {"sPrevious": "", "sNext": ""} },
+	"iDisplayLength": 6,
+	"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+  });	
+  
+  $("select[name='datatable_length']").chosen();	
+  $.fn.editable.defaults.mode = 'popup';
+  $('.xedit').editable();
 
-	 //Init jquery spinner init - default  
-	 $(".checkbox").uniform();
- 	 $(".radio").uniform();
-
-	//Init jquery spinner init - default
-	$("#chosen-list1").chosen();
-	$("#chosen-list2").chosen(); 
-	  
-	//Init jquery spinner init - default
-	$("#spinner1").spinner();
-	
-	//Init jquery spinner init - currency 
-	$("#spinner2").spinner({
-      min: 5,
-      max: 2500,
-      step: 25,
-      start: 1000,
-      //numberFormat: "C"
-    });
-	
-	//Init jquery spinner init - decimal  
-	$( "#spinner3" ).spinner({
-      step: 0.01,
-      numberFormat: "n"
-    });
-	
-	//Init jquery time spinner
-    $.widget( "ui.timespinner", $.ui.spinner, {
-		options: {
-		  // seconds
-		  step: 60 * 1000,
-		  // hours
-		  page: 60
-		},
-		_parse: function( value ) {
-		  if ( typeof value === "string" ) {
-			// already a timestamp
-			if ( Number( value ) == value ) {
-			  return Number( value );
-			}
-			return +Globalize.parseDate( value );
-		  }
-		  return value;
-		},
-	 
-		_format: function( value ) {
-		  return Globalize.format( new Date(value), "t" );
-		}
-	  });
-    $( "#spinner4" ).timespinner();
-
-	//Init jquery masked inputs
-	$('.date').mask('99/99/9999');
-	$('.time').mask('99:99:99');
-	$('.date_time').mask('99/99/9999 99:99:99');
-	$('.zip').mask('99999-999');
-	$('.phone').mask('(999) 999-9999');
-	$('.phoneext').mask("(999) 999-9999 x99999");
-	$(".money").mask("999,999,999.999"); 
-	$(".product").mask("999.999.999.999"); 
-	$(".tin").mask("99-9999999");
-	$(".ssn").mask("999-99-9999");
-	$(".ip").mask("9ZZ.9ZZ.9ZZ.9ZZ");
-	$(".eyescript").mask("~9.99 ~9.99 999");
-	$(".custom").mask("9.99.999.9999");
-	
 });
 </script>
 </body>

@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
+
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -18,15 +24,13 @@
 <link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
 <!-- Plugin CSS -->
-<link rel="stylesheet" type="text/css" href="vendor/plugins/mfpopup/dist/magnific-popup.css" media="screen" />
-<link rel="stylesheet" href="vendor/plugins/dropzone/downloads/css/dropzone.css" />
-<link rel="stylesheet" href="vendor/plugins/jqueryupload/plugins/blueimp/css/blueimp-gallery.min.css" />
-<link rel="stylesheet" href="vendor/plugins/jqueryupload/css/jquery.fileupload.css" />
-<link rel="stylesheet" href="vendor/plugins/jqueryupload/css/jquery.fileupload-ui.css" />
-
-<!-- No Script CSS -->
-<noscript><link rel="stylesheet" href="vendor/plugins/jqueryupload/css/jquery.fileupload-noscript.css" /></noscript>
-<noscript><link rel="stylesheet" href="vendor/plugins/jqueryupload/css/jquery.fileupload-ui-noscript.css" /></noscript>
+<link rel="stylesheet" type="text/css" href="vendor/plugins/chosen/chosen.min.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/timepicker/bootstrap-timepicker.min.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/colorpicker/colorpicker.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/datepicker/datepicker.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/daterange/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/formswitch/css/bootstrap-switch.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/tags/tagmanager.css" />
 
 <!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="css/theme.css" />
@@ -49,7 +53,7 @@
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
-
+</head>
 <body>
 <!-- Start: Theme Preview Pane -->
 <div id="skin-toolbox">
@@ -57,45 +61,46 @@
   <div class="skin-toolbox-panel">
     <h4 class="padding-left-sm">主题选择</h4>
     <form id="skin-toolbox-form" />
-      <div class="form-group">
-        <label class="checkbox-inline">
-          <input id="header-option" class="checkbox" type="checkbox" checked="" />
-          定制 <b>标题</b> </label>
-      </div>
-      <div class="form-group">
-        <label class="checkbox-inline">
-          <input id="sidebar-option" class="checkbox" type="checkbox" />
-          定制 <b>侧边栏</b> </label>
-      </div>
-      <div class="form-group">
-        <label class="checkbox-inline option-disabled">
-          <input id="breadcrumb-option" class="checkbox" type="checkbox" disabled="" />
-          定制 <b>Breadcrumbs</b> </label>
-      </div>
-      <hr class="short" style="margin: 7px 10px;" />
-      <div class="form-group">
-        <label class="checkbox-inline">
-          <input id="breadcrumb-hidden" class="checkbox" type="checkbox" />
-          隐藏 <b>Breadcrumbs</b> </label>
-      </div>
-      <div class="form-group margin-bottom-lg">
-        <label class="checkbox-inline">
-          <input id="searchbar-hidden" class="checkbox" type="checkbox" />
-          隐藏 <b>搜索框</b> </label>
-      </div>
-      <h4 class="padding-left-sm">布局选择</h4>
-      <div class="form-group">
-        <label class="radio-inline">
-          <input class="radio" type="radio" name="optionsRadios" id="fullwidth-option" checked="" />
-          全屏 </label>
-      </div>
-      <div class="form-group">
-        <label class="radio-inline">
-          <input class="radio" type="radio" name="optionsRadios" id="boxed-option" />
-          局部</label>
-      </div>
-      <hr class="short" />
-      <div class="form-group"> <a href="customizer.html" id="customizer-link" class="btn btn-warning btn-gradient btn-block padding-bottom padding-top">定制</a> </div>
+    
+    <div class="form-group">
+      <label class="checkbox-inline">
+        <input id="header-option" class="checkbox" type="checkbox" checked="" />
+        定制 <b>标题</b> </label>
+    </div>
+    <div class="form-group">
+      <label class="checkbox-inline">
+        <input id="sidebar-option" class="checkbox" type="checkbox" />
+        定制 <b>侧边栏</b> </label>
+    </div>
+    <div class="form-group">
+      <label class="checkbox-inline option-disabled">
+        <input id="breadcrumb-option" class="checkbox" type="checkbox" disabled="" />
+        定制 <b>Breadcrumbs</b> </label>
+    </div>
+    <hr class="short" style="margin: 7px 10px;" />
+    <div class="form-group">
+      <label class="checkbox-inline">
+        <input id="breadcrumb-hidden" class="checkbox" type="checkbox" />
+        隐藏 <b>Breadcrumbs</b> </label>
+    </div>
+    <div class="form-group margin-bottom-lg">
+      <label class="checkbox-inline">
+        <input id="searchbar-hidden" class="checkbox" type="checkbox" />
+        隐藏 <b>搜索框</b> </label>
+    </div>
+    <h4 class="padding-left-sm">布局选择</h4>
+    <div class="form-group">
+      <label class="radio-inline">
+        <input class="radio" type="radio" name="optionsRadios" id="fullwidth-option" checked="" />
+        全屏 </label>
+    </div>
+    <div class="form-group">
+      <label class="radio-inline">
+        <input class="radio" type="radio" name="optionsRadios" id="boxed-option" />
+        局部</label>
+    </div>
+    <hr class="short" />
+    <div class="form-group"> <a href="customizer.html" id="customizer-link" class="btn btn-warning btn-gradient btn-block padding-bottom padding-top">定制</a> </div>
     </form>
   </div>
 </div>
@@ -265,9 +270,10 @@
   <aside id="sidebar">
     <div id="sidebar-search">
       <form role="search" />
-        <input type="text" class="search-bar form-control" placeholder="搜索" />
-        <i class="fa fa-search field-icon-right"></i>
-        <button type="submit" class="btn btn-default hidden"></button>
+      
+      <input type="text" class="search-bar form-control" placeholder="搜索" />
+      <i class="fa fa-search field-icon-right"></i>
+      <button type="submit" class="btn btn-default hidden"></button>
       </form>
       <div class="sidebar-toggle"> <i class="fa fa-bars"></i> </div>
     </div>
@@ -277,8 +283,8 @@
         <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
         <li> <a href="publisher_questionnaire_man.html"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
         <li> <a href="publisher_hireman.html"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
-          </ul>
-        </li>
+      </ul>
+      </li>
       </ul>
     </div>
   </aside>
@@ -289,64 +295,83 @@
       <ol class="breadcrumb">
         <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
         <li><a href="publisher_home.html">主页</a></li>
-        <li class="active">任务管理</li>
+        <li><a href="publisher_taskman.html">任务管理</a></li>
+        <li><a href="publisher_taskpub.html">发布任务</a></li>
+        <li class="active">网站任务</li>
       </ol>
     </div>
-<div class="container">
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel">
-                <div class="panel-heading"></div>
-                <div class="panel-body">
-                    <form id="dropZone" class="dropzone dz-clickable" action="publishTestingTask.do" method="post">
-                    <input type="hidden" name="method" value="goToPublish" />
-                        <div class="dz-default dz-message">
-                            <span>
-                                <i class="fa fa-cloud-upload"></i>
-                                <span class="main-text">
-                                    <b>
-                                        发布任务
-                                   </b>
-                                     
-                                </span>
-                                <br></br>
-                                <span class="sub-text">
-                                    <button class="btn btn-info btn-gradient btn-lg" type="submit">点击发布</button>
-                                </span>
-                            </span>
-                        </div>
-                    </form>
-                </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel">
+            <div class="panel-heading">
+            	<div class="panel-title"><i class="fa fa-globe"></i>网战测试</div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel">
-                <div class="panel-heading"></div>
-                <div class="panel-body">
-                    <form id="dropZone" class="dropzone dz-clickable" action="index.html">
-                        <div class="dz-default dz-message">
-                            <span>
-                                <i class="fa fa-list"></i>
-                                <span class="main-text">
-                                    <b>
-                                        查看任务
-                                    </b>
-                                     
-                                </span>
-                                <br></br>
-                                <span class="sub-text">
-                                    <button class="btn btn-info btn-gradient btn-lg" type="button">点击查看</button>
-                                </span>
-                            </span>
-                        </div>
-                    </form>
+            <div class="panel-body">
+              <h2 class="text-primary"> 请填写详细信息 </h2>
+              <hr/>
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                <form enctype="multipart/form-data" action="publishTestingTask.do"  method="post" >
+                <input type="hidden" name="method" value="webSubmitForm" />
+                  <p class="alert alert-success">请<b>正确填写</b>信息</p>
+                  <div class="form-group">
+                    <label for="web_url"> 网站名称 </label>
+                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-bookmark-o"></i> </span>
+                      <input class="form-control" type="text" required placeholder="请输入网站名称" name="webName" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="web_url"> 网站URL </label>
+                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-link"></i> </span>
+                      <input class="form-control" type="text" required placeholder="请输入网站地址" name="webUrl" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="web_url"> 上传图标 </label>
+                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-picture-o"></i> </span>
+                      <input class="form-control" type="file" required placeholder="" name="icon" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="textArea">任务描述</label>
+                      <div class="input-group">
+                        <textarea class="form-control" id="textArea" cols="80" rows="3" required name="description"></textarea>
+                      </div>
+                  </div>
+                   <div class="form-group">
+                    <label for="web_url"> 是否需要测试帐号 </label>
+                    <label class="radio-inline">
+                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
+                          需要 </label>
+                    <label class="radio-inline">
+                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked="" />
+                          不需要 </label>
+                  </div>
+                   <div class="form-group">
+                    <label for="web_url"> 上传测试帐号信息 </label>
+                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-cloud-upload"></i> </span>
+                      <input class="form-control" type="text" required placeholder="TesterAccountData.xml" name="icon" disabled="" />
+                    </div>
+                  </div>
+                  
+                  <hr></hr>
+                  <div class="pull-left">
+                  	<button class="btn btn-gradient btn-lg btn-green" type="button">返回</button>
+                  </div>
+                  <div class="pull-right">
+                  	<button class="btn btn-info btn-gradient btn-lg" type="submit">下一步</button>
+                  </div>
+                  </form>
                 </div>
+              </div>
+              <div class="row"><hr></hr></div>
             </div>
+            
+          </div>
         </div>
+      </div>
     </div>
-
-</div>
   </section>
   <!-- End: Content --> 
 </div>
@@ -357,18 +382,18 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 
-<!-- Plugins - Via CDN -->
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
-<!--<script type="text/javascript" src="vendor/plugins/datatables/jquery.dataTables.min.js"></script> Local Option -->
+<!-- Plugins - Via CDN --> 
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script> 
+<!--<script type="text/javascript" src="vendor/plugins/datatables/jquery.dataTables.min.js"></script> Local Option --> 
 
-<!-- Plugins -->
-<script type="text/javascript" src="vendor/plugins/datatables/js/datatables.js"></script><!-- Datatable Bootstrap Addon -->
+<!-- Plugins --> 
+<script type="text/javascript" src="vendor/plugins/datatables/js/datatables.js"></script><!-- Datatable Bootstrap Addon --> 
 <script type="text/javascript" src="vendor/editors/xeditable/js/bootstrap-editable.js"></script> 
 <script type="text/javascript" src="vendor/plugins/chosen/chosen.jquery.min.js"></script> 
 
 <!-- Theme Javascript --> 
 <script type="text/javascript" src="js/uniform.min.js"></script> 
-<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/main.js"></script> 
 <script type="text/javascript" src="js/custom.js"></script> 
 <script type="text/javascript">
 jQuery(document).ready(function() {

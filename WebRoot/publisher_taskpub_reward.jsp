@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
+
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -18,15 +24,13 @@
 <link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
 <!-- Plugin CSS -->
-<link rel="stylesheet" type="text/css" href="vendor/plugins/mfpopup/dist/magnific-popup.css" media="screen" />
-<link rel="stylesheet" href="vendor/plugins/dropzone/downloads/css/dropzone.css" />
-<link rel="stylesheet" href="vendor/plugins/jqueryupload/plugins/blueimp/css/blueimp-gallery.min.css" />
-<link rel="stylesheet" href="vendor/plugins/jqueryupload/css/jquery.fileupload.css" />
-<link rel="stylesheet" href="vendor/plugins/jqueryupload/css/jquery.fileupload-ui.css" />
-
-<!-- No Script CSS -->
-<noscript><link rel="stylesheet" href="vendor/plugins/jqueryupload/css/jquery.fileupload-noscript.css" /></noscript>
-<noscript><link rel="stylesheet" href="vendor/plugins/jqueryupload/css/jquery.fileupload-ui-noscript.css" /></noscript>
+<link rel="stylesheet" type="text/css" href="vendor/plugins/chosen/chosen.min.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/timepicker/bootstrap-timepicker.min.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/colorpicker/colorpicker.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/datepicker/datepicker.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/daterange/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/formswitch/css/bootstrap-switch.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/tags/tagmanager.css" />
 
 <!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="css/theme.css" />
@@ -57,45 +61,46 @@
   <div class="skin-toolbox-panel">
     <h4 class="padding-left-sm">主题选择</h4>
     <form id="skin-toolbox-form" />
-      <div class="form-group">
-        <label class="checkbox-inline">
-          <input id="header-option" class="checkbox" type="checkbox" checked="" />
-          定制 <b>标题</b> </label>
-      </div>
-      <div class="form-group">
-        <label class="checkbox-inline">
-          <input id="sidebar-option" class="checkbox" type="checkbox" />
-          定制 <b>侧边栏</b> </label>
-      </div>
-      <div class="form-group">
-        <label class="checkbox-inline option-disabled">
-          <input id="breadcrumb-option" class="checkbox" type="checkbox" disabled="" />
-          定制 <b>Breadcrumbs</b> </label>
-      </div>
-      <hr class="short" style="margin: 7px 10px;" />
-      <div class="form-group">
-        <label class="checkbox-inline">
-          <input id="breadcrumb-hidden" class="checkbox" type="checkbox" />
-          隐藏 <b>Breadcrumbs</b> </label>
-      </div>
-      <div class="form-group margin-bottom-lg">
-        <label class="checkbox-inline">
-          <input id="searchbar-hidden" class="checkbox" type="checkbox" />
-          隐藏 <b>搜索框</b> </label>
-      </div>
-      <h4 class="padding-left-sm">布局选择</h4>
-      <div class="form-group">
-        <label class="radio-inline">
-          <input class="radio" type="radio" name="optionsRadios" id="fullwidth-option" checked="" />
-          全屏 </label>
-      </div>
-      <div class="form-group">
-        <label class="radio-inline">
-          <input class="radio" type="radio" name="optionsRadios" id="boxed-option" />
-          局部</label>
-      </div>
-      <hr class="short" />
-      <div class="form-group"> <a href="customizer.html" id="customizer-link" class="btn btn-warning btn-gradient btn-block padding-bottom padding-top">定制</a> </div>
+    
+    <div class="form-group">
+      <label class="checkbox-inline">
+        <input id="header-option" class="checkbox" type="checkbox" checked="" />
+        定制 <b>标题</b> </label>
+    </div>
+    <div class="form-group">
+      <label class="checkbox-inline">
+        <input id="sidebar-option" class="checkbox" type="checkbox" />
+        定制 <b>侧边栏</b> </label>
+    </div>
+    <div class="form-group">
+      <label class="checkbox-inline option-disabled">
+        <input id="breadcrumb-option" class="checkbox" type="checkbox" disabled="" />
+        定制 <b>Breadcrumbs</b> </label>
+    </div>
+    <hr class="short" style="margin: 7px 10px;" />
+    <div class="form-group">
+      <label class="checkbox-inline">
+        <input id="breadcrumb-hidden" class="checkbox" type="checkbox" />
+        隐藏 <b>Breadcrumbs</b> </label>
+    </div>
+    <div class="form-group margin-bottom-lg">
+      <label class="checkbox-inline">
+        <input id="searchbar-hidden" class="checkbox" type="checkbox" />
+        隐藏 <b>搜索框</b> </label>
+    </div>
+    <h4 class="padding-left-sm">布局选择</h4>
+    <div class="form-group">
+      <label class="radio-inline">
+        <input class="radio" type="radio" name="optionsRadios" id="fullwidth-option" checked="" />
+        全屏 </label>
+    </div>
+    <div class="form-group">
+      <label class="radio-inline">
+        <input class="radio" type="radio" name="optionsRadios" id="boxed-option" />
+        局部</label>
+    </div>
+    <hr class="short" />
+    <div class="form-group"> <a href="customizer.html" id="customizer-link" class="btn btn-warning btn-gradient btn-block padding-bottom padding-top">定制</a> </div>
     </form>
   </div>
 </div>
@@ -265,9 +270,10 @@
   <aside id="sidebar">
     <div id="sidebar-search">
       <form role="search" />
-        <input type="text" class="search-bar form-control" placeholder="搜索" />
-        <i class="fa fa-search field-icon-right"></i>
-        <button type="submit" class="btn btn-default hidden"></button>
+      
+      <input type="text" class="search-bar form-control" placeholder="搜索" />
+      <i class="fa fa-search field-icon-right"></i>
+      <button type="submit" class="btn btn-default hidden"></button>
       </form>
       <div class="sidebar-toggle"> <i class="fa fa-bars"></i> </div>
     </div>
@@ -277,8 +283,8 @@
         <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
         <li> <a href="publisher_questionnaire_man.html"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
         <li> <a href="publisher_hireman.html"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
-          </ul>
-        </li>
+      </ul>
+      </li>
       </ul>
     </div>
   </aside>
@@ -289,64 +295,61 @@
       <ol class="breadcrumb">
         <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
         <li><a href="publisher_home.html">主页</a></li>
-        <li class="active">任务管理</li>
+        <li><a href="publisher_taskman.html">任务管理</a></li>
+        <li><a href="publisher_taskpub.html">发布任务</a></li>
+        <li class="active">奖励设置</li>
       </ol>
     </div>
-<div class="container">
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel">
-                <div class="panel-heading"></div>
-                <div class="panel-body">
-                    <form id="dropZone" class="dropzone dz-clickable" action="publishTestingTask.do" method="post">
-                    <input type="hidden" name="method" value="goToPublish" />
-                        <div class="dz-default dz-message">
-                            <span>
-                                <i class="fa fa-cloud-upload"></i>
-                                <span class="main-text">
-                                    <b>
-                                        发布任务
-                                   </b>
-                                     
-                                </span>
-                                <br></br>
-                                <span class="sub-text">
-                                    <button class="btn btn-info btn-gradient btn-lg" type="submit">点击发布</button>
-                                </span>
-                            </span>
-                        </div>
-                    </form>
-                </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel">
+            <div class="panel-heading">
+            	<div class="panel-title"><i class="fa fa-trophy"></i> 奖励设置</div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel">
-                <div class="panel-heading"></div>
-                <div class="panel-body">
-                    <form id="dropZone" class="dropzone dz-clickable" action="index.html">
-                        <div class="dz-default dz-message">
-                            <span>
-                                <i class="fa fa-list"></i>
-                                <span class="main-text">
-                                    <b>
-                                        查看任务
-                                    </b>
-                                     
-                                </span>
-                                <br></br>
-                                <span class="sub-text">
-                                    <button class="btn btn-info btn-gradient btn-lg" type="button">点击查看</button>
-                                </span>
-                            </span>
+            <div class="panel-body">
+            <form action="publishTestingTask.do"  method="post" >
+                <input type="hidden" name="method" value="pubTask" />
+              <h2 class="text-primary"> 请认真填写一下内容</h2>
+              <hr/>
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                  <p class="alert alert-success">您的余额为： <b><span class="text-primary">200</span></b></p>
+                   <div class="input-group col-lg-5"> <span class="input-group-addon"><i class="fa fa-calendar "></i> </span>
+                          <input type="text" id="datepicker_2" class="form-control margin-top-none" placeholder="10/25/2013 - 10/25/2013" name="daterange" />
+                   </div>
+                   <br/>
+                   <div class="form-group">
+                      <label for="spinner1">参与奖励</label>
+                        <div class="input-group col-lg-5"> <span class="input-group-addon"><i class="fa fa-usd"></i> </span>
+                          <input id="spinner1" class="form-control ui-spinner-input" name="wholeReward" value="300" />
                         </div>
-                    </form>
+                    </div>
+                     <br/>
+                   <div class="form-group">
+                      <label for="spinner1">报告提交奖励</label>
+                        <div class="input-group col-lg-5"> <span class="input-group-addon"><i class="fa fa-usd"></i> </span>
+                          <input  class="form-control ui-spinner-input" name="perReward" value="300" />
+                        </div>
+                    </div>
+                  <hr></hr>
+                  <div class="pull-left">
+                  	<button class="btn btn-gradient btn-lg btn-green" type="reset">返回</button>
+                  </div>
+                  <div class="pull-right">
+                  	<button class="btn btn-info btn-gradient btn-lg" type="submit">下一步</button>
+                  </div>
+                  
                 </div>
+              </div>
+              <div class="row"><hr></hr></div>
+              </form>
             </div>
+            
+          </div>
         </div>
+      </div>
     </div>
-
-</div>
   </section>
   <!-- End: Content --> 
 </div>
@@ -357,35 +360,114 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 
-<!-- Plugins - Via CDN -->
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
-<!--<script type="text/javascript" src="vendor/plugins/datatables/jquery.dataTables.min.js"></script> Local Option -->
-
-<!-- Plugins -->
-<script type="text/javascript" src="vendor/plugins/datatables/js/datatables.js"></script><!-- Datatable Bootstrap Addon -->
-<script type="text/javascript" src="vendor/editors/xeditable/js/bootstrap-editable.js"></script> 
+<!-- Plugins --> 
+<script type="text/javascript" src="vendor/plugins/globalize/globalize.js"></script> 
 <script type="text/javascript" src="vendor/plugins/chosen/chosen.jquery.min.js"></script> 
+<script type="text/javascript" src="vendor/plugins/daterange/moment.min.js"></script> 
+<script type="text/javascript" src="vendor/plugins/daterange/daterangepicker.js"></script> 
+<script type="text/javascript" src="vendor/plugins/colorpicker/bootstrap-colorpicker.js"></script> 
+<script type="text/javascript" src="vendor/plugins/timepicker/bootstrap-timepicker.min.js"></script> 
+<script type="text/javascript" src="vendor/plugins/datepicker/bootstrap-datepicker.js"></script> 
+<script type="text/javascript" src="vendor/plugins/formswitch/js/bootstrap-switch.min.js"></script> 
+<script type="text/javascript" src="vendor/plugins/jquerymask/jquery.maskedinput.min.js"></script> 
+<script type="text/javascript" src="vendor/plugins/tags/tagmanager.js"></script> 
 
 <!-- Theme Javascript --> 
 <script type="text/javascript" src="js/uniform.min.js"></script> 
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/custom.js"></script> 
 <script type="text/javascript">
-jQuery(document).ready(function() {
+ jQuery(document).ready(function() {
 
-  Core.init();
+	 // Init Theme Core
+	 Core.init();
 
-  $('#datatable').dataTable( {
-	"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ -1 ] }],
-	"oLanguage": { "oPaginate": {"sPrevious": "", "sNext": ""} },
-	"iDisplayLength": 6,
-	"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-  });	
-  
-  $("select[name='datatable_length']").chosen();	
-  $.fn.editable.defaults.mode = 'popup';
-  $('.xedit').editable();
+	 //Init jquery Date Picker
+	 $('.datepicker').datepicker()
+	 
+	 //Init jquery Date Range Picker
+	 $('input[name="daterange"]').daterangepicker();
+	 
+	 //Init jquery Color Picker
+	 $('.colorpicker').colorpicker() 
+	 $('.rgbapicker').colorpicker() 
+	 
+	 //Init jquery Time Picker
+	 $('.timepicker').timepicker();
+	  
+	 //Init jquery Tags Manager 
+	 $(".tm-input").tagsManager({
+        tagsContainer: '.tag-container',
+		prefilled: ["Miley Cyrus", "Apple", "Wow This is a really Long tag", "Na uh"],
+		tagClass: 'tm-tag-info',
+     });
 
+	 //Init jquery spinner init - default  
+	 $(".checkbox").uniform();
+ 	 $(".radio").uniform();
+
+	//Init jquery spinner init - default
+	$("#chosen-list1").chosen();
+	$("#chosen-list2").chosen(); 
+	  
+	//Init jquery spinner init - default
+	$("#spinner1").spinner();
+	
+	//Init jquery spinner init - currency 
+	$("#spinner2").spinner({
+      min: 5,
+      max: 2500,
+      step: 25,
+      start: 1000,
+      //numberFormat: "C"
+    });
+	
+	//Init jquery spinner init - decimal  
+	$( "#spinner3" ).spinner({
+      step: 0.01,
+      numberFormat: "n"
+    });
+	
+	//Init jquery time spinner
+    $.widget( "ui.timespinner", $.ui.spinner, {
+		options: {
+		  // seconds
+		  step: 60 * 1000,
+		  // hours
+		  page: 60
+		},
+		_parse: function( value ) {
+		  if ( typeof value === "string" ) {
+			// already a timestamp
+			if ( Number( value ) == value ) {
+			  return Number( value );
+			}
+			return +Globalize.parseDate( value );
+		  }
+		  return value;
+		},
+	 
+		_format: function( value ) {
+		  return Globalize.format( new Date(value), "t" );
+		}
+	  });
+    $( "#spinner4" ).timespinner();
+
+	//Init jquery masked inputs
+	$('.date').mask('99/99/9999');
+	$('.time').mask('99:99:99');
+	$('.date_time').mask('99/99/9999 99:99:99');
+	$('.zip').mask('99999-999');
+	$('.phone').mask('(999) 999-9999');
+	$('.phoneext').mask("(999) 999-9999 x99999");
+	$(".money").mask("999,999,999.999"); 
+	$(".product").mask("999.999.999.999"); 
+	$(".tin").mask("99-9999999");
+	$(".ssn").mask("999-99-9999");
+	$(".ip").mask("9ZZ.9ZZ.9ZZ.9ZZ");
+	$(".eyescript").mask("~9.99 ~9.99 999");
+	$(".custom").mask("9.99.999.9999");
+	
 });
 </script>
 </body>

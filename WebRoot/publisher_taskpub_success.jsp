@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
+
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -295,24 +301,26 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="panel">
-                <div class="panel-heading"></div>
+                <div class="panel-heading">
+                <i class="fa fa-legal"></i>
+                	等待审核中...
+                </div>
                 <div class="panel-body">
-                    <form id="dropZone" class="dropzone dz-clickable" action="publishTestingTask.do" method="post">
-                    <input type="hidden" name="method" value="goToPublish" />
+                    <form id="dropZone" class="dropzone dz-clickable" action="publisher_taskman.html">
                         <div class="dz-default dz-message">
                             <span>
-                                <i class="fa fa-cloud-upload"></i>
+                                <i class="fa fa-check"></i>
                                 <span class="main-text">
                                     <b>
-                                        发布任务
+                                        任务发布成功
                                    </b>
                                      
                                 </span>
                                 <br></br>
                                 <span class="sub-text">
-                                    <button class="btn btn-info btn-gradient btn-lg" type="submit">点击发布</button>
+                                    <button class="btn btn-info btn-gradient btn-lg"  type="submit">返回</button>
                                 </span>
                             </span>
                         </div>
@@ -320,30 +328,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="panel">
-                <div class="panel-heading"></div>
-                <div class="panel-body">
-                    <form id="dropZone" class="dropzone dz-clickable" action="index.html">
-                        <div class="dz-default dz-message">
-                            <span>
-                                <i class="fa fa-list"></i>
-                                <span class="main-text">
-                                    <b>
-                                        查看任务
-                                    </b>
-                                     
-                                </span>
-                                <br></br>
-                                <span class="sub-text">
-                                    <button class="btn btn-info btn-gradient btn-lg" type="button">点击查看</button>
-                                </span>
-                            </span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+       
     </div>
 
 </div>

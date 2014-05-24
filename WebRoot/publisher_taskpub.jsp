@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
+
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -289,32 +295,31 @@
       <ol class="breadcrumb">
         <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
         <li><a href="publisher_home.html">主页</a></li>
-        <li class="active">任务管理</li>
+        <li><a href="publisher_taskman.html">任务管理</a></li>
+        <li class="active">发布任务</li>
       </ol>
     </div>
 <div class="container">
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4">
             <div class="panel">
-                <div class="panel-heading">
-                <i class="fa fa-legal"></i>
-                	等待审核中...
-                </div>
+                <div class="panel-heading"></div>
                 <div class="panel-body">
-                    <form id="dropZone" class="dropzone dz-clickable" action="publisher_taskman.html">
+                    <form id="dropZone" class="dropzone dz-clickable" action="publishTestingTask.do" method="post">
+                    <input type="hidden" name="method" value="pubWeb" />
                         <div class="dz-default dz-message">
                             <span>
-                                <i class="fa fa-check"></i>
+                                <i class="fa fa-globe"></i>
                                 <span class="main-text">
                                     <b>
-                                        任务发布成功
+                                        网站任务
                                    </b>
                                      
                                 </span>
                                 <br></br>
                                 <span class="sub-text">
-                                    <button class="btn btn-info btn-gradient btn-lg"  type="submit">返回</button>
+                                    <button class="btn btn-info btn-gradient btn-lg" type="submit">点击发布</button>
                                 </span>
                             </span>
                         </div>
@@ -322,7 +327,57 @@
                 </div>
             </div>
         </div>
-       
+        <div class="col-md-4">
+            <div class="panel">
+                <div class="panel-heading"></div>
+                <div class="panel-body">
+                    <form id="dropZone" class="dropzone dz-clickable" action="publishTestingTask.do" method="post">
+                    <input type="hidden" name="method" value="pubAndroid" />
+                        <div class="dz-default dz-message">
+                            <span>
+                                <i class="fa fa-android"></i>
+                                <span class="main-text">
+                                    <b>
+                                        安卓任务
+                                    </b>
+                                     
+                                </span>
+                                <br></br>
+                                <span class="sub-text">
+                                  <button class="btn btn-info btn-gradient btn-lg" type="submit">点击发布</button>
+                                </span>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+            <div class="col-md-4">
+            <div class="panel">
+                <div class="panel-heading"></div>
+                <div class="panel-body">
+                    <form id="dropZone" class="dropzone dz-clickable" action="publishTestingTask.do" method="post">
+                    <input type="hidden" name="method" value="pubDesktop" />
+                        <div class="dz-default dz-message">
+                            <span>
+                                <i class="fa fa-laptop"></i>
+                                <span class="main-text">
+                                    <b>
+                                        桌面任务
+                                    </b>
+                                     
+                                </span>
+                                <br></br>
+                                <span class="sub-text">
+                                    <button class="btn btn-info btn-gradient btn-lg" type="submit">点击发布</button>
+                                </span>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
