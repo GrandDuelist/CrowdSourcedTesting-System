@@ -6,9 +6,13 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html:html lang="true">
-  <head>
+<!DOCTYPE html>
+<!--[if IE 7]> <html lang="en" class="ie7"> <![endif]-->  
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> 
+<html:html lang="en"> <!--<![endif]-->  
+<head>
     <title>TCTEST</title>
 
     <!-- Meta -->
@@ -92,16 +96,16 @@
                     <span class="icon-bar"></span>
                 </a><!-- /nav-collapse -->                                  
                 <div class="nav-collapse collapse">                                     
-                    <ul class="nav">
+                    <ul class="nav top-2">
                         <li>
-                           <a href="index.html">主页
+                           <a href="index.jsp">主页
                             
                             </a>
                            
                       </li>
                         <li class="active">
-                            <a href="gifts.jsp">礼品中心
-                           
+                            <a href="gifts.html">礼品中心
+                            <a href="gifts.do?method=selectAllGifts">礼品中心
                                                         
                             </a>
                                        
@@ -111,26 +115,27 @@
                             </a>
                         </li>
                         <li>
-                            <a href="page_hirelist.jsp">招募帖                          
+                            <a href="page_hirelist.html">招募�                         
+                            <a href="recruitment.do?method=selectAllRecruitment">招募�                         
                             </a>
                         </li>
                         <li>
                             <a href="page_clients.html">合作伙伴</a>
       
                         </li>
-                        <li>
-                            <a href="page_contact.html">联系我们
+                       <li>
+                            <a href="questionnaire.do?method=pageQuestionnaire">问卷调查
                             </a>
                             
                                                     
                         </li>
                         <li><a class="search search-nav"><i class="icon-search search-btn"></i></a></li>                                
                     </ul>
-                    <div class="search-open search-open-inner">
+                    <div class="search-open">
                         <div class="input-append">
-                            <form />
-                                <input type="text" class="span3" placeholder="Search" />
-                                <button type="submit" class="btn-u">Search</button>
+                            <form action="gifts.do?method=selectSimilarGifts" method="post">
+                                <input name="searchinput" type="text" class="span3" placeholder="搜索" />
+                                <button type="submit" class="btn-u">搜索</button>
                             </form>
                         </div>
                     </div>
@@ -140,6 +145,7 @@
     </div><!-- /container -->               
 </div><!--/header -->      
 <!--=== End Header ===-->
+
 
 <!--=== Breadcrumbs ===-->
 <div class="breadcrumbs margin-bottom-40">
@@ -166,19 +172,19 @@
         <div id="w">    
             <div class="sort" id="sort">
 				<ul class="unstyled inline">
-                	<li><a href="gifts.do?method=selectAllGifts" class="all selected">所有礼品</a></li>
+                	<li><a href="gifts.do?method=selectAllGifts" class="all selected">所有礼�/a></li>
                 	<!-- 
                 	<li><a href="#" class="web">常规礼品</a></li>
                 	<li><a href="#" class="ios">项目礼品</a></li>
                 	 -->
-                	<li><a href="gifts.do?method=selectAvailableGifts&usercredit=5000" class="print">可兑换礼品</a></li>
+                	<li><a href="gifts.do?method=selectAvailableGifts&usercredit=5000" class="print">可兑换礼�/a></li>
                 </ul>
             </div>
             
             <ul class="portfolio recent-work clearfix"> 
             
 		<% 
-            for(int i=0;i<10;i++)
+            for(int i=0;i<giftpage.getPerRows();i++)
   			{ 
   				if(!it.hasNext())
 					break;
@@ -222,7 +228,7 @@
 			<div class="span4">
                 <!-- About -->
 		        <div class="headline"><h3>关于</h3></div>	
-				<p class="margin-bottom-25">TCTest全名为吐槽测试网，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见。</p>	
+				<p class="margin-bottom-25">TCTest全名为吐槽测试网，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见�/p>	
 
 				
 			</div><!--/span4-->	
@@ -231,8 +237,8 @@
             <!-- Monthly Newsletter -->
 		        <div class="headline"><h3>联系方式</h3></div>	
                 <address>
-					4800号，曹安公路，同济大学软件学院 <br />
-					上海市, 中国 <br />
+					4800号，曹安公路，同济大学软件学�<br />
+					上海� 中国 <br />
 					电话: 131 6293 7287 <br />
 					传真: 800 123 3456 <br />
 					Email: <a href="mailto:info@anybiz.com" class="">chengran327@gmail.com</a>
@@ -280,23 +286,19 @@
 <script type="text/javascript" src="assets/js/modernizr.custom.js"></script>        
 <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
 <!-- JS Implementing Plugins -->           
-<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/sequence.jquery-min.js"></script>
-<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/horizontal-parallax.js"></script>
-<script type="text/javascript" src="assets/plugins/bxslider/jquery.bxslider.js"></script>
+<script type="text/javascript" src="assets/plugins/portfolioSorting/js/jquery.quicksand.js"></script>
+<script type="text/javascript" src="assets/plugins/portfolioSorting/js/sorting.js"></script>
 <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
 <!-- JS Page Level -->           
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
-        App.initSliders();
-        App.initBxSlider();
     });
 </script>
 <!--[if lt IE 9]>
-	<script src="assets/js/respond.js"></script>
-<![endif]-->		
-
+    <script src="assets/js/respond.js"></script>
+<![endif]-->
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
-</html:html>
+</html:html> 

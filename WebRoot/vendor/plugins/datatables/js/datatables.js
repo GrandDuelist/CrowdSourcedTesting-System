@@ -3,8 +3,8 @@ $.extend( true, $.fn.dataTable.defaults, {
 	"sDom": "<'row'<'col-sm-12 datatables-toolbar'<'pull-right'f><'pull-left'i>r<'clearfix'>>>t<'row'<'col-sm-12 datatables-footer'<'pull-left'l><'pull-right'p><'clearfix'>>>",
     "sPaginationType": "bs_normal",
     "oLanguage": {
-        "sLengthMenu": "Show _MENU_ Rows",
-        "sSearch": ""
+        "sLengthMenu": "展示 _MENU_ 列",
+        "sSearch": "搜索"
     }
 } );
 

@@ -1,8 +1,11 @@
 package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
+import cn.com.crowdsourcedtesting.bean.Recruitment;
 import cn.com.crowdsourcedtesting.bean.TaskComment;
+import cn.com.other.page.Page;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.LockMode;
@@ -144,4 +147,65 @@ public class TaskCommentDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
+	
+	//按页查找
+	
+			@SuppressWarnings("unchecked")
+			public List findByPage(Page page, int task_id)
+			{
+				try {
+					List<TaskComment> recruitments = new ArrayList<TaskComment>();
+					String queryString = "from TaskComment as model where model.TASK_ID =" + task_id;					
+					Query queryObject = getSession().createQuery(queryString);
+					queryObject.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
+					queryObject.setMaxResults(page.getPerRows());
+					
+					recruitments = queryObject.list();						
+					return recruitments;
+					}
+					catch(RuntimeException re) {
+						log.error("find by page failed", re);
+						throw re;
+					}
+						
+					
+			}
+				
+				
+	
+	//模糊搜索
+		public List findSimilarPropertyByPage(Page page, String propertyName, Object value) {
+			log.debug("search label by property limit");
+
+			try {
+				String queryString = "from TaskComment as model where model."
+						+ propertyName + " like ?";
+				Query query = getSession().createQuery(queryString);
+				query.setParameter(0, "%"+value+"%");
+				query.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
+				query.setMaxResults(page.getPerRows());
+				return query.list();
+			} catch (RuntimeException re) {
+				log.error("find label by property limit failed", re);
+				throw re;
+			}
+
+		}
+		
+		public int getTotalSimilarRows(String propertyName, Object value)
+		{
+
+			try {					
+				String queryString = "from TaskComment as model where model."
+						+ propertyName + " like ?";
+				Query query = getSession().createQuery(queryString);
+				query.setParameter(0, "%"+value+"%");
+				return query.list().size();
+			}
+			catch(RuntimeException re) {
+				log.error("find by page failed", re);
+				throw re;
+			}
+
+		}
 }

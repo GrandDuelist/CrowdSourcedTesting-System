@@ -6,7 +6,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html:html lang="true">
   <head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -67,6 +67,10 @@
 <%
  List <Recruitment> recruitments  =(List<Recruitment>) request.getAttribute("hirelist");
  Page hirepage = (Page)request.getAttribute("page");
+ int firstPage = (int)(hirepage.getCurrentPage()-1)/hirepage.DEFAULT_MAX_PAGE;
+ firstPage = firstPage*hirepage.DEFAULT_MAX_PAGE+1;
+ int lastPage = (hirepage.getTotalPage()+1)<(firstPage+hirepage.DEFAULT_MAX_PAGE)? (hirepage.getTotalPage()+1):(firstPage+hirepage.DEFAULT_MAX_PAGE);
+ 
  Iterator<Recruitment> it= recruitments.iterator();
  Recruitment recruitment = null;
  %>
@@ -367,6 +371,39 @@
                       
                       </tbody>
                     </table>
+                    
+                    
+                    <div class="row">
+           <div class="col-sm-12 datatables-footer">
+                  <div class="pull-right"><div class="dataTables_paginate paging_bs_normal"><ul class="pagination">
+                 <%if( hirepage.getCurrentPage()==1){ %>
+                  <li class="prev disabled"><a><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                  <%} else{%>
+                  
+                    <li class="prev" id="previouPage"><a id = "<%=hirepage.getCurrentPage()%>"><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                <%} %>
+                
+                
+                <%for (int i=firstPage; i<lastPage;i++) 
+                {  if(i == hirepage.getCurrentPage())
+                {%>
+                <li class="active" id="pageNum"><a id="<%=i%>"><%=i %></a></li>
+                  
+                 <%}else { %>
+                  <li id="pageNum"><a id="<%=i%>"><%=i %></a></li>
+                 <%}} %>
+                
+                 <%if( hirepage.getCurrentPage()==hirepage.getTotalPage()){ %>
+                 <li class="next disabled"><a >&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                  <%} else{%>
+                  
+                   <li class="next" id="nextPage"><a id="<%=hirepage.getCurrentPage()%>">&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                <%} %>
+                
+                 </ul></div></div>
+                  <div class="clearfix"></div></div></div>
+                  
+                    
             </div>
           </div>
         </div>
@@ -410,13 +447,6 @@
 jQuery(document).ready(function() {
 
   Core.init();
-
- $('#datatable').dataTable( {
-	"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ -1 ] }],
-	"oLanguage": { "oPaginate": {"sPrevious": "", "sNext": ""} },
-	"iDisplayLength": 6,
-	"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-  });	
   
   $("select[name='datatable_length']").chosen();	
   $.fn.editable.defaults.mode = 'popup';

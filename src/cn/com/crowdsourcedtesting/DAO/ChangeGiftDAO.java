@@ -2,6 +2,7 @@ package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.ChangeGift;
+import cn.com.other.page.Page;
 
 import java.util.Date;
 import java.util.List;
@@ -29,6 +30,9 @@ public class ChangeGiftDAO extends BaseHibernateDAO {
 	// property constants
 	public static final String CREDIT = "credit";
 	public static final String SEND_ADDRESS = "sendAddress";
+	public static final String RECEIVER = "receiver";
+	public static final String ZIPCODE = "zipcode";
+	public static final String MOBILE = "mobile";
 
 	public void save(ChangeGift transientInstance) {
 		log.debug("saving ChangeGift instance");
@@ -102,6 +106,18 @@ public class ChangeGiftDAO extends BaseHibernateDAO {
 		return findByProperty(SEND_ADDRESS, sendAddress);
 	}
 
+	public List findByReceiver(Object receiver) {
+		return findByProperty(RECEIVER, receiver);
+	}
+
+	public List findByZipcode(Object zipcode) {
+		return findByProperty(ZIPCODE, zipcode);
+	}
+
+	public List findByMobile(Object mobile) {
+		return findByProperty(MOBILE, mobile);
+	}
+
 	public List findAll() {
 		log.debug("finding all ChangeGift instances");
 		try {
@@ -148,4 +164,44 @@ public class ChangeGiftDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
+	
+	
+	
+	//模糊搜索
+		public List findSimilarPropertyByPage(Page page, String propertyName, Object value) {
+			log.debug("search label by property limit");
+
+			try {
+				String queryString = "from ChangeGift as model where model."
+						+ propertyName + " like ?";
+				Query query = getSession().createQuery(queryString);
+				query.setParameter(0, "%"+value+"%");
+				query.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
+				query.setMaxResults(page.getPerRows());
+				return query.list();
+			} catch (RuntimeException re) {
+				log.error("find label by property limit failed", re);
+				throw re;
+			}
+
+		}
+		
+		public int getTotalSimilarRows(String propertyName, Object value)
+		{
+
+			try {					
+				String queryString = "from ChangeGift as model where model."
+						+ propertyName + " like ?";
+				Query query = getSession().createQuery(queryString);
+				query.setParameter(0, "%"+value+"%");
+				return query.list().size();
+			}
+			catch(RuntimeException re) {
+				log.error("find by page failed", re);
+				throw re;
+			}
+
+		}
+		
+	
 }

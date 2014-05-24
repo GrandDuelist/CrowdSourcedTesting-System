@@ -2,6 +2,8 @@ package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.JoinQuestionnaire;
+import cn.com.other.page.Page;
+import cn.com.crowdsourcedtesting.modelhelper.TaskType;
 
 import java.util.Date;
 import java.util.List;
@@ -140,4 +142,53 @@ public class JoinQuestionnaireDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
+	
+	
+	public int hasJoined(int testerID, int questionnaireID)
+	{
+		Number c = (Number) getSession()
+				.createQuery(
+						"select count(*) from JoinQuestionnaire where TESTER_ID="+ testerID+ " and QUESTIONNAIRE_ID="+questionnaireID)
+				.uniqueResult();
+
+		return c.intValue();
+	}
+	
+	
+	//模糊搜索
+		public List findSimilarPropertyByPage(Page page, String propertyName, Object value) {
+			log.debug("search label by property limit");
+
+			try {
+				String queryString = "from JoinQuestionnaire as model where model."
+						+ propertyName + " like ?";
+				Query query = getSession().createQuery(queryString);
+				query.setParameter(0, "%"+value+"%");
+				query.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
+				query.setMaxResults(page.getPerRows());
+				return query.list();
+			} catch (RuntimeException re) {
+				log.error("find label by property limit failed", re);
+				throw re;
+			}
+
+		}
+		
+		public int getTotalSimilarRows(String propertyName, Object value)
+		{
+
+			try {					
+				String queryString = "from JoinQuestionnaire as model where model."
+						+ propertyName + " like ?";
+				Query query = getSession().createQuery(queryString);
+				query.setParameter(0, "%"+value+"%");
+				return query.list().size();
+			}
+			catch(RuntimeException re) {
+				log.error("find by page failed", re);
+				throw re;
+			}
+
+		}
+		
 }

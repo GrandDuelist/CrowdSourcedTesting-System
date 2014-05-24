@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,15 +43,18 @@ public class PublisherDAO extends BaseHibernateDAO {
 
 	public void save(Publisher transientInstance) {
 		log.debug("saving Publisher instance");
+		 Session session=getSession();
 		try {
+			session.beginTransaction();
 			getSession().save(transientInstance);
+			session.beginTransaction().commit();
 			log.debug("save successful");
 		} catch (RuntimeException re) {
 			log.error("save failed", re);
+			session.beginTransaction().rollback();
 			throw re;
 		}
 	}
-
 	public void delete(Publisher persistentInstance) {
 		log.debug("deleting Publisher instance");
 		try {
@@ -267,4 +271,41 @@ public class PublisherDAO extends BaseHibernateDAO {
 		return c.intValue();
 
 	}
+	
+	
+	//模糊搜索
+		public List findSimilarPropertyByPage(Page page, String propertyName, Object value) {
+			log.debug("search label by property limit");
+
+			try {
+				String queryString = "from Publisher as model where model."
+						+ propertyName + " like ?";
+				Query query = getSession().createQuery(queryString);
+				query.setParameter(0, "%"+value+"%");
+				query.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
+				query.setMaxResults(page.getPerRows());
+				return query.list();
+			} catch (RuntimeException re) {
+				log.error("find label by property limit failed", re);
+				throw re;
+			}
+
+		}
+		
+		public int getTotalSimilarRows(String propertyName, Object value)
+		{
+
+			try {					
+				String queryString = "from Publisher as model where model."
+						+ propertyName + " like ?";
+				Query query = getSession().createQuery(queryString);
+				query.setParameter(0, "%"+value+"%");
+				return query.list().size();
+			}
+			catch(RuntimeException re) {
+				log.error("find by page failed", re);
+				throw re;
+			}
+
+		}
 }

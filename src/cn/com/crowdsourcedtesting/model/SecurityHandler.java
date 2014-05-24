@@ -202,10 +202,18 @@ public class SecurityHandler extends GeneralHandler {
 			
 		}
 
-		public void findAllTask(Tester tester) {
+		@Override
+		public void setTargetDetailThree(int id, HttpServletRequest request) {
+			// TODO Auto-generated method stub
+	
+			
+		}
+		
+		
+	public void findAllTask(Tester tester) {
 			
 			List <Task> tasks= new ArrayList<Task>();
-			
+	
 			
 		}
 		

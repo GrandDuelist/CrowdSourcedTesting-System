@@ -1,8 +1,15 @@
 ﻿<!DOCTYPE html>
+<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
-<meta charset="utf-8" />
+<m/>
 <title>TCTEST</title>
 <meta name="keywords" content="TCTEST" />
 <meta name="description" content="TCTEST" />
@@ -36,7 +43,8 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="img/favicon.ico" />
-
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/list_control/list_control.js"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -45,6 +53,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 
 <body>
+<%
+List<Questionnaire> questionnaires =(List <Questionnaire>)session.getAttribute("questionnaires");
+Page currentPage = (Page)session.getAttribute("currentPage");
+int firstPage = (int)(currentPage.getCurrentPage()-1)/currentPage.DEFAULT_MAX_PAGE;
+firstPage = firstPage*currentPage.DEFAULT_MAX_PAGE+1;
+int lastPage = (currentPage.getTotalPage()+1)<(firstPage+currentPage.DEFAULT_MAX_PAGE)? (currentPage.getTotalPage()+1):(firstPage+currentPage.DEFAULT_MAX_PAGE);
+
+ %>
+ 
+ <form id="selectForm"  method="post">
+ <input type="hidden" name="id"/>
+ <input type="hidden" name="subType">
+ <input type="hidden" name="page">
+</form>
+ 
 <!-- Start: Theme Preview Pane -->
 <div id="skin-toolbox">
   <div class="skin-toolbox-toggle"> <i class="fa fa-flask"></i> </div>
@@ -269,23 +292,29 @@
     </div>
     <div id="sidebar-menu">
       <ul class="nav sidebar-nav">
-        <li> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
-        <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
-        <li class="active"> <a href="publisher_questionnaire_man.html"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
-        <li> <a href="publisher_hireman.html"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
-      </ul>
-      </li>
+        <li class="active"> <a class="accordion-toggle collapsed" href="#examine"><span class="glyphicons glyphicons-check"></span><span class="sidebar-title">审核</span><span class="caret"></span></a>
+          <ul id="examine" class="nav sub-nav">
+            <li><a href="admin_tasklist.html"><span class="glyphicons glyphicons glyphicons-flag"></span> 审核任务</a></li>
+            <li class="active"><a href="admin_queslist.html"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
+            <li><a href="admin_registerlist.html"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>
+          </ul>
+        </li>
+        <li> <a class="accordion-toggle collapsed" href="#user_admin"><span class="glyphicons glyphicons-adress_book"></span><span class="sidebar-title">用户管理</span><span class="caret"></span></a>
+          <ul id="user_admin" class="nav sub-nav">
+            <li><a href="admin_testerlist.html"><span class="glyphicons glyphicons-cleaning"></span> 维护测试者信息</a></li>
+            <li><a href="admin_publisherlist.html"><span class="glyphicons glyphicons-lightbulb"></span> 维护发布者信息</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </aside>
-  <!-- End: Sidebar -->
+  <!-- End: Sidebar --> 
   <!-- Start: Content -->
   <section id="content">
     <div id="topbar">
       <ol class="breadcrumb">
-        <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
-        <li><a href="publisher_home.html">主页</a></li>
-        <li><a href="publisher_questionnaire_man.html">问卷管理</a></li>
+        <li><a href="admin_home.html"><i class="fa fa-home"></i></a></li>
+        <li><a href="admin_home.html">主页</a></li>
         <li class="active">问卷列表</li>
       </ol>
     </div>
@@ -297,7 +326,7 @@
               <div class="panel-title"> <i class="fa fa-table"></i> 问卷列表</div>
             </div>
             <div class="panel-body">
-              <table class="table table-striped" id="datatable">
+              <table  style="font-size:13px" class="table table-striped" id="datatable">
                       <thead>
                         <tr>
                           
@@ -309,108 +338,50 @@
                         </tr>
                       </thead>
                       <tbody>
+                      <%for(int i = 0;i<questionnaires.size();i++){
+                       Questionnaire questionnaire  = questionnaires.get(i);
+                       %>
                         <tr>
                           
-                          <td class="info"><b> 桌面测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i> 百度公司</span></td>
+                          <td class="info"><b> <%=questionnaire.getTitle() %></b><br />
+                            <span class="text-muted"><i class="fa fa-home"></i> <%=questionnaire.getPublisher().getPublisherName() %></span></td>
                           <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-half-empty text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 500</td>
-                          <td><span class="label label-inverse margin-right-sm">BUG讨论</span><span class="label label-warning margin-right-sm">改进</span></td>
-                          <td class="text-right text-center">
-                              <a class="btn btn-primary btn-gradient> <span class=" glyphicons-circle_info"="" glyphicons="" type="button" href="publisher_quesinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
+                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> <%=questionnaire.getQuestionnaireCount()%></td>
+                          <td><span class="label label-inverse margin-right-sm">测试问卷</span></td>
+                          <td id="detail" class="text-right text-center"><a  id="<%=questionnaire.getQuestionnaireId() %>" class="btn btn-primary btn-gradient" type="button"><span  class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
                         </tr>
-                        <tr>
-                          
-                          <td class="info"><b> 百词斩问卷</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>超有爱</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-half-empty text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 520</td>
-                          <td><span class="label label-warning margin-right-sm">改进</span><span class="label label-inverse margin-right-sm">BUG讨论</span></td>
-                          <td class="text-right text-center">
-                              <a class="btn btn-primary btn-gradient> <span class=" glyphicons-circle_info"="" glyphicons="" type="button" href="publisher_quesinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          
-                          <td class="info"><b> 人人网站测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>人人公司</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 30</td>
-                          <td><span class="label label-primary margin-right-sm">使用反馈</span></td>
-                          <td class="text-right text-center">
-                              <a class="btn btn-primary btn-gradient> <span class=" glyphicons-circle_info"="" glyphicons="" type="button" href="publisher_quesinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          
-                          <td class="info"><b> 火狐桌面浏览器测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 370</td>
-                          <td><span class="label label-success margin-right-sm">兴趣问卷</span></td>
-                          <td class="text-right text-center">
-                              <a class="btn btn-primary btn-gradient> <span class=" glyphicons-circle_info"="" glyphicons="" type="button" href="publisher_quesinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                         <tr>
-                          
-                          <td class="info"><b> 火狐桌面浏览器测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 370</td>
-                          <td><span class="label label-warning margin-right-sm">愿景调查</span></td>
-                          <td class="text-right text-center">
-                              <a class="btn btn-primary btn-gradient> <span class=" glyphicons-circle_info"="" glyphicons="" type="button" href="publisher_quesinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                         <tr>
-                          
-                          <td class="info"><b> 火狐桌面浏览器测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 370</td>
-                          <td><span class="label label-danger margin-right-sm">兴趣问卷</span></td>
-                          <td class="text-right text-center">
-                              <a class="btn btn-primary btn-gradient> <span class=" glyphicons-circle_info"="" glyphicons="" type="button" href="publisher_quesinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                         <tr>
-                          
-                          <td class="info"><b> 火狐桌面浏览器测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 370</td>
-                          <td><span class="label label-info margin-right-sm">兴趣调查</span></td>
-                          <td class="text-right text-center">
-                              <a class="btn btn-primary btn-gradient> <span class=" glyphicons-circle_info"="" glyphicons="" type="button" href="publisher_quesinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                         <tr>
-                          
-                          <td class="info"><b> 火狐桌面浏览器测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 370</td>
-                          <td><span class="label label-success margin-right-sm">该问卷是兴趣调查</span></td>
-                          <td class="text-right text-center">
-                              <a class="btn btn-primary btn-gradient> <span class=" glyphicons-circle_info"="" glyphicons="" type="button" href="publisher_quesinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                         <tr>
-                          
-                          <td class="info"><b> 火狐桌面浏览器测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 370</td>
-                          <td><span class="label label-success margin-right-sm">该问卷是兴趣调查</span></td>
-                          <td class="text-right text-center">
-                              <a class="btn btn-primary btn-gradient> <span class=" glyphicons-circle_info"="" glyphicons="" type="button" href="publisher_quesinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                         <tr>
-                          
-                          <td class="info"><b> 火狐桌面浏览器测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 370</td>
-                          <td><span class="label label-success margin-right-sm">该问卷是兴趣调查</span></td>
-                          <td class="text-right text-center">
-                              <a class="btn btn-primary btn-gradient> <span class=" glyphicons-circle_info"="" glyphicons="" type="button" href="publisher_quesinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
+                       <%} %>
                       </tbody>
                     </table>
+                  <div class="row">
+           <div class="col-sm-12 datatables-footer">
+                  <div class="pull-right"><div class="dataTables_paginate paging_bs_normal"><ul class="pagination">
+                 <%if( currentPage.getCurrentPage()==1){ %>
+                  <li class="prev disabled"><a><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                  <%} else{%>
+                  
+                    <li class="prev" id="previouPage"><a id = "<%=currentPage.getCurrentPage()%>"><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                <%} %>
+                
+                
+                <%for (int i=firstPage; i<lastPage;i++) 
+                {  if(i == currentPage.getCurrentPage())
+                {%>
+                <li class="active" id="pageNum"><a id="<%=i%>"><%=i %></a></li>
+                  
+                 <%}else { %>
+                  <li id="pageNum"><a id="<%=i%>"><%=i %></a></li>
+                 <%}} %>
+                
+                 <%if( currentPage.getCurrentPage()==currentPage.getTotalPage()){ %>
+                 <li class="next disabled"><a >&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                  <%} else{%>
+                  
+                   <li class="next" id="nextPage"><a id="<%=currentPage.getCurrentPage()%>">&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                <%} %>
+                
+                 </ul></div></div>
+                  <div class="clearfix"></div></div></div>
             </div>
           </div>
         </div>
@@ -444,12 +415,7 @@ jQuery(document).ready(function() {
 
   Core.init();
 
-  $('#datatable').dataTable( {
-	"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ -1 ] }],
-	"oLanguage": { "oPaginate": {"sPrevious": "", "sNext": ""} },
-	"iDisplayLength": 6,
-	"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-  });	
+
   
   $("select[name='datatable_length']").chosen();	
   $.fn.editable.defaults.mode = 'popup';

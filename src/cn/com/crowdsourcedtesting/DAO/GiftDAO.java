@@ -188,90 +188,134 @@ public class GiftDAO extends BaseHibernateDAO {
 	}
 	
 	
+	
+	
+	
+	
+	//模糊搜索
+	public List findSimilarPropertyByPage(Page page, String propertyName, Object value) {
+		log.debug("search label by property limit");
+
+		try {
+			String queryString = "from Gift as model where model."
+					+ propertyName + " like ?";
+			Query query = getSession().createQuery(queryString);
+			query.setParameter(0, "%"+value+"%");
+			query.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
+			query.setMaxResults(page.getPerRows());
+			return query.list();
+		} catch (RuntimeException re) {
+			log.error("find label by property limit failed", re);
+			throw re;
+		}
+
+	}
+	
+	public int getTotalSimilarRows(String propertyName, Object value)
+	{
+
+		try {					
+			String queryString = "from Gift as model where model."
+					+ propertyName + " like ?";
+			Query query = getSession().createQuery(queryString);
+			query.setParameter(0, "%"+value+"%");
+			return query.list().size();
+		}
+		catch(RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
+		}
+
+	}
+	
+	
+	
+	
+	
 	//按页查找
-		
-			@SuppressWarnings("unchecked")
-			public List findByPage(Page page)
-			{
-				try {
-				List<Gift> gifts = new ArrayList<Gift>();
-				String queryString = "from Gift";
-				
-				Query queryObject = getSession().createQuery(queryString);
-				queryObject.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
-				queryObject.setMaxResults(page.getPerRows());
-				
-				gifts = queryObject.list();						
-				return gifts;
-				}
-				catch(RuntimeException re) {
-					log.error("find by page failed", re);
-					throw re;
-				}
-					
-					
-			}
-				
-				
-			
-			//得到总的礼品数
-			public int getTotalRows()
-			{
-			
-						 Number c= (Number) getSession().createQuery("select count(*) from Gift")
-						.uniqueResult();
-						 
-						
-						 return c.intValue();
-						
-						
-				//return this.findAll().size();
-			}
-			
-			
-			//
-			@SuppressWarnings("unchecked")
-			public List findAvailableByPage(Object giftCredit, Page page)
-			{
-				try {
-				List<Gift> gifts = new ArrayList<Gift>();
-				
-				String queryString = "from Gift as model where model."
-						+ GIFT_CREDIT + "<= ?";
-				Query queryObject = getSession().createQuery(queryString);
-				queryObject.setParameter(0, giftCredit);
-				queryObject.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
-				queryObject.setMaxResults(page.getPerRows());
-				
-				gifts = queryObject.list();						
-				return gifts;
-				}
-				catch(RuntimeException re) {
-					log.error("find by page failed", re);
-					throw re;
-				}
-					
-					
-				}
-				
-				
-			
-			//得到总的礼品数
-			public int getTotalAvailableRows(Double giftCredit)
-			{
-			
-				try {					
-					String queryString = "from Gift as model where model."
-							+ GIFT_CREDIT + "<= ?";
-					Query queryObject = getSession().createQuery(queryString);
-					queryObject.setParameter(0, giftCredit);
-					return queryObject.list().size();
-				}
-				catch(RuntimeException re) {
-						log.error("find by page failed", re);
-						throw re;
-					}
-				
-			}
+
+	@SuppressWarnings("unchecked")
+	public List findByPage(Page page)
+	{
+		try {
+			List<Gift> gifts = new ArrayList<Gift>();
+			String queryString = "from Gift";
+
+			Query queryObject = getSession().createQuery(queryString);
+			queryObject.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
+			queryObject.setMaxResults(page.getPerRows());
+
+			gifts = queryObject.list();						
+			return gifts;
+		}
+		catch(RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
+		}
+
+
+	}
+
+
+
+	//得到总的礼品数
+	public int getTotalRows()
+	{
+
+		Number c= (Number) getSession().createQuery("select count(*) from Gift")
+				.uniqueResult();
+
+
+		return c.intValue();
+
+
+		//return this.findAll().size();
+	}
+
+
+	//
+	@SuppressWarnings("unchecked")
+	public List findAvailableByPage(Object giftCredit, Page page)
+	{
+		try {
+			List<Gift> gifts = new ArrayList<Gift>();
+
+			String queryString = "from Gift as model where model."
+					+ GIFT_CREDIT + "<= ?";
+			Query queryObject = getSession().createQuery(queryString);
+			queryObject.setParameter(0, giftCredit);
+			queryObject.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
+			queryObject.setMaxResults(page.getPerRows());
+
+			gifts = queryObject.list();						
+			return gifts;
+		}
+		catch(RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
+		}
+
+
+	}
+
+
+
+	//得到总的礼品数
+	public int getTotalAvailableRows(Double giftCredit)
+	{
+
+		try {					
+			String queryString = "from Gift as model where model."
+					+ GIFT_CREDIT + "<= ?";
+			Query queryObject = getSession().createQuery(queryString);
+			queryObject.setParameter(0, giftCredit);
+			return queryObject.list().size();
+		}
+		catch(RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
+		}
+
+	}
 			
 }
