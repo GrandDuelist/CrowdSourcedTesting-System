@@ -1,6 +1,9 @@
 package cn.com.crowdsourcedtesting.model;
 
+<<<<<<< HEAD
+=======
 import java.text.SimpleDateFormat;
+>>>>>>> d1011eb85325fa03371564c0ce68f92bde4b0bd5
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +21,11 @@ import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Recruitment;
 import cn.com.other.page.Page;
 
+<<<<<<< HEAD
+public class RecruitmentHandler {
+=======
 public class RecruitmentHandler extends GeneralHandler {
+>>>>>>> d1011eb85325fa03371564c0ce68f92bde4b0bd5
 
 	// 前端调用
 	public void selectAllRecruitments(Page page, HttpServletRequest request) {
@@ -38,7 +45,11 @@ public class RecruitmentHandler extends GeneralHandler {
 
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+	
+=======
 
+>>>>>>> d1011eb85325fa03371564c0ce68f92bde4b0bd5
 	public void selectRecentRecruitments(Page page, HttpServletRequest request){
 		List<Recruitment> recruitments = new ArrayList();
 		RecruitmentDAO dao = new RecruitmentDAO();
@@ -54,11 +65,15 @@ public class RecruitmentHandler extends GeneralHandler {
 			request.setAttribute("isLegal", "illegal");
 	}
 	
-	public void selectRecruitment(int id, HttpServletRequest request) {
+<<<<<<< HEAD
+	public void selectRecruitment(int id, HttpServletRequest request){
 =======
 
 	public void selectRecruitment(int id, HttpServletRequest request) {
 >>>>>>> 81cced6a3148acef5050965baee7b6bb8c0f944d
+=======
+	public void selectRecruitment(int id, HttpServletRequest request) {
+>>>>>>> d1011eb85325fa03371564c0ce68f92bde4b0bd5
 		RecruitmentDAO dao = new RecruitmentDAO();
 		Recruitment recruitment = dao.findById(id);
 		if(recruitment != null)
@@ -127,6 +142,8 @@ public class RecruitmentHandler extends GeneralHandler {
 		request.setAttribute("isLegal", "legal");
 	}
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 
 	@Override
 	public void setTargetListOne(Page page, HttpServletRequest request) {
@@ -161,4 +178,5 @@ public class RecruitmentHandler extends GeneralHandler {
 	
 =======
 >>>>>>> 9332983d12b8cd580322705d0dfbb005a965f265
+>>>>>>> d1011eb85325fa03371564c0ce68f92bde4b0bd5
 }

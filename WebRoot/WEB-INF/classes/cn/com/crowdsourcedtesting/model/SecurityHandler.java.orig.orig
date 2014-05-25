@@ -1,5 +1,15 @@
 package cn.com.crowdsourcedtesting.model;
 
+<<<<<<< HEAD
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.omg.DynamicAny.DynAnyOperations;
+
+import cn.com.crowdsourcedtesting.bean.Administrator;
+=======
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -18,11 +28,15 @@ import com.sun.jmx.snmp.tasks.Task;
 import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
 import cn.com.crowdsourcedtesting.bean.Administrator;
 import cn.com.crowdsourcedtesting.bean.JoinQuestionnaire;
+>>>>>>> d1011eb85325fa03371564c0ce68f92bde4b0bd5
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Questionnaire;
 import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.crowdsourcedtesting.struts.form.AdminLoginForm;
+<<<<<<< HEAD
+=======
 import cn.com.crowdsourcedtesting.struts.form.ChangeInformationForm;
+>>>>>>> d1011eb85325fa03371564c0ce68f92bde4b0bd5
 import cn.com.crowdsourcedtesting.struts.form.FindPasswordForm;
 import cn.com.crowdsourcedtesting.struts.form.LoginForm;
 import cn.com.crowdsourcedtesting.struts.form.PublisherLoginForm;
@@ -31,7 +45,11 @@ import cn.com.other.page.Page;
 
 public class SecurityHandler extends GeneralHandler {
 
-	// 测试用户的登�
+<<<<<<< HEAD
+	// 测试用户的登录
+=======
+	// 测试用户的登�
+>>>>>>> d1011eb85325fa03371564c0ce68f92bde4b0bd5
 	public Tester handleTesterLogin(LoginForm form)
 	{
 		Tester tester=DAOFactory.getTesterDAO().isTester(form.getUsername(), form.getPassword());
@@ -58,11 +76,25 @@ public class SecurityHandler extends GeneralHandler {
 			return administrator;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d1011eb85325fa03371564c0ce68f92bde4b0bd5
 		
 		public void handleTesterFindPassword(FindPasswordForm form) {
 			
 			Tester tester = new Tester();
 			
+<<<<<<< HEAD
+			tester.setTesterEmail(form.getEmail());
+			tester.setTesterPassword(form.getPassword());
+			
+			DAOFactory.getTesterDAO().attachDirty(tester);
+			
+			
+		}
+}
+=======
+=======
 			List<Tester> testers = DAOFactory.getTesterDAO().findByTesterEmail(form.getEmail());
 			Iterator<Tester> iterator = testers.iterator();
 			
@@ -142,6 +174,7 @@ public class SecurityHandler extends GeneralHandler {
 			}
 			
 		}
+>>>>>>> d1011eb85325fa03371564c0ce68f92bde4b0bd5
 
 		
 	//第一个列表接口： 得到企业注册用户
@@ -180,7 +213,11 @@ public class SecurityHandler extends GeneralHandler {
 		}
 
 		
-		//DetailHandle的处理接�
+<<<<<<< HEAD
+		//DetailHandle的处理接口1
+=======
+		//DetailHandle的处理接�
+>>>>>>> d1011eb85325fa03371564c0ce68f92bde4b0bd5
 		@Override
 		public void setTargetDetailOne(int id, HttpServletRequest request) {
 			// TODO Auto-generated method stub
@@ -191,7 +228,11 @@ public class SecurityHandler extends GeneralHandler {
 			session.setAttribute("publisherType", "Company");
 			
 		}
-		//DetailHandle的处理接�
+<<<<<<< HEAD
+		//DetailHandle的处理接口2
+=======
+		//DetailHandle的处理接�
+>>>>>>> d1011eb85325fa03371564c0ce68f92bde4b0bd5
 		@Override
 		public void setTargetDetailTwo(int id, HttpServletRequest request) {
 			// TODO Auto-generated method stub
@@ -203,6 +244,12 @@ public class SecurityHandler extends GeneralHandler {
 			
 		}
 
+<<<<<<< HEAD
+		
+		
+		}
+>>>>>>> 81cced6a3148acef5050965baee7b6bb8c0f944d
+=======
 <<<<<<< HEAD
 		@Override
 		public void setTargetDetailThree(int id, HttpServletRequest request) {
@@ -241,3 +288,4 @@ public class SecurityHandler extends GeneralHandler {
 			
 		}
 }
+>>>>>>> d1011eb85325fa03371564c0ce68f92bde4b0bd5
