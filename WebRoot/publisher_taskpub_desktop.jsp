@@ -323,23 +323,27 @@
                     <p class="alert alert-success">请<b>正确填写</b>信息</p>
                 <% } %>
                   <div class="form-group">
+                    <label for="web_url"> 应用名 </label>
+                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-picture-o"></i> </span>
+                      <input class="form-control" type="text" required placeholder="" name="appName" />
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label for="web_url"> 下载链接 </label>
                     <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-link"></i> </span>
-                      <input class="form-control" type="text" required placeholder="thunder://QUFodHRwOi8vZ" name="web_url">
-                      </input>
+                      <input class="form-control" type="text" required placeholder="thunder://QUFodHRwOi8vZ" name="downLoadLink" />
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="web_url"> 上传图标 </label>
                     <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-picture-o"></i> </span>
-                      <input class="form-control" type="text" required placeholder="" name="icon">
-                      </input>
+                      <input class="form-control" type="file" required placeholder="" name="icon" />
                     </div>
                   </div>
                   <div class="form-group">
                       <label for="textArea">任务描述</label>
                       <div class="input-group">
-                        <textarea class="form-control" id="textArea" cols="80" rows="3"></textarea>
+                        <textarea class="form-control" id="textArea" cols="80" rows="3" required name="description"></textarea>
                       </div>
                   </div>
                    <div class="form-group">
@@ -363,7 +367,7 @@
                   	<button class="btn btn-gradient btn-lg btn-green" type="button">返回</button>
                   </div>
                   <div class="pull-right">
-                  	<button class="btn btn-info btn-gradient btn-lg" type="button">下一步</button>
+                  	<button class="btn btn-info btn-gradient btn-lg" type="submit">下一步</button>
                   </div>
                   </form>
                 </div>

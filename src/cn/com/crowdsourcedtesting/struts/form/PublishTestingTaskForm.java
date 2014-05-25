@@ -49,6 +49,8 @@ public class PublishTestingTaskForm extends ActionForm {
 	private String appName;
 
 	private FormFile apkFile;
+	
+	private String downLoadLink;
 
 	/*
 	 * Generated Methods
@@ -191,6 +193,14 @@ public class PublishTestingTaskForm extends ActionForm {
 
 	public void setApkFile(FormFile apkFile) {
 		this.apkFile = apkFile;
+	}
+
+	public String getDownLoadLink() {
+		return downLoadLink;
+	}
+
+	public void setDownLoadLink(String downLoadLink) {
+		this.downLoadLink = downLoadLink;
 	}
 
 }

@@ -66,6 +66,8 @@ public class PublishTestingTaskAction extends DispatchAction {
 	private final String webProductSuccessForward = "webProductSuccess";
 	private final String androidProductErrorForward = "androidProductError";
 	private final String androidProductSuccessForward = "androidProductSuccess";
+	private final String desktopProductErrorForward = "desktopProductError";
+	private final String desktopProductSuccessForward = "desktopProductSuccess";
 	private final String taskPublishSuccessForward = "taskSuccess";
 	private final String publisherLogin = "publisherLogin";
 
@@ -472,6 +474,158 @@ public class PublishTestingTaskAction extends DispatchAction {
 		}
 
 		request.getSession().removeAttribute("AndroidProduct");
+
+		ActionRedirect redirect = new ActionRedirect(
+				mapping.findForwardConfig(taskPublishSuccessForward));
+		return redirect;
+	}
+
+	public ActionForward desktopSubmitForm(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Publisher publisher = (Publisher) request.getSession().getAttribute(
+				"Publisher");
+		if (publisher == null) {
+			return new ActionRedirect(mapping.findForwardConfig(publisherLogin));
+		}
+
+		PublishTestingTaskForm publishTestingForm = (PublishTestingTaskForm) form;
+
+		FormFile iconFile = publishTestingForm.getIcon();
+		if (iconFile == null) {
+			request.getSession().setAttribute(productErrorMessageAttributeName,
+					productNoIconFileErrorMessage);
+			return mapping.findForward(webProductErrorForward);
+		}
+		String[] name = publishTestingForm.getIcon().getFileName().split("\\.");
+		if (name.length <= 1
+				|| !generalHelperHandler.isPic(name[name.length - 1])) {
+			request.getSession().setAttribute(productErrorMessageAttributeName,
+					productIconFileTypeErrorMessage);
+			return mapping.findForward(webProductErrorForward);
+		}
+
+		String iconFileTypeName = name[name.length - 1];
+
+		String iconFilePath = "product/desktop/icon/product_template_"
+				+ publisher.getPublisherId() + "." + iconFileTypeName;
+		String realPath = request.getSession().getServletContext()
+				.getRealPath("/" + iconFilePath);
+
+		try {
+			BufferedInputStream bin = new BufferedInputStream(
+					iconFile.getInputStream());
+			BufferedOutputStream bout = new BufferedOutputStream(
+					new FileOutputStream(realPath));
+			int bufferSize = 0;
+			byte[] buffer = new byte[1024];
+			while ((bufferSize = bin.read(buffer, 0, buffer.length)) != -1) {
+				bout.write(buffer, 0, bufferSize);
+			}
+			bout.flush();
+			bout.close();
+			bin.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			request.getSession().setAttribute(productErrorMessageAttributeName,
+					productFileUploadErrorMessage);
+			return mapping.findForward(desktopProductErrorForward);
+		}
+
+		Product product = new Product();
+		product.setProductName(publishTestingForm.getAppName());
+		product.setDesktopAddress(publishTestingForm.getDownLoadLink());
+		product.setIcon(iconFilePath);
+		product.setDescription(publishTestingForm.getDescription());
+
+		request.getSession().setAttribute("DesktopProduct", product);
+
+		return new ActionRedirect(
+				mapping.findForward(desktopProductSuccessForward));
+	}
+
+	public ActionForward pubDesktopTask(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		PublishTestingTaskForm publishTestingForm = (PublishTestingTaskForm) form;
+		System.out.println(publishTestingForm.getDaterange());
+		System.out.println(publishTestingForm.getPerReward());
+		System.out.println(publishTestingForm.getWholeReward());
+
+		Publisher publisher = (Publisher) request.getSession().getAttribute(
+				"Publisher");
+		if (publisher == null) {
+			return new ActionRedirect(mapping.findForwardConfig(publisherLogin));
+		}
+
+		Product product = (Product) request.getSession().getAttribute(
+				"DesktopProduct");
+		if (product == null) {
+			return new ActionRedirect(
+					mapping.findForward(goToPubDesktopProductForward));
+		}
+
+		if (publishTestingForm.getDaterange() == null
+				|| "".equals(publishTestingForm.getDaterange())
+				|| publishTestingForm.getPerReward() == null
+				|| "".equals(publishTestingForm.getPerReward())
+				|| publishTestingForm.getWholeReward() == null
+				|| "".equals(publishTestingForm.getWholeReward())) {
+			request.getSession().setAttribute(taskErrorMessageAttributeName,
+					taskFormErrorMessage);
+			return mapping.findForward(goToPubDesktopTaskForward);
+		}
+
+		Integer perReward = publishTestingForm.getPerReward();
+		Integer wholeCredit = publishTestingForm.getWholeReward();
+
+		String[] dateRange = publishTestingForm.getDaterange().split("-");
+		if (dateRange.length != 2) {
+			request.getSession().setAttribute(taskErrorMessageAttributeName,
+					taskDaterangeFormatErrorMessage);
+			return mapping.findForward(goToPubDesktopTaskForward);
+		}
+
+		DateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy");
+		Date beginDate = null;
+		Date endDate = null;
+		try {
+			beginDate = dateFormat.parse(dateRange[0]);
+			endDate = dateFormat.parse(dateRange[1]);
+			System.out.println(beginDate);
+			System.out.println(endDate);
+		} catch (ParseException e) {
+			request.getSession().setAttribute(taskErrorMessageAttributeName,
+					taskDaterangeFormatErrorMessage);
+			return mapping.findForward(goToPubDesktopTaskForward);
+		}
+
+		File iconFile = new File(request.getSession().getServletContext()
+				.getRealPath("/" + product.getIcon()));
+		String[] name = product.getIcon().split("\\.");
+		String iconNewName = "product/desktop/icon/product_"
+				+ publisher.getPublisherId() + "_" + System.currentTimeMillis()
+				+ "." + name[name.length - 1];
+		iconFile.renameTo(new File(request.getSession().getServletContext()
+				.getRealPath("/" + iconNewName)));
+		product.setIcon(iconNewName);
+
+		try {
+			ProductDAO productDAO = new ProductDAO();
+			product = productDAO.addDesktopProduct(product.getProductName(),
+					product.getIcon(), product.getDesktopAddress(),
+					product.getDescription());
+			TestTaskDAO testTaskDAO = new TestTaskDAO();
+			testTaskDAO.addTestTask(product, 3, publisher, beginDate, endDate,
+					perReward, wholeCredit);
+		} catch (RuntimeException re) {
+			re.printStackTrace();
+			request.getSession().setAttribute(taskErrorMessageAttributeName,
+					taskSystemErrorMessage);
+			return mapping.findForward(goToPubWebTaskForward);
+		}
+
+		request.getSession().removeAttribute("WebProduct");
 
 		ActionRedirect redirect = new ActionRedirect(
 				mapping.findForwardConfig(taskPublishSuccessForward));
