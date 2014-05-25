@@ -169,6 +169,7 @@ public class GiftHandler {
 		//Double usercredit = 5000.0;
 		HttpSession session  = request.getSession();
 		Tester tester = (Tester)session.getAttribute("Tester");
+
 		Double usercredit = tester.getTesterCredit();
 		System.out.println("礼物所需积分："+creditneeded);
 		//判断用户积分和所需积分大小

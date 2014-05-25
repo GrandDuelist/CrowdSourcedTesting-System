@@ -175,25 +175,6 @@ public class TestTaskDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public List<TestTask> findPublisherWebTestTaskByPage(Page page,
-			Publisher publisher) {
-		try {
-			String queryString = "from TestTask testTask where testTask.taskType="
-					+ TaskType.Web
-					+ " and testTask.publisher.publisherId="
-					+ publisher.getPublisherId()
-					+ " order by testTask.taskId desc";
-			Query query = getSession().createQuery(queryString);
-			query.setFirstResult((page.getCurrentPage() - 1)
-					* page.getPerRows());
-			query.setMaxResults(page.getPerRows());
-			return query.list();
-		} catch (RuntimeException re) {
-			log.error("find label by property limit failed", re);
-			throw re;
-		}
-	}
-
 	// 模糊搜索
 	public List findSimilarPropertyByPage(Page page, String propertyName,
 			Object value) {
@@ -227,10 +208,12 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			log.error("find by page failed", re);
 			throw re;
 		}
+
 	}
 
-	public TestTask addTestTask(Product product, int productType, Publisher publisher,
-			Date beginTime, Date endTime, double perReward, double wholeCredit) {
+	public TestTask addTestTask(Product product, int productType,
+			Publisher publisher, Date beginTime, Date endTime,
+			double perReward, double wholeCredit) {
 		Session session = getSession();
 		Transaction trans = null;
 		TestTask testTask = null;
@@ -317,16 +300,9 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
-		
-				
-			
-				
-
-	
 
 	// 得到未审核Android任务的总条�
 	public int getUncheckedAndroidTotalRows() {
-
 		Number c = (Number) getSession()
 				.createQuery(
 						"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and  TASK_TYPE="
@@ -367,5 +343,27 @@ public class TestTaskDAO extends BaseHibernateDAO {
 
 		return c.intValue();
 
+	}
+
+	public List<TestTask> findPublisherWebTestTaskByPage(Page page,
+			Publisher publisher) {
+		try {
+			String queryString = "from TestTask testTask where testTask.taskType="
+					+ TaskType.Web
+					+ "and testTask.publisher.publisherId="
+					+ publisher.getPublisherId()
+					+ " order by testTask.taskId desc";
+			Query queryObject = getSession().createQuery(queryString);
+
+			queryObject
+					.setFirstResult(
+							(page.getCurrentPage() - 1) * page.getPerRows())
+					.setMaxResults(page.getPerRows()).list();
+
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
+		}
 	}
 }

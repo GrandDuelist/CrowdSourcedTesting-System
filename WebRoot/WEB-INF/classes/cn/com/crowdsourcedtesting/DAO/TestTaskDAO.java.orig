@@ -1,26 +1,13 @@
 package cn.com.crowdsourcedtesting.DAO;
 
-<<<<<<< HEAD
-import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
-import cn.com.crowdsourcedtesting.bean.Publisher;
-import cn.com.crowdsourcedtesting.bean.Questionnaire;
-import cn.com.crowdsourcedtesting.bean.TestTask;
-import cn.com.crowdsourcedtesting.modelhelper.TaskType;
-import cn.com.other.page.Page;
-
 import java.util.ArrayList;
-=======
->>>>>>> 1a9657db90812a6038566d35ad62de31d3b6fe3d
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
-<<<<<<< HEAD
-=======
 import org.hibernate.Transaction;
->>>>>>> 1a9657db90812a6038566d35ad62de31d3b6fe3d
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +16,8 @@ import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.Product;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.TestTask;
+import cn.com.crowdsourcedtesting.modelhelper.TaskType;
+import cn.com.other.page.Page;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -54,7 +43,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 
 	public void save(TestTask transientInstance) {
 		log.debug("saving TestTask instance");
-		 Session session=getSession();
+		Session session = getSession();
 		try {
 			session.beginTransaction();
 			getSession().save(transientInstance);
@@ -67,8 +56,8 @@ public class TestTaskDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public TestTask findById(java.lang.Integer id) {
-		log.debug("getting TestTask instance with id: " + id);
+	public void delete(TestTask persistentInstance) {
+		log.debug("deleting TestTask instance");
 		try {
 			getSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -158,94 +147,6 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			TestTask result = (TestTask) getSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
-			TestTask instance = (TestTask) getSession().get(
-					"cn.com.crowdsourcedtesting.bean.TestTask", id);
-			return instance;
-		} catch (RuntimeException re) {
-			log.error("get failed", re);
-			throw re;
-		}
-	}
-
-	public List findByExample(TestTask instance) {
-		log.debug("finding TestTask instance by example");
-		try {
-			List results = getSession()
-					.createCriteria("cn.com.crowdsourcedtesting.bean.TestTask")
-					.add(Example.create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
-			return results;
-		} catch (RuntimeException re) {
-			log.error("find by example failed", re);
-			throw re;
-		}
-	}
-
-	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding TestTask instance with property: " + propertyName
-				+ ", value: " + value);
-		try {
-			String queryString = "from TestTask as model where model."
-					+ propertyName + "= ?";
-			Query queryObject = getSession().createQuery(queryString);
-			queryObject.setParameter(0, value);
-			return queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find by property name failed", re);
-			throw re;
-		}
-	}
-
-	public List findByTaskType(Object taskType) {
-		return findByProperty(TASK_TYPE, taskType);
-	}
-
-	public List findByCheckedAdministratorId(Object checkedAdministratorId) {
-		return findByProperty(CHECKED_ADMINISTRATOR_ID, checkedAdministratorId);
-	}
-
-	public List findByTaskEnvironment(Object taskEnvironment) {
-		return findByProperty(TASK_ENVIRONMENT, taskEnvironment);
-	}
-
-	public List findByPerReward(Object perReward) {
-		return findByProperty(PER_REWARD, perReward);
-	}
-
-	public List findByWholeCredit(Object wholeCredit) {
-		return findByProperty(WHOLE_CREDIT, wholeCredit);
-	}
-
-	public List findAll() {
-		log.debug("finding all TestTask instances");
-		try {
-			String queryString = "from TestTask";
-			Query queryObject = getSession().createQuery(queryString);
-			return queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find all failed", re);
-			throw re;
-		}
-	}
-
-	public TestTask merge(TestTask detachedInstance) {
-		log.debug("merging TestTask instance");
-		try {
-			TestTask result = (TestTask) getSession().merge(detachedInstance);
-			log.debug("merge successful");
-			return result;
-		} catch (RuntimeException re) {
-			log.error("merge failed", re);
-			throw re;
-		}
-	}
-
-	public void attachDirty(TestTask instance) {
-		log.debug("attaching dirty TestTask instance");
-		try {
-			getSession().saveOrUpdate(instance);
-			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("merge failed", re);
 			throw re;
@@ -262,31 +163,57 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
-<<<<<<< HEAD
-	
-	
-	//模糊搜索
-		public List findSimilarPropertyByPage(Page page, String propertyName, Object value) {
-			log.debug("search label by property limit");
 
-			try {
-				String queryString = "from TestTask as model where model."
-						+ propertyName + " like ?";
-				Query query = getSession().createQuery(queryString);
-				query.setParameter(0, "%"+value+"%");
-				query.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
-				query.setMaxResults(page.getPerRows());
-				return query.list();
-			} catch (RuntimeException re) {
-				log.error("find label by property limit failed", re);
-				throw re;
-			}
-
+	public void attachClean(TestTask instance) {
+		log.debug("attaching clean TestTask instance");
+		try {
+			getSession().lock(instance, LockMode.NONE);
+			log.debug("attach successful");
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			throw re;
 		}
-		
-		public int getTotalSimilarRows(String propertyName, Object value)
-		{
+	}
 
+	public List<TestTask> findPublisherWebTestTaskByPage(Page page,
+			Publisher publisher) {
+		try {
+			String queryString = "from TestTask testTask where testTask.taskType="
+					+ TaskType.Web
+					+ " and testTask.publisher.publisherId="
+					+ publisher.getPublisherId()
+					+ " order by testTask.taskId desc";
+			Query query = getSession().createQuery(queryString);
+			query.setFirstResult((page.getCurrentPage() - 1)
+					* page.getPerRows());
+			query.setMaxResults(page.getPerRows());
+			return query.list();
+		} catch (RuntimeException re) {
+			log.error("find label by property limit failed", re);
+			throw re;
+		}
+	}
+
+	// 模糊搜索
+	public List findSimilarPropertyByPage(Page page, String propertyName,
+			Object value) {
+		log.debug("search label by property limit");
+
+		try {
+			String queryString = "from TestTask as model where model."
+					+ propertyName + " like ?";
+			Query query = getSession().createQuery(queryString);
+			query.setParameter(0, "%" + value + "%");
+			query.setFirstResult((page.getCurrentPage() - 1)
+					* page.getPerRows());
+			query.setMaxResults(page.getPerRows());
+			return query.list();
+		} catch (RuntimeException re) {
+			log.error("find label by property limit failed", re);
+			throw re;
+		}
+
+<<<<<<< HEAD
 			try {					
 				String queryString = "from TestTask as model where model."
 						+ propertyName + " like ?";
@@ -299,26 +226,150 @@ public class TestTaskDAO extends BaseHibernateDAO {
 				throw re;
 			}
 
-	public void attachClean(TestTask instance) {
-		log.debug("attaching clean TestTask instance");
+		}
+
+	
+
+=======
+	}
+
+	public int getTotalSimilarRows(String propertyName, Object value) {
+
 		try {
-			getSession().lock(instance, LockMode.NONE);
-			log.debug("attach successful");
+			String queryString = "from TestTask as model where model."
+					+ propertyName + " like ?";
+			Query query = getSession().createQuery(queryString);
+			query.setParameter(0, "%" + value + "%");
+			return query.list().size();
 		} catch (RuntimeException re) {
-			log.error("attach failed", re);
+			log.error("find by page failed", re);
 			throw re;
 		}
-	}
+
 <<<<<<< HEAD
+	}
+
+	public TestTask addTestTask(Product product, int productType,
+			Publisher publisher, Date beginTime, Date endTime,
+			double perReward, double wholeCredit) {
+=======
+		
+
+>>>>>>> a2dd94d886e25b2402d605e27d05ba08d6436da5
+	public TestTask addTestTask(Product product, int productType, Publisher publisher,
+			Date beginTime, Date endTime, double perReward, double wholeCredit) {
+>>>>>>> bed7515d4486cf83a7abf3c14a27645d13de2b2a
+		Session session = getSession();
+		Transaction trans = null;
+		TestTask testTask = null;
+		try {
+			trans = session.beginTransaction();
+			if (trans != null) {
+<<<<<<< HEAD
+				
+			testTask = new TestTask(product, publisher, productType, perReward,wholeCredit);
+			testTask.setTaskStartTime(beginTime);
+			testTask.setTaskEndTime(endTime);
+			session.save(testTask);
+
+			trans.commit();
+			log.debug("add testtask successful");
+			return testTask;
+			
+			}} catch (RuntimeException re) {
+				log.error("attach failed", re);
+				if (trans != null) {
+					trans.rollback();
+				}
+				testTask = null;
+				throw re;
+			}
+			return testTask;
+		}
+	
+
+	
+=======
+
+				testTask = new TestTask(product, publisher, productType,
+						perReward, wholeCredit);
+				testTask.setTaskStartTime(beginTime);
+				testTask.setTaskEndTime(endTime);
+				session.save(testTask);
+
+				trans.commit();
+				log.debug("add testtask successful");
+				return testTask;
+
+			}
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			if (trans != null) {
+				trans.rollback();
+			}
+			testTask = null;
+			throw re;
+		}
+<<<<<<< HEAD
+		return testTask;
+	}
+=======
+>>>>>>> a2dd94d886e25b2402d605e27d05ba08d6436da5
+	
+
 	
 	
-	
-	//按页查找未审核Web应用
+>>>>>>> bed7515d4486cf83a7abf3c14a27645d13de2b2a
+
+	// 按页查找未审核Web应用
 	public List<TestTask> findUncheckedWebByPage(Page page) {
 		// TODO Auto-generated method stub
 		try {
 			List<TestTask> testTasks = new ArrayList<TestTask>();
-			String queryString = "from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="+TaskType.Web;
+			String queryString = "from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="
+					+ TaskType.Web;
+			Query queryObject = getSession().createQuery(queryString);
+
+			testTasks = queryObject
+					.setFirstResult(
+							(page.getCurrentPage() - 1) * page.getPerRows())
+					.setMaxResults(page.getPerRows()).list();
+
+			return testTasks;
+
+		} catch (RuntimeException re) {
+
+			log.error("attach failed", re);
+
+			throw re;
+		}
+
+	}
+
+	// 得到未审核Web任务的总条�
+	public int getUncheckedWebTotalRows() {
+
+		Number c = (Number) getSession()
+				.createQuery(
+						"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="
+								+ TaskType.Web).uniqueResult();
+
+		return c.intValue();
+
+	}
+<<<<<<< HEAD
+	// 得到未审核Web任务的总条�
+		public int getUncheckedWebTotalRows() {
+=======
+>>>>>>> a2dd94d886e25b2402d605e27d05ba08d6436da5
+
+	// 按页查找未审核Android应用
+	public List<TestTask> findUncheckedAndroidByPage(Page page) {
+		// TODO Auto-generated method stub
+		try {
+			List<TestTask> testTasks = new ArrayList<TestTask>();
+			String queryString = "from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="
+					+ TaskType.Android;
 			Query queryObject = getSession().createQuery(queryString);
 
 			testTasks = queryObject
@@ -331,34 +382,9 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			log.error("find by page failed", re);
 			throw re;
 		}
+<<<<<<< HEAD
 	}
-	// 得到未审核Web任务的总条�
-		public int getUncheckedWebTotalRows() {
-
-		}
 =======
-
-	public TestTask addTestTask(Product product, Publisher publisher,
-			Date beginTime, Date endTime, double perReward, double wholeCredit) {
-		Session session = getSession();
-		Transaction trans = null;
-		TestTask testTask = null;
-		try {
-			trans = session.beginTransaction();
-
-			testTask = new TestTask(product, publisher, true, perReward,
-					wholeCredit);
-			testTask.setTaskStartTime(beginTime);
-			testTask.setTaskEndTime(endTime);
-			session.save(testTask);
-			Number c = (Number) getSession()
-					.createQuery(
-							"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="+TaskType.Web)
-					.uniqueResult();
-
-			return c.intValue();
-
-		}
 		
 		//按页查找未审核Android应用
 		public List<TestTask> findUncheckedAndroidByPage(Page page) {
@@ -368,21 +394,6 @@ public class TestTaskDAO extends BaseHibernateDAO {
 				String queryString = "from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="+TaskType.Android;
 				Query queryObject = getSession().createQuery(queryString);
 
-			trans.commit();
-			log.debug("add testtask successful");
-		} catch (RuntimeException re) {
-			log.error("attach failed", re);
-			if (trans != null) {
-				trans.rollback();
-			}
-			testTask = null;
-			throw re;
-		}
-		return testTask;
-	}
-
->>>>>>> 9332983d12b8cd580322705d0dfbb005a965f265
-}
 				testTasks = queryObject
 						.setFirstResult(
 								(page.getCurrentPage() - 1) * page.getPerRows())
@@ -394,17 +405,29 @@ public class TestTaskDAO extends BaseHibernateDAO {
 				throw re;
 			}
 		}
-		// 得到未审核Android任务的总条�
-			public int getUncheckedAndroidTotalRows() {
+		
+				
+			
+				
 
-				Number c = (Number) getSession()
+		
+		// 得到未审核Android任务的总条�
+					public int getUncheckedAndroidTotalRows() {
+						Number c = (Number) getSession()
 						.createQuery(
 								"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and  TASK_TYPE="+TaskType.Android)
 						.uniqueResult();
+>>>>>>> bed7515d4486cf83a7abf3c14a27645d13de2b2a
 
-				return c.intValue();
+	// 得到未审核Android任务的总条�
+	public int getUncheckedAndroidTotalRows() {
 
+<<<<<<< HEAD
 			}
+			
+
+			
+				
 			
 			//按页查找未审核Desktop应用
 			public List<TestTask> findUncheckedDesktopByPage(Page page) {
@@ -425,45 +448,49 @@ public class TestTaskDAO extends BaseHibernateDAO {
 					throw re;
 				}
 			}
-			// 得到未审核Desktop任务的总条�
+			// 得到未审核Desktop任务的总条�
 				public int getUncheckedDesktopTotalRows() {
-
-					Number c = (Number) getSession()
-							.createQuery(
-									"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and  TASK_TYPE="+TaskType.Desktop)
-							.uniqueResult();
-
-					return c.intValue();
-
-				}
 =======
+		Number c = (Number) getSession()
+				.createQuery(
+						"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and  TASK_TYPE="
+								+ TaskType.Android).uniqueResult();
+>>>>>>> a2dd94d886e25b2402d605e27d05ba08d6436da5
 
-	public TestTask addTestTask(Product product, Publisher publisher,
-			Date beginTime, Date endTime, double perReward, double wholeCredit) {
-		Session session = getSession();
-		Transaction trans = null;
-		TestTask testTask = null;
-		try {
-			trans = session.beginTransaction();
+		return c.intValue();
 
-			testTask = new TestTask(product, publisher, true, perReward,
-					wholeCredit);
-			testTask.setTaskStartTime(beginTime);
-			testTask.setTaskEndTime(endTime);
-			session.save(testTask);
-
-			trans.commit();
-			log.debug("add testtask successful");
-		} catch (RuntimeException re) {
-			log.error("attach failed", re);
-			if (trans != null) {
-				trans.rollback();
-			}
-			testTask = null;
-			throw re;
-		}
-		return testTask;
 	}
 
->>>>>>> 1a9657db90812a6038566d35ad62de31d3b6fe3d
+	// 按页查找未审核Desktop应用
+	public List<TestTask> findUncheckedDesktopByPage(Page page) {
+		// TODO Auto-generated method stub
+		try {
+			List<TestTask> testTasks = new ArrayList<TestTask>();
+			String queryString = "from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="
+					+ TaskType.Desktop;
+			Query queryObject = getSession().createQuery(queryString);
+
+			testTasks = queryObject
+					.setFirstResult(
+							(page.getCurrentPage() - 1) * page.getPerRows())
+					.setMaxResults(page.getPerRows()).list();
+
+			return testTasks;
+		} catch (RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
+		}
+	}
+
+	// 得到未审核Desktop任务的总条�
+	public int getUncheckedDesktopTotalRows() {
+
+		Number c = (Number) getSession()
+				.createQuery(
+						"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and  TASK_TYPE="
+								+ TaskType.Desktop).uniqueResult();
+
+		return c.intValue();
+
+	}
 }

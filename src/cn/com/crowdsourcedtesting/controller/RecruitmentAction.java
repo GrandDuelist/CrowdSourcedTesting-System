@@ -145,23 +145,17 @@ public class RecruitmentAction extends DispatchAction {
 		Date enddate = null;
 
 		try {
-
 			java.text.SimpleDateFormat sdf=new java.text.SimpleDateFormat("MM/dd/yyyy");
 
 			startdate = sdf.parse(sdate);
-			enddate = sdf.parse(edate);
-
-			
+			enddate = sdf.parse(edate);			
 		} catch (ParseException e) {
-
 			System.out.println("String to Date error");
-
 		}
 		 
-		String company = recruitmentForm.getCompany();
-		int publisherId = 8;		
+		String company = recruitmentForm.getCompany();	
 		
-//		handler.addNewRecruitment(title, online, startdate, enddate, place, brief, content, company, publisherId, request);
+		handler.addNewRecruitment(title, online, startdate, enddate, place, brief, content, company, request);
 		
 		return this.gotoList(mapping, form, request, response);
 	}

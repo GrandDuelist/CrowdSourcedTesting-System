@@ -336,7 +336,11 @@
                                 </span>
                                 <br></br>
                                 <span class="sub-text">
+<<<<<<< HEAD
                                     <button class="btn btn-info btn-gradient btn-lg" type="button">点击查看</button>
+=======
+                                    <button class="btn btn-info btn-gradient btn-lg" type="submit">点击查看</button>
+>>>>>>> a2dd94d886e25b2402d605e27d05ba08d6436da5
                                 </span>
                             </span>
                         </div>

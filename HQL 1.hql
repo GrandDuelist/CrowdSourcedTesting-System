@@ -1,1 +1,1 @@
-from TestTask testTask where testTask.taskType=0 order by testTask.taskId desc
+from TestTask testTask where testTask.taskType=0 and testTask.publisher.publisherId= order by testTask.taskId desc

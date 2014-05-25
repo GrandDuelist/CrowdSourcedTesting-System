@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -17,6 +19,7 @@ import org.apache.struts.actions.DispatchAction;
 
 import cn.com.crowdsourcedtesting.DAO.GiftDAO;
 import cn.com.crowdsourcedtesting.bean.Gift;
+import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.crowdsourcedtesting.model.GiftHandler;
 import cn.com.crowdsourcedtesting.model.RecruitmentHandler;
 import cn.com.crowdsourcedtesting.struts.form.GiftForm;
@@ -165,18 +168,20 @@ public class GiftAction extends DispatchAction {
 	public ActionForward getGift(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		GiftForm giftForm = (GiftForm) form;// TODO Auto-generated method stub
-		//int id = giftForm.getGiftId();
-		//System.out.println("now:"+id);
+		HttpSession session  = request.getSession();
+		Tester tester = (Tester)session.getAttribute("Tester");
 		
-		if(handler.getGift(mapping, giftForm, request, response))
+		if(tester == null)
+		{
+			return mapping.findForward("changegiftfailed");
+		}
+		else if(handler.getGift(mapping, giftForm, request, response))
 		{
 			System.out.println("跳入adrress界面");
 			return mapping.findForward("changegift");
 		}
 		else
-		{
 			return mapping.findForward("changegiftfailed");
-		}
 	}
 	
 	

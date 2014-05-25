@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -19,6 +20,7 @@ import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
 import cn.com.crowdsourcedtesting.bean.Product;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Recruitment;
+import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.other.page.Page;
 
 public class RecruitmentHandler extends GeneralHandler {
@@ -93,10 +95,13 @@ public class RecruitmentHandler extends GeneralHandler {
 	// 后台调用
 	public void addNewRecruitment(String title, int online, Date startdate,
 			Date enddate, String place, String brief, String content,
-			String company, Publisher publisher, HttpServletRequest request) {
+			String company, HttpServletRequest request) {
 		RecruitmentDAO dao = new RecruitmentDAO();
 		PublisherDAO pdao = new PublisherDAO();
 		AdministratorDAO adao = new AdministratorDAO();
+		HttpSession httpsession  = request.getSession();
+		Publisher publisher = (Publisher)httpsession.getAttribute("Publisher");
+		
 		boolean flag = true;
 		if (online != 1)
 			flag = false;
