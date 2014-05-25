@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
+
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -18,10 +24,13 @@
 <link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
 <!-- Plugin CSS -->
-<link rel="stylesheet" type="text/css" href="vendor/plugins/calendar/fullcalendar.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="vendor/plugins/datatables/css/datatables.min.css" />
-<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/css/bootstrap-editable.css" />
 <link rel="stylesheet" type="text/css" href="vendor/plugins/chosen/chosen.min.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/timepicker/bootstrap-timepicker.min.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/colorpicker/colorpicker.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/datepicker/datepicker.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/daterange/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/formswitch/css/bootstrap-switch.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/tags/tagmanager.css" />
 
 <!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="css/theme.css" />
@@ -43,8 +52,7 @@
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-</head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 
 <body>
 <!-- Start: Theme Preview Pane -->
@@ -280,62 +288,76 @@
       </ul>
     </div>
   </aside>
-  <!-- End: Sidebar -->  
+  <!-- End: Sidebar --> 
   <!-- Start: Content -->
   <section id="content">
     <div id="topbar">
       <ol class="breadcrumb">
-          <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
-          <li><a href="publisher_home.html">主页</a></li>
-          <li><a href="publisher_taskman.html">任务管理</a></li>
-          <li><a href="publisher_tasklist.html">查看任务</a></li>
-          <li class="active">关闭任务</li>
+        <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
+        <li><a href="publisher_home.html">主页</a></li>
+        <li><a href="publisher_taskman.html">任务管理</a></li>
+        <li><a href="publisher_taskpub.html">发布任务</a></li>
+        <li class="active">奖励设置</li>
       </ol>
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
           <div class="panel">
             <div class="panel-heading">
-              <div class="panel-title"> <i class="fa fa-pencil"></i> 关闭任务 </div>
-              <div class="text-right"><button class="btn btn-warning btn-gradient">返回</button></div>
+            	<div class="panel-title"><i class="fa fa-trophy"></i> 奖励设置</div>
             </div>
             <div class="panel-body">
-              <div class="alert alert-success">请选择关闭任务的 <b>理由</b> 并填写关闭任务的<b>具体原因</b></div>
-              <form class="form-horizontal" role="form" />
-                    <hr />
-
-                    <div class="form-group">
-                      <label for="chosen-list2" class="col-md-2 control-label">关闭原因</label>
-                      <div class="col-md-10">
-                        <select multiple="" class="form-control" id="chosen-list2">
-                          <option />任务发布错误
-                          <option />重新修改奖励信息
-                          <option />任务无人认领
-                          <option />任务信息无法完成
-                          <option />其他
-                        </select>
-                      </div>
+            <form action="publishTestingTask.do"  method="post" >
+                <input type="hidden" name="method" value="pubAndroidTask" />
+              <h2 class="text-primary"> 请认真填写一下内容</h2>
+              <hr/>
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                <% String message = (String) session.getAttribute("TaskPublishErrorMessage");
+                session.removeAttribute("TaskPublishErrorMessage");
+                if (message != null && !"".equals(message)) { %>
+                	<p class="alert alert-warning"><%= message %></p>
+                <% } %>
+                  <p class="alert alert-success">您的余额为： <b><span class="text-primary">200</span></b></p>
+                   <div class="input-group col-lg-5"> <span class="input-group-addon"><i class="fa fa-calendar "></i> </span>
+                          <input type="text" id="datepicker_2" class="form-control margin-top-none" required placeholder="10/25/2013 - 10/25/2013" name="daterange" />
+                   </div>
+                   <br/>
+                   <div class="form-group">
+                      <label for="spinner1">参与奖励</label>
+                        <div class="input-group col-lg-5"> <span class="input-group-addon"><i class="fa fa-usd"></i> </span>
+                          <input class="form-control ui-spinner-input" required type="number" name="wholeReward" value="300" />
+                        </div>
                     </div>
-                    <br/>
-                     <div class="form-group">
-                      <label class="col-lg-2 control-label" for="textArea">具体描述</label>
-                      <div class="col-lg-10">
-                        <textarea class="form-control" id="textArea" rows="3"></textarea>
-                      </div>
+                     <br/>
+                   <div class="form-group">
+                      <label for="spinner1">报告提交奖励</label>
+                        <div class="input-group col-lg-5"> <span class="input-group-addon"><i class="fa fa-usd"></i> </span>
+                          <input  class="form-control ui-spinner-input" name="perReward" required type="number" value="300" />
+                        </div>
                     </div>
-                
+                  <hr></hr>
+                  <div class="pull-left">
+                  	<button class="btn btn-gradient btn-lg btn-green" type="reset">返回</button>
+                  </div>
+                  <div class="pull-right">
+                  	<button class="btn btn-info btn-gradient btn-lg" type="submit">下一步</button>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="row"><hr></hr></div>
+              </form>
             </div>
-            <div class="text-center"><button class="btn btn-info btn-gradient btn-lg">提交申请</button></div>
-          <hr></div>
+            
           </div>
-          
         </div>
       </div>
     </div>
   </section>
   <!-- End: Content --> 
-
+</div>
 <!-- End: Main --> 
 
 <!-- Core Javascript - via CDN --> 

@@ -3,6 +3,7 @@ package cn.com.crowdsourcedtesting.model;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,12 +13,15 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import cn.com.crowdsourcedtesting.DAO.AdministratorDAO;
+import cn.com.crowdsourcedtesting.DAO.ProductDAO;
 import cn.com.crowdsourcedtesting.DAO.PublisherDAO;
 import cn.com.crowdsourcedtesting.DAO.RecruitmentDAO;
 import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
+import cn.com.crowdsourcedtesting.bean.Product;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Questionnaire;
 import cn.com.crowdsourcedtesting.bean.Recruitment;
+import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.crowdtest.factory.DAOFactory;
 import cn.com.other.page.Page;
 
@@ -29,8 +33,9 @@ public class RecruitmentHandler extends GeneralHandler {
 		RecruitmentDAO dao = new RecruitmentDAO();
 
 		recruitments = dao.findByPage(page);
+		
 
-		if(recruitments != null && recruitments.size()>0)
+		if(recruitments != null && recruitments.size()>0 )
 		{
 			request.setAttribute("hirelist", recruitments);
 			request.setAttribute("page", page);
@@ -38,7 +43,6 @@ public class RecruitmentHandler extends GeneralHandler {
 		}
 		else
 			request.setAttribute("isLegal", "illegal");
-
 	}
 
 	public void selectRecentRecruitments(Page page, HttpServletRequest request){
@@ -46,9 +50,16 @@ public class RecruitmentHandler extends GeneralHandler {
 		RecruitmentDAO dao = new RecruitmentDAO();
 
 		recruitments = dao.findByPage(page);
-		if(recruitments != null && recruitments.size()>0)
+		
+		List<Product> products = new ArrayList();
+		ProductDAO productDAO = new ProductDAO();
+		
+		products = productDAO.findAll();		
+
+		if(recruitments != null && recruitments.size()>0 && products != null && products.size()>0)
 		{
 			request.setAttribute("hirelist", recruitments);
+			request.setAttribute("products", products);
 			request.setAttribute("page", page);
 			request.setAttribute("isLegal", "legal");
 		}
@@ -86,10 +97,13 @@ public class RecruitmentHandler extends GeneralHandler {
 	// 后台调用
 	public void addNewRecruitment(String title, int online, Date startdate,
 			Date enddate, String place, String brief, String content,
-			String company, Publisher publisher, HttpServletRequest request) {
+			String company, HttpServletRequest request) {
 		RecruitmentDAO dao = new RecruitmentDAO();
 		PublisherDAO pdao = new PublisherDAO();
 		AdministratorDAO adao = new AdministratorDAO();
+		HttpSession httpsession  = request.getSession();
+		Publisher publisher = (Publisher)httpsession.getAttribute("Publisher");
+		
 		boolean flag = true;
 		if (online != 1)
 			flag = false;

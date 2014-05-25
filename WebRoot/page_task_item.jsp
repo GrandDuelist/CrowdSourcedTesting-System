@@ -40,7 +40,7 @@
  String flag = (String)request.getAttribute("isLegal");
  if(flag == null || flag != "legal")
  {
- 	response.sendRedirect("gifts.do?method=selectAllGifts");
+ 	response.sendRedirect("comment.do?method=checkWebList");
  	return;
  }
  else
@@ -98,13 +98,13 @@
                 <div class="nav-collapse collapse">                                     
                     <ul class="nav top-2">
                         <li>
-                           <a href="index.html">主页
+                           <a href="index.jsp">主页
                             
                             </a>
                            
                       </li>
                         <li>
-                            <a href="gifts.html">礼品中心
+                            <a href="gifts.do?method=selectAllGifts">礼品中心
                                                         
                             </a>
                                        
@@ -114,7 +114,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="page_hirelist.html">招募帖                          
+                            <a href="recruitment.do?method=selectAllRecruitment">招募帖                          
                             </a>
                         </li>
                         <li>
@@ -122,7 +122,7 @@
       
                         </li>
                        <li>
-                            <a href="page_questionaire.html">问卷调查
+                            <a href="questionnaire.do?method=pageQuestionnaire">问卷调查
                             </a>
                             
                                                     
@@ -229,10 +229,11 @@
             <!-- Leave a Comment -->
             <div class="post-comment">
             	<h3 class="color-green">评论</h3>
-                <form action="comment.do?method=addNewComment" method="post">
+                <form id="commentform" action="comment.do?method=addNewComment" method="post">
                     <label>内容</label>
-                    <textarea name="comment" rows="8" class="span10"></textarea>
-                    <p><button type="submit" class="btn-u">发送</button></p>
+                    <input type="hidden" name="taskId" value=<%=comment.getTestTask().getTaskId()%>/>
+                    <textarea id="commentcontent" name="comment" rows="8" class="span10"></textarea>
+                    <p><button id="commentbtn" class="btn-u">发送</button></p>
                 </form>
             </div><!--/post-comment-->
         </div><!--/span9-->
@@ -348,9 +349,18 @@
 <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
 <!-- JS Page Level -->           
 <script type="text/javascript" src="assets/js/app.js"></script>
+<script type="text/javascript" src="js/wordsfilter.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
+        
+        
+        $('#commentbtn').click(function(){
+        	var content = filterText($('#RecruitmentTitle').val());
+        	$("#commentcontent").attr("value",content);
+        	$('#commentform').submit();      	
+        });
+        
     });
 </script>
 <!--[if lt IE 9]>

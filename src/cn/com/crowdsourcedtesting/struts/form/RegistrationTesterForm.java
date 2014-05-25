@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.upload.FormFile;
 import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
 
 /** 
@@ -46,7 +47,7 @@ public class RegistrationTesterForm extends ActionForm {
 	private Date birthday;
 	
 	/** photo property */
-	private String photo;
+	private FormFile photo;
 	
 	/** credit property */
 	private double credit;
@@ -151,11 +152,11 @@ public class RegistrationTesterForm extends ActionForm {
 		this.birthday = birthday;
 	}
 
-	public String getPhoto() {
+	public FormFile getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(String photo) {
+	public void setPhoto(FormFile photo) {
 		this.photo = photo;
 	}
 

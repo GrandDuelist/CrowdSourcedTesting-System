@@ -9,6 +9,7 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import oracle.net.aso.p;
 
@@ -50,8 +51,6 @@ public class RegistrationRouter extends DispatchAction {
 
 	private RegistrationHandler handler = new RegistrationHandler();
 	
-	private RegistrationTesterForm registrationTesterForm;
-	private RegistrationPublisherForm registrationPublisherForm;
 	
 	
 	
@@ -65,7 +64,7 @@ public class RegistrationRouter extends DispatchAction {
 	 */
 	public ActionForward testerRegistrationActivate(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		registrationTesterForm = (RegistrationTesterForm) form;// TODO Auto-generated method stub
+		RegistrationTesterForm registrationTesterForm = (RegistrationTesterForm) form;// TODO Auto-generated method stub
 
 		RandomCode randomcode = new RandomCode();
 		
@@ -107,25 +106,30 @@ public class RegistrationRouter extends DispatchAction {
 			e.printStackTrace();
 		}
 		
+		request.setAttribute("randomcode", registrationTesterForm.getCode());
+		request.setAttribute("name", registrationTesterForm.getName());
+		request.setAttribute("email", registrationTesterForm.getEmail());
+		request.setAttribute("password", registrationTesterForm.getPassword());
+		request.setAttribute("gender", registrationTesterForm.getGender());
+		request.setAttribute("mobile", registrationTesterForm.getMobile());
+		request.setAttribute("birthday", registrationTesterForm.getBirthday());
+		
 		return mapping.findForward("activate");
 	}
 	
 	public ActionForward testerRegistration(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		RegistrationTesterForm registrationTesterForm_comfirm = (RegistrationTesterForm) form;// TODO Auto-generated method stub
+		RegistrationTesterForm registrationTesterForm = (RegistrationTesterForm) form;// TODO Auto-generated method stub
 		
-		if (registrationTesterForm.getCode().equals(registrationTesterForm_comfirm.getComfirmCode())) {
-			handler.handleRegistrationTester(registrationTesterForm);
-			return mapping.findForward("success");
-		}
-		else {
-			return null;
-		}
+		handler.handleRegistrationTester(registrationTesterForm);
+			
+		return mapping.findForward("success");
+
 	}
 	
 	public ActionForward publisherRegistrationActive(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		registrationPublisherForm =(RegistrationPublisherForm) form;
+		RegistrationPublisherForm registrationPublisherForm =(RegistrationPublisherForm) form;
 		
 		RandomCode randomcode = new RandomCode();
 		
@@ -167,21 +171,29 @@ public class RegistrationRouter extends DispatchAction {
 			e.printStackTrace();
 		}
 		
+		request.setAttribute("randomcode", registrationPublisherForm.getCode());
+		request.setAttribute("authority", registrationPublisherForm.getAuthority());
+		request.setAttribute("logEmail", registrationPublisherForm.getLogEmail());
+		request.setAttribute("publisherName", registrationPublisherForm.getPublisherName());
+		request.setAttribute("type", registrationPublisherForm.getType());
+		request.setAttribute("credit", registrationPublisherForm.getCredit());
+		request.setAttribute("password", registrationPublisherForm.getPassword());
+		request.setAttribute("connectEmail", registrationPublisherForm.getConnectEmail());
+		request.setAttribute("companyName", registrationPublisherForm.getCompanyName());
+		request.setAttribute("license", registrationPublisherForm.getLicense());
+		request.setAttribute("photo", registrationPublisherForm.getPhoto());
+		
 		
 		return mapping.findForward("activate");
 	}
 	
 	public ActionForward publisherRegistration(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		RegistrationPublisherForm registrationPublisherForm_comfirm = (RegistrationPublisherForm) form;
+		RegistrationPublisherForm registrationPublisherForm = (RegistrationPublisherForm) form;
 		
-		if (registrationPublisherForm.getCode().equals(registrationPublisherForm_comfirm.getComfirmCode())) {
-			handler.handleRegistrationPublisher(registrationPublisherForm);
-			return mapping.findForward("success");
-		}
-		else {
-			return null;
-		}
+		handler.handleRegistrationPublisher(registrationPublisherForm);
+		
+		return mapping.findForward("success");
 	}
 }
 class MyAuthenticator extends Authenticator{  

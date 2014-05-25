@@ -306,8 +306,8 @@ int lastPage = (currentPage.getTotalPage()+1)<(firstPage+currentPage.DEFAULT_MAX
   <div id="topbar">
     <ol class="breadcrumb">
       <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
-      <li><a href="publisher_home.html">主页</a></li>
-      <li><a href="publisher_questionnaire_man.html">问卷管理</a></li>
+      <li><a href="ManageTestTaskView.jsp">主页</a></li>
+      <li><a href="PublisherQuestionnaireMainView.jsp">问卷管理</a></li>
       <li class="active">问卷列表</li>
     </ol>
     </div>

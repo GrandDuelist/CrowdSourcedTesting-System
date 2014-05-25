@@ -75,7 +75,7 @@
 
 
     <div class="btn-group user-menu">
-      <a href="index.html"><button type="button" class="btn btn-default btn-gradient btn-sm dropdown-toggle"> <span class="glyphicons glyphicons-home"></span>返回</button></a>
+      <a href="index.jsp"><button type="button" class="btn btn-default btn-gradient btn-sm dropdown-toggle"> <span class="glyphicons glyphicons-home"></span>返回</button></a>
     </div>
   </div>
 </header>
@@ -124,30 +124,52 @@
                         <p class="alert alert-warning">请您<b>正确填写</b> 注册信息</p>
                         
                         <div class="form-group">
+                        <label for="web_url"> 注册邮箱 </label>
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-envelope-o"></i> </span>
                             <input class="form-control" type="email" name="email" placeholder="注册邮箱" required />
                           </div>
                         </div>
                         <div class="form-group">
+                        <label for="web_url"> 密码 </label>
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-key"></i> </span>
                             <input class="form-control" type="password" name="password" placeholder="密码" required />
                           </div>
                         </div>
                         <div class="form-group">
+                        <label for="web_url"> 昵称 </label>
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i> </span>
                             <input class="form-control" type="text" name="name" placeholder="昵称" required />
                           </div>
                         </div>
                         <div class="form-group">
-                          <div class="input-group"> <span class="input-group-addon"><i class="fa fa-envelope-o"></i> </span>
-                            <input class="form-control" type="email" name="contact_email" placeholder="联络邮箱" required />
+                        <label for="web_url"> 性别 </label>
+                          <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i> </span>
+                            <!--  <input class="form-control" type="text" name="name" placeholder="性别" required />-->
+                            <select name="gender" class="form-control">
+                            	<option value="0" selected="selected">男</option>
+                            	<option value="1">女</option>
+                            </select>
                           </div>
                         </div>
                         <div class="form-group">
+                        <label for="web_url"> 手机 </label>
+                          <div class="input-group"> <span class="input-group-addon"><i class="fa fa-mobile"></i> </span>
+                            <input class="form-control" type="text" name="mobile" placeholder="手机" required />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                    		<label for="web_url"> 上传头像 </label>
+                    		<div class="input-group"> <span class="input-group-addon"> <i class="fa fa-picture-o"></i> </span>
+                      			<input class="form-control" type="file" required placeholder="" name="photo" />
+                    		</div>
+                  		</div>
+                        <div class="form-group">
+                        <label for="web_url"> 出生日期 </label>
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-calendar"></i> </span>
                            <input type="text" id="datepicker" class="form-control datepicker margin-top-none" placeholder="出生日期：24/12/1993" />                      
                           </div>
                         </div>
+                        <!-- 缺少照片上传 -->
                         <div class="input-group">
                         
                             <span class="input-group-addon"></span>
@@ -160,15 +182,12 @@
                           <label for="agree">请同意我们的使用条款</label>
                         </div>
                       </div>
-                      <div class="tab-pane" id="tab2">
-                        <p class="alert alert-success">恭喜您<b>完成注册第一步 </b> 系统已将验证邮件发送至你的邮箱，请注意查收</p>
-                      </div>
                       <div class="tab-pane" id="tab3">
                         <p class="alert alert-info">验证成功 <b>正在审核</b> 请耐心等待</p>
                       </div>
                       <ul class="pager wizard">
                         <li class="previous first" style="display:none;"><a href="#">填写注册信息</a></li>
-                        <li class="previous"><a href="#">上一步</a></li>
+                        <li class="previous"><button class="btn btn-primary" type="submit" disabled="disabled">上一步</button></li>
                         <li class="next last" style="display:none;"><a href="#">发送确认链接</a></li>
                         <li class="next"><button class="btn btn-primary" type="submit">下一步</button></li>
                         <li class="save" style="display:none;"><a href="#">等待审核</a></li>
