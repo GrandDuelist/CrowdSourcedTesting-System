@@ -187,7 +187,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="container">
 		<div class="span9">
             <span>吐槽网是一个众包测试网站，服务超过两百家中型企业</span>
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi  vehicula sem ut volutpat. Ut non libero magna fusce condimentum eleifend enim a feugiat.</p>
         </div>
         <a href="#" class="btn-buy hover-effect">详情</a>
     </div>
@@ -202,22 +201,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!-- Our Services -->
             <div class="row-fluid">
                 <div class="headline"><h3>服务简介</h3></div>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem donec id elit non mi porta gravida at eget metus.</p><br />
+                <p>吐槽网专为测试而生，用户可以在这里发布自己的测试任务，收集他人的测试报告，从而对自己的产品进行改进。同时用户也可以参与到其他人的测试任务之中，获取积分，赢得礼品。</p><br />
                 <div class="row-fluid servive-block servive-block-in">
                     <div class="span4">
-                        <h4><a href="#">Lorem sequat ipsum de</a></h4>
+                        <h4><a href="#">发布测试</a></h4>
                         <p><i class="icon-bell"></i></p>
-                        <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine.</p>
+                        <p>发布者可以发布自己的测试任务</p>
                     </div>
                     <div class="span4">
-                        <h4><a href="#">Vivamus imperdiet gravi</a></h4>
+                        <h4><a href="#">参与测试</a></h4>
                         <p><i class="icon-bullhorn"></i></p>
-                        <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine.</p>
+                        <p>用户可以参与到已经发布的测试任务</p>
                     </div>
                     <div class="span4">
-                        <h4><a href="#">Donec idslacs elit nomi</a></h4>
+                        <h4><a href="#">礼品兑换</a></h4>
                         <p><i class=" icon-lightbulb"></i></p>
-                        <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine.</p>
+                        <p>用户可以利用积分兑换想要的礼品</p>
                     </div>
                 </div><!--/welcome-block-->
             </div><!--/row-fluid-->        
@@ -352,12 +351,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!-- Why Choose Us -->
             <div class="who margin-bottom-30">
                 <div class="headline"><h3>为何选择我们</h3></div>
-                <p>Pellentesque fermentum, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id.</p>
+                <p>我们拥有最全面的功能，最方便的服务以及众多的测试用户。在这里，你可以体会到测试的乐趣！</p>
                 <ul class="unstyled">
-                    <li><a href="#"><i class="icon-desktop"></i>Vivamus imperdiet condimentum</a></li>
-                    <li><a href="#"><i class="icon-bullhorn"></i>Anim pariatur cliche squid</a></li>
-                    <li><a href="#"><i class="icon-globe"></i>Eget placerat felis consectetur</a></li>
-                    <li><a href="#"><i class="icon-group"></i>Condimentum diam eget placerat</a></li>
+                    <li><a href="#"><i class="icon-desktop"></i>界面友好</a></li>
+                    <li><a href="#"><i class="icon-bullhorn"></i>操作简单</a></li>
+                    <li><a href="#"><i class="icon-globe"></i>功能强大</a></li>
+                    <li><a href="#"><i class="icon-group"></i>用户众多</a></li>
                 </ul>
             </div>
 
