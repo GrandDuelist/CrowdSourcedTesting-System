@@ -75,7 +75,7 @@
 
 
     <div class="btn-group user-menu">
-      <a href="index.html"><button type="button" class="btn btn-default btn-gradient btn-sm dropdown-toggle"> <span class="glyphicons glyphicons-home"></span>返回</button></a>
+      <a href="index.jsp"><button type="button" class="btn btn-default btn-gradient btn-sm dropdown-toggle"> <span class="glyphicons glyphicons-home"></span>返回</button></a>
     </div>
   </div>
 </header>
@@ -184,9 +184,6 @@
                           <input type="checkbox" class="checkbox" id="agree" name="agree" />
                           <label for="agree">请同意我们的使用条款</label>
                         </div>
-                      </div>
-                      <div class="tab-pane" id="tab2">
-                        <p class="alert alert-success">恭喜您<b>完成注册第一步 </b> 系统已将验证邮件发送至你的邮箱，请注意查收</p>
                       </div>
                       <div class="tab-pane" id="tab3">
                         <p class="alert alert-info">验证成功 <b>正在审核</b> 请耐心等待</p>

@@ -68,13 +68,31 @@ public class TestTaskRouter extends DispatchAction {
 	 * @return
 	 */
 
-	public ActionForward addNewComment(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response) {
-		TaskForm giftForm = (TaskForm) form;// TODO Auto-generated method stub
-		String comment = giftForm.getComment();
+	/*		HttpServletRequest request, HttpServletResponse response) {
+	
+	TaskForm giftForm = (TaskForm) form;// TODO Auto-generated method stub
+	String comment = giftForm.getComment();
 		System.out.println("add comment: " + comment);
-		return mapping.findForward("allcomment");
+	return mapping.findForward("allcomment");
 	}
+	public ActionForward checkWebList(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		PageIdForm pageIDForm = (PageIdForm) form;
+		
+		
+		// 交给事务处理
+		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodOne);    //调用第一个接�
+
+		return mapping.findForward("list");
+		
+		
+	}*/
+	
+	
+	
+	
 
 	public ActionForward checkWebList(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -123,9 +141,10 @@ public class TestTaskRouter extends DispatchAction {
 			request.setAttribute("isLegal", "illegal");
 
 		return mapping.findForward("allcomment");
-
+	
 	}
 
+	
 	/**
 	 * 桌面任务审核列表处理
 	 * 

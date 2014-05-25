@@ -207,7 +207,7 @@
     		<div class="service clearfix">
                 <i class="icon-group"></i>
     			<div class="desc">
-    				<h4><%=questionnaire.getTitle() %></h4>
+    				<h4><a href="questionnaire.do?method=pageDetail&id=<%=questionnaire.getQuestionnaireId()%>"><%=questionnaire.getTitle() %></a></h4>
     			</div>
     		</div>	
     	</div>
@@ -221,7 +221,7 @@
     		<div class="service clearfix">
                 <i class="icon-desktop"></i>
     			<div class="desc">
-    				<h4><%=questionnaire.getTitle() %></h4>                  
+    				<h4><a href="questionnaire.do?method=pageDetail&id=<%=questionnaire.getQuestionnaireId()%>"><%=questionnaire.getTitle() %></a></h4>            
     			</div>
     		</div>	
     	</div>
@@ -235,7 +235,7 @@
     		<div class="service clearfix">
                 <i class="icon-bullhorn"></i>
     			<div class="desc">
-    				<h4><%=questionnaire.getTitle() %></h4>
+    				<h4><a href="questionnaire.do?method=pageDetail&id=<%=questionnaire.getQuestionnaireId()%>"><%=questionnaire.getTitle() %></a></h4>
     			</div>
     		</div>	
     	</div>
@@ -249,7 +249,7 @@
     		<div class="service clearfix">
                 <i class="icon-globe"></i>
     			<div class="desc">
-    				<h4><%=questionnaire.getTitle() %></h4>
+    				<h4><a href="questionnaire.do?method=pageDetail&id=<%=questionnaire.getQuestionnaireId()%>"><%=questionnaire.getTitle() %></a></h4>
                 </div>
     		</div>	
     	</div>	
@@ -263,7 +263,7 @@
     		<div class="service clearfix">
                 <i class="icon-resize-small"></i>
     			<div class="desc">
-    				<h4><%=questionnaire.getTitle() %></h4>                   
+    				<h4><a href="questionnaire.do?method=pageDetail&id=<%=questionnaire.getQuestionnaireId()%>"><%=questionnaire.getTitle() %></a></h4>            
     			</div>
     		</div>	
     	</div>	
@@ -277,7 +277,7 @@
     		<div class="service clearfix">
                 <i class="icon-plane"></i>
     			<div class="desc">
-    				<h4><%=questionnaire.getTitle() %></h4>
+    				<h4><a href="questionnaire.do?method=pageDetail&id=<%=questionnaire.getQuestionnaireId()%>"><%=questionnaire.getTitle() %></a></h4>
     			</div>
     		</div>	
     	</div>	
@@ -291,7 +291,7 @@
     		<div class="service clearfix">
                 <i class="icon-filter"></i>
     			<div class="desc">
-    				<h4><%=questionnaire.getTitle() %></h4>
+    				<h4><a href="questionnaire.do?method=pageDetail&id=<%=questionnaire.getQuestionnaireId()%>"><%=questionnaire.getTitle() %></a></h4>
     			</div>
     		</div>	
     	</div>
@@ -305,7 +305,7 @@
     		<div class="service clearfix">
                 <i class="icon-fire"></i>
     			<div class="desc">
-    				<h4><%=questionnaire.getTitle() %></h4>
+    				<h4><a href="questionnaire.do?method=pageDetail&id=<%=questionnaire.getQuestionnaireId()%>"><%=questionnaire.getTitle() %></a></h4>
     			</div>
     		</div>	
     	</div>

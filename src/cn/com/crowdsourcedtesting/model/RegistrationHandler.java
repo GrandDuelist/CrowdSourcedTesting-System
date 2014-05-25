@@ -25,7 +25,7 @@ public class RegistrationHandler {
 		tester.setTesterGender(form.getGender());
 		tester.setTesterMobile(form.getMobile());
 		tester.setTesterBirthday(form.getBirthday());
-		tester.setTesterPhoto(form.getPhoto());
+		//tester.setTesterPhoto(form.getPhoto());
 		tester.setTesterCredit(form.getCredit());
 		
 		Session session = HibernateSessionFactory.getSession();

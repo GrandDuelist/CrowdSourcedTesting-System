@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,java.util.List,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" import="cn.com.crowdsourcedtesting.modelhelper.*,java.util.*,cn.com.crowdsourcedtesting.bean.*,java.util.List,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
 
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -32,6 +32,11 @@
     <link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-1" />    
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head> 
 
+<%
+UserType  userType = (UserType)session.getAttribute("UserType");
+Tester tester2  = (Tester)session.getAttribute("Tester");
+%>
+
 <body>
 <!--=== Style Switcher ===-->    
 <i class="style-switcher-btn style-switcher-btn-option icon-cogs"></i>
@@ -55,7 +60,12 @@
             <ul class="loginbar inline">
                 <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i> chengran327@gmail.com</a></li>	
                 <li><a><i class="icon-phone-sign"></i> 021 4202 2656</a></li>	
+                <%if(userType==null){ %>
                 <li><a href="login.do?method=testerLogin"><i class="icon-user"></i> 登录</a></li>	
+                <%}else if(userType.equals(UserType.Tester)) {%>
+                  <li><a href="security.do?method=testerLogout"><i class="icon-user"></i>注销</a></li>
+                   <li><a href="personal_center.do?method=testerFindAllQuestionnaire"><%=tester2.getTesterName()%></a></li>	
+               <% }%>
             </ul>
         </div>        				
     </div><!--/container-->		

@@ -86,6 +86,7 @@
     	<set-property property="cancellable" value="true" />
      
      	<forward name="success" path="/page_personal_center.jsp"></forward>
+     	<forward name="home" path="/index.jsp"></forward>
     </action>
     
     <action
@@ -218,14 +219,14 @@
     name="publisherQuestionnaireForm" 
              input="/PublisherQuestionnaireView.jsp"
              attribute="publisherQuestionnaireForm"
-            path="/questionnaire" 
+            path="/publisherQuestionnaire" 
             parameter="method" 
             scope="request" 
             type="cn.com.crowdsourcedtesting.controller.QuestionnaireRouter">
       <set-property property="cancellable" value="true" />
        <forward name="publisherLogin" path="/PublisherLoginView.jsp"></forward>
        <forward name="add" path="/PublisherQuestionnaireView.jsp"></forward>
-        <forward name="main" path="/PublisherQuestionnaireMainView.jsp"></forward>
+       <forward name="main" path="/PublisherQuestionnaireMainView.jsp"></forward>
     </action>
     
     
@@ -396,6 +397,8 @@
       scope="request"
       type="cn.com.crowdsourcedtesting.controller.BugReportPublishAction">
       <set-property property="cancellable" value="true" />
+      <forward name="taskPub" path="/publisher_taskpub_reward.jsp"></forward>
+      <forward name="productSuccess" path="/publisher_taskpub_reward.jsp"></forward>
       <forward name="bugPubSuccess" path="/publisher_taskpub_desktop.jsp"></forward>
       <forward name="bugPubError" path="/tester_bugpub.jsp"></forward>
     </action>
