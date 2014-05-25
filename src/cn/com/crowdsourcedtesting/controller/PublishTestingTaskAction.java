@@ -29,6 +29,7 @@ import cn.com.crowdsourcedtesting.DAO.TestTaskDAO;
 import cn.com.crowdsourcedtesting.bean.Product;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.model.GeneralHelperHandler;
+import cn.com.crowdsourcedtesting.modelhelper.TaskType;
 import cn.com.crowdsourcedtesting.struts.form.PublishTestingTaskForm;
 
 /**
@@ -257,7 +258,7 @@ public class PublishTestingTaskAction extends DispatchAction {
 					product.getIcon(), product.getWebLink(),
 					product.getDescription());
 			TestTaskDAO testTaskDAO = new TestTaskDAO();
-			testTaskDAO.addTestTask(product, 1, publisher, beginDate, endDate,
+			testTaskDAO.addTestTask(product, TaskType.Web, publisher, beginDate, endDate,
 					perReward, wholeCredit);
 		} catch (RuntimeException re) {
 			re.printStackTrace();
@@ -464,7 +465,7 @@ public class PublishTestingTaskAction extends DispatchAction {
 					product.getIcon(), product.getApkAddress(),
 					product.getDescription());
 			TestTaskDAO testTaskDAO = new TestTaskDAO();
-			testTaskDAO.addTestTask(product, 2, publisher, beginDate, endDate,
+			testTaskDAO.addTestTask(product, TaskType.Android, publisher, beginDate, endDate,
 					perReward, wholeCredit);
 		} catch (RuntimeException re) {
 			re.printStackTrace();
@@ -616,7 +617,7 @@ public class PublishTestingTaskAction extends DispatchAction {
 					product.getIcon(), product.getDesktopAddress(),
 					product.getDescription());
 			TestTaskDAO testTaskDAO = new TestTaskDAO();
-			testTaskDAO.addTestTask(product, 3, publisher, beginDate, endDate,
+			testTaskDAO.addTestTask(product, TaskType.Desktop, publisher, beginDate, endDate,
 					perReward, wholeCredit);
 		} catch (RuntimeException re) {
 			re.printStackTrace();

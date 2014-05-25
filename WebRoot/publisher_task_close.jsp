@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
+
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -295,6 +301,8 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
+        <form action="editTask.do" class="form-horizontal" role="form" />
+        <input type="hidden" name="method" value="closeMessage"/>
           <div class="panel">
             <div class="panel-heading">
               <div class="panel-title"> <i class="fa fa-pencil"></i> 关闭任务 </div>
@@ -302,18 +310,16 @@
             </div>
             <div class="panel-body">
               <div class="alert alert-success">请选择关闭任务的 <b>理由</b> 并填写关闭任务的<b>具体原因</b></div>
-              <form class="form-horizontal" role="form" />
                     <hr />
-
                     <div class="form-group">
                       <label for="chosen-list2" class="col-md-2 control-label">关闭原因</label>
                       <div class="col-md-10">
                         <select multiple="" class="form-control" id="chosen-list2">
-                          <option />任务发布错误
-                          <option />重新修改奖励信息
-                          <option />任务无人认领
-                          <option />任务信息无法完成
-                          <option />其他
+                          <option >任务发布错误</option>
+                          <option >重新修改奖励信息</option>
+                          <option >任务无人认领</option>
+                          <option >任务信息无法完成</option>
+                          <option >其他</option>
                         </select>
                       </div>
                     </div>
@@ -326,13 +332,13 @@
                     </div>
                 
             </div>
-            <div class="text-center"><button class="btn btn-info btn-gradient btn-lg">提交申请</button></div>
+            <div class="text-center"><button class="btn btn-info btn-gradient btn-lg" type="submit">提交申请</button></div>
           <hr></div>
+          </form>
           </div>
           
         </div>
       </div>
-    </div>
   </section>
   <!-- End: Content --> 
 
