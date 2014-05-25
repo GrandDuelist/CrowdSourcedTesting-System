@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.modelhelper.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -41,6 +41,8 @@ Page currentPage = (Page)session.getAttribute("currentPage");
 int firstPage = (int)(currentPage.getCurrentPage()-1)/currentPage.DEFAULT_MAX_PAGE;
 firstPage = firstPage*currentPage.DEFAULT_MAX_PAGE+1;
 int lastPage = (currentPage.getTotalPage()+1)<(firstPage+currentPage.DEFAULT_MAX_PAGE)? (currentPage.getTotalPage()+1):(firstPage+currentPage.DEFAULT_MAX_PAGE);
+UserType  userType = (UserType)session.getAttribute("UserType");
+Tester tester  = (Tester)session.getAttribute("Tester");
 %>
 
  <form id="selectForm"  method="post">
@@ -70,7 +72,21 @@ int lastPage = (currentPage.getTotalPage()+1)<(firstPage+currentPage.DEFAULT_MAX
             <ul class="loginbar inline">
                 <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i> chengran327@gmail.com</a></li>	
                 <li><a><i class="icon-phone-sign"></i> 021 4202 2656</a></li>	
-                <li><a href="page_login.html"><i class="icon-user"></i> 登录</a></li>	
+                <%
+                	if(userType == null)
+                	{
+                %>
+                 <li><a href="login.do?method=testerLogin"><i class="icon-user"></i> 登录</a></li>	
+                <%
+                	}
+                	else if(userType.equals(UserType.Tester))
+                	{
+                %>
+                 <li><a href="security.do?method=testerLogout"><i class="icon-user"></i>注销</a></li>
+                 <li><a href="personal_center.do?method=testerFindAllQuestionnaire"><%=tester.getTesterName()%></a></li>	
+                <%
+                	}
+                %>
             </ul>
         </div>        				
     </div><!--/container-->		

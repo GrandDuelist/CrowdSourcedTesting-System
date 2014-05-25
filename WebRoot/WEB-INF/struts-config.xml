@@ -84,6 +84,7 @@
     	<set-property property="cancellable" value="true" />
      
      	<forward name="success" path="/page_personal_center.jsp"></forward>
+     	<forward name="home" path="/index.jsp"></forward>
     </action>
     
     <action

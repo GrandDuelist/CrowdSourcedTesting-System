@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,java.util.List,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,java.util.*,cn.com.crowdsourcedtesting.modelhelper.*,java.util.List,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
 
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -46,6 +46,8 @@
  }
  else
  	request.removeAttribute("isLegal");
+	UserType userType = (UserType)session.getAttribute("UserType");
+	Tester tester  = (Tester)session.getAttribute("Tester");
  %>
  
 
@@ -72,7 +74,21 @@
             <ul class="loginbar inline">
                 <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i> chengran327@gmail.com</a></li>	
                 <li><a><i class="icon-phone-sign"></i> 021 4202 2656</a></li>	
-                <li><a href="page_login.html"><i class="icon-user"></i> 登录</a></li>	
+                <%
+                	if(userType == null)
+                	{
+                %>
+                 <li><a href="login.do?method=testerLogin"><i class="icon-user"></i> 登录</a></li>	
+                <%
+                	}
+                	else if(userType.equals(UserType.Tester))
+                	{
+                %>
+                 <li><a href="security.do?method=testerLogout"><i class="icon-user"></i>注销</a></li>
+                 <li><a href="personal_center.do?method=testerFindAllQuestionnaire"><%=tester.getTesterName()%></a></li>	
+                <%
+                	}
+                %>
             </ul>
         </div>        				
     </div><!--/container-->		
@@ -104,7 +120,6 @@
                            
                       </li>
                         <li class="active">
-                            <a href="gifts.html">礼品中心
                             <a href="gifts.do?method=selectAllGifts">礼品中心
                                                         
                             </a>
@@ -114,9 +129,8 @@
                             <a href="page_list.html">任务广场                            
                             </a>
                         </li>
-                        <li>
-                            <a href="page_hirelist.html">招募�                         
-                            <a href="recruitment.do?method=selectAllRecruitment">招募�                         
+                        <li>                    
+                            <a href="recruitment.do?method=selectAllRecruitment">招募帖                        
                             </a>
                         </li>
                         <li>
@@ -172,12 +186,12 @@
         <div id="w">    
             <div class="sort" id="sort">
 				<ul class="unstyled inline">
-                	<li><a href="gifts.do?method=selectAllGifts" class="all selected">所有礼�/a></li>
+                	<li><a href="gifts.do?method=selectAllGifts" class="all selected">所有礼品</a></li>
                 	<!-- 
                 	<li><a href="#" class="web">常规礼品</a></li>
                 	<li><a href="#" class="ios">项目礼品</a></li>
                 	 -->
-                	<li><a href="gifts.do?method=selectAvailableGifts&usercredit=5000" class="print">可兑换礼�/a></li>
+                	<li><a href="gifts.do?method=selectAvailableGifts&usercredit=5000" class="print">可兑换礼品</a></li>
                 </ul>
             </div>
             
@@ -228,7 +242,7 @@
 			<div class="span4">
                 <!-- About -->
 		        <div class="headline"><h3>关于</h3></div>	
-				<p class="margin-bottom-25">TCTest全名为吐槽测试网，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见�/p>	
+				<p class="margin-bottom-25">TCTest全名为吐槽测试网，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见�/p>	
 
 				
 			</div><!--/span4-->	
@@ -237,8 +251,8 @@
             <!-- Monthly Newsletter -->
 		        <div class="headline"><h3>联系方式</h3></div>	
                 <address>
-					4800号，曹安公路，同济大学软件学�<br />
-					上海� 中国 <br />
+					4800号，曹安公路，同济大学软件学�<br />
+					上海� 中国 <br />
 					电话: 131 6293 7287 <br />
 					传真: 800 123 3456 <br />
 					Email: <a href="mailto:info@anybiz.com" class="">chengran327@gmail.com</a>
