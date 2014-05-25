@@ -293,7 +293,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div id="topbar">
       <ol class="breadcrumb">
         <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
-        <li><a href="publisher_home.html">主页</a></li>
+        <li><a href="ManageTestTaskView.jsp">主页</a></li>
         <li class="active">问卷管理</li>
       </ol>
     </div>
@@ -307,7 +307,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <form id="dropZone" class="dropzone dz-clickable" method="post" action="questionnaire.do?method=goToPublish" >
                         <div class="dz-default dz-message">
                             <span >
-                                <a href="questionnaire.do?method=goToPublish"><i class="fa fa-upload" style="cursor: pointer" ></i></a>
+                                <a href="publisherQuestionnaire.do?method=goToPublish"><i class="fa fa-upload" style="cursor: pointer" ></i></a>
                                 <span class="main-text">
                                     <b >
                                         发布问卷

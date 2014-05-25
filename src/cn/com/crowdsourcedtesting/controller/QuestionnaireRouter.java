@@ -63,6 +63,7 @@ public class QuestionnaireRouter extends DispatchAction {
 	public ActionForward goToPublish(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 
+		
 		return mapping.findForward("add");
 	}
 

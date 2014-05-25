@@ -217,14 +217,14 @@
     name="publisherQuestionnaireForm" 
              input="/PublisherQuestionnaireView.jsp"
              attribute="publisherQuestionnaireForm"
-            path="/questionnaire" 
+            path="/publisherQuestionnaire" 
             parameter="method" 
             scope="request" 
             type="cn.com.crowdsourcedtesting.controller.QuestionnaireRouter">
       <set-property property="cancellable" value="true" />
        <forward name="publisherLogin" path="/PublisherLoginView.jsp"></forward>
        <forward name="add" path="/PublisherQuestionnaireView.jsp"></forward>
-        <forward name="main" path="/PublisherQuestionnaireMainView.jsp"></forward>
+       <forward name="main" path="/PublisherQuestionnaireMainView.jsp"></forward>
     </action>
     
     

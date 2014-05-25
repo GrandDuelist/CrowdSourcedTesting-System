@@ -215,7 +215,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 
 		}
 
-		}
+		
 
 	public TestTask addTestTask(Product product, int productType, Publisher publisher,
 			Date beginTime, Date endTime, double perReward, double wholeCredit) {
@@ -275,7 +275,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 	}
 		
 	}
-	// 得到未审核Web任务的总条�
+	// 得到未审核Web任务的总条�
 		public int getUncheckedWebTotalRows() {
 
 			Number c = (Number) getSession()
@@ -312,7 +312,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 				
 
 		
-		// 得到未审核Android任务的总条�
+		// 得到未审核Android任务的总条�
 					public int getUncheckedAndroidTotalRows() {
 						Number c = (Number) getSession()
 						.createQuery(
@@ -346,7 +346,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 					throw re;
 				}
 			}
-			// 得到未审核Desktop任务的总条�
+			// 得到未审核Desktop任务的总条�
 				public int getUncheckedDesktopTotalRows() {
 
 					Number c = (Number) getSession()
