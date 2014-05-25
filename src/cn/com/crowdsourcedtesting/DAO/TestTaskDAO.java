@@ -227,19 +227,10 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			log.error("find by page failed", re);
 			throw re;
 		}
-
-<<<<<<< HEAD
 	}
-
-	public TestTask addTestTask(Product product, int productType,
-			Publisher publisher, Date beginTime, Date endTime,
-			double perReward, double wholeCredit) {
-=======
-		
 
 	public TestTask addTestTask(Product product, int productType, Publisher publisher,
 			Date beginTime, Date endTime, double perReward, double wholeCredit) {
->>>>>>> bed7515d4486cf83a7abf3c14a27645d13de2b2a
 		Session session = getSession();
 		Transaction trans = null;
 		TestTask testTask = null;
@@ -266,15 +257,8 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			testTask = null;
 			throw re;
 		}
-<<<<<<< HEAD
 		return testTask;
 	}
-=======
-	
-
-	
-	
->>>>>>> bed7515d4486cf83a7abf3c14a27645d13de2b2a
 
 	// 按页查找未审核Web应用
 	public List<TestTask> findUncheckedWebByPage(Page page) {
@@ -332,42 +316,13 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			log.error("find by page failed", re);
 			throw re;
 		}
-<<<<<<< HEAD
 	}
-=======
-		
-		//按页查找未审核Android应用
-		public List<TestTask> findUncheckedAndroidByPage(Page page) {
-			// TODO Auto-generated method stub
-			try {
-				List<TestTask> testTasks = new ArrayList<TestTask>();
-				String queryString = "from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="+TaskType.Android;
-				Query queryObject = getSession().createQuery(queryString);
-
-				testTasks = queryObject
-						.setFirstResult(
-								(page.getCurrentPage() - 1) * page.getPerRows())
-						.setMaxResults(page.getPerRows()).list();
-
-				return testTasks;
-			} catch (RuntimeException re) {
-				log.error("find by page failed", re);
-				throw re;
-			}
-		}
 		
 				
 			
 				
 
-		
-		// 得到未审核Android任务的总条�
-					public int getUncheckedAndroidTotalRows() {
-						Number c = (Number) getSession()
-						.createQuery(
-								"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and  TASK_TYPE="+TaskType.Android)
-						.uniqueResult();
->>>>>>> bed7515d4486cf83a7abf3c14a27645d13de2b2a
+	
 
 	// 得到未审核Android任务的总条�
 	public int getUncheckedAndroidTotalRows() {
