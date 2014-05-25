@@ -139,8 +139,17 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <div class="input-group"> <span class="input-group-addon"><i class="fa fa-envelope-o"></i> </span>
-                            <input class="form-control" type="email" name="contact_email" placeholder="联络邮箱" required />
+                          <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i> </span>
+                            <!--  <input class="form-control" type="text" name="name" placeholder="性别" required />-->
+                            <select name="gender" class="form-control">
+                            	<option value="0" selected="selected">男</option>
+                            	<option value="1">女</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="input-group"> <span class="input-group-addon"><i class="fa fa-mobile"></i> </span>
+                            <input class="form-control" type="text" name="mobile" placeholder="手机" required />
                           </div>
                         </div>
                         <div class="form-group">
@@ -148,6 +157,7 @@
                            <input type="text" id="datepicker" class="form-control datepicker margin-top-none" placeholder="出生日期：24/12/1993" />                      
                           </div>
                         </div>
+                        <!-- 缺少照片上传 -->
                         <div class="input-group">
                         
                             <span class="input-group-addon"></span>
@@ -168,7 +178,7 @@
                       </div>
                       <ul class="pager wizard">
                         <li class="previous first" style="display:none;"><a href="#">填写注册信息</a></li>
-                        <li class="previous"><a href="#">上一步</a></li>
+                        <li class="previous"><button class="btn btn-primary" type="submit" disabled="disabled">上一步</button></li>
                         <li class="next last" style="display:none;"><a href="#">发送确认链接</a></li>
                         <li class="next"><button class="btn btn-primary" type="submit">下一步</button></li>
                         <li class="save" style="display:none;"><a href="#">等待审核</a></li>
