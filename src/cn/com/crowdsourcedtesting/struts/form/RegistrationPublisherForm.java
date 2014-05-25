@@ -28,7 +28,7 @@ public class RegistrationPublisherForm extends ActionForm {
 	private String logEmail;
 
 	/** name property */
-	private String name;
+	private String publisherName;
 
 	/** type property */
 	private Boolean type;
@@ -40,10 +40,17 @@ public class RegistrationPublisherForm extends ActionForm {
 	private String password;
 	
 	private String connectEmail;
+	
+	private String companyName;
+	
+	private String license;
+	
+	private String photo;
+	
+	private String introduction;
 
 	private String code;
 	
-	private String comfirmCode;
 	/*
 	 * Generated Methods
 	 */
@@ -59,7 +66,7 @@ public class RegistrationPublisherForm extends ActionForm {
 		// TODO Auto-generated method stub
 		this.authority = false;
 		this.credit = 0.0;
-		this.type = false;
+		this.photo = null;
 		return null;
 	}
 
@@ -102,22 +109,6 @@ public class RegistrationPublisherForm extends ActionForm {
 	 */
 	public void setLogEmail(String logEmail) {
 		this.logEmail = logEmail;
-	}
-
-	/** 
-	 * Returns the name.
-	 * @return String
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/** 
-	 * Set the name.
-	 * @param name The name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	/** 
@@ -184,11 +175,45 @@ public class RegistrationPublisherForm extends ActionForm {
 		this.code = code;
 	}
 
-	public String getComfirmCode() {
-		return comfirmCode;
+	public String getPublisherName() {
+		return publisherName;
 	}
 
-	public void setComfirmCode(String comfirmCode) {
-		this.comfirmCode = comfirmCode;
+	public void setPublisherName(String publisherName) {
+		this.publisherName = publisherName;
 	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getLicense() {
+		return license;
+	}
+
+	public void setLicense(String license) {
+		this.license = license;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
+
+	
 }

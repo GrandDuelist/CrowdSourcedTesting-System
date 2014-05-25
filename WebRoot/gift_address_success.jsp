@@ -1,4 +1,4 @@
-<%@ page language="java" import="cn.com.crowdsourcedtesting.bean.*;" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" import="cn.com.crowdsourcedtesting.modelhelper.*,cn.com.crowdsourcedtesting.bean.*;" contentType="text/html; charset=UTF-8"%>
 
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -31,7 +31,10 @@
     <link rel="stylesheet" href="assets/css/themes/default.css" id="style_color" />
     <link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-1" />    
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head> 
-
+<%
+UserType  userType = (UserType)session.getAttribute("UserType");
+Tester tester2  = (Tester)session.getAttribute("Tester");
+%>
 <body>
 <!--=== Style Switcher ===-->    
 <i class="style-switcher-btn style-switcher-btn-option icon-cogs"></i>
@@ -55,7 +58,12 @@
             <ul class="loginbar inline">
                 <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i> chengran327@gmail.com</a></li>	
                 <li><a><i class="icon-phone-sign"></i> 021 4202 2656</a></li>	
-                <li><a href="page_login.html"><i class="icon-user"></i> 登录</a></li>	
+                <%if(userType==null){ %>
+                <li><a href="login.do?method=testerLogin"><i class="icon-user"></i> 登录</a></li>	
+                <%}else if(userType.equals(UserType.Tester)) {%>
+                  <li><a href="security.do?method=testerLogout"><i class="icon-user"></i>注销</a></li>
+                   <li><a href="personal_center.do?method=testerFindAllQuestionnaire"><%=tester2.getTesterName()%></a></li>	
+               <% }%>
             </ul>
         </div>        				
     </div><!--/container-->		
@@ -82,14 +90,12 @@
                 <div class="nav-collapse collapse">                                     
                     <ul class="nav top-2">
                         <li>
-                           <a href="index.html">主页
-                            
+                           <a href="index.jsp">主页      
                             </a>
                            
                       </li>
                         <li class="active">
-                            <a href="gifts.html">礼品中心
-                                                        
+                            <a href="gifts.do?method=selectAllGifts">礼品中心                           
                             </a>
                                        
                         </li>
@@ -98,7 +104,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="page_hirelist.html">招募帖                          
+                            <a href="recruitment.do?method=selectAllRecruitment">招募帖                          
                             </a>
                         </li>
                         <li>
@@ -106,7 +112,7 @@
       
                         </li>
                         <li>
-                            <a href="page_contact.html">联系我们
+                            <a href="questionnaire.do?method=pageQuestionnaire">问卷调查
                             </a>
                             
                                                     

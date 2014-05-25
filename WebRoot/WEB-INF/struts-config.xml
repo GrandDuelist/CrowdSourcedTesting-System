@@ -13,7 +13,6 @@
     <form-bean name="registrationTesterForm" type="cn.com.crowdsourcedtesting.struts.form.RegistrationTesterForm" />
     <form-bean name="registrationPublisherForm" type="cn.com.crowdsourcedtesting.struts.form.RegistrationPublisherForm" />
     <form-bean name="publisherQuestionnaireForm" type="cn.com.crowdsourcedtesting.struts.form.PublisherQuestionnaireForm" />
-    <form-bean name="publishWebTestingForm" type="cn.com.crowdsourcedtesting.struts.form.PublishWebTestingForm" />
     <form-bean name="pageIdForm" type="cn.com.crowdsourcedtesting.struts.form.PageIdForm" />
     <form-bean name="adminLoginForm" type="cn.com.crowdsourcedtesting.struts.form.AdminLoginForm" />
     <form-bean name="checkQuestionnaireDetailForm" type="cn.com.crowdsourcedtesting.struts.form.CheckQuestionnaireDetailForm" />
@@ -21,6 +20,8 @@
     <form-bean name="checkRegisterListForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterListForm" />
     <form-bean name="checkRegisterDetailForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterDetailForm" />
     <form-bean name="changeInformationForm" type="cn.com.crowdsourcedtesting.struts.form.ChangeInformationForm" />
+    <form-bean name="bugReportPublishForm" type="cn.com.crowdsourcedtesting.struts.form.BugReportPublishForm" />
+    <form-bean name="publishTestingTaskForm" type="cn.com.crowdsourcedtesting.struts.form.PublishTestingTaskForm" />
     <form-bean name="questionnaireDisplayForm" type="cn.com.crowdsourcedtesting.struts.form.QuestionnaireDisplayForm" />
     <form-bean name="taskForm" type="cn.com.crowdsourcedtesting.struts.form.TaskForm" />
    
@@ -83,6 +84,7 @@
     	<set-property property="cancellable" value="true" />
      
      	<forward name="success" path="/page_personal_center.jsp"></forward>
+     	<forward name="home" path="/index.jsp"></forward>
     </action>
     
     <action
@@ -381,33 +383,47 @@
       	<forward name="activate" path="/registration_publisher_code.jsp"></forward>
       	<forward name="success" path="/registration.html"></forward>
     </action>
+    <action path="/checkQuestionnaire" type="cn.com.crowdsourcedtesting.struts.action.CheckQuestionnaireAction">
+      <set-property property="cancellable" value="true" />
+    </action>
     <action
-      attribute="publishWebTestingForm"
+      attribute="bugReportPublishForm"
       parameter="method"
-      input="/form/publishWebTesting.jsp"
-      name="publishWebTestingForm"
-      path="/publishWebTesting"
+      input="/form/bugReportPublish.jsp"
+      name="bugReportPublishForm"
+      path="/bugReportPublish"
       scope="request"
-      type="cn.com.crowdsourcedtesting.controller.PublishWebTestingRouter">
+      type="cn.com.crowdsourcedtesting.controller.BugReportPublishAction">
       <set-property property="cancellable" value="true" />
       <forward name="taskPub" path="/publisher_taskpub_reward.jsp"></forward>
       <forward name="productSuccess" path="/publisher_taskpub_reward.jsp"></forward>
-      <forward name="productSuccess" path="/publisher_taskpub_reward.jsp"></forward>
+      <forward name="bugPubSuccess" path="/publisher_taskpub_desktop.jsp"></forward>
+      <forward name="bugPubError" path="/tester_bugpub.jsp"></forward>
+    </action>
+    <action
+      attribute="publishTestingTaskForm"
+      input="/form/publishTestingTask.jsp"
+      name="publishTestingTaskForm"
+      parameter="method"
+      path="/publishTestingTask"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.PublishTestingTaskAction">
+      <set-property property="cancellable" value="true" />
+      <forward name="taskManagement" path="/publisher_taskman.html"></forward>
+      <forward name="pubTask" path="/publisher_taskpub.jsp"></forward>
+      <forward name="webProductSuccess" path="/publisher_taskpub_web_reward.jsp"></forward>
       <forward name="webProductError" path="/publisher_taskpub_web.jsp"></forward>
+      <forward name="androidProductSuccess" path="/publisher_taskpub_android_reward.jsp"></forward>
       <forward name="androidProductError" path="/publisher_taskpub_android.jsp"></forward>
+      <forward name="desktopProductSuccess" path="/publisher_taskpub_desktop_reward.jsp"></forward>
       <forward name="desktopProductError" path="/publisher_taskpub_desktop.jsp"></forward>
-      <forward name="taskSuccess" path="/publisher_taskpub_success.html"></forward>
+      <forward name="taskSuccess" path="/publisher_taskpub_success.jsp"></forward>
       <forward name="taskError" path="/publisher_taskpub_reward.jsp"></forward>
       <forward name="directTo" path="/publisher_taskpub_web.jsp"></forward>
       <forward name="pubWeb" path="/publisher_taskpub_web.jsp"></forward>
       <forward name="pubAndroid" path="/publisher_taskpub_android.jsp"></forward>
       <forward name="pubDesktop" path="/publisher_taskpub_desktop.jsp"></forward>
-    </action>
-    <action path="/checkQuestionnaire" type="cn.com.crowdsourcedtesting.struts.action.CheckQuestionnaireAction">
-      <set-property property="cancellable" value="true" />
-    </action>
-    <action path="/checkQuestionnaire" type="cn.com.crowdsourcedtesting.struts.action.CheckQuestionnaireAction">
-      <set-property property="cancellable" value="true" />
+      <forward name="publisherLogin" path="entrance.do?method=goToLogin"></forward>
     </action>
 
   </action-mappings>
@@ -415,4 +431,3 @@
 
   <message-resources parameter="cn.com.crowdsourcedtesting.struts.ApplicationResources" />
 </struts-config>
-

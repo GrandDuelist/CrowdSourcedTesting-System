@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="cn.com.crowdsourcedtesting.modelhelper.*,java.util.*,cn.com.crowdsourcedtesting.bean.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -34,6 +34,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <% Questionnaire questionnaire   =  (Questionnaire)session.getAttribute("questionnaire");
    String hasjoined = (String) session.getAttribute("hasJoined");
+	UserType  userType = (UserType)session.getAttribute("UserType");
+	Tester tester2  = (Tester)session.getAttribute("Tester");
 %>
 <!--=== Style Switcher ===-->
 
@@ -62,7 +64,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <ul class="loginbar inline">
                 <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i> chengran327@gmail.com</a></li>	
                 <li><a><i class="icon-phone-sign"></i> 021 4202 2656</a></li>	
-                <li><a href="page_login.html"><i class="icon-user"></i> 登录</a></li>	
+                <%if(userType==null){ %>
+                <li><a href="login.do?method=testerLogin"><i class="icon-user"></i> 登录</a></li>	
+                <%}else if(userType.equals(UserType.Tester)) {%>
+                  <li><a href="security.do?method=testerLogout"><i class="icon-user"></i>注销</a></li>
+                   <li><a href="personal_center.do?method=testerFindAllQuestionnaire"><%=tester2.getTesterName()%></a></li>	
+               <% }%>
             </ul>
         </div>        				
     </div><!--/container-->		

@@ -98,13 +98,13 @@
                 <div class="nav-collapse collapse">                                     
                     <ul class="nav top-2">
                         <li>
-                           <a href="index.html">主页
+                           <a href="index.jsp">主页
                             
                             </a>
                            
                       </li>
                         <li>
-                            <a href="gifts.html">礼品中心
+                            <a href="gifts.do?method=selectAllGifts">礼品中心
                                                         
                             </a>
                                        
@@ -114,7 +114,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="page_hirelist.html">招募帖                          
+                            <a href="recruitment.do?method=selectAllRecruitment">招募帖                          
                             </a>
                         </li>
                         <li>
@@ -122,7 +122,7 @@
       
                         </li>
                        <li>
-                            <a href="page_questionaire.html">问卷调查
+                            <a href="questionnaire.do?method=pageQuestionnaire">问卷调查
                             </a>
                             
                                                     

@@ -8,9 +8,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%try{ %>
 <html>
-<% UserType  userType = (UserType)session.getAttribute("UserType");
-   Tester tester  = (Tester)session.getAttribute("Tester");
- %>
+<%
+	UserType  userType = (UserType)session.getAttribute("UserType");
+	Tester tester  = (Tester)session.getAttribute("Tester");
+%>
   <head>
    <title>TCTEST</title>
 
@@ -70,10 +71,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="container">			        
         <div class="row-fluid">
             <ul class="loginbar inline">
-                <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i> chengran327@gmail.com</a></li>	
+                <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i>chengran327@gmail.com</a></li>	
                 <li><a><i class="icon-phone-sign"></i> 021 4202 2656</a></li>	
                 <%if(userType==null){ %>
-                <li><a href="security.do?method=goToLogin"><i class="icon-user"></i> 登录</a></li>	
+                <li><a href="login.do?method=testerLogin"><i class="icon-user"></i> 登录</a></li>	
                 <%}else if(userType.equals(UserType.Tester)) {%>
                   <li><a href="security.do?method=testerLogout"><i class="icon-user"></i>注销</a></li>
                    <li><a href="personal_center.do?method=testerFindAllQuestionnaire"><%=tester.getTesterName()%></a></li>	
@@ -225,7 +226,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="headline">
               <h3>测试产品列表</h3></div>
             <div class="row-fluid margin-bottom-40">
+            <%
+            	List<Product> products = (List<Product>)request.getAttribute("products");
+            	Iterator<Product> iterator = products.iterator();
+            	Product product = null;
+            %>
                 <ul id="list" class="bxslider recent-work">
+                <%
+                	while(iterator.hasNext())
+                	{
+                		product = iterator.next();
+                	
+                %>
                     <li>
                        <div class="booking-blocks">
              <div class="pull-left booking-img">
@@ -236,12 +248,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </ul>
              </div>
              <div style="overflow:hidden;">
-                <h2><a href="#">谷歌文档测试</a></h2>
-                <p>对谷歌文档进行测试并拿取丰厚奖励 <a href="#">详细信息</a></p>
+                <h2><a href="#"><%=product.getProductName() %></a></h2>
+                <!-- <p>对谷歌文档进行测试并拿取丰厚奖励 <a href="#">详细信息</a></p>  -->
              </div>
           </div>
                     </li>
- <li>
+                    <%
+					}
+                    %>
+ 					<li>
                        <div class="booking-blocks">
              <div class="pull-left booking-img">
                 <img src="assets/img/new/img4.jpg" alt="" />
@@ -305,7 +320,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         %>
             <!-- Posts -->
 			<div class="posts margin-bottom-30">
-                <div class="headline"><h3>近期任务</h3></div>
+                <div class="headline"><h3>近期招募任务</h3></div>
                 <%
                 	while(it.hasNext())
                 	{
@@ -314,7 +329,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <dl class="dl-horizontal">
                     <dt><a href="#"><img alt="" src="assets/img/sliders/elastislide/6.jpg" /></a></dt>
                     <dd>
-                        <p><a href="#"><%=recruitment.getActivityName()%></a></p> 
+                        <p><a href="recruitment.do?method=selectRecruitment&id=<%=recruitment.getActivityId()%>"><%=recruitment.getActivityName()%></a></p> 
                     </dd>
                 </dl>
                 <%

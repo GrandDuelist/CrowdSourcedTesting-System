@@ -75,7 +75,7 @@
 
 
     <div class="btn-group user-menu">
-      <a href="index.html"><button type="button" class="btn btn-default btn-gradient btn-sm dropdown-toggle"> <span class="glyphicons glyphicons-home"></span>返回</button></a>
+      <a href="index.jsp"><button type="button" class="btn btn-default btn-gradient btn-sm dropdown-toggle"> <span class="glyphicons glyphicons-home"></span>返回</button></a>
     </div>
   </div>
 </header>
@@ -134,8 +134,8 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <div class="input-group"> <span class="input-group-addon"><i class="fa fa-globe"></i> </span>
-                            <input class="form-control" type="text" name="name" placeholder="公司名称" required />
+                          <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i> </span>
+                            <input class="form-control" type="text" name="publisherName" placeholder="注册人姓名" required />
                           </div>
                         </div>
                         <div class="form-group">
@@ -144,25 +144,34 @@
                           </div>
                         </div>
                         <div class="form-group">
+                          <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i> </span>
+                            <!-- <input class="form-control" type="text" name="type" placeholder="no类型" required />  -->
+                           <select name="type" class="form-control">
+                           <option value="0" selected="selected">公司注册</option>
+                           <option value="1">个人注册</option>
+                           </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="input-group"> <span class="input-group-addon"><i class="fa fa-globe"></i> </span>
+                            <input class="form-control" type="text" name="companyName" placeholder="公司名称" required />
+                          </div>
+                        </div>
+                        <div class="form-group">
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-file-o"></i> </span>
-                            <input id="营业执照" class="form-control" type="text" placeholder="营业执照" required></input>
+                            <input id="营业执照" class="form-control" type="text" name="license" placeholder="营业执照" required></input>
                           <!--  <input type="text" id="datepicker" class="form-control datepicker margin-top-none" placeholder="23/9/2013" />
                           -->
                           </div>
-                        </div>
-                        <div class="form-group">
-                          <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i> </span>
-                            <input class="form-control" type="text" name="type111" placeholder="no类型" required />
-                          </div>
-                        </div>
+                        </div>               
                         <div class="form-group">
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-chain"></i> </span>
-                            <input class="form-control" type="text" name="name" placeholder="主页地址" required />
+                           <input class="form-control" type="text" name="photo" placeholder="公司图片" required /> 
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-list-alt"></i> </span>
-                          	 <textarea id="textArea" class="form-control" placeholder="公司概述"  rows="3"></textarea>
+                          	 <textarea id="textArea" class="form-control" name="introduction" placeholder="公司概述"  rows="3"></textarea>
                           </div>
                         </div>
                         <div class="input-group">
@@ -176,15 +185,12 @@
                           <label for="agree">请同意我们的使用条款</label>
                         </div>
                       </div>
-                      <div class="tab-pane" id="tab2">
-                        <p class="alert alert-success">恭喜您<b>完成注册第一步 </b> 系统已将验证邮件发送至你的邮箱，请注意查收</p>
-                      </div>
                       <div class="tab-pane" id="tab3">
                         <p class="alert alert-info">验证成功 <b>正在审核</b> 请耐心等待</p>
                       </div>
                       <ul class="pager wizard">
                         <li class="previous first" style="display:none;"><a href="#">填写注册信息</a></li>
-                        <li class="previous"><a href="#">上一步</a></li>
+                        <li class="previous"><input class="btn btn-primary" type="submit" value="上一步" disabled="disabled"></li>
                         <li class="next last" style="display:none;"><a href="#">发送确认链接</a></li>
                         <li class="next"><input class="btn btn-primary" type="submit" value="下一步" /></li>
                         <li class="save" style="display:none;"><a href="#">等待审核</a></li>

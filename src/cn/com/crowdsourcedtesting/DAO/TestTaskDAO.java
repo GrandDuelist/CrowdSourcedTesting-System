@@ -215,7 +215,9 @@ public class TestTaskDAO extends BaseHibernateDAO {
 
 		}
 
-	public TestTask addTestTask(Product product, Publisher publisher,
+		}
+
+	public TestTask addTestTask(Product product, int productType, Publisher publisher,
 			Date beginTime, Date endTime, double perReward, double wholeCredit) {
 		Session session = getSession();
 		Transaction trans = null;
@@ -224,7 +226,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			trans = session.beginTransaction();
 			if (trans != null) {
 				
-			testTask = new TestTask(product, publisher, 1, perReward,wholeCredit);
+			testTask = new TestTask(product, publisher, productType, perReward,wholeCredit);
 			testTask.setTaskStartTime(beginTime);
 			testTask.setTaskEndTime(endTime);
 			session.save(testTask);
@@ -243,6 +245,9 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			}
 			return testTask;
 		}
+	
+
+	
 	
 
 	
@@ -270,7 +275,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 	}
 		
 	}
-	// 得到未审核Web任务的总条�
+	// 得到未审核Web任务的总条�
 		public int getUncheckedWebTotalRows() {
 
 			Number c = (Number) getSession()
@@ -302,10 +307,12 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			}
 		}
 		
+				
 			
+				
 
 		
-		// 得到未审核Android任务的总条�
+		// 得到未审核Android任务的总条�
 					public int getUncheckedAndroidTotalRows() {
 						Number c = (Number) getSession()
 						.createQuery(
@@ -315,6 +322,10 @@ public class TestTaskDAO extends BaseHibernateDAO {
 				return c.intValue();
 
 			}
+			
+
+			
+				
 			
 			//按页查找未审核Desktop应用
 			public List<TestTask> findUncheckedDesktopByPage(Page page) {
@@ -335,7 +346,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 					throw re;
 				}
 			}
-			// 得到未审核Desktop任务的总条�
+			// 得到未审核Desktop任务的总条�
 				public int getUncheckedDesktopTotalRows() {
 
 					Number c = (Number) getSession()

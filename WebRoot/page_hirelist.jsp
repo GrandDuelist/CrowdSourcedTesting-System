@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,java.util.List,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.modelhelper.*,cn.com.crowdsourcedtesting.bean.*,java.util.List,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
 
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -41,6 +41,8 @@ String flag = (String)request.getAttribute("isLegal");
  }
  else
  	request.removeAttribute("isLegal");
+ 	UserType  userType = (UserType)session.getAttribute("UserType");
+	Tester tester  = (Tester)session.getAttribute("Tester");
 %>
 
 
@@ -67,7 +69,21 @@ String flag = (String)request.getAttribute("isLegal");
             <ul class="loginbar inline">
                 <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i> chengran327@gmail.com</a></li>	
                 <li><a><i class="icon-phone-sign"></i> 021 4202 2656</a></li>	
-                <li><a href="login.do?method=testerLogin"><i class="icon-user"></i> 登录</a></li>	
+                <%
+                	if(userType == null)
+                	{
+                %>
+                 <li><a href="login.do?method=testerLogin"><i class="icon-user"></i> 登录</a></li>	
+                <%
+                	}
+                	else if(userType.equals(UserType.Tester))
+                	{
+                %>
+                 <li><a href="security.do?method=testerLogout"><i class="icon-user"></i>注销</a></li>
+                 <li><a href="personal_center.do?method=testerFindAllQuestionnaire"><%=tester.getTesterName()%></a></li>	
+                <%
+                	}
+                %>
             </ul>
         </div>        				
     </div><!--/container-->		
@@ -242,7 +258,7 @@ String flag = (String)request.getAttribute("isLegal");
  		%>
 			
                 <div class="span4">
-                    <h4><a href="recruitment.do?method=selectRecruitment&id=<%=(i+3*(k-1))%>"><%=recruitment.getActivityName()%></a></h4>
+                    <h4><a href="recruitment.do?method=selectRecruitment&id=<%=recruitment.getActivityId()%>"><%=recruitment.getActivityName()%></a></h4>
                     <p>时间: <%=startdate%>至<%=enddate%></p>
                     <p>简介: <%=recruitment.getBrief()%></p>
                 </div>

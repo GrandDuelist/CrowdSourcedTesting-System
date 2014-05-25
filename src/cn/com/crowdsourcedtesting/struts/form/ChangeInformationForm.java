@@ -47,11 +47,11 @@ public class ChangeInformationForm extends ActionForm {
 	public ActionErrors validate(ActionMapping mapping,
 			HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		if (!(this.password.equals(this.password_comfirm))) {
-			System.out.println(this.password);
-			System.out.println(this.password_comfirm);
-			this.password = null;
-		}
+//		if (!(this.password.equals(this.password_comfirm))) {
+//			System.out.println(this.password);
+//			System.out.println(this.password_comfirm);
+//			this.password = null;
+//		}
 		return null;
 	}
 
