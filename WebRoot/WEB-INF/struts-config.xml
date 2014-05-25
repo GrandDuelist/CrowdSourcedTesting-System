@@ -20,13 +20,10 @@
     <form-bean name="checkRegisterListForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterListForm" />
     <form-bean name="checkRegisterDetailForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterDetailForm" />
     <form-bean name="changeInformationForm" type="cn.com.crowdsourcedtesting.struts.form.ChangeInformationForm" />
-<<<<<<< HEAD
     <form-bean name="bugReportPublishForm" type="cn.com.crowdsourcedtesting.struts.form.BugReportPublishForm" />
     <form-bean name="publishTestingTaskForm" type="cn.com.crowdsourcedtesting.struts.form.PublishTestingTaskForm" />
-=======
     <form-bean name="questionnaireDisplayForm" type="cn.com.crowdsourcedtesting.struts.form.QuestionnaireDisplayForm" />
     <form-bean name="taskForm" type="cn.com.crowdsourcedtesting.struts.form.TaskForm" />
->>>>>>> 7f7d713416803351f689844e0916425fcce462d7
    
   
   </form-beans>

@@ -28,7 +28,21 @@ public class RegistrationHandler {
 		tester.setTesterPhoto(form.getPhoto());
 		tester.setTesterCredit(form.getCredit());
 		
-		DAOFactory.getTesterDAO().save(tester);
+		Session session = HibernateSessionFactory.getSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			DAOFactory.getTesterDAO().save(tester);
+			transaction.commit();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally{
+			session.close();
+		}
+		
 				
 	}
 	
@@ -36,13 +50,18 @@ public class RegistrationHandler {
 	public void handleRegistrationPublisher(RegistrationPublisherForm form) {
 		Publisher publisher = new Publisher();
 		
-		publisher.setPublisherName(form.getName());
-		publisher.setPublisherLogEmail(form.getLogEmail());
-		publisher.setPublisherPassword(form.getPassword());
-		publisher.setPublisherCredit(form.getCredit());
 		publisher.setPublisherAuthority(form.getAuthority());
-		publisher.setPublisherType(false);
+		publisher.setPublisherLogEmail(form.getLogEmail());
+		publisher.setPublisherName(form.getPublisherName());
+		publisher.setPublisherType(form.getType());
+		publisher.setPublisherCredit(form.getCredit());
+		publisher.setPublisherPassword(form.getPassword());
 		publisher.setPublisherConnectEmail(form.getConnectEmail());
+		publisher.setPublisherCompany(form.getCompanyName());
+		
+		//缺少license映射
+		
+		publisher.setPublisherPhoto(form.getPhoto());
 		
 		Session session = HibernateSessionFactory.getSession();
 		Transaction transaction = null;
