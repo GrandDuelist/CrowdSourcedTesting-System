@@ -53,7 +53,7 @@
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
-</head>
+
 <body>
 <!-- Start: Theme Preview Pane -->
 <div id="skin-toolbox">
@@ -297,7 +297,7 @@
         <li><a href="publisher_home.html">主页</a></li>
         <li><a href="publisher_taskman.html">任务管理</a></li>
         <li><a href="publisher_taskpub.html">发布任务</a></li>
-        <li class="active">网站任务</li>
+        <li class="active">奖励设置</li>
       </ol>
     </div>
     <div class="container">
@@ -305,75 +305,50 @@
         <div class="col-md-12">
           <div class="panel">
             <div class="panel-heading">
-            	<div class="panel-title"><i class="fa fa-globe"></i>网战测试</div>
+            	<div class="panel-title"><i class="fa fa-trophy"></i> 奖励设置</div>
             </div>
             <div class="panel-body">
-              <h2 class="text-primary"> 请填写详细信息 </h2>
+            <form action="publishTestingTask.do"  method="post" >
+                <input type="hidden" name="method" value="pubWebTask" />
+              <h2 class="text-primary"> 请认真填写一下内容</h2>
               <hr/>
               <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                <form enctype="multipart/form-data" action="publishTestingTask.do"  method="post" >
-                <input type="hidden" name="method" value="webSubmitForm" />
-                <%
-                String value = (String) session.getAttribute("ProductPublishErrorMessage");
-                session.removeAttribute("ProductPublishErrorMessage");
-                if (value != null && !"".equals(value)) { %>
-                    <p class="alert alert-warning"><%=value %></p>
-                <% } else { %>
-                    <p class="alert alert-success">请<b>正确填写</b>信息</p>
+                <% String message = (String) session.getAttribute("TaskPublishErrorMessage");
+                session.removeAttribute("TaskPublishErrorMessage");
+                if (message != null && !"".equals(message)) { %>
+                	<p class="alert alert-warning"><%= message %></p>
                 <% } %>
-                  
-                  <div class="form-group">
-                    <label for="web_url"> 网站名称 </label>
-                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-bookmark-o"></i> </span>
-                      <input class="form-control" type="text" required placeholder="请输入网站名称" name="webName" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="web_url"> 网站URL </label>
-                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-link"></i> </span>
-                      <input class="form-control" type="text" required placeholder="请输入网站地址" name="webUrl" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="web_url"> 上传图标 </label>
-                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-picture-o"></i> </span>
-                      <input class="form-control" type="file" required placeholder="" name="icon" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="textArea">任务描述</label>
-                      <div class="input-group">
-                        <textarea class="form-control" id="textArea" cols="80" rows="3" required name="description"></textarea>
-                      </div>
-                  </div>
+                  <p class="alert alert-success">您的余额为： <b><span class="text-primary">200</span></b></p>
+                   <div class="input-group col-lg-5"> <span class="input-group-addon"><i class="fa fa-calendar "></i> </span>
+                          <input type="text" id="datepicker_2" class="form-control margin-top-none" required placeholder="10/25/2013 - 10/25/2013" name="daterange" />
+                   </div>
+                   <br/>
                    <div class="form-group">
-                    <label for="web_url"> 是否需要测试帐号 </label>
-                    <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          需要 </label>
-                    <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked="" />
-                          不需要 </label>
-                  </div>
-                   <div class="form-group">
-                    <label for="web_url"> 上传测试帐号信息 </label>
-                    <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-cloud-upload"></i> </span>
-                      <input class="form-control" type="text" required placeholder="TesterAccountData.xml" name="icon" disabled="" />
+                      <label for="spinner1">参与奖励</label>
+                        <div class="input-group col-lg-5"> <span class="input-group-addon"><i class="fa fa-usd"></i> </span>
+                          <input type="number" class="form-control ui-spinner-input" name="wholeReward" required value="300" />
+                        </div>
                     </div>
-                  </div>
-                  
+                     <br/>
+                   <div class="form-group">
+                      <label for="spinner1">报告提交奖励</label>
+                        <div class="input-group col-lg-5"> <span class="input-group-addon"><i class="fa fa-usd"></i> </span>
+                          <input type="number"  class="form-control ui-spinner-input" name="perReward" required value="300" />
+                        </div>
+                    </div>
                   <hr></hr>
                   <div class="pull-left">
-                  	<button class="btn btn-gradient btn-lg btn-green" type="button">返回</button>
+                  	<button class="btn btn-gradient btn-lg btn-green" type="reset">返回</button>
                   </div>
                   <div class="pull-right">
                   	<button class="btn btn-info btn-gradient btn-lg" type="submit">下一步</button>
                   </div>
-                  </form>
+                  
                 </div>
               </div>
               <div class="row"><hr></hr></div>
+              </form>
             </div>
             
           </div>
@@ -390,35 +365,114 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 
-<!-- Plugins - Via CDN --> 
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script> 
-<!--<script type="text/javascript" src="vendor/plugins/datatables/jquery.dataTables.min.js"></script> Local Option --> 
-
 <!-- Plugins --> 
-<script type="text/javascript" src="vendor/plugins/datatables/js/datatables.js"></script><!-- Datatable Bootstrap Addon --> 
-<script type="text/javascript" src="vendor/editors/xeditable/js/bootstrap-editable.js"></script> 
+<script type="text/javascript" src="vendor/plugins/globalize/globalize.js"></script> 
 <script type="text/javascript" src="vendor/plugins/chosen/chosen.jquery.min.js"></script> 
+<script type="text/javascript" src="vendor/plugins/daterange/moment.min.js"></script> 
+<script type="text/javascript" src="vendor/plugins/daterange/daterangepicker.js"></script> 
+<script type="text/javascript" src="vendor/plugins/colorpicker/bootstrap-colorpicker.js"></script> 
+<script type="text/javascript" src="vendor/plugins/timepicker/bootstrap-timepicker.min.js"></script> 
+<script type="text/javascript" src="vendor/plugins/datepicker/bootstrap-datepicker.js"></script> 
+<script type="text/javascript" src="vendor/plugins/formswitch/js/bootstrap-switch.min.js"></script> 
+<script type="text/javascript" src="vendor/plugins/jquerymask/jquery.maskedinput.min.js"></script> 
+<script type="text/javascript" src="vendor/plugins/tags/tagmanager.js"></script> 
 
 <!-- Theme Javascript --> 
 <script type="text/javascript" src="js/uniform.min.js"></script> 
-<script type="text/javascript" src="js/main.js"></script> 
+<script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/custom.js"></script> 
 <script type="text/javascript">
-jQuery(document).ready(function() {
+ jQuery(document).ready(function() {
 
-  Core.init();
+	 // Init Theme Core
+	 Core.init();
 
-  $('#datatable').dataTable( {
-	"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ -1 ] }],
-	"oLanguage": { "oPaginate": {"sPrevious": "", "sNext": ""} },
-	"iDisplayLength": 6,
-	"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-  });	
-  
-  $("select[name='datatable_length']").chosen();	
-  $.fn.editable.defaults.mode = 'popup';
-  $('.xedit').editable();
+	 //Init jquery Date Picker
+	 $('.datepicker').datepicker()
+	 
+	 //Init jquery Date Range Picker
+	 $('input[name="daterange"]').daterangepicker();
+	 
+	 //Init jquery Color Picker
+	 $('.colorpicker').colorpicker() 
+	 $('.rgbapicker').colorpicker() 
+	 
+	 //Init jquery Time Picker
+	 $('.timepicker').timepicker();
+	  
+	 //Init jquery Tags Manager 
+	 $(".tm-input").tagsManager({
+        tagsContainer: '.tag-container',
+		prefilled: ["Miley Cyrus", "Apple", "Wow This is a really Long tag", "Na uh"],
+		tagClass: 'tm-tag-info',
+     });
 
+	 //Init jquery spinner init - default  
+	 $(".checkbox").uniform();
+ 	 $(".radio").uniform();
+
+	//Init jquery spinner init - default
+	$("#chosen-list1").chosen();
+	$("#chosen-list2").chosen(); 
+	  
+	//Init jquery spinner init - default
+	$("#spinner1").spinner();
+	
+	//Init jquery spinner init - currency 
+	$("#spinner2").spinner({
+      min: 5,
+      max: 2500,
+      step: 25,
+      start: 1000,
+      //numberFormat: "C"
+    });
+	
+	//Init jquery spinner init - decimal  
+	$( "#spinner3" ).spinner({
+      step: 0.01,
+      numberFormat: "n"
+    });
+	
+	//Init jquery time spinner
+    $.widget( "ui.timespinner", $.ui.spinner, {
+		options: {
+		  // seconds
+		  step: 60 * 1000,
+		  // hours
+		  page: 60
+		},
+		_parse: function( value ) {
+		  if ( typeof value === "string" ) {
+			// already a timestamp
+			if ( Number( value ) == value ) {
+			  return Number( value );
+			}
+			return +Globalize.parseDate( value );
+		  }
+		  return value;
+		},
+	 
+		_format: function( value ) {
+		  return Globalize.format( new Date(value), "t" );
+		}
+	  });
+    $( "#spinner4" ).timespinner();
+
+	//Init jquery masked inputs
+	$('.date').mask('99/99/9999');
+	$('.time').mask('99:99:99');
+	$('.date_time').mask('99/99/9999 99:99:99');
+	$('.zip').mask('99999-999');
+	$('.phone').mask('(999) 999-9999');
+	$('.phoneext').mask("(999) 999-9999 x99999");
+	$(".money").mask("999,999,999.999"); 
+	$(".product").mask("999.999.999.999"); 
+	$(".tin").mask("99-9999999");
+	$(".ssn").mask("999-99-9999");
+	$(".ip").mask("9ZZ.9ZZ.9ZZ.9ZZ");
+	$(".eyescript").mask("~9.99 ~9.99 999");
+	$(".custom").mask("9.99.999.9999");
+	
 });
 </script>
 </body>

@@ -215,7 +215,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 
 		}
 
-	public TestTask addTestTask(Product product, Publisher publisher,
+	public TestTask addTestTask(Product product, int productType, Publisher publisher,
 			Date beginTime, Date endTime, double perReward, double wholeCredit) {
 		Session session = getSession();
 		Transaction trans = null;
@@ -224,7 +224,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			trans = session.beginTransaction();
 			if (trans != null) {
 				
-			testTask = new TestTask(product, publisher, 1, perReward,wholeCredit);
+			testTask = new TestTask(product, publisher, productType, perReward,wholeCredit);
 			testTask.setTaskStartTime(beginTime);
 			testTask.setTaskEndTime(endTime);
 			session.save(testTask);

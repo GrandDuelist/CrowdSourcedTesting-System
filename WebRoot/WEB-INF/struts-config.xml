@@ -20,13 +20,10 @@
     <form-bean name="checkRegisterListForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterListForm" />
     <form-bean name="checkRegisterDetailForm" type="cn.com.crowdsourcedtesting.struts.form.CheckRegisterDetailForm" />
     <form-bean name="changeInformationForm" type="cn.com.crowdsourcedtesting.struts.form.ChangeInformationForm" />
-<<<<<<< HEAD
     <form-bean name="bugReportPublishForm" type="cn.com.crowdsourcedtesting.struts.form.BugReportPublishForm" />
     <form-bean name="publishTestingTaskForm" type="cn.com.crowdsourcedtesting.struts.form.PublishTestingTaskForm" />
-=======
     <form-bean name="questionnaireDisplayForm" type="cn.com.crowdsourcedtesting.struts.form.QuestionnaireDisplayForm" />
     <form-bean name="taskForm" type="cn.com.crowdsourcedtesting.struts.form.TaskForm" />
->>>>>>> 7f7d713416803351f689844e0916425fcce462d7
    
   
   </form-beans>
@@ -411,9 +408,11 @@
       <set-property property="cancellable" value="true" />
       <forward name="taskManagement" path="/publisher_taskman.html"></forward>
       <forward name="pubTask" path="/publisher_taskpub.jsp"></forward>
-      <forward name="productSuccess" path="/publisher_taskpub_reward.jsp"></forward>
+      <forward name="webProductSuccess" path="/publisher_taskpub_web_reward.jsp"></forward>
       <forward name="webProductError" path="/publisher_taskpub_web.jsp"></forward>
+      <forward name="androidProductSuccess" path="/publisher_taskpub_android_reward.jsp"></forward>
       <forward name="androidProductError" path="/publisher_taskpub_android.jsp"></forward>
+      <forward name="desktopProductSuccess" path="/publisher_taskpub_desktop_reward.jsp"></forward>
       <forward name="desktopProductError" path="/publisher_taskpub_desktop.jsp"></forward>
       <forward name="taskSuccess" path="/publisher_taskpub_success.jsp"></forward>
       <forward name="taskError" path="/publisher_taskpub_reward.jsp"></forward>
@@ -421,6 +420,7 @@
       <forward name="pubWeb" path="/publisher_taskpub_web.jsp"></forward>
       <forward name="pubAndroid" path="/publisher_taskpub_android.jsp"></forward>
       <forward name="pubDesktop" path="/publisher_taskpub_desktop.jsp"></forward>
+      <forward name="publisherLogin" path="entrance.do?method=goToLogin"></forward>
     </action>
 
   </action-mappings>
