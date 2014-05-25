@@ -28,8 +28,17 @@ public class Tester implements java.io.Serializable {
 	private Set bugReports = new HashSet(0);
 	private Set joinQuestionnaires = new HashSet(0);
 	private Set changeGifts = new HashSet(0);
+	private Boolean hasAuthority;
 
 	// Constructors
+
+	public Boolean getHasAuthority() {
+		return hasAuthority;
+	}
+
+	public void setHasAuthority(Boolean hasAuthority) {
+		this.hasAuthority = hasAuthority;
+	}
 
 	/** default constructor */
 	public Tester() {

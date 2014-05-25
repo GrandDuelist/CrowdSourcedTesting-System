@@ -2,8 +2,10 @@ package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.ChangeGift;
+import cn.com.crowdsourcedtesting.bean.JoinQuestionnaire;
 import cn.com.other.page.Page;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.LockMode;
@@ -202,6 +204,41 @@ public class ChangeGiftDAO extends BaseHibernateDAO {
 			}
 
 		}
+		
+		@SuppressWarnings("unchecked")
+		public List<ChangeGift> findNotDeliveredByPage(Page page)
+		{
+			try {
+				List<ChangeGift> changeGifts = new ArrayList<ChangeGift>();
+
+				String queryString = "from ChangeGift where HAS_DELIVERED=null";
+				Query queryObject = getSession().createQuery(queryString);
+				queryObject.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
+				queryObject.setMaxResults(page.getPerRows());
+
+				changeGifts = queryObject.list();						
+				return changeGifts;
+			}
+			catch(RuntimeException re) {
+				log.error("find by page failed", re);
+				throw re;
+			}
+
+
+		}
+
+
+		// 得到总条数
+				public int getTotalRows() {
+
+					Number c = (Number) getSession()
+							.createQuery(
+									"select count(*) from ChangeGift")
+							.uniqueResult();
+
+					return c.intValue();
+
+				}		
 		
 	
 }

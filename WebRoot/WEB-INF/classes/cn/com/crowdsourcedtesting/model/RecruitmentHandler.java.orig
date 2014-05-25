@@ -37,7 +37,6 @@ public class RecruitmentHandler extends GeneralHandler {
 			request.setAttribute("isLegal", "illegal");
 
 	}
-<<<<<<< HEAD
 
 	public void selectRecentRecruitments(Page page, HttpServletRequest request){
 		List<Recruitment> recruitments = new ArrayList();
@@ -55,10 +54,6 @@ public class RecruitmentHandler extends GeneralHandler {
 	}
 	
 	public void selectRecruitment(int id, HttpServletRequest request) {
-=======
-
-	public void selectRecruitment(int id, HttpServletRequest request) {
->>>>>>> 81cced6a3148acef5050965baee7b6bb8c0f944d
 		RecruitmentDAO dao = new RecruitmentDAO();
 		Recruitment recruitment = dao.findById(id);
 		if(recruitment != null)

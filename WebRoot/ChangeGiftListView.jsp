@@ -1,4 +1,24 @@
-﻿<!DOCTYPE html>
+<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<%
+try{
+    String isLegal=(String)request.getAttribute("isLegal");
+    if(isLegal==null||!isLegal.equals("true")){
+     response.sendRedirect("information.do?method=manageChangeGiftList");
+     return; 
+    }else{
+    request.removeAttribute("isLegal");
+    }
+ 	List<ChangeGift> changeGifts = (List<ChangeGift>) request.getAttribute("changeGifts");
+  	Page currentPage = (Page)request.getAttribute("currentPage");
+	int firstPage = (int)(currentPage.getCurrentPage()-1)/currentPage.DEFAULT_MAX_PAGE;
+	firstPage = firstPage*currentPage.DEFAULT_MAX_PAGE+1;
+	int lastPage = (currentPage.getTotalPage()+1)<(firstPage+currentPage.DEFAULT_MAX_PAGE)? (currentPage.getTotalPage()+1):(firstPage+currentPage.DEFAULT_MAX_PAGE);
+%>
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -271,9 +291,9 @@
     </div>
     <div id="sidebar-menu">
       <ul class="nav sidebar-nav">
-        <li class="active"> <a class="accordion-toggle collapsed" href="#examine"><span class="glyphicons glyphicons-check"></span><span class="sidebar-title">审核</span><span class="caret"></span></a>
+        <li> <a class="accordion-toggle collapsed" href="#examine"><span class="glyphicons glyphicons-check"></span><span class="sidebar-title">审核</span><span class="caret"></span></a>
           <ul id="examine" class="nav sub-nav">
-            <li class="active"><a href="admin_tasklist.html"><span class="glyphicons glyphicons glyphicons-flag"></span> 审核任务</a></li>
+            <li><a href="admin_tasklist.html"><span class="glyphicons glyphicons glyphicons-flag"></span> 审核任务</a></li>
             <li><a href="admin_queslist.html"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
             <li><a href="admin_registerlist.html"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>
           </ul>
@@ -284,6 +304,7 @@
             <li><a href="admin_publisherlist.html"><span class="glyphicons glyphicons-lightbulb"></span> 维护发布者信息</a></li>
           </ul>
         </li>
+        <li class="active"> <a href="admin_giftList.html"><span class="glyphicons glyphicons-sort"></span><span class="sidebar-title">礼品管理</span></a> </li>
       </ul>
     </div>
   </aside>
@@ -308,11 +329,7 @@
             <div class="panel">
               <div class="panel-heading">
                 <div class="panel-title"> <i class="fa fa-tasks"></i> 任务列表 </div>
-                <ul class="nav panel-tabs">
-                  <li class="active"><a href="#tab1" data-toggle="tab"><i class="fa fa-globe"></i> Web任务</a></li>
-                  <li><a href="#tab2" data-toggle="tab"><i class="fa fa-android"></i> Android任务</a></li>
-                  <li><a href="#tab3" data-toggle="tab"><i class="fa fa-laptop"></i> 桌面任务</a></li>
-                </ul>
+               
               </div>
               <div class="panel-body">
                 <div class="tab-content padding-none border-none">
@@ -321,190 +338,61 @@
                       <thead>
                         <tr>
                           <th></th>
-                          <th>项目名称</th>
-                          <th class="hidden-xs">发布者</th>
-                          <th>奖励金额</th>
-                          <th>当前状态</th>
+                          <th>礼品名称</th>
+                          <th class="hidden-xs">收件人</th>
+                          <th>兑换日期</th>
+                          <th>收货地址</th>
+                             <th>当前状态</th>
                           <th style="width: 70px;" class="text-right">操作</th>
                         </tr>
                       </thead>
                       <tbody>
+                          <%for(int i=0;i<changeGifts.size();i++) {
+                        ChangeGift changeGift = changeGifts.get(i);
+                      %>
                         <tr>
                           <td class="text-center"><img src="img/avatars/2.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> Web百度管家测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i> 百度公司</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 500</td>
-                          <td><i class="fa fa-circle text-green"></i> 已通过</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
+                          <td class="info"><b> iPad Mimi</b><br />
+                            <span class="text-muted"><i class="fa fa-money"></i><%=changeGift.getGift().getGiftCredit() %> 积分</span></td>
+                          <td><i class="fa fa-user text-blue"></i><%=changeGift.getReceiver()%></td>
+                          <td><i class="fa fa-calendar fa-lg text-blue padding-right-sm"></i> <%=changeGift.getChangeDate()%></td>
+                          <td><i class="fa fa-truck text-blue"></i><%=changeGift.getSendAddress()%></td>
+                          <td><i class="fa fa-truck text-blue"></i> <%=changeGift.getHasDelivered()!=null||!changeGift.getHasDelivered()?"未发货":"已发货"%></td>
+                          <td class="text-right text-center"><a id="<%=changeGift.getChangeId() %>" class="btn btn-primary btn-gradient"  type="button" href="admin_giftInfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
                         </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/1.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 百词斩测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>超有爱</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 520</td>
-                          <td><i class="fa fa-circle text-info"></i> 待审核</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/4.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 人人网站测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>人人公司</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 30</td>
-                          <td><i class="fa fa-circle text-danger"></i> 未通过</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/5.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 火狐桌面浏览器测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 370</td>
-                          <td><i class="fa fa-circle text-green"></i> 已通过</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
+                        <%} %>
+                       
                       </tbody>
                     </table>
                     <div class="text-right">
-                      <ul class="pagination pagination-alt margin-bottom">
-                        <li><a href="#"><i class="fa fa-caret-left"></i> </a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#"><i class="fa fa-caret-right"></i> </a></li>
+                     <ul class="pagination pagination-alt margin-bottom">
+                        <%if( currentPage.getCurrentPage()==1){ %>
+                  <li class="prev disabled"><a><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                  <%} else{%>
+                  
+                    <li class="prev" id="previouPage"><a id = "<%=currentPage.getCurrentPage()%>"><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                <%} %>
+                 
+                <%for (int i=firstPage; i<lastPage;i++) 
+                {  if(i == currentPage.getCurrentPage())
+                {%>
+                <li class="active" id="pageNum"><a id="<%=i%>"><%=i %></a></li>
+                  
+                 <%}else { %>
+                  <li id="pageNum"><a id="<%=i%>"><%=i%></a></li>
+                 <%}} %>
+                
+                 <%if( currentPage.getCurrentPage()==currentPage.getTotalPage()){ %>
+                 <li class="next disabled"><a >&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                  <%} else{%>
+                  
+                   <li class="next" id="nextPage"><a id="<%=currentPage.getCurrentPage()%>">&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                <%} %>
+                
                       </ul>
                     </div>
                   </div>
-                  <div id="tab2" class="tab-pane chat-panel">
-                    <table class="table table-striped" id="datatable">
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th>项目名称</th>
-                          <th class="hidden-xs">发布者</th>
-                          <th>奖励积分</th>
-                          <th>当前状态</th>
-                          <th style="width: 70px;" class="text-right">操作</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/2.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> Android百度管家测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i> 百度公司</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 500</td>
-                          <td><i class="fa fa-circle text-green"></i> 已通过</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/1.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 百词斩测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>超有爱</span></td>
-                         <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 520</td>
-                          <td><i class="fa fa-circle text-info"></i> 待审核</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/4.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 人人网站测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>人人公司</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 30</td>
-                          <td><i class="fa fa-circle text-info"></i> 待审核</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/5.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 火狐桌面浏览器测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 370</td>
-                          <td><i class="fa fa-circle text-danger"></i> 未通过</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div class="text-right">
-                      <ul class="pagination pagination-alt margin-bottom">
-                        <li><a href="#"><i class="fa fa-caret-left"></i> </a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#"><i class="fa fa-caret-right"></i> </a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div id="tab3" class="tab-pane">
-                    <table class="table table-striped" id="datatable">
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th>项目名称</th>
-                          <th class="hidden-xs">评分</th>
-                          <th>奖励金额</th>
-                          <th>当前状态</th>
-                          <th style="width: 70px;" class="text-right">操作</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/2.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 桌面测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i> 百度公司</span></td>
-                         <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 500</td>
-                          <td><i class="fa fa-circle text-green"></i> 已通过</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/1.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 百词斩测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>超有爱</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 520</td>
-                          <td><i class="fa fa-circle text-info"></i> 待审核</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/4.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 人人网站测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>人人公司</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 30</td>
-                          <td><i class="fa fa-circle text-danger"></i> 未通过</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/5.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 火狐桌面浏览器测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-user text-blue"></i> 程冉</td>
-                          <td><i class="fa fa-money fa-lg text-blue padding-right-sm"></i> 370</td>
-                          <td><i class="fa fa-circle text-green"></i> 已通过</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_examine_taskinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div class="text-right">
-                      <ul class="pagination pagination-alt margin-bottom">
-                        <li><a href="#"><i class="fa fa-caret-left"></i> </a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#"><i class="fa fa-caret-right"></i> </a></li>
-                      </ul>
-                    </div>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -718,3 +606,12 @@ jQuery(document).ready(function () {
 </script>
 </body>
 </html>
+<%}catch(NullPointerException e){
+ 
+  return;
+}catch(Exception e)
+{
+   
+   return;
+}
+%>

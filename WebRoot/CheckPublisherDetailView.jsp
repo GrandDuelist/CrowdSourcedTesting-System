@@ -1,4 +1,33 @@
-﻿<!DOCTYPE html>
+<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<%
+/* try{ */
+    String isLegal=(String)request.getAttribute("isLegal");
+    String modify = (String) request.getAttribute("modify");
+     String type=(String)request.getAttribute("publisherType");
+    if(isLegal==null||!isLegal.equals("true")||type==null){
+     response.sendRedirect("information.do?method=managePublisherList");
+     return; 
+ }else{
+    request.removeAttribute("isLegal");
+    request.removeAttribute("publisherType");
+    request.removeAttribute("modify");
+ }
+ Publisher publisher = (Publisher)request.getAttribute("publisher");
+
+ 
+ if(publisher==null)
+ {
+    if(type.equals("Company"))response.sendRedirect("information.do?method=managePublisherList");
+    else response.sendRedirect("information.do?method=managePersonList");
+ }
+ 
+ 
+    %>
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -17,17 +46,18 @@
 <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
+<!-- Plugin CSS -->
+<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/css/bootstrap-editable.css" />
+<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/inputs/address/address.css" />
+<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/inputs/typeaheadjs/lib/typeahead.js-bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/daterange/daterangepicker-bs3.css" />
+
 <!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="css/theme.css" />
 <link rel="stylesheet" type="text/css" href="css/pages.css" />
 <link rel="stylesheet" type="text/css" href="css/plugins.css" />
 <link rel="stylesheet" type="text/css" href="css/responsive.css" />
-<link href="css/animate.css" type="text/css">
-<!--Plugins-->
-<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/css/bootstrap-editable.css" />
-<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/inputs/address/address.css" />
-<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/inputs/typeaheadjs/lib/typeahead.js-bootstrap.css" />
-<link rel="stylesheet" type="text/css" href="vendor/plugins/daterange/daterangepicker-bs3.css" />
+
 <!-- Demonstration CSS -->
 <link rel="stylesheet" type="text/css" href="css/demo.css" />
 
@@ -42,10 +72,11 @@
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-</head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/detail_control/admin_publisher.js" > </script>
 
-<body class="messages-page">
+<body>
 <!-- Start: Theme Preview Pane -->
 <div id="skin-toolbox">
   <div class="skin-toolbox-toggle"> <i class="fa fa-flask"></i> </div>
@@ -257,7 +288,7 @@
 <!-- End: Header --> 
 <!-- Start: Main -->
 <div id="main"> 
-   <!-- Start: Sidebar -->
+ <!-- Start: Sidebar -->
   <aside id="sidebar">
     <div id="sidebar-search">
       <form role="search" />
@@ -270,17 +301,17 @@
     </div>
     <div id="sidebar-menu">
       <ul class="nav sidebar-nav">
-        <li class="active"> <a class="accordion-toggle collapsed" href="#examine"><span class="glyphicons glyphicons-check"></span><span class="sidebar-title">审核</span><span class="caret"></span></a>
+        <li> <a class="accordion-toggle collapsed" href="#examine"><span class="glyphicons glyphicons-check"></span><span class="sidebar-title">审核</span><span class="caret"></span></a>
           <ul id="examine" class="nav sub-nav">
             <li><a href="admin_tasklist.html"><span class="glyphicons glyphicons glyphicons-flag"></span> 审核任务</a></li>
-            <li class="active"><a href="admin_queslist.html"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
+            <li><a href="admin_queslist.html"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
             <li><a href="admin_registerlist.html"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>
           </ul>
         </li>
-        <li> <a class="accordion-toggle collapsed" href="#user_admin"><span class="glyphicons glyphicons-adress_book"></span><span class="sidebar-title">用户管理</span><span class="caret"></span></a>
+        <li class="active"> <a class="accordion-toggle collapsed" href="#user_admin"><span class="glyphicons glyphicons-adress_book"></span><span class="sidebar-title">用户管理</span><span class="caret"></span></a>
           <ul id="user_admin" class="nav sub-nav">
             <li><a href="admin_testerlist.html"><span class="glyphicons glyphicons-cleaning"></span> 维护测试者信息</a></li>
-            <li><a href="admin_publisherlist.html"><span class="glyphicons glyphicons-lightbulb"></span> 维护发布者信息</a></li>
+            <li class="active"><a href="admin_publisherlist.html"><span class="glyphicons glyphicons-lightbulb"></span> 维护发布者信息</a></li>
           </ul>
         </li>
       </ul>
@@ -291,179 +322,127 @@
   <section id="content">
     <div id="topbar">
       <ol class="breadcrumb">
-        <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
-        <li><a href="publisher_home.html">主页</a></li>
-        <li><a href="publisher_taskman.html">问卷管理</a></li>
-        <li class="active">问卷详情</li>
+          <li><a href="admin_home.html"><i class="fa fa-home"></i></a></li>
+      <li><a href="admin_home.html">主页</a></li>
+      <li><a href="admin_publisherlist.html">发布者列表</a></li>
+      <li class="active">详细信息</li>
       </ol>
     </div>
     <div class="container">
       <div class="row">
-      
-      
-        
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="panel">
-                <div class="panel-heading">
-                  <div class="panel-title visible-lg"> <i class="fa fa-info-circle"></i> 问卷详情</div>
-                </div>
-                <div class="panel-body">
-                  <h4 class="panel-body-title">关于游戏的调查问卷</h4>
-                
-                  	现在越来越多的同学对游戏感兴趣，现在我们来对大家做一个关于LOL的游戏调查
-                  
-                  <hr/>
-                  <p>
-                  	<ol>
-                        <li><label for="web_url"> 你喜欢哪个英雄的造型？ </label>
-                    <div class="text-left">
-                      <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          盖伦 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-                          阿狸 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios3" value="option3" />
-                          琴女 </label>
-                    </div> </li>
-                        <li><label for="web_url"> 你喜欢哪个英雄的造型？ </label>
-                    <div class="text-left">
-                      <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          盖伦 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-                          阿狸 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios3" value="option3" />
-                          琴女 </label>
-                    </div> </li>
-                        <li><label for="web_url"> 你喜欢哪个英雄的造型？ </label>
-                    <div class="text-left">
-                      <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          盖伦 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-                          阿狸 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios3" value="option3" />
-                          琴女 </label>
-                    </div> </li>
-                        <li><label for="web_url"> 你喜欢哪个英雄的造型？ </label>
-                    <div class="text-left">
-                      <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          盖伦 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-                          阿狸 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios3" value="option3" />
-                          琴女 </label>
-                    </div> </li>
-                        <li><label for="web_url"> 你喜欢哪个英雄的造型？ </label>
-                    <div class="text-left">
-                      <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          盖伦 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-                          阿狸 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios3" value="option3" />
-                          琴女 </label>
-                    </div> </li>
-                        <li><label for="web_url"> 你喜欢哪个英雄的造型？ </label>
-                    <div class="text-left">
-                      <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          盖伦 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-                          阿狸 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios3" value="option3" />
-                          琴女 </label>
-                    </div> </li>
-                        <li><label for="web_url"> 你喜欢哪个英雄的造型？ </label>
-                    <div class="text-left">
-                      <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                          盖伦 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-                          阿狸 </label>
-                        <label class="radio-inline">
-                          <input class="radio" type="radio" name="optionsRadios" id="optionsRadios3" value="option3" />
-                          琴女 </label>
-                    </div> </li>
-                    </ol>
-                  </p>
-                  
-                  <h4 class="panel-body-title text-alert">审核操作：</h4>
-                  <div class="text-center btn-group-lg">
-                      <button class="btn btn-primary btn-gradient" data-toggle="modal" data-target="#passAlert"> 通过 </button>
-                      &nbsp;&nbsp;&nbsp;<button class="btn btn-danger btn-gradient" data-toggle="modal" data-target="#failAlert"> 否决 </button>
-                      </div>
-                </div>
-                
-                <hr>
-                </hr>
+        <div class="col-md-8 col-md-offset-2">
+          <div class="panel">
+            <div class="panel-heading">
+              <div class="panel-title"> <i class="fa fa-pencil"></i> 编辑信息 </div>
+              <div class="panel-btns pull-right">
+                <label style="display: inline-block; margin-right: 15px; font-size: 12px; color: #888888;">
+               	 <form id="informationForm" method="post">
+                 <input name="status" type="checkbox" class="checkbox" id="autoopen" style="vertical-align: baseline" />
+                  &nbsp;<%=publisher.getPublisherAuthority()?"冻结":"解冻" %>
+                 <input type="hidden" name="username" />
+                 <input type="hidden" name="license"/>
+                 <input type="hidden" name="credit"/>
+                 <input type="hidden" name="company"/>
+                 <input type="hidden" name="publisherType"/>
+                 <input type="hidden" name="id" value="<%=publisher.getPublisherId()%>"/>
+                </form>
+                 </label>
+                <button id="enable" class="btn btn-default btn-gradient">启用 / 关闭</button>
               </div>
             </div>
+            <div class="panel-body">
+            <%if(modify==null){ %>
+              <div class="alert alert-success">编辑字段不能为空，请检查您的输入： <b>昵称</b> 是否符合条件</div>
+              <%}else if("success".equals(modify)){ %>
+              <div class="alert alert-success">修改成功!!</div>
+              <%}else { %>
+              <div class="alert alert-success">操作失败!!请重新尝试!</div>
+              <% }%>
+              <table id="user" class="table table-bordered table-striped" style="clear: both">
+                <tbody>
+                <tr>
+                    <td style="width: 35%;"><b>头像</b></td>
+                    <td class="text-center"><img src="<%=publisher.getPublisherPhoto()%>" width="50" height="50" /></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 35%;"><strong>昵称</strong></td>
+                    <td style="width: 65%;"><a href="#" id="username" data-type="text" data-pk="1" data-title="输入昵称" class="editable editable-click"><%=publisher.getPublisherName() %></a></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 35%;"><strong>公司名称</strong></td>
+                    <td style="width: 65%;"><a href="#" id="company" data-type="text" data-pk="1" data-title="输入名称" class="editable editable-click"><%=publisher.getPublisherCompany()==null?"无":publisher.getPublisherCompany()%></a></td>
+                  </tr>
+                  <tr>
+                    <td><b>邮箱</b></td>
+                    <td><a id="email" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" ><%=publisher.getPublisherLogEmail() %></a></td>
+                  </tr>
+                  <%if("Company".equals(type)){ %>
+                  <tr>
+                    <td><b>发布问卷数</b></td>
+                    <td><a id="questionnaire" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" ><%=publisher.getQuestionnaires().size() %></a></td>
+                  </tr>
+                  <tr>
+                    <td><b>招募信息数</b></td>
+                    <td><a id="questionnaire" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" ><%=publisher.getRecruitments().size() %></a></td>
+                  </tr>
+                  <%} %>
+                   <tr>
+                    <td><b>当前状态</b></td>
+                    <td><a id="stat" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required"><%=publisher.getPublisherAuthority()?"可用":"冻结"%></a></td>
+                  </tr>
+                   <tr>
+                    <td><b>测试产品数</b></td>
+                    <td><a id="product"  data-type="text" data-pk="1" data-placement="right" data-placeholder="Required"><%=publisher.getQuestionnaires().size() %></a></td>
+                  </tr>
+                  
+                  <%if(publisher.getPublisherType()) {%>
+                  <tr>
+                    <td><b>营业执照</b></td>
+                    <td><a href="#" id="license"  data-type="text" data-pk="1" data-title="输入营业执照" class="editable editable-click"><%=publisher.getBusinessLicense()==null?"无":publisher.getBusinessLicense()%></a></td>
+                  </tr>
+                  <%} %>
+                  <tr>
+                    <td><strong>当前积分</strong></td>
+                    <td><a href="#" id="credit"  data-type="text" data-title="修改积分" data-pk="1" class="editable editable-click"><%=publisher.getPublisherCredit() %></a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="text-center"><button  class="btn btn-primary btn-gradient" data-toggle="modal" data-target="#submitAlert"> 提交 </button></div>
+          <hr></div>
           </div>
+          
         </div>
-
       </div>
     </div>
   </section>
   <!-- End: Content --> 
 </div>
 <!-- End: Main --> 
-<!--Popups-->
-<div class="modal fade" id="passAlert" tabindex="-1" role="dialog" aria-hidden="true">
+<!--Popup-->
+<div class="modal fade" id="submitAlert" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-sm">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title text-center">确认通过该问卷?</h4>
+        <h4 class="modal-title text-center">确认修改?</h4>
       </div>
       <div class="modal-body">
-        <p class="margin-bottom-lg">通过该问卷后，问卷将被发布，您不能再对该问卷进行审核操作，是否确认？ </p>
+        <p class="margin-bottom-lg"> 确认提交后将会在数据库修改您的数据，是否确认？ </p>
         <div class="form-group text-center">
-          <button type="button" class="btn btn-success btn-gradient margin-right-sm" data-dismiss="modal"><i class="fa fa-check"></i> 确认 </button>
-          <button type="button" class="btn btn-danger btn-gradient" data-dismiss="modal"><i class="fa fa-warning"></i> 取消 </button>
+          <button type="button" class="btn btn-success btn-gradient margin-right-sm" data-dismiss="modal" id="<%="Company".equals(type)?"sureButton":"sureButton2" %>"><i class="fa fa-check"></i> 确认</button>
+          <button type="button" class="btn btn-danger btn-gradient" data-dismiss="modal" ><i class="fa fa-warning"></i> 取消</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="modal fade" id="failAlert" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title text-center">确认拒绝发布?</h4>
-      </div>
-      <div class="modal-body">
-        <p class="margin-bottom-lg"> 选择审核未通过后问卷将不会发布，并会发送给发布者未通过审核消息，是否确认？ </p>
-        <div class="form-group text-center">
-          <button type="button" class="btn btn-success btn-gradient margin-right-sm" data-dismiss="modal"><i class="fa fa-check"></i> 确认</button>
-          <button type="button" class="btn btn-danger btn-gradient" data-dismiss="modal"><i class="fa fa-warning"></i> 取消</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!--end of popups-->
+<!--End:Popup-->
 <!-- Core Javascript - via CDN --> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+
 <!-- Plugins --> 
 <script type="text/javascript" src="vendor/editors/xeditable/js/bootstrap-editable.js"></script> 
 <script type="text/javascript" src="vendor/editors/xeditable/inputs/address/address.js"></script> 
@@ -471,23 +450,19 @@
 <script type="text/javascript" src="vendor/editors/xeditable/inputs/typeaheadjs/typeaheadjs.js"></script> 
 <script type="text/javascript" src="vendor/plugins/daterange/moment.min.js"></script> 
 <script type="text/javascript" src="vendor/plugins/daterange/daterangepicker.js"></script> 
-<script type="text/javascript" src="vendor/plugins/datepicker/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/flot/0.8.1/jquery.flot.min.js"></script>
-<script type="text/javascript" src="vendor/plugins/jqueryflot/jquery.flot.resize.min.js"></script>
-<script type="text/javascript" src="vendor/plugins/jqueryflot/jquery.flot.pie.min.js"></script>  
-<script type="text/javascript" src="js/charts.js"></script> 
+<script type="text/javascript" src="vendor/plugins/datepicker/bootstrap-datepicker.js"></script> 
+
 <!-- Theme Javascript --> 
 <script type="text/javascript" src="js/uniform.min.js"></script> 
-<script type="text/javascript" src="js/main.js"></script> 
+<script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/custom.js"></script> 
 <script type="text/javascript">
-jQuery(document).ready(function() {
-	
-	// Init Theme Core 	  
-	Core.init();
-	
-	Charts.init();
-	//enable / disable xedit
+ jQuery(document).ready(function() {
+
+	  // Init Theme Core	
+	  Core.init();
+
+	  //enable / disable xedit
 	  $('#enable').click(function() {
 		 $('#user .editable').editable('toggleDisabled');
 	  });    
@@ -608,8 +583,7 @@ jQuery(document).ready(function() {
 			  var html = '<b>' + $('<div>').text(value.city).html() + '</b>, ' + $('<div>').text(value.street).html() + ' st., bld. ' + $('<div>').text(value.building).html();
 			  $(this).html(html); 
 		  }         
-	  });
-	                
+	  });              
 		   
 	 $('#user .editable').on('hidden', function(e, reason){
 		  if(reason === 'save' || reason === 'nochange') {
@@ -623,8 +597,16 @@ jQuery(document).ready(function() {
 			  } 
 		  }
 	 });
-	 
-});
+
+ });
 </script>
 </body>
 </html>
+<%/* }catch(NullPointerException e){
+ 
+  return;
+}catch(Exception e)
+{
+  return;
+} */
+%>

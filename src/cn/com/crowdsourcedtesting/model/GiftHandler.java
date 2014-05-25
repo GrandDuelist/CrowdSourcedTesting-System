@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -18,14 +19,20 @@ import org.hibernate.Transaction;
 import cn.com.crowdsourcedtesting.DAO.GiftDAO;
 import cn.com.crowdsourcedtesting.DAO.TesterDAO;
 import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
+import cn.com.crowdsourcedtesting.bean.Administrator;
 import cn.com.crowdsourcedtesting.bean.ChangeGift;
 import cn.com.crowdsourcedtesting.bean.Gift;
+import cn.com.crowdsourcedtesting.bean.JoinQuestionnaire;
 import cn.com.crowdsourcedtesting.bean.Recruitment;
 import cn.com.crowdsourcedtesting.bean.Tester;
+import cn.com.crowdsourcedtesting.modelhelper.MethodNumber;
 import cn.com.crowdsourcedtesting.struts.form.GiftForm;
+import cn.com.crowdsourcedtesting.struts.form.InformationForm;
+import cn.com.crowdsourcedtesting.struts.form.PageIdForm;
+import cn.com.crowdtest.factory.DAOFactory;
 import cn.com.other.page.Page;
 
-public class GiftHandler {
+public class GiftHandler extends GeneralHandler {
 
 	public void selectGift(HttpServletRequest request, int id){
 		GiftDAO dao = new GiftDAO();
@@ -221,6 +228,121 @@ public class GiftHandler {
 			System.out.println("兑换失败");
 			return false;
 		}
+	}
+	
+	
+	
+	
+	/**
+	 * 将获得的InformationForm转换为通用类型
+	 * 
+	 * @param form
+	 * @return
+	 */
+	public PageIdForm changeToPageIdForm(ActionForm form) {
+		InformationForm f = (InformationForm) form;
+		
+		if (f != null) {
+			PageIdForm pageIdForm = new PageIdForm();
+			pageIdForm.setId(f.getId() + "");
+			pageIdForm.setPage(f.getPage() + "");
+			if(f.getSubType()!=null)pageIdForm.setSubType(f.getSubType());
+			return pageIdForm;
+		}
+		
+		return null;
+		
+	}
+
+	/**
+	 * 自定义参数的路由
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param targetPage
+	 * @param method
+	 * @return
+	 */
+	public ActionForward generalListRouter(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request, String targetPage,
+			MethodNumber method) {
+       
+		HttpSession session = request.getSession();
+		Administrator admin = (Administrator) session
+				.getAttribute("Administrator");
+		if (admin == null) {
+			return mapping.findForward("adminLogin");
+		}
+		
+		request.setAttribute("isLegal", "true");
+		this.ListHandle(this.changeToPageIdForm(form), request, method);
+		return mapping.findForward(targetPage);
+	}
+
+	/**
+	 * 自定义参数的路由
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param targetPage
+	 * @param method
+	 * @return
+	 */
+	public ActionForward generalDetailRouter(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request, String targetPage,
+			MethodNumber method) {
+
+		HttpSession session = request.getSession();
+		Administrator admin = (Administrator) session
+				.getAttribute("Administrator");
+		if (admin == null) {
+			return mapping.findForward("adminLogin");
+		}
+		request.setAttribute("isLegal", "true");
+		this.detailHandle(this.changeToPageIdForm(form), request, method);
+		return mapping.findForward(targetPage);
+	}
+
+	@Override
+	public void setTargetListOne(Page page, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		page.setTotalRows(DAOFactory.getChangeGiftDAO().getTotalRows());
+		List<ChangeGift> changeGifts = DAOFactory.getChangeGiftDAO().findNotDeliveredByPage(page);
+		request.setAttribute("currentPage", page);
+		request.setAttribute("changeGifts", changeGifts);
+		
+	}
+
+	@Override
+	public void setTargetListTwo(Page page, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTargetListThree(Page page, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTargetDetailOne(int id, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTargetDetailTwo(int id, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTargetDetailThree(int id, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

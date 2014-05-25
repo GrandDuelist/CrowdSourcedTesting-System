@@ -26,6 +26,11 @@
   <property generated="never" lazy="false" name="testerMobile" type="java.lang.String">
    <column length="20" name="TESTER_MOBILE"/>
   </property>
+  <property generated="never" lazy="false" name="hasAuthority"
+			type="java.lang.Boolean">
+			<column name="HAS_AUTHORITY" not-null="false" precision="1"
+				scale="0" />
+		</property>
   <property generated="never" lazy="false" name="testerBirthday" type="java.util.Date">
    <column length="7" name="TESTER_BIRTHDAY"/>
   </property>

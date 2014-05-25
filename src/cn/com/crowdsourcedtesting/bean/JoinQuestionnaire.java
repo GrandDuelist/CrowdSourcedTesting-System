@@ -1,6 +1,12 @@
 package cn.com.crowdsourcedtesting.bean;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import org.hibernate.Query;
+
+import cn.com.other.page.Page;
 
 /**
  * JoinQuestionnaire entity. @author MyEclipse Persistence Tools
@@ -15,7 +21,6 @@ public class JoinQuestionnaire implements java.io.Serializable {
 	private Tester tester;
 	private Date joinTime;
 
-	// Constructors
 
 	/** default constructor */
 	public JoinQuestionnaire() {
@@ -62,5 +67,6 @@ public class JoinQuestionnaire implements java.io.Serializable {
 	public void setJoinTime(Date joinTime) {
 		this.joinTime = joinTime;
 	}
+	
 
 }

@@ -1,4 +1,23 @@
-﻿<!DOCTYPE html>
+<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<%
+try{
+    String isLegal=(String)request.getAttribute("isLegal");
+    if(isLegal==null||!isLegal.equals("true")){
+     response.sendRedirect("information.do?method=managePublisherList");
+     return; 
+    }else{
+    request.removeAttribute("isLegal");
+    }
+ 	List<Publisher> publishers = (List<Publisher>) request.getAttribute("publishers");
+  	Page currentPage = (Page)request.getAttribute("currentPage");
+	int firstPage = (int)(currentPage.getCurrentPage()-1)/currentPage.DEFAULT_MAX_PAGE;
+	firstPage = firstPage*currentPage.DEFAULT_MAX_PAGE+1;
+	int lastPage = (currentPage.getTotalPage()+1)<(firstPage+currentPage.DEFAULT_MAX_PAGE)? (currentPage.getTotalPage()+1):(firstPage+currentPage.DEFAULT_MAX_PAGE);
+%>
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -37,7 +56,8 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="img/favicon.ico" />
-
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/list_control/admin_publisher.js"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -48,6 +68,13 @@
 
 <body>
 <!-- Start: Theme Preview Pane -->
+
+ <form id="selectForm"  method="post">
+ <input type="hidden" name="id"/>
+ <input type="hidden" name="subType"/>
+ <input type="hidden" name="page"/>
+ <input type="hidden" name="publisherType"/>
+</form>
 <div id="skin-toolbox">
   <div class="skin-toolbox-toggle"> <i class="fa fa-flask"></i> </div>
   <div class="skin-toolbox-panel">
@@ -273,9 +300,9 @@
       <ul class="nav sidebar-nav">
         <li class="active"> <a class="accordion-toggle collapsed" href="#examine"><span class="glyphicons glyphicons-check"></span><span class="sidebar-title">审核</span><span class="caret"></span></a>
           <ul id="examine" class="nav sub-nav">
-            <li><a href="admin_tasklist.html"><span class="glyphicons glyphicons glyphicons-flag"></span> 审核任务</a></li>
-            <li><a href="admin_queslist.html"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
-            <li class="active"><a href="admin_registerlist.html"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>
+           <li><a href="checkTestTaskList.do?method=checkWebList"><span class="glyphicons glyphicons glyphicons-flag"></span> 审核任务</a></li>
+            <li><a href="manageQuestionnaire.do?method=checkList"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
+            <li  class="active"><a href="checkRegisterList.do?method=checkCompanyList"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>
           </ul>
         </li>
         <li> <a class="accordion-toggle collapsed" href="#user_admin"><span class="glyphicons glyphicons-adress_book"></span><span class="sidebar-title">用户管理</span><span class="caret"></span></a>
@@ -309,12 +336,24 @@
               <div class="panel-heading">
                 <div class="panel-title"> <i class="fa fa-tasks"></i> 新注册发布者列表 </div>
                 <ul class="nav panel-tabs">
-                  <li class="active"><a href="#tab1" data-toggle="tab"><i class="fa fa-briefcase"></i> 公司发布者</a></li>
-                  <li><a href="#tab2" data-toggle="tab"><i class="fa fa-user"></i> 个人发布者</a></li>
+                   <%String publisherType = (String)request.getAttribute("publisherType"); 
+                if(publisherType==null||"Company".equals(publisherType)){%>
+                
+                  <li class="active"><a ><i class="fa fa-briefcase"></i> 公司发布者</a></li>
+                  <li><a href="information.do?method=managePersonList" ><i class="fa fa-user"></i> 个人发布者</a></li>
+                  <%}else{ %>
+                   <li ><a href="information.do?method=manageCompanyList" ><i class="fa fa-user"></i> 公司发布者</a></li>
+                  <li class="active"><a  data-toggle="tab"><i class="fa fa-briefcase"></i> 个人发布者</a></li>
+                  <%} %>
                 </ul>
               </div>
               <div class="panel-body">
                 <div class="tab-content padding-none border-none">
+                
+                <!-- 企业发布者 -->
+                <% 
+                if(publisherType==null||"Company".equals(publisherType)){
+                %>
                   <div id="tab1" class="tab-pane active">
                     <table class="table table-striped" id="datatable">
                       <thead>
@@ -322,130 +361,127 @@
                           <th></th>
                           <th>公司名称</th>
                           <th class="hidden-xs">联络邮箱</th>
-                          <th>主页地址</th>
+                          <th>当前状态</th>
                           <th>营业执照</th>
                           <th style="width: 70px;" class="text-right">操作</th>
                         </tr>
                       </thead>
                       <tbody>
+                      <%for(int i=0; i<publishers.size();i++) {
+                      Publisher publisher  =  publishers.get(i);
+                      
+                      %>
                         <tr>
                           <td class="text-center"><img src="img/avatars/2.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 周鸿伟</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i> 百度公司</span></td>
-                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> 752050943@qq.com </td>
-                          <td><i class="fa fa-link fa-lg text-blue padding-right-sm"></i> www.baidu.com</td>
-                          <td><i class="fa fa-credit-card fa-lg text-blue padding-right-sm"></i>5203042034</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_registerinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
+                          <td class="info"><b><%=publisher.getPublisherName() %></b><br />
+                            <span class="text-muted"><i class="fa fa-home"></i> <%=publisher.getPublisherCompany() %></span></td>
+                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> <%=publisher.getPublisherLogEmail() %></td>
+                          <td><i class="fa fa-link fa-lg text-blue padding-right-sm"></i><%=publisher.getPublisherAuthority()?"活跃":"封锁"%></td>
+                          <td><i class="fa fa-credit-card fa-lg text-blue padding-right-sm"></i><%=publisher.getBusinessLicense()==null?"无":publisher.getBusinessLicense()==null %></td>
+                          <td class="text-right text-center" id="detail1"><a class="btn btn-primary btn-gradient" id=<%=publisher.getPublisherId() %> type="button" ><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
                         </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/1.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 李彦宏</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>超有爱</span></td>
-                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> 892983424@qq.com  </td>
-                          <td><i class="fa fa-link fa-lg text-blue padding-right-sm"></i> www.baicizhan.com</td>
-                          <td><i class="fa fa-credit-card fa-lg text-blue padding-right-sm"></i>620304203x</td>
-                         <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_registerinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/4.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 张斌</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>人人公司</span></td>
-                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> 892983424@qq.com  </td>
-                          <td><i class="fa fa-link fa-lg text-blue padding-right-sm"></i> www.renren.com</td>
-                          <td><i class="fa fa-credit-card fa-lg text-blue padding-right-sm"></i>4203042034</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_registerinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/5.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> Lisa</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> 892983424@qq.com  </td>
-                          <td><i class="fa fa-link fa-lg text-blue padding-right-sm"></i> www.firefox.com</td>
-                          <td><i class="fa fa-credit-card fa-lg text-blue padding-right-sm"></i>0203042034</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_registerinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
+                        <%} %>
+                
                       </tbody>
                     </table>
                     <div class="text-right">
                     	
                       <ul class="pagination pagination-alt margin-bottom">
-                        <li><a href="#"><i class="fa fa-caret-left"></i> </a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#"><i class="fa fa-caret-right"></i> </a></li>
+                        <%if( currentPage.getCurrentPage()==1){ %>
+                  <li class="prev disabled"><a><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                  <%} else{%>
+                  
+                    <li class="prev" id="previouPage"><a id = "<%=currentPage.getCurrentPage()%>"><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                <%} %>
+                
+                
+                <%for (int i=firstPage; i<lastPage;i++) 
+                {  if(i == currentPage.getCurrentPage())
+                {%>
+                <li class="active" id="pageNum"><a id="<%=i%>"><%=i %></a></li>
+                  
+                 <%}else { %>
+                  <li id="pageNum"><a id="<%=i%>"><%=i %></a></li>
+                 <%}} %>
+                
+                 <%if( currentPage.getCurrentPage()==currentPage.getTotalPage()){ %>
+                 <li class="next disabled"><a >&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                  <%} else{%>
+                  
+                   <li class="next" id="nextPage"><a id="<%=currentPage.getCurrentPage()%>">&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                <%} %>
+                
                       </ul>
                     
                     </div>
                     
                   </div>
-                  <div id="tab2" class="tab-pane chat-panel">
+                  <!-- 企业发布者   end -->
+                  <%}else{%>
+                  <!-- 个人发布者 -->
+                  <div id="tab1" class="tab-pane active">
                     <table class="table table-striped" id="datatable">
                       <thead>
                         <tr>
                           <th></th>
-                          <th>项目名称</th>
-                          <th class="hidden-xs">评分</th>
-                          <th>测试人数</th>
+                          <th>公司名称</th>
+                          <th class="hidden-xs">联络邮箱</th>
                           <th>当前状态</th>
+                          <th>生日</th>
                           <th style="width: 70px;" class="text-right">操作</th>
                         </tr>
                       </thead>
                       <tbody>
+                      <%for(int i=0; i<publishers.size();i++) {
+                      Publisher publisher  =  publishers.get(i);
+                      
+                      %>
                         <tr>
                           <td class="text-center"><img src="img/avatars/2.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 李彦宏</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i> 百度公司</span></td>
-                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> 892983424@qq.com  </td>
-                          <td><i class="fa fa-link fa-lg text-blue padding-right-sm"></i> www.baiduyun.com</td>
-                          <td><i class="fa fa-credit-card fa-lg text-blue padding-right-sm"></i>9203042034</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_registerinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
+                          <td class="info"><b><%=publisher.getPublisherName() %></b><br />
+                            <span class="text-muted"><i class="fa fa-home"></i> <%=publisher.getPublisherCompany() %></span></td>
+                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> <%=publisher.getPublisherLogEmail() %></td>
+                          <td><i class="fa fa-link fa-lg text-blue padding-right-sm"></i><%=publisher.getPublisherAuthority()?"活跃":"冻结"%></td>
+                          <td><i class="fa fa-credit-card fa-lg text-blue padding-right-sm"></i><%=publisher.getAdministrator()==null?"无": publisher.getAdministrator().getAdministratorName()%></td>
+                          <td class="text-right text-center" id="detail2"><a class="btn btn-primary btn-gradient" id="<%=publisher.getPublisherId() %>" type="button" ><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
                         </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/1.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 程冉</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>超有爱</span></td>
-                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> 892983424@qq.com  </td>
-                          <td><i class="fa fa-link fa-lg text-blue padding-right-sm"></i> www.baicizhan.com</td>
-                          <td><i class="fa fa-credit-card fa-lg text-blue padding-right-sm"></i>2203042034</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_registerinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/4.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 刘强东</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>人人公司</span></td>
-                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> 892983424@qq.com  </td>
-                          <td><i class="fa fa-link fa-lg text-blue padding-right-sm"></i> www.renren.com</td>
-                          <td><i class="fa fa-credit-card fa-lg text-blue padding-right-sm"></i>1203042034</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_registerinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/5.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 流川枫</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> 892983424@qq.com  </td>
-                          <td><i class="fa fa-link fa-lg text-blue padding-right-sm"></i> www.firefox.com</td>
-                          <td><i class="fa fa-credit-card fa-lg text-blue padding-right-sm"></i>1203042034</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_registerinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
+                        <%} %>
+                
                       </tbody>
                     </table>
                     <div class="text-right">
                     	
                       <ul class="pagination pagination-alt margin-bottom">
-                        <li><a href="#"><i class="fa fa-caret-left"></i> </a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#"><i class="fa fa-caret-right"></i> </a></li>
+                        <%if( currentPage.getCurrentPage()==1){ %>
+                  <li class="prev disabled"><a><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                  <%} else{%>
+                  
+                    <li class="prev" id="previouPage2"><a id = "<%=currentPage.getCurrentPage()%>"><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                <%} %>
+                 
+                <%for (int i=firstPage; i<lastPage;i++) 
+                {  if(i == currentPage.getCurrentPage())
+                {%>
+                <li class="active" id="pageNum2"><a id="<%=i%>"><%=i %></a></li>
+                  
+                 <%}else { %>
+                  <li id="pageNum2"><a id="<%=i%>"><%=i%></a></li>
+                 <%}} %>
+                
+                 <%if( currentPage.getCurrentPage()==currentPage.getTotalPage()){ %>
+                 <li class="next disabled"><a >&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                  <%} else{%>
+                  
+                   <li class="next" id="nextPage2"><a id="<%=currentPage.getCurrentPage()%>">&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                <%} %>
+                
                       </ul>
                     
                     </div>
+                    
                   </div>
+                  <!-- 个人发布者     end -->
+                  <%} %>
                  <!--End:tabs-->
                 </div>
               </div>
@@ -660,3 +696,11 @@ jQuery(document).ready(function () {
 </script>
 </body>
 </html>
+<%}catch(NullPointerException e){
+
+  return;
+}catch(Exception e)
+{
+   return;
+}
+%>

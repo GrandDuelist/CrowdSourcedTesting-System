@@ -1,5 +1,6 @@
 package cn.com.crowdsourcedtesting.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.LockMode;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
+import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.other.page.Page;
 
@@ -232,6 +234,39 @@ public class TesterDAO extends BaseHibernateDAO {
 				log.error("find by page failed", re);
 				throw re;
 			}
+
+		}
+		
+
+		// 按页查找个人用户
+		public List<Tester> findByPage(Page page) {
+			// TODO Auto-generated method stub
+			try {
+				List<Tester> testers = new ArrayList<Tester>();
+				String queryString = "from Tester";
+				Query queryObject = getSession().createQuery(queryString);
+
+				testers = queryObject
+						.setFirstResult(
+								(page.getCurrentPage() - 1) * page.getPerRows())
+						.setMaxResults(page.getPerRows()).list();
+
+				return testers;
+			} catch (RuntimeException re) {
+				log.error("find by page failed", re);
+				throw re;
+			}
+		}
+
+		// 得到总条数
+		public int getTotalRows() {
+
+			Number c = (Number) getSession()
+					.createQuery(
+							"select count(*) from Tester")
+					.uniqueResult();
+
+			return c.intValue();
 
 		}
 

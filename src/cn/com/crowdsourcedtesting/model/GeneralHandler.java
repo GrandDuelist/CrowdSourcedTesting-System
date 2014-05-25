@@ -54,6 +54,7 @@ public abstract class GeneralHandler {
 			
 		}else if("pageNum".equals(subType))
 		{
+			System.out.println(form.getPage());
 			currentPage  = Integer.parseInt(form.getPage());
 		}else if("previousPage".equals(subType))
 		{
