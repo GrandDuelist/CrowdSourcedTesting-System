@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
+
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -289,171 +295,62 @@
       <ol class="breadcrumb">
         <li><a href="publisher_home.html"><i class="fa fa-home"></i></a></li>
         <li><a href="publisher_home.html">主页</a></li>
+        <li><a href="publisher_taskman.html">任务管理</a></li>
         <li><a href="publisher_taskpub.html">发布任务</a></li>
-        <li class="active">充值</li>
+        <li class="active">奖励设置</li>
       </ol>
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
-          <div class="pricing-tables margin-top-lg text-center">
-            <div class="col-sm-4">
-              <div class="pricing-plan">
-                <div class="pricing-title btn-light2">
-                  <h3>基本会员</h3>
-                </div>
-                <div class="pricing-info"> <span class="currency-sign">￥</span>
-                  <h2>39</h2>
-                  <h6>每月</h6>
-                </div>
-                <div class="pricing-features">
-                  <ul>
-                    <li><i class="fa fa-hdd-o"></i> <b>20</b> 个任务发布</li>
-                    <li><i class="fa fa-exchange"></i> <b>20</b> 个账户限额</li>
-                    <li><i class="fa fa-refresh"></i> <b>5</b> 只测试团队</li>
-                  </ul>
-                </div>
-                <div class="pricing-icons">
-                  <ul>
-                    <li><i class="fa fa-times"></i> </li>
-                    <li><i class="fa fa-times"></i> </li>
-                    <li><i class="fa fa-times"></i> </li>
-                    <li><i class="fa fa-ellipsis-h"></i> </li>
-                  </ul>
-                </div>
-                <a class="btn btn-large btn-dark" href="#">加入</a> </div>
+        <div class="col-md-12">
+          <div class="panel">
+            <div class="panel-heading">
+            	<div class="panel-title"><i class="fa fa-trophy"></i> 奖励设置</div>
             </div>
-            <div class="col-sm-4 hero-plan">
-              <div class="pricing-plan">
-                <div class="pricing-title btn-blue">
-                  <h3>合作伙伴</h3>
-                  <span class="pricing-subtitle text-blue4">最佳选择</span> </div>
-                <div class="pricing-info"> <span class="currency-sign">￥</span>
-                  <h2>59</h2>
-                  <h6>Per Month</h6>
+            <div class="panel-body">
+            <form action="publishTestingTask.do"  method="post" >
+                <input type="hidden" name="method" value="pubDesktopTask" />
+              <h2 class="text-primary"> 请认真填写一下内容</h2>
+              <hr/>
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                <% String message = (String) session.getAttribute("TaskPublishErrorMessage");
+                session.removeAttribute("TaskPublishErrorMessage");
+                if (message != null && !"".equals(message)) { %>
+                	<p class="alert alert-warning"><%= message %></p>
+                <% } %>
+                  <p class="alert alert-success">您的余额为： <b><span class="text-primary">200</span></b></p>
+                   <div class="input-group col-lg-5"> <span class="input-group-addon"><i class="fa fa-calendar "></i> </span>
+                          <input type="text" id="datepicker_2" class="form-control margin-top-none" placeholder="10/25/2013 - 10/25/2013" name="daterange" />
+                   </div>
+                   <br/>
+                   <div class="form-group">
+                      <label for="spinner1">参与奖励</label>
+                        <div class="input-group col-lg-5"> <span class="input-group-addon"><i class="fa fa-usd"></i> </span>
+                          <input type="number" class="form-control ui-spinner-input" name="wholeReward" value="300" />
+                        </div>
+                    </div>
+                     <br/>
+                   <div class="form-group">
+                      <label for="spinner1">报告提交奖励</label>
+                        <div class="input-group col-lg-5"> <span class="input-group-addon"><i class="fa fa-usd"></i> </span>
+                          <input type="number" class="form-control ui-spinner-input" name="perReward" value="300" />
+                        </div>
+                    </div>
+                  <hr></hr>
+                  <div class="pull-left">
+                  	<button class="btn btn-gradient btn-lg btn-green" type="reset">返回</button>
+                  </div>
+                  <div class="pull-right">
+                  	<button class="btn btn-info btn-gradient btn-lg" type="submit">下一步</button>
+                  </div>
+                  
                 </div>
-                <div class="pricing-features">
-                  <ul>
-                    <li><i class="fa fa-hdd-o"></i> <b>2GB</b> Disk Space</li>
-                    <li><i class="fa fa-exchange"></i> <b>20GB</b> Bandwidth</li>
-                    <li><i class="fa fa-refresh"></i> <b>5</b> Email Accounts</li>
-                  </ul>
-                </div>
-                <div class="pricing-icons">
-                  <ul>
-                    <li><i class="fa fa-check text-blue"></i> </li>
-                    <li><i class="fa fa-times"></i> </li>
-                    <li><i class="fa fa-check text-blue"></i> </li>
-                    <li><i class="fa fa-ellipsis-h"></i> </li>
-                  </ul>
-                </div>
-                <a class="btn btn-blue" href="#">加入</a> </div>
+              </div>
+              <div class="row"><hr></hr></div>
+              </form>
             </div>
-            <div class="col-sm-4">
-              <div class="pricing-plan">
-                <div class="pricing-title btn-light2">
-                  <h3>战略合伙人</h3>
-                </div>
-                <div class="pricing-info"> <span class="currency-sign">￥</span>
-                  <h2>99</h2>
-                  <h6>Per Month</h6>
-                </div>
-                <div class="pricing-features">
-                  <ul>
-                    <li><i class="fa fa-hdd-o"></i> <b>2GB</b> Disk Space</li>
-                    <li><i class="fa fa-exchange"></i> <b>20GB</b> Bandwidth</li>
-                    <li><i class="fa fa-refresh"></i> <b>5</b> Email Accounts</li>
-                  </ul>
-                </div>
-                <div class="pricing-icons">
-                  <ul>
-                    <li><i class="fa fa-check text-blue"></i> </li>
-                    <li><i class="fa fa-check text-blue"></i> </li>
-                    <li><i class="fa fa-times"></i> </li>
-                    <li><i class="fa fa-ellipsis-h"></i> </li>
-                  </ul>
-                </div>
-                <a class="btn btn-dark" href="#">加入</a> </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
-          <hr class="alt" />
-          <div class="pricing-tables margin-top-lg text-center row">
-            <div class="col-sm-4 col-md-3 hero-plan">
-              <div class="pricing-plan margin-none">
-                <div class="pricing-title btn-blue4">
-                  <h3>Standard</h3>
-                  <span class="pricing-subtitle">Most Popular</span> </div>
-                <div class="pricing-info"> <span class="currency-sign">￥</span>
-                  <h2>59</h2>
-                  <h6>Per Month</h6>
-                </div>
-                <div class="pricing-features">
-                  <ul>
-                    <li><i class="fa fa-hdd-o"></i> <b>2GB</b> Disk Space</li>
-                    <li><i class="fa fa-exchange"></i> <b>20GB</b> Bandwidth</li>
-                    <li><i class="fa fa-refresh"></i> <b>5</b> Email Accounts</li>
-                  </ul>
-                </div>
-                <a class="btn btn-blue4" href="#">Sign up</a> </div>
-            </div>
-            <div class="col-sm-4 col-md-3 hero-plan">
-              <div class="pricing-plan margin-none">
-                <div class="pricing-title btn-blue">
-                  <h3>Standard</h3>
-                  <span class="pricing-subtitle">Most Popular</span> </div>
-                <div class="pricing-info"> <span class="currency-sign">$</span>
-                  <h2>59</h2>
-                  <h6>Per Month</h6>
-                </div>
-                <div class="pricing-features">
-                  <ul>
-                    <li><i class="fa fa-hdd-o"></i> <b>2GB</b> Disk Space</li>
-                    <li><i class="fa fa-exchange"></i> <b>20GB</b> Bandwidth</li>
-                    <li><i class="fa fa-refresh"></i> <b>5</b> Email Accounts</li>
-                  </ul>
-                </div>
-                <a class="btn btn-blue" href="#">Sign up</a> </div>
-            </div>
-            <div class="col-sm-4 col-md-3 hero-plan">
-              <div class="pricing-plan margin-none">
-                <div class="pricing-title btn-green">
-                  <h3>Standard</h3>
-                  <span class="pricing-subtitle">Most Popular</span> </div>
-                <div class="pricing-info"> <span class="currency-sign">$</span>
-                  <h2>59</h2>
-                  <h6>Per Month</h6>
-                </div>
-                <div class="pricing-features">
-                  <ul>
-                    <li><i class="fa fa-hdd-o"></i> <b>2GB</b> Disk Space</li>
-                    <li><i class="fa fa-exchange"></i> <b>20GB</b> Bandwidth</li>
-                    <li><i class="fa fa-refresh"></i> <b>5</b> Email Accounts</li>
-                  </ul>
-                </div>
-                <a class="btn btn-green" href="#">Sign up</a> </div>
-            </div>
-            <div class="hidden-sm col-md-3 hero-plan">
-              <div class="pricing-plan margin-none">
-                <div class="pricing-title btn-alert">
-                  <h3>Standard</h3>
-                  <span class="pricing-subtitle">Most Popular</span> </div>
-                <div class="pricing-info"> <span class="currency-sign">$</span>
-                  <h2>59</h2>
-                  <h6>Per Month</h6>
-                </div>
-                <div class="pricing-features">
-                  <ul>
-                    <li><i class="fa fa-hdd-o"></i> <b>2GB</b> Disk Space</li>
-                    <li><i class="fa fa-exchange"></i> <b>20GB</b> Bandwidth</li>
-                    <li><i class="fa fa-refresh"></i> <b>5</b> Email Accounts</li>
-                  </ul>
-                </div>
-                <a class="btn btn-alert" href="#">Sign up</a> </div>
-            </div>
+            
           </div>
         </div>
       </div>

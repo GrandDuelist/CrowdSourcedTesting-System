@@ -1,19 +1,51 @@
 package cn.com.crowdsourcedtesting.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import cn.com.crowdsourcedtesting.DAO.AdministratorDAO;
+import cn.com.crowdsourcedtesting.DAO.PublisherDAO;
+import cn.com.crowdsourcedtesting.DAO.RecruitmentDAO;
+import cn.com.crowdsourcedtesting.DAO.TestTaskDAO;
+import cn.com.crowdsourcedtesting.DAO.TesterDAO;
+import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Questionnaire;
+import cn.com.crowdsourcedtesting.bean.Recruitment;
+import cn.com.crowdsourcedtesting.bean.TaskComment;
 import cn.com.crowdsourcedtesting.bean.TestTask;
+import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.crowdtest.factory.DAOFactory;
 import cn.com.other.page.Page;
 
 public class TestTaskHandler  extends GeneralHandler{
 
-	
+	public void addNewComment(int taskId, String content, HttpServletRequest request) {
+		TesterDAO pdao = new TesterDAO();
+		TestTaskDAO tdao = new TestTaskDAO();
+		TestTask task = tdao.findById(taskId);
+		
+		HttpSession httpsession  = request.getSession();
+		Tester tester = (Tester)httpsession.getAttribute("Tester");
+		
+		Date time = new Date();
+		
+		Session session = HibernateSessionFactory.getSession();
+		Transaction tst = session.beginTransaction();
+		TaskComment comment = new TaskComment(task, tester, content, time);
+		session.save(comment);
+		tst.commit();
+		session.close();
+
+		request.setAttribute("isLegal", "legal");
+	}
+
 	
 	/**
 	 * 第一个为Web任务测试的接口

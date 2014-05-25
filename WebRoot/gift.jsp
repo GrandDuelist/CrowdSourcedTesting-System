@@ -1,4 +1,4 @@
-<%@ page language="java" import="cn.com.crowdsourcedtesting.bean.*;" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" import="cn.com.crowdsourcedtesting.modelhelper.*,cn.com.crowdsourcedtesting.bean.*;" contentType="text/html; charset=UTF-8"%>
 
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -42,6 +42,9 @@
  }
  else
  	request.removeAttribute("isLegal");
+ 
+ UserType  userType = (UserType)session.getAttribute("UserType");
+ Tester tester2  = (Tester)session.getAttribute("Tester");
  %>
  
 
@@ -68,7 +71,12 @@
             <ul class="loginbar inline">
                 <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i> chengran327@gmail.com</a></li>	
                 <li><a><i class="icon-phone-sign"></i> 021 4202 2656</a></li>	
-                <li><a href="page_login.html"><i class="icon-user"></i> 登录</a></li>	
+                <%if(userType==null){ %>
+                <li><a href="login.do?method=testerLogin"><i class="icon-user"></i> 登录</a></li>	
+                <%}else if(userType.equals(UserType.Tester)) {%>
+                  <li><a href="security.do?method=testerLogout"><i class="icon-user"></i>注销</a></li>
+                   <li><a href="personal_center.do?method=testerFindAllQuestionnaire"><%=tester2.getTesterName()%></a></li>	
+               <% }%>
             </ul>
         </div>        				
     </div><!--/container-->		

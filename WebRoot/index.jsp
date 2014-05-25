@@ -8,9 +8,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%try{ %>
 <html>
-<% UserType  userType = (UserType)session.getAttribute("UserType");
-   Tester tester  = (Tester)session.getAttribute("Tester");
- %>
+<%
+	UserType  userType = (UserType)session.getAttribute("UserType");
+	Tester tester  = (Tester)session.getAttribute("Tester");
+%>
   <head>
    <title>TCTEST</title>
 
@@ -70,10 +71,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="container">			        
         <div class="row-fluid">
             <ul class="loginbar inline">
-                <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i> chengran327@gmail.com</a></li>	
+                <li><a href="mailto:info@anybiz.com"><i class="icon-envelope-alt"></i>chengran327@gmail.com</a></li>	
                 <li><a><i class="icon-phone-sign"></i> 021 4202 2656</a></li>	
                 <%if(userType==null){ %>
-                <li><a href="security.do?method=goToLogin"><i class="icon-user"></i> 登录</a></li>	
+                <li><a href="login.do?method=testerLogin"><i class="icon-user"></i> 登录</a></li>	
                 <%}else if(userType.equals(UserType.Tester)) {%>
                   <li><a href="security.do?method=testerLogout"><i class="icon-user"></i>注销</a></li>
                    <li><a href="personal_center.do?method=testerFindAllQuestionnaire"><%=tester.getTesterName()%></a></li>	
@@ -186,7 +187,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="container">
 		<div class="span9">
             <span>吐槽网是一个众包测试网站，服务超过两百家中型企业</span>
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi  vehicula sem ut volutpat. Ut non libero magna fusce condimentum eleifend enim a feugiat.</p>
         </div>
         <a href="#" class="btn-buy hover-effect">详情</a>
     </div>
@@ -201,22 +201,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!-- Our Services -->
             <div class="row-fluid">
                 <div class="headline"><h3>服务简介</h3></div>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem donec id elit non mi porta gravida at eget metus.</p><br />
+                <p>吐槽网专为测试而生，用户可以在这里发布自己的测试任务，收集他人的测试报告，从而对自己的产品进行改进。同时用户也可以参与到其他人的测试任务之中，获取积分，赢得礼品。</p><br />
                 <div class="row-fluid servive-block servive-block-in">
                     <div class="span4">
-                        <h4><a href="#">Lorem sequat ipsum de</a></h4>
+                        <h4><a href="#">发布测试</a></h4>
                         <p><i class="icon-bell"></i></p>
-                        <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine.</p>
+                        <p>发布者可以发布自己的测试任务</p>
                     </div>
                     <div class="span4">
-                        <h4><a href="#">Vivamus imperdiet gravi</a></h4>
+                        <h4><a href="#">参与测试</a></h4>
                         <p><i class="icon-bullhorn"></i></p>
-                        <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine.</p>
+                        <p>用户可以参与到已经发布的测试任务</p>
                     </div>
                     <div class="span4">
-                        <h4><a href="#">Donec idslacs elit nomi</a></h4>
+                        <h4><a href="#">礼品兑换</a></h4>
                         <p><i class=" icon-lightbulb"></i></p>
-                        <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine.</p>
+                        <p>用户可以利用积分兑换想要的礼品</p>
                     </div>
                 </div><!--/welcome-block-->
             </div><!--/row-fluid-->        
@@ -225,7 +225,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="headline">
               <h3>测试产品列表</h3></div>
             <div class="row-fluid margin-bottom-40">
+            <%
+            	List<Product> products = (List<Product>)request.getAttribute("products");
+            	Iterator<Product> iterator = products.iterator();
+            	Product product = null;
+            %>
                 <ul id="list" class="bxslider recent-work">
+                <%
+                	while(iterator.hasNext())
+                	{
+                		product = iterator.next();
+                	
+                %>
                     <li>
                        <div class="booking-blocks">
              <div class="pull-left booking-img">
@@ -236,12 +247,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </ul>
              </div>
              <div style="overflow:hidden;">
-                <h2><a href="#">谷歌文档测试</a></h2>
-                <p>对谷歌文档进行测试并拿取丰厚奖励 <a href="#">详细信息</a></p>
+                <h2><a href="#"><%=product.getProductName() %></a></h2>
+                <!-- <p>对谷歌文档进行测试并拿取丰厚奖励 <a href="#">详细信息</a></p>  -->
              </div>
           </div>
                     </li>
- <li>
+                    <%
+					}
+                    %>
+ 					<li>
                        <div class="booking-blocks">
              <div class="pull-left booking-img">
                 <img src="assets/img/new/img4.jpg" alt="" />
@@ -305,7 +319,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         %>
             <!-- Posts -->
 			<div class="posts margin-bottom-30">
-                <div class="headline"><h3>近期任务</h3></div>
+                <div class="headline"><h3>近期招募任务</h3></div>
                 <%
                 	while(it.hasNext())
                 	{
@@ -314,7 +328,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <dl class="dl-horizontal">
                     <dt><a href="#"><img alt="" src="assets/img/sliders/elastislide/6.jpg" /></a></dt>
                     <dd>
-                        <p><a href="#"><%=recruitment.getActivityName()%></a></p> 
+                        <p><a href="recruitment.do?method=selectRecruitment&id=<%=recruitment.getActivityId()%>"><%=recruitment.getActivityName()%></a></p> 
                     </dd>
                 </dl>
                 <%
@@ -337,12 +351,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!-- Why Choose Us -->
             <div class="who margin-bottom-30">
                 <div class="headline"><h3>为何选择我们</h3></div>
-                <p>Pellentesque fermentum, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id.</p>
+                <p>我们拥有最全面的功能，最方便的服务以及众多的测试用户。在这里，你可以体会到测试的乐趣！</p>
                 <ul class="unstyled">
-                    <li><a href="#"><i class="icon-desktop"></i>Vivamus imperdiet condimentum</a></li>
-                    <li><a href="#"><i class="icon-bullhorn"></i>Anim pariatur cliche squid</a></li>
-                    <li><a href="#"><i class="icon-globe"></i>Eget placerat felis consectetur</a></li>
-                    <li><a href="#"><i class="icon-group"></i>Condimentum diam eget placerat</a></li>
+                    <li><a href="#"><i class="icon-desktop"></i>界面友好</a></li>
+                    <li><a href="#"><i class="icon-bullhorn"></i>操作简单</a></li>
+                    <li><a href="#"><i class="icon-globe"></i>功能强大</a></li>
+                    <li><a href="#"><i class="icon-group"></i>用户众多</a></li>
                 </ul>
             </div>
 

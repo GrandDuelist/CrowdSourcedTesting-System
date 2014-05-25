@@ -57,8 +57,8 @@ public class StaticTest {
 		// Product product = new Product();
 		// productDAO.addWebProduct("name", "icon", "http://www.baidu.com",
 		// "测试百度");
-
-		Transaction trans = null;
+/*
+	/*	Transaction trans = null;
 		TestTask testTask = null;
 		try {
 			trans = session.beginTransaction();

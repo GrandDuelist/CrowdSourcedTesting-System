@@ -72,13 +72,13 @@
                 <div class="nav-collapse collapse">                                     
                     <ul class="nav">
                         <li class="active">
-                           <a href="index.html">主页
+                           <a href="index.jsp">主页
                             
                             </a>
                            
                       </li>
                         <li>
-                            <a href="gifts.html">礼品中心
+                            <a href="gifts.do?method=selectAllGifts">礼品中心
                                                         
                             </a>
                                        
@@ -88,7 +88,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="page_hirelist.html">招募帖                          
+                            <a href="recruitment.do?method=selectAllRecruitment">招募帖                          
                             </a>
                         </li>
                         <li>
@@ -96,7 +96,7 @@
       
                         </li>
                         <li>
-                            <a href="page_contact.html">联系我们
+                            <a href="questionnaire.do?method=pageQuestionnaire">问卷调查
                             </a>
                             
                                                     
@@ -159,7 +159,7 @@
             </div>
             <hr />
             <h4>没有帐号 ? 忘记密码 ?</h4>
-            <p>不用担心， 点击这里 <a class="color-green" href="registration.html">注册</a> 或 <a class="color-green" href="page_findpassword.html">修改密码</a></p>
+            <p>不用担心， 点击这里 <a class="color-green" href="registration_tester.jsp">注册</a> 或 <a class="color-green" href="page_findpassword.jsp">修改密码</a></p>
         </form>
     </div><!--/row-fluid-->
 </div><!--/container-->		

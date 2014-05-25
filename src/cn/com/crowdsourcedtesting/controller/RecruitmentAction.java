@@ -7,6 +7,7 @@ package cn.com.crowdsourcedtesting.controller;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +18,10 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import cn.com.crowdsourcedtesting.DAO.GiftDAO;
+import cn.com.crowdsourcedtesting.DAO.ProductDAO;
 import cn.com.crowdsourcedtesting.DAO.RecruitmentDAO;
 import cn.com.crowdsourcedtesting.bean.Gift;
+import cn.com.crowdsourcedtesting.bean.Product;
 import cn.com.crowdsourcedtesting.bean.Recruitment;
 import cn.com.crowdsourcedtesting.model.RecruitmentHandler;
 import cn.com.crowdsourcedtesting.struts.form.GiftForm;
@@ -142,23 +145,17 @@ public class RecruitmentAction extends DispatchAction {
 		Date enddate = null;
 
 		try {
-
 			java.text.SimpleDateFormat sdf=new java.text.SimpleDateFormat("MM/dd/yyyy");
 
 			startdate = sdf.parse(sdate);
-			enddate = sdf.parse(edate);
-
-			
+			enddate = sdf.parse(edate);			
 		} catch (ParseException e) {
-
 			System.out.println("String to Date error");
-
 		}
 		 
-		String company = recruitmentForm.getCompany();
-		int publisherId = 8;		
+		String company = recruitmentForm.getCompany();	
 		
-//		handler.addNewRecruitment(title, online, startdate, enddate, place, brief, content, company, publisherId, request);
+		handler.addNewRecruitment(title, online, startdate, enddate, place, brief, content, company, request);
 		
 		return this.gotoList(mapping, form, request, response);
 	}
