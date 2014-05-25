@@ -395,6 +395,8 @@
       scope="request"
       type="cn.com.crowdsourcedtesting.controller.BugReportPublishAction">
       <set-property property="cancellable" value="true" />
+      <forward name="taskPub" path="/publisher_taskpub_reward.jsp"></forward>
+      <forward name="productSuccess" path="/publisher_taskpub_reward.jsp"></forward>
       <forward name="bugPubSuccess" path="/publisher_taskpub_desktop.jsp"></forward>
       <forward name="bugPubError" path="/tester_bugpub.jsp"></forward>
     </action>
