@@ -205,6 +205,15 @@ public class TestTaskDAO extends BaseHibernateDAO {
 				String queryString = "from TestTask as model where model."
 						+ propertyName + " like ?";
 				Query query = getSession().createQuery(queryString);
+				query.setParameter(0, "%"+value+"%");
+				return query.list().size();
+			}
+			catch(RuntimeException re) {
+				log.error("find by page failed", re);
+				throw re;
+			}
+
+		}
 
 	public TestTask addTestTask(Product product, Publisher publisher,
 			Date beginTime, Date endTime, double perReward, double wholeCredit) {
@@ -221,17 +230,20 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			session.save(testTask);
 
 			trans.commit();
-			
+			log.debug("add testtask successful");
 			return testTask;
-		
 			
-			}}catch (RuntimeException re){
-			testTask = null;
-			trans.rollback();
-			throw re;
+			}} catch (RuntimeException re) {
+				log.error("attach failed", re);
+				if (trans != null) {
+					trans.rollback();
+				}
+				testTask = null;
+				throw re;
+			}
+			return testTask;
 		}
-		return testTask;
-	}
+	
 
 	
 	
@@ -258,7 +270,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 	}
 		
 	}
-	// 得到未审核Web任务的总条�
+	// 得到未审核Web任务的总条�
 		public int getUncheckedWebTotalRows() {
 
 			Number c = (Number) getSession()
@@ -289,30 +301,13 @@ public class TestTaskDAO extends BaseHibernateDAO {
 				throw re;
 			}
 		}
-		// 得到未审核Android任务的总条�
-			public int getUncheckedAndroidTotalRows() {
-			log.debug("add testtask successful");
-		} catch (RuntimeException re) {
-			log.error("attach failed", re);
-			if (trans != null) {
-				trans.rollback();
-			}
-			testTask = null;
-			throw re;
-		}
-		return testTask;
-	}
+		
+			
 
-				query.setParameter(0, "%"+value+"%");
-				return query.list().size();
-			}
-			catch(RuntimeException re) {
-				log.error("find by page failed", re);
-				throw re;
-			}
-
-		}
-				Number c = (Number) getSession()
+		
+		// 得到未审核Android任务的总条�
+					public int getUncheckedAndroidTotalRows() {
+						Number c = (Number) getSession()
 						.createQuery(
 								"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and  TASK_TYPE="+TaskType.Android)
 						.uniqueResult();
@@ -340,7 +335,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 					throw re;
 				}
 			}
-			// 得到未审核Desktop任务的总条�
+			// 得到未审核Desktop任务的总条�
 				public int getUncheckedDesktopTotalRows() {
 
 					Number c = (Number) getSession()

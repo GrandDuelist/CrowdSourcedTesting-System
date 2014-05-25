@@ -67,15 +67,33 @@ public class TestTaskRouter extends DispatchAction {
 	 * @param response
 	 * @return
 	 */
-	public ActionForward addNewComment(ActionMapping mapping, ActionForm form,
+	public ActionForward AddNewComment(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+	
+	TaskForm giftForm = (TaskForm) form;// TODO Auto-generated method stub
+	String comment = giftForm.getComment();
+	System.out.println("add comment: "+comment);
+	
+	return mapping.findForward("allcomment");
+	}
 	public ActionForward checkWebList(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		TaskForm giftForm = (TaskForm) form;// TODO Auto-generated method stub
-		String comment = giftForm.getComment();
-		System.out.println("add comment: "+comment);
 		
-		return mapping.findForward("allcomment");
+		
+		PageIdForm pageIDForm = (PageIdForm) form;
+		
+		
+		// 交给事务处理
+		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodOne);    //调用第一个接�
+
+		return mapping.findForward("list");
+		
+		
 	}
+	
+	
+	
+	
 	
 	
 	/** 
@@ -114,15 +132,10 @@ public class TestTaskRouter extends DispatchAction {
 			request.setAttribute("isLegal", "illegal");
 		
 		return mapping.findForward("allcomment");
-		PageIdForm pageIDForm = (PageIdForm) form;
-		
-		
-		// 交给事务处理
-		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodOne);    //调用第一个接�
-
-		return mapping.findForward("list");
+	
 	}
 	
+
 	
 	/**
 	 * 桌面任务审核列表处理
@@ -137,7 +150,7 @@ public class TestTaskRouter extends DispatchAction {
 		PageIdForm pageIDForm = (PageIdForm) form;
 
 		// 交给事务处理
-		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodTwo);    //调用第二个接�
+		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodTwo);    //调用第二个接�
 
 		return mapping.findForward("list");
 	}
@@ -156,7 +169,7 @@ public class TestTaskRouter extends DispatchAction {
 		PageIdForm pageIDForm = (PageIdForm) form;
 
 		// 交给事务处理
-		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodThree);    //调用第三个接�
+		myHandler.ListHandle(pageIDForm, request, MethodNumber.MethodThree);    //调用第三个接�
 
 		return mapping.findForward("list");
 	}
@@ -174,7 +187,7 @@ public class TestTaskRouter extends DispatchAction {
 		PageIdForm pageIDForm = (PageIdForm) form;
 
 		// 交给事务处理
-		myHandler.detailHandle(pageIDForm, request, MethodNumber.MethodOne);    //调用第二个接�
+		myHandler.detailHandle(pageIDForm, request, MethodNumber.MethodOne);    //调用第二个接�
 
 		return mapping.findForward("detail");
 	}
@@ -193,7 +206,7 @@ public class TestTaskRouter extends DispatchAction {
 		PageIdForm pageIDForm = (PageIdForm) form;
 
 		// 交给事务处理
-		myHandler.detailHandle(pageIDForm, request, MethodNumber.MethodTwo);    //调用第二个接�
+		myHandler.detailHandle(pageIDForm, request, MethodNumber.MethodTwo);    //调用第二个接�
 
 		return mapping.findForward("detail");
 	}
@@ -211,7 +224,7 @@ public class TestTaskRouter extends DispatchAction {
 		PageIdForm pageIDForm = (PageIdForm) form;
 
 		// 交给事务处理
-		myHandler.detailHandle(pageIDForm, request, MethodNumber.MethodThree);    //调用第三个接�
+		myHandler.detailHandle(pageIDForm, request, MethodNumber.MethodThree);    //调用第三个接�
 
 		return mapping.findForward("detail");
 	}
@@ -243,7 +256,7 @@ public class TestTaskRouter extends DispatchAction {
 
 			} else if (form == null) { // 如果传过来的表单为空
 
-				// 如果表单为空，则直接跳转到列�
+				// 如果表单为空，则直接跳转到列�
 				Page currentPage = (Page) session.getAttribute("currentPage");
 				CheckRegisterListForm p = new CheckRegisterListForm();
 				p.setPage(currentPage.getCurrentPage() + "");
@@ -278,7 +291,7 @@ public class TestTaskRouter extends DispatchAction {
 					q.setIsPassed(false);
 
 				}
-				qd.save(q); // 修改数据�
+				qd.save(q); // 修改数据�
 
 				Page currentPage = (Page) session.getAttribute("currentPage");
 				PageIdForm p = new PageIdForm();
