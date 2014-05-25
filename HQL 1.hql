@@ -1,0 +1,1 @@
+from TestTask testTask where testTask.taskType=0 order by testTask.taskId desc

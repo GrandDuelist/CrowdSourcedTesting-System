@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
+
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -303,9 +309,9 @@
               <div class="panel-heading">
                 <div class="panel-title"> <i class="fa fa-tasks"></i> 任务列表 </div>
                 <ul class="nav panel-tabs">
-                  <li class="active"><a href="#tab1" data-toggle="tab"><i class="fa fa-globe"></i> Web任务</a></li>
-                  <li><a href="#tab2" data-toggle="tab"><i class="fa fa-android"></i> Android任务</a></li>
-                  <li><a href="#tab3" data-toggle="tab"><i class="fa fa-laptop"></i> 桌面任务</a></li>
+                  <li <% if ("0".equals(request.getAttribute("type"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=0&page=1" data-toggle="tab"><i class="fa fa-globe"></i> Web任务</a></li>
+                  <li <% if ("1".equals(request.getAttribute("type"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=1&page=1" data-toggle="tab"><i class="fa fa-android"></i> Android任务</a></li>
+                  <li <% if ("2".equals(request.getAttribute("type"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=2&page=1" data-toggle="tab"><i class="fa fa-laptop"></i> 桌面任务</a></li>
                 </ul>
               </div>
               <div class="panel-body">
@@ -323,9 +329,15 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/2.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> Web百度管家测试</b><br />
+                      <% List<TestTask> list = (List<TestTask>)session.getAttribute("PublisherWebTestTaskByPage"); 
+                      request.getSession().removeAttribute("PublisherWebTestTaskByPage");
+                      int i=0;
+                      for (TestTask testTask : list) { 
+                      i++;%>
+                      <tr>
+                        <input type="hidden" name="taskID" value="<%= testTask.getTaskId() %>">
+                          <td class="text-center"><img src="<%= testTask.getProduct().getIcon() %>" width="50" height="50" alt="avatar" /></td>
+                          <td class="info"><b><%= testTask.getProduct().getProductName() %></b><br />
                             <span class="text-muted"><i class="fa fa-home"></i> 百度公司</span></td>
                           <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-o text-blue"></i> 4 </td>
                           <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 500</td>
@@ -335,77 +347,35 @@
                           <td class="text-right text-center"><div class="btn-group">
                               <button type="button" class="btn btn-primary btn-gradient dropdown-toggle" data-toggle="dropdown"> <span class="glyphicons glyphicons-cogwheel"></span> 详细</button>
                               <ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
-                                <li><a href="publisher_task_close.html"><i class="fa fa-ban"></i> 关闭 </a></li>
-                                <li><a href="publisher_task_edit.html"><i class="fa fa-edit"></i> 修改 </a></li>
-                                <li><a><i class="fa fa-level-up"></i> 重启 </a></li>
+                                <li>
+                                <form action="editTask.do" name="close<%=i%>" method="post">
+                                <input type="hidden" name="taskID" value="<%= testTask.getTaskId()%>"/>
+                                <input type="hidden" name="method" value="submitCloseForm" />
+                                </form>
+                                  <a href="javascript:void(document.close<%=i%>.submit())">
+                                    <i class="fa fa-ban"></i> 关闭 </a>
+                                </li>
+                                <li>
+                                  <a href="publisher_task_edit.html"><i class="fa fa-edit"></i> 修改 </a>
+                                </li>
+                                <li>
+                                  <a><i class="fa fa-level-up"></i> 重启 </a>
+                                </li>
                               </ul>
                             </div></td>
                         </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/1.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 百词斩测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>超有爱</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-half-empty text-blue"></i> <i class="fa fa-star-o text-blue"></i> 3.5 </td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 520</td>
-                          <td><div class="progress">
-                              <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 10%"><span class="sr-only">10% Complete</span> </div>
-                            </div></td>
-                          <td class="text-right text-center"><div class="btn-group">
-                              <button type="button" class="btn btn-primary btn-gradient dropdown-toggle" data-toggle="dropdown"> <span class="glyphicons glyphicons-cogwheel"></span> 详细</button>
-                              <ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
-                                <li><a href="publisher_task_close.html"><i class="fa fa-ban"></i> 关闭 </a></li>
-                                <li><a href="publisher_task_edit.html"><i class="fa fa-edit"></i> 修改 </a></li>
-                                <li><a><i class="fa fa-level-up"></i> 重启 </a></li>
-                              </ul>
-                            </div></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/4.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 人人网站测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>人人公司</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i> 2 </td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 30</td>
-                          <td><div class="progress">
-                              <div class="progress-bar progress-bar-alert" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 30%"><span class="sr-only">30% Complete</span> </div>
-                            </div></td>
-                          <td class="text-right text-center"><div class="btn-group">
-                              <button type="button" class="btn btn-primary btn-gradient dropdown-toggle" data-toggle="dropdown"> <span class="glyphicons glyphicons-cogwheel"></span> 详细</button>
-                              <ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
-                                <li><a href="publisher_task_close.html"><i class="fa fa-ban"></i> 关闭 </a></li>
-                                <li><a href="publisher_task_edit.html"><i class="fa fa-edit"></i> 修改 </a></li>
-                                <li><a><i class="fa fa-level-up"></i> 重启 </a></li>
-                              </ul>
-                            </div></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/5.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 火狐桌面浏览器测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i> 3 </td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 370</td>
-                          <td><div class="progress">
-                              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 50%"><span class="sr-only">50% Complete</span> </div>
-                            </div></td>
-                          <td class="text-right text-center"><div class="btn-group">
-                              <button type="button" class="btn btn-primary btn-gradient dropdown-toggle" data-toggle="dropdown"> <span class="glyphicons glyphicons-cogwheel"></span> 详细</button>
-                              <ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
-                                <li><a href="publisher_task_close.html"><i class="fa fa-ban"></i> 关闭 </a></li>
-                                <li><a href="publisher_task_edit.html"><i class="fa fa-edit"></i> 修改 </a></li>
-                                <li><a><i class="fa fa-level-up"></i> 重启 </a></li>
-                              </ul>
-                            </div></td>
-                        </tr>
+                      <% } %>
                       </tbody>
                     </table>
                     <div class="text-right">
                     	
                       <ul class="pagination pagination-alt margin-bottom">
                         <li><a href="#"><i class="fa fa-caret-left"></i> </a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
+                        <li <% if ("1".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=<%=request.getAttribute("type") %>&page=1">1</a></li>
+                        <li <% if ("2".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=<%=request.getAttribute("type") %>&page=2">2</a></li>
+                        <li <% if ("3".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=<%=request.getAttribute("type") %>&page=3">3</a></li>
+                        <li <% if ("4".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=<%=request.getAttribute("type") %>&page=4">4</a></li>
+                        <li <% if ("5".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=<%=request.getAttribute("type") %>&page=5">5</a></li>
                         <li><a href="#"><i class="fa fa-caret-right"></i> </a></li>
                       </ul>
                     
@@ -433,60 +403,6 @@
                           <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 500</td>
                           <td><div class="progress">
                               <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 90%"><span class="sr-only">80% Complete</span> </div>
-                            </div></td>
-                          <td class="text-right text-center"><div class="btn-group">
-                              <button type="button" class="btn btn-primary btn-gradient dropdown-toggle" data-toggle="dropdown"> <span class="glyphicons glyphicons-cogwheel"></span> 详细</button>
-                              <ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
-                                <li><a href="publisher_task_close.html"><i class="fa fa-ban"></i> 关闭 </a></li>
-                                <li><a href="publisher_task_edit.html"><i class="fa fa-edit"></i> 修改 </a></li>
-                                <li><a><i class="fa fa-level-up"></i> 重启 </a></li>
-                              </ul>
-                            </div></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/1.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 百词斩测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>超有爱</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-half-empty text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 520</td>
-                          <td><div class="progress">
-                              <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 10%"><span class="sr-only">10% Complete</span> </div>
-                            </div></td>
-                          <td class="text-right text-center"><div class="btn-group">
-                              <button type="button" class="btn btn-primary btn-gradient dropdown-toggle" data-toggle="dropdown"> <span class="glyphicons glyphicons-cogwheel"></span> 详细</button>
-                              <ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
-                                <li><a href="publisher_task_close.html"><i class="fa fa-ban"></i> 关闭 </a></li>
-                                <li><a href="publisher_task_edit.html"><i class="fa fa-edit"></i> 修改 </a></li>
-                                <li><a><i class="fa fa-level-up"></i> 重启 </a></li>
-                              </ul>
-                            </div></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/4.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 人人网站测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>人人公司</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 30</td>
-                          <td><div class="progress">
-                              <div class="progress-bar progress-bar-alert" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 30%"><span class="sr-only">30% Complete</span> </div>
-                            </div></td>
-                          <td class="text-right text-center"><div class="btn-group">
-                              <button type="button" class="btn btn-primary btn-gradient dropdown-toggle" data-toggle="dropdown"> <span class="glyphicons glyphicons-cogwheel"></span> 详细</button>
-                              <ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
-                                <li><a href="publisher_task_close.html"><i class="fa fa-ban"></i> 关闭 </a></li>
-                                <li><a href="publisher_task_edit.html"><i class="fa fa-edit"></i> 修改 </a></li>
-                                <li><a><i class="fa fa-level-up"></i> 重启 </a></li>
-                              </ul>
-                            </div></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/5.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 火狐桌面浏览器测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 370</td>
-                          <td><div class="progress">
-                              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 50%"><span class="sr-only">50% Complete</span> </div>
                             </div></td>
                           <td class="text-right text-center"><div class="btn-group">
                               <button type="button" class="btn btn-primary btn-gradient dropdown-toggle" data-toggle="dropdown"> <span class="glyphicons glyphicons-cogwheel"></span> 详细</button>
@@ -534,60 +450,6 @@
                           <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 500</td>
                           <td><div class="progress">
                               <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 90%"><span class="sr-only">80% Complete</span> </div>
-                            </div></td>
-                          <td class="text-right text-center"><div class="btn-group">
-                              <button type="button" class="btn btn-primary btn-gradient dropdown-toggle" data-toggle="dropdown"> <span class="glyphicons glyphicons-cogwheel"></span> 详细</button>
-                              <ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
-                                <li><a href="publisher_task_close.html"><i class="fa fa-ban"></i> 关闭 </a></li>
-                                <li><a href="publisher_task_edit.html"><i class="fa fa-edit"></i> 修改 </a></li>
-                                <li><a><i class="fa fa-level-up"></i> 重启 </a></li>
-                              </ul>
-                            </div></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/1.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 百词斩测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>超有爱</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-half-empty text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 520</td>
-                          <td><div class="progress">
-                              <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 10%"><span class="sr-only">10% Complete</span> </div>
-                            </div></td>
-                          <td class="text-right text-center"><div class="btn-group">
-                              <button type="button" class="btn btn-primary btn-gradient dropdown-toggle" data-toggle="dropdown"> <span class="glyphicons glyphicons-cogwheel"></span> 详细</button>
-                              <ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
-                                <li><a href="publisher_task_close.html"><i class="fa fa-ban"></i> 关闭 </a></li>
-                                <li><a href="publisher_task_edit.html"><i class="fa fa-edit"></i> 修改 </a></li>
-                                <li><a><i class="fa fa-level-up"></i> 重启 </a></li>
-                              </ul>
-                            </div></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/4.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 人人网站测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>人人公司</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 30</td>
-                          <td><div class="progress">
-                              <div class="progress-bar progress-bar-alert" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 30%"><span class="sr-only">30% Complete</span> </div>
-                            </div></td>
-                          <td class="text-right text-center"><div class="btn-group">
-                              <button type="button" class="btn btn-primary btn-gradient dropdown-toggle" data-toggle="dropdown"> <span class="glyphicons glyphicons-cogwheel"></span> 详细</button>
-                              <ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
-                                <li><a href="publisher_task_close.html"><i class="fa fa-ban"></i> 关闭 </a></li>
-                                <li><a href="publisher_task_edit.html"><i class="fa fa-edit"></i> 修改 </a></li>
-                                <li><a><i class="fa fa-level-up"></i> 重启 </a></li>
-                              </ul>
-                            </div></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/5.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 火狐桌面浏览器测试</b><br />
-                            <span class="text-muted"><i class="fa fa-home"></i>火狐公司</span></td>
-                          <td><i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star text-blue"></i> <i class="fa fa-star-o text-blue"></i> <i class="fa fa-star-o text-blue"></i></td>
-                          <td><i class="fa fa-group fa-lg text-blue padding-right-sm"></i> 370</td>
-                          <td><div class="progress">
-                              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 50%"><span class="sr-only">50% Complete</span> </div>
                             </div></td>
                           <td class="text-right text-center"><div class="btn-group">
                               <button type="button" class="btn btn-primary btn-gradient dropdown-toggle" data-toggle="dropdown"> <span class="glyphicons glyphicons-cogwheel"></span> 详细</button>

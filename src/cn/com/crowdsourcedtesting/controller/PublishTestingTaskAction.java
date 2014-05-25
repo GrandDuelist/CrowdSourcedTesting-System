@@ -29,6 +29,7 @@ import cn.com.crowdsourcedtesting.DAO.TestTaskDAO;
 import cn.com.crowdsourcedtesting.bean.Product;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.model.GeneralHelperHandler;
+import cn.com.crowdsourcedtesting.modelhelper.TaskType;
 import cn.com.crowdsourcedtesting.struts.form.PublishTestingTaskForm;
 
 /**
@@ -48,13 +49,13 @@ public class PublishTestingTaskAction extends DispatchAction {
 	private final String productSystemErrorMessage = "系统错误";
 	private final String productIconFileTypeErrorMessage = "上传图标文件类型错误";
 	private final String productApkFileTypeErrorMessage = "上传应用文件类型错误";
-	private final String productNoIconFileErrorMessage = "未上传图标";
-	private final String productNoApkFileErrorMessage = "未上传应用程序";
+	private final String productNoIconFileErrorMessage = "未上传图�;
+	private final String productNoApkFileErrorMessage = "未上传应用程�;
 	private final String productFileUploadErrorMessage = "文件上传错误";
 
 	private final String taskFormErrorMessage = "表单星标内容不能为空";
 	private final String taskDaterangeFormatErrorMessage = "时间范围格式错误，请重新输入";
-	private final String taskSystemErrorMessage = "系统错误,请重试或者稍后再试";
+	private final String taskSystemErrorMessage = "系统错误,请重试或者稍后再�;
 
 	private final String goToPubWebProductForward = "pubWeb";
 	private final String goToPubAndroidProductForward = "pubAndroid";
