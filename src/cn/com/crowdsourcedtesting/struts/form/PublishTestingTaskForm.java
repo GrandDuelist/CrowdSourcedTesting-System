@@ -5,16 +5,17 @@
 package cn.com.crowdsourcedtesting.struts.form;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.upload.FormFile;
 
-/** 
- * MyEclipse Struts
- * Creation date: 05-24-2014
+/**
+ * MyEclipse Struts Creation date: 05-24-2014
  * 
  * XDoclet definition:
+ * 
  * @struts.form name="publishTestingTaskForm"
  */
 public class PublishTestingTaskForm extends ActionForm {
@@ -38,19 +39,24 @@ public class PublishTestingTaskForm extends ActionForm {
 
 	/** webName property */
 	private String webName;
-	
+
 	private Integer perReward;
-	
+
 	private Integer wholeReward;
-	
+
 	private String daterange;
+
+	private String appName;
+
+	private FormFile apkFile;
 
 	/*
 	 * Generated Methods
 	 */
 
-	/** 
+	/**
 	 * Method validate
+	 * 
 	 * @param mapping
 	 * @param request
 	 * @return ActionErrors
@@ -61,8 +67,9 @@ public class PublishTestingTaskForm extends ActionForm {
 		return null;
 	}
 
-	/** 
+	/**
 	 * Method reset
+	 * 
 	 * @param mapping
 	 * @param request
 	 */
@@ -70,65 +77,77 @@ public class PublishTestingTaskForm extends ActionForm {
 		// TODO Auto-generated method stub
 	}
 
-	/** 
+	/**
 	 * Returns the icon.
+	 * 
 	 * @return String
 	 */
 	public FormFile getIcon() {
 		return icon;
 	}
 
-	/** 
+	/**
 	 * Set the icon.
-	 * @param icon The icon to set
+	 * 
+	 * @param icon
+	 *            The icon to set
 	 */
 	public void setIcon(FormFile icon) {
 		this.icon = icon;
 	}
 
-	/** 
+	/**
 	 * Returns the webUrl.
+	 * 
 	 * @return String
 	 */
 	public String getWebUrl() {
 		return webUrl;
 	}
 
-	/** 
+	/**
 	 * Set the webUrl.
-	 * @param webUrl The webUrl to set
+	 * 
+	 * @param webUrl
+	 *            The webUrl to set
 	 */
 	public void setWebUrl(String webUrl) {
 		this.webUrl = webUrl;
 	}
 
-	/** 
+	/**
 	 * Returns the description.
+	 * 
 	 * @return String
 	 */
 	public String getDescription() {
 		return description;
 	}
 
-	/** 
+	/**
 	 * Set the description.
-	 * @param description The description to set
+	 * 
+	 * @param description
+	 *            The description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	/** 
+	/**
 	 * Returns the webName.
+	 * 
 	 * @return String
 	 */
 	public String getWebName() {
 		return webName;
 	}
 
-	/** 
+	/**
 	 * Set the webName.
-	 * @param webName The webName to set
+	 * 
+	 * @param webName
+	 *            The webName to set
 	 */
 	public void setWebName(String webName) {
 		this.webName = webName;
@@ -157,6 +176,21 @@ public class PublishTestingTaskForm extends ActionForm {
 	public void setDaterange(String daterange) {
 		this.daterange = daterange;
 	}
-	
-	
+
+	public String getAppName() {
+		return appName;
+	}
+
+	public void setAppName(String appName) {
+		this.appName = appName;
+	}
+
+	public FormFile getApkFile() {
+		return apkFile;
+	}
+
+	public void setApkFile(FormFile apkFile) {
+		this.apkFile = apkFile;
+	}
+
 }

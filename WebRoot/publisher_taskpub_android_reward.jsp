@@ -309,27 +309,32 @@
             </div>
             <div class="panel-body">
             <form action="publishTestingTask.do"  method="post" >
-                <input type="hidden" name="method" value="pubWebTask" />
+                <input type="hidden" name="method" value="pubAndroidTask" />
               <h2 class="text-primary"> 请认真填写一下内容</h2>
               <hr/>
               <div class="row">
                 <div class="col-md-8 col-md-offset-2">
+                <% String message = (String) session.getAttribute("TaskPublishErrorMessage");
+                session.removeAttribute("TaskPublishErrorMessage");
+                if (message != null && !"".equals(message)) { %>
+                	<p class="alert alert-warning"><%= message %></p>
+                <% } %>
                   <p class="alert alert-success">您的余额为： <b><span class="text-primary">200</span></b></p>
                    <div class="input-group col-lg-5"> <span class="input-group-addon"><i class="fa fa-calendar "></i> </span>
-                          <input type="text" id="datepicker_2" class="form-control margin-top-none" placeholder="10/25/2013 - 10/25/2013" name="daterange" />
+                          <input type="text" id="datepicker_2" class="form-control margin-top-none" required placeholder="10/25/2013 - 10/25/2013" name="daterange" />
                    </div>
                    <br/>
                    <div class="form-group">
                       <label for="spinner1">参与奖励</label>
                         <div class="input-group col-lg-5"> <span class="input-group-addon"><i class="fa fa-usd"></i> </span>
-                          <input id="spinner1" class="form-control ui-spinner-input" name="wholeReward" value="300" />
+                          <input class="form-control ui-spinner-input" required type="number" name="wholeReward" value="300" />
                         </div>
                     </div>
                      <br/>
                    <div class="form-group">
                       <label for="spinner1">报告提交奖励</label>
                         <div class="input-group col-lg-5"> <span class="input-group-addon"><i class="fa fa-usd"></i> </span>
-                          <input  class="form-control ui-spinner-input" name="perReward" value="300" />
+                          <input  class="form-control ui-spinner-input" name="perReward" required type="number" value="300" />
                         </div>
                     </div>
                   <hr></hr>

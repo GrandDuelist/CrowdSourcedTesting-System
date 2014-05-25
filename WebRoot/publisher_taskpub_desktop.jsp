@@ -312,7 +312,16 @@
               <hr/>
               <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                  <p class="alert alert-success">请<b>正确填写</b>信息</p>
+                <form enctype="multipart/form-data" action="publishTestingTask.do"  method="post" >
+                <input type="hidden" name="method" value="desktopSubmitForm" />
+                  <%
+                String value = (String) session.getAttribute("ProductPublishErrorMessage");
+                session.removeAttribute("ProductPublishErrorMessage");
+                if (value != null && !"".equals(value)) { %>
+                    <p class="alert alert-warning"><%=value %></p>
+                <% } else { %>
+                    <p class="alert alert-success">请<b>正确填写</b>信息</p>
+                <% } %>
                   <div class="form-group">
                     <label for="web_url"> 下载链接 </label>
                     <div class="input-group"> <span class="input-group-addon"> <i class="fa fa-link"></i> </span>
@@ -356,7 +365,7 @@
                   <div class="pull-right">
                   	<button class="btn btn-info btn-gradient btn-lg" type="button">下一步</button>
                   </div>
-                  
+                  </form>
                 </div>
               </div>
               <div class="row"><hr></hr></div>
