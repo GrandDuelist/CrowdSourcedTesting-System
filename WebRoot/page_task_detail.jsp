@@ -8,8 +8,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles"%>
 
 <%
-	TestTask testTask = (TestTask) session
-			.getAttribute("TaskDetail");
+	TestTask testTask = (TestTask) session.getAttribute("TaskDetail");
 	session.removeAttribute("TaskDetail");
 	if (testTask == null) {
 		response.sendRedirect("");
@@ -168,10 +167,10 @@
 			<!-- Left Sidebar -->
 			<div class="span9">
 				<div class="blog margin-bottom-30">
-					<h3><%=testTask.getProduct().getProductName() %></h3>
+					<h3><%=testTask.getProduct().getProductName()%></h3>
 					<ul class="unstyled inline blog-info">
-						<li><i class="icon-calendar"></i><%=testTask.getTaskStartTime() %></li>
-						<li><i class="icon-pencil"></i><%=testTask.getPublisher().getPublisherName() %></li>
+						<li><i class="icon-calendar"></i><%=testTask.getTaskStartTime()%></li>
+						<li><i class="icon-pencil"></i><%=testTask.getPublisher().getPublisherName()%></li>
 						<li><i class="icon-comments"></i> <a href="#">24 Comments</a>
 						</li>
 					</ul>
@@ -183,7 +182,7 @@
 					<div class="blog-img">
 						<img src="assets/img/posts/1.jpg" alt="" />
 					</div>
-					<p><%=testTask.getProduct().getDescription() %></p>
+					<p><%=testTask.getProduct().getDescription()%></p>
 
 					<blockquote class="hero">
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit
@@ -274,6 +273,18 @@
 				<!--/media-->
 
 				<hr />
+				<%
+					Tester tester = (Tester) session.getAttribute("Tester");
+					if (tester == null) {
+				%>
+				<div class="text-center">
+					<a href="">
+						<button class="btn btn-large btn-primary" type="button">请先登录</button>
+					</a>
+				</div>
+				<%
+					}
+				%>
 
 				<!-- Leave a Comment -->
 				<div class="post-comment">
