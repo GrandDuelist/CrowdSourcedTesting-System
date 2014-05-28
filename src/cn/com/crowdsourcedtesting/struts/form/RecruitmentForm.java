@@ -45,13 +45,30 @@ public class RecruitmentForm extends ActionForm {
 	private String company;
 
 	private int perrow;
-	
+	private String subType;
+	private String page;
 	/*
 	 * Generated Methods
 	 */
 	
 	public int getPerrow() {
 		return perrow;
+	}
+
+	public String getSubType() {
+		return subType;
+	}
+
+	public void setSubType(String subType) {
+		this.subType = subType;
+	}
+
+	public String getPage() {
+		return page;
+	}
+
+	public void setPage(String page) {
+		this.page = page;
 	}
 
 	public void setPerrow(int perrow) {

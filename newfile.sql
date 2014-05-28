@@ -1,2 +1,2 @@
-select * from test_task;
-select * from product order by product_id
+select * from PRODUCT;
+select * from TEST_TASK

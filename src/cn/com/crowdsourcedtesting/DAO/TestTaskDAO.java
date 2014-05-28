@@ -366,4 +366,28 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
+	
+	public List<TestTask> findcheckedWebByPage(Page page) {
+		// TODO Auto-generated method stub
+		try {
+			List<TestTask> testTasks = new ArrayList<TestTask>();
+			String queryString = "from TestTask where (CHECK_ADMINISTRATOR_ID is not null and IS_PASSED=1) and TASK_TYPE="
+					+ TaskType.Web;
+			Query queryObject = getSession().createQuery(queryString);
+
+			testTasks = queryObject
+					.setFirstResult(
+							(page.getCurrentPage() - 1) * page.getPerRows())
+					.setMaxResults(page.getPerRows()).list();
+
+			return testTasks;
+
+		} catch (RuntimeException re) {
+
+			log.error("attach failed", re);
+
+			throw re;
+		}
+
+	}
 }

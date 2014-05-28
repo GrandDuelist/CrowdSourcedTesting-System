@@ -22,6 +22,7 @@ import cn.com.crowdsourcedtesting.bean.Gift;
 import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.crowdsourcedtesting.model.GiftHandler;
 import cn.com.crowdsourcedtesting.model.RecruitmentHandler;
+import cn.com.crowdsourcedtesting.modelhelper.MethodNumber;
 import cn.com.crowdsourcedtesting.struts.form.GiftForm;
 import cn.com.other.page.Page;
 
@@ -201,6 +202,17 @@ public class GiftAction extends DispatchAction {
 			return mapping.findForward("changegiftsuccess");
 		else
 			return mapping.findForward("changegiftfailed");
+		
+	}
+	
+	/**
+	 * 发货清单
+	 */
+	public ActionForward changeGiftList(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+	
+		return handler.generalListRouter(mapping, form, request, "changeGiftList",MethodNumber.MethodOne);
+		
 		
 	}
 	

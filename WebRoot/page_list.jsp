@@ -1,3 +1,9 @@
+<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.modelhelper.*,cn.com.crowdsourcedtesting.bean.*,java.util.List,cn.com.other.page.*;" contentType="text/html; charset=UTF-8"%>
+
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <!DOCTYPE html>
 <!--[if IE 7]> <html lang="en" class="ie7"> <![endif]-->  
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
@@ -18,7 +24,7 @@
     <link rel="stylesheet" href="assets/css/headers/header1.css" />
     <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" href="assets/css/style_responsive.css" />
-    <link rel="shortcut icon" href="favicon.ico" />        
+    <link rel="shortcut icon" href="favicon.ico" />
     <!-- CSS Implementing Plugins -->    
     <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="assets/plugins/portfolioSorting/css/sorting.css" />    
@@ -140,26 +146,28 @@
     <!-- Search Result -->
     <div class="row-fluid search-page">
         <h2>所有任务列表</h2>
-
-        <div class="alert alert-info alert-block">
-            <button data-dismiss="alert" class="close" type="button">×</button>
-            <h4>Info!</h4>
-            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
-        </div>        
-
-        <p class="margin-bottom-20">Et harum quidem rerum facilis est et expedita distinctio lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero consectetur adipiscing elit magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat. Pellentesque viverra vehicula sem ut volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat.</p>
-
-        <div class="row-fluid">
-          <div class="span6 booking-blocks">
+        
+        <%
+        List<TestTask> list = (List<TestTask>) session.getAttribute("TestTaskViewList");
+        if (list != null) {
+        	TestTask testTask = null;
+        	Iterator<TestTask> it = list.iterator();
+        	while (it.hasNext()) { %>
+        	<div class="row-fluid">
+             <%
+             for (int i=0; i<2 && it.hasNext(); i++) {
+        		testTask = it.next();
+        	%>
+        	<div class="span6 booking-blocks">
              <div class="pull-left booking-img">
-                <img src="assets/img/new/img1.jpg" alt="" />
+                <img src="<%=testTask.getProduct().getIcon() %>" alt="" />
                 <ul class="unstyled">
-                   <li><i class="icon-briefcase"></i> Dell, Google</li>
-                   <li><i class="icon-map-marker"></i> New York, US</li>
+                   <li><i class="icon-briefcase"></i><%=testTask.getPublisher().getPublisherCompany() %></li>
+                   <li><i class="icon-map-marker"></i><%=testTask.getPublisher().getPublisherName() %></li>
                 </ul>
              </div>
              <div style="overflow:hidden;">
-                <h2><a href="#">Here Any Title</a></h2>
+                <h2><a href="testTaskDetailView.do?taskID=<%=testTask.getTaskId() %>"><%=testTask.getProduct().getProductName() %></a></h2>
                 <ul class="unstyled inline">
                    <li><i class="icon-star"></i></li>
                    <li><i class="icon-star"></i></li>
@@ -167,155 +175,15 @@
                    <li><i class="icon-star"></i></li>
                    <li><i class="icon-star-empty"></i></li>
                 </ul>
-                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum. <a href="#">read more</a></p>
+                <p><%=testTask.getProduct().getDescription() %><a href="#">read more</a></p>
              </div>
           </div>
-          <div class="span6 booking-blocks">
-             <div class="pull-left booking-img">
-                <img src="assets/img/new/img6.jpg" alt="" />
-                <ul class="unstyled">
-                   <li><i class="icon-briefcase"></i> Apple, Microsoft</li>
-                   <li><i class="icon-map-marker"></i> London, UK</li>
-                </ul>
-             </div>
-             <div style="overflow:hidden;">
-                <h2><a href="#">Here Any Title</a></h2>
-                <ul class="unstyled inline">
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                </ul>
-                <p>Lorem ipsum dolor sit eos et accusamus et iusto odio amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam lacus usce condimentum eleifend enim a sunt in culpa qui officia feugiat. Pellentesque dolores et quas molestias viverra vehicula sem ut volutpat. Integer sed arcu. <a href="#">read more</a></p>
-             </div>
+          <% } %>
           </div>
-        </div>
-        <div class="row-fluid">
-          <div class="span6 booking-blocks">
-             <div class="pull-left booking-img">
-                <img src="assets/img/new/img2.jpg" alt="" />
-                <ul class="unstyled">
-                   <li><i class="icon-briefcase"></i> Acer, Microsoft</li>
-                   <li><i class="icon-map-marker"></i> KL, Malaysia</li>
-                </ul>
-             </div>
-             <div style="overflow:hidden;">
-                <h2><a href="#">Here Any Title</a></h2>
-                <ul class="unstyled inline">
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star-empty"></i></li>
-                </ul>
-                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum. <a href="#">read more</a></p>
-             </div>
-          </div>
-          <div class="span6 booking-blocks">
-             <div class="pull-left booking-img">
-                <img src="assets/img/new/img7.jpg" alt="" />
-                <ul class="unstyled">
-                   <li><i class="icon-briefcase"></i> Dell, Google</li>
-                   <li><i class="icon-map-marker"></i> Vancouver, Canada</li>
-                </ul>
-             </div>
-             <div style="overflow:hidden;">
-                <h2><a href="#">Here Any Title</a></h2>
-                <ul class="unstyled inline">
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                </ul>
-                <p>Lorem ipsum dolor sit eos et accusamus et iusto odio amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam lacus usce condimentum eleifend enim a sunt in culpa qui officia feugiat. Pellentesque dolores et quas molestias viverra vehicula sem ut volutpat. Integer sed arcu. <a href="#">read more</a></p>
-             </div>
-          </div>
-        </div>
-        <div class="row-fluid">
-          <div class="span6 booking-blocks">
-             <div class="pull-left booking-img">
-                <img src="assets/img/new/img3.jpg" alt="" />
-                <ul class="unstyled">
-                   <li><i class="icon-briefcase"></i> Dell, Asus</li>
-                   <li><i class="icon-map-marker"></i> Vancouver, Canada</li>
-                </ul>
-             </div>
-             <div style="overflow:hidden;">
-                <h2><a href="#">Here Any Title</a></h2>
-                <ul class="unstyled inline">
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star-empty"></i></li>
-                </ul>
-                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum. <a href="#">read more</a></p>
-             </div>
-          </div>
-          <div class="span6 booking-blocks">
-             <div class="pull-left booking-img">
-                <img src="assets/img/new/img8.jpg" alt="" />
-                <ul class="unstyled">
-                   <li><i class="icon-briefcase"></i> Dell, Google</li>
-                   <li><i class="icon-map-marker"></i> London, UK</li>
-                </ul>
-             </div>
-             <div style="overflow:hidden;">
-                <h2><a href="#">Here Any Title</a></h2>
-                <ul class="unstyled inline">
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                </ul>
-                <p>Lorem ipsum dolor sit eos et accusamus et iusto odio amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam lacus usce condimentum eleifend enim a sunt in culpa qui officia feugiat. Pellentesque dolores et quas molestias viverra vehicula sem ut volutpat. Integer sed arcu. <a href="#">read more</a></p>
-             </div>
-          </div>
-        </div>
-        <div class="row-fluid margin-bottom-20">
-          <div class="span6 booking-blocks">
-             <div class="pull-left booking-img">
-                <img src="assets/img/new/img4.jpg" alt="" />
-                <ul class="unstyled">
-                   <li><i class="icon-briefcase"></i> Apple, Google</li>
-                   <li><i class="icon-map-marker"></i> Vancouver, Canada</li>
-                </ul>
-             </div>
-             <div style="overflow:hidden;">
-                <h2><a href="#">Here Any Title</a></h2>
-                <ul class="unstyled inline">
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star-empty"></i></li>
-                </ul>
-                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum. <a href="#">read more</a></p>
-             </div>
-          </div>
-          <div class="span6 booking-blocks">
-             <div class="pull-left booking-img">
-                <img src="assets/img/new/img9.jpg" alt="" />
-                <ul class="unstyled">
-                   <li><i class="icon-briefcase"></i> HTC, Samsung</li>
-                   <li><i class="icon-map-marker"></i> Barcelona, Spain</li>
-                </ul>
-             </div>
-             <div style="overflow:hidden;">
-                <h2><a href="#">Here Any Title</a></h2>
-                <ul class="unstyled inline">
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                   <li><i class="icon-star"></i></li>
-                </ul>
-                <p>Lorem ipsum dolor sit eos et accusamus et iusto odio amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam lacus usce condimentum eleifend enim a sunt in culpa qui officia feugiat. Pellentesque dolores et quas molestias viverra vehicula sem ut volutpat. Integer sed arcu. <a href="#">read more</a></p>
-             </div>
-          </div>
+        	
+        	<%}
+        }
+         %>
         </div>
         <div class="pagination pagination-centered">
             <ul>

@@ -19,7 +19,17 @@ public class ChangeGift implements java.io.Serializable {
 	private String receiver;
 	private String zipcode;
 	private String mobile;
+	private Boolean hasDelivered;
 
+	// Constructors
+
+	public Boolean getHasDelivered() {
+		return hasDelivered;
+	}
+
+	public void setHasDelivered(Boolean hasDelivered) {
+		this.hasDelivered = hasDelivered;
+	}
 	// Constructors
 
 	/** default constructor */

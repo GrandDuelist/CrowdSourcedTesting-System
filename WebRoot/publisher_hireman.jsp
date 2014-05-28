@@ -344,7 +344,7 @@
                                 </span>
                                 <br></br>
                                 <span class="sub-text">
-                                    <a href="recruitment.do?method=gotoList&perrow=5">请单击</a>
+                                    <a href="recruitment.do?method=publisherList">请单击</a>
                                 </span>
                             </span>
                         </div>

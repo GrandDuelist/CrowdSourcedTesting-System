@@ -1,4 +1,24 @@
-﻿<!DOCTYPE html>
+<%@ page language="java" import="java.util.*,cn.com.crowdsourcedtesting.bean.*,cn.com.other.page.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<% 
+try{
+    Tester tester=(Tester)request.getAttribute("tester");
+    String isLegal=(String)request.getAttribute("isLegal");
+    String modify = (String) request.getAttribute("modify");
+    if(isLegal==null||!isLegal.equals("true")||tester==null){
+     response.sendRedirect("information.do?method=manageTesterList");
+     return; 
+    }else{
+     	request.removeAttribute("isLegal");
+    }
+
+    
+    
+%>
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -8,7 +28,8 @@
 <meta name="description" content="TCTEST" />
 <meta name="author" content="Rain Cheng" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/detail_control/admin_tester.js"></script>
 <!-- Font CSS  -->
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
 
@@ -18,10 +39,10 @@
 <link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
 <!-- Plugin CSS -->
-<link rel="stylesheet" type="text/css" href="vendor/plugins/calendar/fullcalendar.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="vendor/plugins/datatables/css/datatables.min.css" />
 <link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/css/bootstrap-editable.css" />
-<link rel="stylesheet" type="text/css" href="vendor/plugins/chosen/chosen.min.css" />
+<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/inputs/address/address.css" />
+<link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/inputs/typeaheadjs/lib/typeahead.js-bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="vendor/plugins/daterange/daterangepicker-bs3.css" />
 
 <!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="css/theme.css" />
@@ -43,10 +64,14 @@
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-</head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 
 <body>
+
+<form id="idForm"  method="post">
+<input type="hidden" name="subType"/>
+<input type="hidden"  value="<%=tester.getTesterId()%>" name="id">
+</form>
 <!-- Start: Theme Preview Pane -->
 <div id="skin-toolbox">
   <div class="skin-toolbox-toggle"> <i class="fa fa-flask"></i> </div>
@@ -258,7 +283,7 @@
 <!-- End: Header --> 
 <!-- Start: Main -->
 <div id="main"> 
-   <!-- Start: Sidebar -->
+ <!-- Start: Sidebar -->
   <aside id="sidebar">
     <div id="sidebar-search">
       <form role="search" />
@@ -273,7 +298,7 @@
       <ul class="nav sidebar-nav">
         <li> <a class="accordion-toggle collapsed" href="#examine"><span class="glyphicons glyphicons-check"></span><span class="sidebar-title">审核</span><span class="caret"></span></a>
           <ul id="examine" class="nav sub-nav">
-                      <li><a href="checkTestTaskList.do?method=checkWebList"><span class="glyphicons glyphicons glyphicons-flag"></span> 审核任务</a></li>
+                       <li><a href="checkRegisterList.do?method=checkCompanyList"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>><a href="checkTestTaskList.do?method=checkWebList"><span class="glyphicons glyphicons glyphicons-flag"></span> 审核任务</a></li>
             <li><a href="manageQuestionnaire.do?method=checkList"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
             <li><a href="checkRegisterList.do?method=checkCompanyList"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>
           </ul>
@@ -287,303 +312,290 @@
       </ul>
     </div>
   </aside>
-  <!-- End: Sidebar -->
+  <!-- End: Sidebar --> 
   <!-- Start: Content -->
   <section id="content">
-  <div id="topbar">
-    <ol class="breadcrumb">
-      <li><a href="admin_home.html"><i class="fa fa-home"></i></a></li>
+    <div id="topbar">
+      <ol class="breadcrumb">
+          <li><a href="admin_home.html"><i class="fa fa-home"></i></a></li>
       <li><a href="admin_home.html">主页</a></li>
-      <li class="active">测试者列表</li>
-    </ol>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12"> </div>
+      <li><a href="admin_testerlist.html">测试者列表</a></li>
+      <li class="active">详细信息</li>
+      </ol>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel">
-              <div class="panel-heading">
-                <div class="panel-title"> <i class="fa fa-tasks"></i> 测试者列表 </div>
-              </div>
-              <div class="panel-body">
-                <div class="tab-content padding-none border-none">
-                  
-                    <table class="table table-striped" id="datatable">
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th>昵称</th>
-                          <th class="hidden-xs">注册邮箱</th>
-                          <th>联络邮箱</th>
-                          <th>生日</th>
-                          <th style="width: 70px;" class="text-right">操作</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/a2.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 樊亮</b>
-                            </td>
-                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> 752050943@qq.com </td>
-                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> 234293492@qq.com</td>
-                          <td><i class="fa fa-calendar fa-lg text-blue padding-right-sm"></i>1993/8/23</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_testerinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/a1.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 方志晗</b></td>
-                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> 752050943@qq.com </td>
-                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> 234293492@qq.com</td>
-                          <td><i class="fa fa-calendar fa-lg text-blue padding-right-sm"></i>1993/8/23</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_testerinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/a4.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 李加语</b></td>
-                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> 752050943@qq.com </td>
-                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> 234293492@qq.com</td>
-                          <td><i class="fa fa-calendar fa-lg text-blue padding-right-sm"></i>1993/8/23</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_testerinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><img src="img/avatars/a6.png" width="50" height="50" alt="avatar" /></td>
-                          <td class="info"><b> 礼炮</b></td>
-                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> 752050943@qq.com </td>
-                          <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> 234293492@qq.com</td>
-                          <td><i class="fa fa-calendar fa-lg text-blue padding-right-sm"></i>1993/8/23</td>
-                          <td class="text-right text-center"><a class="btn btn-primary btn-gradient"  type="button" href="admin_testerinfo.html"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div class="text-right">
-                    	
-                      <ul class="pagination pagination-alt margin-bottom">
-                        <li><a href="#"><i class="fa fa-caret-left"></i> </a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#"><i class="fa fa-caret-right"></i> </a></li>
-                      </ul>
-                    
-                    </div>
-                  
-                 <!--End:tabs-->
-                </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="panel">
+            <div class="panel-heading">
+              <div class="panel-title"> <i class="fa fa-pencil"></i> 编辑信息 </div>
+              <div class="panel-btns pull-right">
+                <label style="display: inline-block; margin-right: 15px; font-size: 12px; color: #888888;">
+                  	 <form id="informationForm" method="post">
+                  <input name="status" type="checkbox" class="checkbox" id="autoopen" style="vertical-align: baseline" />
+                  &nbsp;<%=tester.getHasAuthority()==null||tester.getHasAuthority()?"冻结":"解冻" %> 
+                 <input type="hidden" name="username" />
+                 <input type="hidden" name="birthday"/>
+                 <input type="hidden" name="id" value="<%=tester.getTesterId()%>"/>
+                </form></label>
+                <button id="enable" class="btn btn-default btn-gradient">启用 / 关闭</button>
               </div>
             </div>
+            <div class="panel-body">
+               <%if(modify==null){ %>
+              <div class="alert alert-success">编辑字段不能为空，请检查您的输入： <b>昵称</b> 是否符合条件</div>
+              <%}else if("success".equals(modify)){ %>
+              <div class="alert alert-success">修改成功!!</div>
+              <%}else { %>
+              <div class="alert alert-success">操作失败!!请重新尝试!</div>
+              <% }%>
+              <table id="user" class="table table-bordered table-striped" style="clear: both">
+                <tbody>
+                <tr>
+                    <td style="width: 35%;"><b>头像</b></td>
+                    <td class="text-center"><img src="img/avatars/a2.png" width="50" height="50" alt="avatar" /></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 35%;"><strong>昵称</strong></td>
+                    <td style="width: 65%;"><a href="#" id="username" data-type="text" data-pk="1" data-title="Enter username" class="editable editable-click"><%=tester.getTesterName() %></a></td>
+                  </tr>
+                   <tr>
+                    <td style="width: 35%;"><strong>当期积分</strong></td>
+                    <td style="width: 65%;"><a id="credit" data-type="text" data-pk="1" ><%=tester.getTesterCredit() %></a></td>
+                  </tr>
+                    <tr>
+                    <td style="width: 35%;"><strong>当前状态</strong></td>
+                    <td style="width: 65%;"><a id="credit" data-type="text" data-pk="1" ><%=tester.getHasAuthority()==null||tester.getHasAuthority()?"可用":"冻结" %></a></td>
+                  </tr>
+                   <tr>
+                    <td style="width: 35%;"><strong>评论总数</strong></td>
+                    <td style="width: 65%;"><a id="credit" data-type="text" data-pk="1" ><%= tester.getTaskComments().size()%></a></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 35%;"><strong>礼品数</strong></td>
+                    <td style="width: 65%;"><a id="credit" data-type="text" data-pk="1" ><%= tester.getTaskComments().size()%></a></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 35%;"><strong>参加问卷数</strong></td>
+                    <td style="width: 65%;"><a id="credit" data-type="text" data-pk="1" ><%= tester.getJoinQuestionnaires().size()%></a></td>
+                  </tr>
+                   <tr>	
+                    <td style="width: 35%;"><strong>提交Bug数</strong></td>
+                    <td style="width: 65%;"><a id="credit" data-type="text" data-pk="1" ><%=tester.getBugReports().size()%></a></td>
+                  </tr>
+                  <tr>
+                    <td><b>邮箱</b></td>
+                    <td><a id="email" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" data-title="Enter your email"><%=tester.getTesterEmail()%></a></td>
+                  </tr>
+                  <tr>
+                    <td><strong>生日</strong></td>
+                    <td><a id="dob" data-type="combodate" data-value="1993-05-15" data-format="YYYY-MM-DD" data-viewformat="DD/MM/YYYY" data-template="D / MMM / YYYY" data-pk="1"><%=tester.getTesterBirthday()==null?"未填写":tester.getTesterBirthday() %></a></td>
+                  </tr> 
+                </tbody>
+              </table>
+            </div>
+            <div class="text-center"><button class="btn btn-primary btn-gradient" data-toggle="modal" data-target="#submitAlert"> 提交 </button></div>
+          <hr></div>
           </div>
-          <!--End: col-md-12--> 
+          
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End: Content --> 
+</div>
+<!-- End: Main --> 
+<!--Popup-->
+<div class="modal fade" id="submitAlert" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title text-center">确认发布?</h4>
+      </div>
+      <div class="modal-body">
+        <p class="margin-bottom-lg"> 确认提交后将会在数据库修改用户数据，是否确认？ </p>
+        <div class="form-group text-center">
+          <button type="button" class="btn btn-success btn-gradient margin-right-sm" data-dismiss="modal" id="sureButton"><i class="fa fa-check"></i> 确认</button>
+          <button type="button" class="btn btn-danger btn-gradient" data-dismiss="modal" ><i class="fa fa-warning"></i> 取消</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-</section>
-<!-- End: Content -->
-</div>
-<!-- End: Main --> 
-
+<!--End:Popup-->
 <!-- Core Javascript - via CDN --> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 
-<!-- Plugins - Via CDN --> 
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="vendor/plugins/datatables/js/datatables.js"></script> 
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/flot/0.8.1/jquery.flot.min.js"></script> 
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script> 
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.min.js"></script> 
-
-<!-- Plugins - Via Local Storage
-<script type="text/javascript" src="vendor/plugins/jqueryflot/jquery.flot.min"></script>
-<script type="text/javascript" src="vendor/plugins/sparkline/jquery.sparkline.min.js"></script>
-<script type="text/javascript" src="vendor/plugins/datatables/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="vendor/plugins/calendar/fullcalendar.min.js"></script>
---> 
-
 <!-- Plugins --> 
-<script type="text/javascript" src="vendor/plugins/calendar/gcal.js"></script><!-- Calendar Addon --> 
-<script type="text/javascript" src="vendor/plugins/jqueryflot/jquery.flot.resize.min.js"></script><!-- Flot Charts Addon --> 
-<script type="text/javascript" src="vendor/plugins/datatables/js/datatables.js"></script><!-- Datatable Bootstrap Addon --> 
-<script type="text/javascript" src="vendor/plugins/chosen/chosen.jquery.min.js"></script>
+<script type="text/javascript" src="vendor/editors/xeditable/js/bootstrap-editable.js"></script> 
+<script type="text/javascript" src="vendor/editors/xeditable/inputs/address/address.js"></script> 
+<script type="text/javascript" src="vendor/editors/xeditable/inputs/typeaheadjs/lib/typeahead.js"></script> 
+<script type="text/javascript" src="vendor/editors/xeditable/inputs/typeaheadjs/typeaheadjs.js"></script> 
+<script type="text/javascript" src="vendor/plugins/daterange/moment.min.js"></script> 
+<script type="text/javascript" src="vendor/plugins/daterange/daterangepicker.js"></script> 
+<script type="text/javascript" src="vendor/plugins/datepicker/bootstrap-datepicker.js"></script> 
 
 <!-- Theme Javascript --> 
 <script type="text/javascript" src="js/uniform.min.js"></script> 
-<script type="text/javascript" src="js/main.js"></script> 
+<script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/custom.js"></script> 
 <script type="text/javascript">
-jQuery(document).ready(function () {
+ jQuery(document).ready(function() {
 
-	// Init Theme Core   
-	Core.init();
-	
+	  // Init Theme Core	
+	  Core.init();
 
-	
-	// Init Calendar Plugin
-	var runFullCalendar = function () {
+	  //enable / disable xedit
+	  $('#enable').click(function() {
+		 $('#user .editable').editable('toggleDisabled');
+	  });    
+	  
+	  //editables 
+	  $('#username').editable({
+			 type: 'text',
+			 pk: 1,
+			 name: 'username',
+			 title: 'Enter username'
+	  });
+	  
+	  $('#firstname').editable({
+		  validate: function(value) {
+			 if($.trim(value) == '') return 'This field is required';
+		  }
+	  });
+	  
+	  $('#sex').editable({
+		  prepend: "not selected",
+		  source: [
+			  {value: 1, text: 'Male'},
+			  {value: 2, text: 'Female'}
+		  ],
+		  display: function(value, sourceData) {
+			   var colors = {"": "gray", 1: "green", 2: "blue"},
+				   elem = $.grep(sourceData, function(o){return o.value == value;});
+				   
+			   if(elem.length) {    
+				   $(this).text(elem[0].text).css("color", colors[value]); 
+			   } else {
+				   $(this).empty(); 
+			   }
+		  }   
+	  });    
+	  
+	  $('#status').editable();   
+	  
+	  $('#group').editable({
+		 showbuttons: false 
+	  });   
+  
+	  $('#vacation').editable({
+		  datepicker: { todayBtn: 'linked' } 
+	  });  
+		  
+	  $('#dob').editable();
+			
+	  $('#event').editable({
+		  placement: 'right',
+		  combodate: {
+			  firstItem: 'name'
+		  }
+	  });      
+	  
+	  $('#meeting_start').editable({
+		  format: 'yyyy-mm-dd hh:ii',    
+		  viewformat: 'dd/mm/yyyy hh:ii',
+		  validate: function(v) {
+			 if(v && v.getDate() == 10) return 'Day cant be 10!';
+		  },
+		  datetimepicker: {
+			 todayBtn: 'linked',
+			 weekStart: 1
+		  }        
+	  });            
+	  
+	  $('#comments').editable({
+		  showbuttons: 'bottom'
+	  }); 
+	  
+	  $('#note').editable(); 
+	  $('#pencil').click(function(e) {
+		  e.stopPropagation();
+		  e.preventDefault();
+		  $('#note').editable('toggle');
+	 });   
+	 
+	  $('#state').editable({
+		  source: ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
+	  }); 
+	  
+	  $('#state2').editable({
+		  value: 'California',
+		  typeahead: {
+			  name: 'state',
+			  local: ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
+		  }
+	  });   
+	 
+	 $('#fruits').editable({
+		 pk: 1,
+		 limit: 3,
+		 source: [
+		  {value: 1, text: 'banana'},
+		  {value: 2, text: 'peach'},
+		  {value: 3, text: 'apple'},
+		  {value: 4, text: 'watermelon'},
+		  {value: 5, text: 'orange'}
+		 ]
+	  }); 
+	  
+	  $('#address').editable({
+		  url: '/post',
+		  value: {
+			  city: "Moscow", 
+			  street: "Lenina", 
+			  building: "12"
+		  },
+		  validate: function(value) {
+			  if(value.city == '') return 'city is required!'; 
+		  },
+		  display: function(value) {
+			  if(!value) {
+				  $(this).empty();
+				  return; 
+			  }
+			  var html = '<b>' + $('<div>').text(value.city).html() + '</b>, ' + $('<div>').text(value.street).html() + ' st., bld. ' + $('<div>').text(value.building).html();
+			  $(this).html(html); 
+		  }         
+	  });              
+		   
+	 $('#user .editable').on('hidden', function(e, reason){
+		  if(reason === 'save' || reason === 'nochange') {
+			  var $next = $(this).closest('tr').next().find('.editable');
+			  if($('#autoopen').is(':checked')) {
+				  setTimeout(function() {
+					  $next.editable('show');
+				  }, 300); 
+			  } else {
+				  $next.focus();
+			  } 
+		  }
+	 });
 
-		var date = new Date();
-		var d = date.getDate();
-		var m = date.getMonth();
-		var y = date.getFullYear();
-
-		$('#calendar').fullCalendar({
-			header: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'month,agendaWeek,agendaDay'
-			},
-			editable: true,
-			events: [{
-				title: 'Business Event',
-				start: new Date(y, m, 3),
-				end: new Date(y, m, 6),
-				color: '#428bca'
-			}, {
-				title: 'Thanksgiving Party',
-				start: new Date(y, m, 14),
-				end: new Date(y, m, 16),
-				color: '#6DB54B'
-			}, {
-				title: 'Birthday Weekend',
-				start: new Date(y, m, 25),
-				end: new Date(y, m, 29)
-			}]
-		});
-
-	}
-	
-
-	// Init Flot Charts Plugin
-	var runFlotCharts = function () {
-
-		//define chart clolors ( add more colors if you want or flot will do it automatically )
-		var chartColours = ['#62aeef', '#d8605f', '#72c380', '#6f7a8a', '#f7cb38', '#5a8022', '#2c7282'];
-
-		//generate random number for charts
-		randNum = function () {
-			return (Math.floor(Math.random() * (1 + 40 - 20))) + 20;
-		}
-
-		//check if element exist and draw auto updating chart
-		if ($(".chart-updating").length) {
-			$(function () {
-				// we use an inline data source in the example, usually data would
-				// be fetched from a server
-				var data = [],
-					totalPoints = 50;
-
-				function getRandomData() {
-					if (data.length > 0)
-						data = data.slice(1);
-
-					// do a random walk
-					while (data.length < totalPoints) {
-						var prev = data.length > 0 ? data[data.length - 1] : 50;
-						var y = prev + Math.random() * 10 - 5;
-						if (y < 0)
-							y = 0;
-						if (y > 100)
-							y = 100;
-						data.push(y);
-					}
-
-					// zip the generated y values with the x values
-					var res = [];
-					for (var i = 0; i < data.length; ++i)
-						res.push([i, data[i]])
-					return res;
-				}
-
-				// Update interval
-				var updateInterval = 250;
-
-				// setup plot
-				var options = {
-					series: {
-						shadowSize: 0, // drawing is faster without shadows
-						lines: {
-							show: true,
-							fill: true,
-							lineWidth: 2,
-							steps: false
-						},
-						points: {
-							show: true,
-							radius: 2.8,
-							symbol: "circle",
-							lineWidth: 2.5
-						}
-					},
-					grid: {
-						show: true,
-						aboveData: false,
-						color: "#3f3f3f",
-						labelMargin: 5,
-						axisMargin: 0,
-						borderWidth: 0,
-						borderColor: null,
-						minBorderMargin: 5,
-						clickable: true,
-						hoverable: true,
-						autoHighlight: false,
-						mouseActiveRadius: 20
-					},
-					colors: chartColours,
-					tooltip: true, //activate tooltip
-					tooltipOpts: {
-						content: "Value is : %y.0",
-						shifts: {
-							x: -30,
-							y: -50
-						}
-					},
-					yaxis: {
-						min: 0,
-						max: 100
-					},
-					xaxis: {
-						show: true
-					}
-				};
-				var plot = $.plot($(".chart-updating"), [getRandomData()], options);
-
-				function update() {
-					plot.setData([getRandomData()]);
-					// since the axes don't change, we don't need to call plot.setupGrid()
-					plot.draw();
-
-					setTimeout(update, updateInterval);
-				}
-
-				update();
-			});
-		}
-	}
-
-	runFullCalendar();
-	runFlotCharts();
-	
-	// Init Datatables
-	$('#datatable, #datatable_2, #datatable_3').dataTable( {
-	  "bSort": true,
-	  "bPaginate": false,
-	  "bLengthChange": false,
-	  "bFilter": false,
-	  "bInfo": false,
-	  "bAutoWidth": false,
-	  "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ -1 ] }]
-	});
-
-});
+ });
 </script>
 </body>
 </html>
+
+<%}catch(NullPointerException e){
+ 
+  return;
+}catch(Exception e)
+{
+   
+   return;
+}
+%>
+

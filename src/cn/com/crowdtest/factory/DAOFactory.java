@@ -70,6 +70,7 @@ public class DAOFactory {
 	{
 		return new TestTaskDAO();
 	}
+
 	
 	
 	public static void sessionSaveOrUpdate(Object q )
@@ -94,6 +95,11 @@ public class DAOFactory {
 
 			sess.close();
 		}
+	}
+
+	public static ChangeGiftDAO getChangeGiftDAO() {
+		// TODO Auto-generated method stub
+		return new ChangeGiftDAO();
 	}
 	
 

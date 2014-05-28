@@ -5,6 +5,7 @@ import cn.com.crowdsourcedtesting.bean.JoinQuestionnaire;
 import cn.com.other.page.Page;
 import cn.com.crowdsourcedtesting.modelhelper.TaskType;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.LockMode;
@@ -190,5 +191,7 @@ public class JoinQuestionnaireDAO extends BaseHibernateDAO {
 			}
 
 		}
+	
+
 		
 }

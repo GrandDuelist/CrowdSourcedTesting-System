@@ -308,4 +308,73 @@ public class PublisherDAO extends BaseHibernateDAO {
 			}
 
 		}
+		
+		// 按页查找公司用户
+		public List<Publisher> findCompanyByPage(Page page) {
+			// TODO Auto-generated method stub
+			try {
+				List<Publisher> publishers = new ArrayList<Publisher>();
+				String queryString = "from Publisher where PUBLISHER_TYPE=1";
+				Query queryObject = getSession().createQuery(queryString);
+
+				publishers = queryObject
+						.setFirstResult(
+								(page.getCurrentPage() - 1) * page.getPerRows())
+						.setMaxResults(page.getPerRows()).list();
+
+				return publishers;
+			} catch (RuntimeException re) {
+				log.error("find by page failed", re);
+				throw re;
+			}
+		}
+		
+		// 按页查找个人用户
+		public List<Publisher> findPersonByPage(Page page) {
+			// TODO Auto-generated method stub
+			try {
+				List<Publisher> publishers = new ArrayList<Publisher>();
+				String queryString = "from Publisher where PUBLISHER_TYPE=0";
+				Query queryObject = getSession().createQuery(queryString);
+
+				publishers = queryObject
+						.setFirstResult(
+								(page.getCurrentPage() - 1) * page.getPerRows())
+						.setMaxResults(page.getPerRows()).list();
+
+				return publishers;
+			} catch (RuntimeException re) {
+				log.error("find by page failed", re);
+				throw re;
+			}
+		}
+
+		// 得到总的个人发布者人数
+		public int getPersonTotalRows() {
+
+			Number c = (Number) getSession()
+					.createQuery(
+							"select count(*) from Publisher Where PUBLISHER_TYPE=0")
+					.uniqueResult();
+
+			return c.intValue();
+
+		}
+		
+		
+		// 得到总的公司发布者人数
+		public int getCompanyTotalRows() {
+
+			Number c = (Number) getSession()
+							.createQuery(
+									"select count(*) from Publisher where PUBLISHER_TYPE=1")
+							.uniqueResult();
+
+					return c.intValue();
+
+				}
+				
+				
+		
+		
 }

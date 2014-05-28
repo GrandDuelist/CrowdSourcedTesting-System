@@ -36,5 +36,10 @@
         <property name="mobile" type="java.lang.String">
             <column name="MOBILE" length="15" not-null="true" />
         </property>
+        <property generated="never" lazy="false" name="hasDelivered"
+			type="java.lang.Boolean">
+			<column length="1" name="HAS_DELIVERED" not-null="false"
+			 />
+		</property>
     </class>
 </hibernate-mapping>

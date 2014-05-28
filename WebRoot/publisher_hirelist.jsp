@@ -51,11 +51,12 @@
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
-
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/list_control/recruitment.js"></script>
 
 <%
  String flag = (String)request.getAttribute("isLegal");
- if(flag == null || flag != "legal")
+ if(flag == null || !flag.equals("legal"))
  {
  	response.sendRedirect("recruitment.do?method=gotoBackStage");
  	return;
@@ -65,16 +66,21 @@
  %>
  
 <%
- List <Recruitment> recruitments  =(List<Recruitment>) request.getAttribute("hirelist");
- Page hirepage = (Page)request.getAttribute("page");
- int firstPage = (int)(hirepage.getCurrentPage()-1)/hirepage.DEFAULT_MAX_PAGE;
- firstPage = firstPage*hirepage.DEFAULT_MAX_PAGE+1;
- int lastPage = (hirepage.getTotalPage()+1)<(firstPage+hirepage.DEFAULT_MAX_PAGE)? (hirepage.getTotalPage()+1):(firstPage+hirepage.DEFAULT_MAX_PAGE);
+ List <Recruitment> recruitments  =(List<Recruitment>) request.getAttribute("recruitments");
+ Page currentPage = (Page)request.getAttribute("currentPage");
+ int firstPage = (int)(currentPage.getCurrentPage()-1)/currentPage.DEFAULT_MAX_PAGE;
+ firstPage = firstPage*currentPage.DEFAULT_MAX_PAGE+1;
+ int lastPage = (currentPage.getTotalPage()+1)<(firstPage+currentPage.DEFAULT_MAX_PAGE)?
+  (currentPage.getTotalPage()+1):(firstPage+currentPage.DEFAULT_MAX_PAGE);
  
  Iterator<Recruitment> it= recruitments.iterator();
  Recruitment recruitment = null;
  %>
- 
+ <form id="selectForm"  method="post">
+ <input type="hidden" name="id"/>
+ <input type="hidden" name="subType">
+ <input type="hidden" name="page">
+</form>
 
 <body>
 <!-- Start: Theme Preview Pane -->
@@ -344,7 +350,7 @@
                         <tr>
                         
  				<%
- 				for(int i=0; i<hirepage.getPerRows(); i++)
+ 				for(int i=0; i<currentPage.getPerRows(); i++)
  				{
                 	if(!it.hasNext())
                 		return;
@@ -360,8 +366,8 @@
                            
                           <td><i class="fa fa-eye fa-lg text-blue padding-right-sm"></i><%=startdate%>至<%=enddate%></td>
                           <td><span class="label label-warning margin-right-sm">改进</span><span class="label label-inverse margin-right-sm"><%=recruitment.getBrief()%></span></td>
-                          <td class="text-right text-center">
-                              <a class="btn btn-primary btn-gradient> <span class=" glyphicons-circle_info"="" glyphicons="" type="button" href="recruitment.do?method=gotoItem&id=<%=recruitment.getActivityId()%>"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
+                          <td class="text-right text-center" id="detail">
+                              <a class="btn btn-primary btn-gradient" id="<%=recruitment.getActivityId()%>"> <span class=" glyphicons-circle_info" glyphicons="" type="button"><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
                         </tr>
                 
                 <%
@@ -376,16 +382,16 @@
                     <div class="row">
            <div class="col-sm-12 datatables-footer">
                   <div class="pull-right"><div class="dataTables_paginate paging_bs_normal"><ul class="pagination">
-                 <%if( hirepage.getCurrentPage()==1){ %>
+                 <%if( currentPage.getCurrentPage()==1){ %>
                   <li class="prev disabled"><a><i class="fa fa-caret-left"></i> &nbsp;</a></li>
                   <%} else{%>
                   
-                    <li class="prev" id="previouPage"><a id = "<%=hirepage.getCurrentPage()%>"><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                    <li class="prev" id="previouPage"><a id = "<%=currentPage.getCurrentPage()%>"><i class="fa fa-caret-left"></i> &nbsp;</a></li>
                 <%} %>
                 
                 
                 <%for (int i=firstPage; i<lastPage;i++) 
-                {  if(i == hirepage.getCurrentPage())
+                {  if(i == currentPage.getCurrentPage())
                 {%>
                 <li class="active" id="pageNum"><a id="<%=i%>"><%=i %></a></li>
                   
@@ -393,11 +399,11 @@
                   <li id="pageNum"><a id="<%=i%>"><%=i %></a></li>
                  <%}} %>
                 
-                 <%if( hirepage.getCurrentPage()==hirepage.getTotalPage()){ %>
+                 <%if( currentPage.getCurrentPage()==currentPage.getTotalPage()){ %>
                  <li class="next disabled"><a >&nbsp;<i class="fa fa-caret-right"></i> </a></li>
                   <%} else{%>
                   
-                   <li class="next" id="nextPage"><a id="<%=hirepage.getCurrentPage()%>">&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                   <li class="next" id="nextPage"><a id="<%=currentPage.getCurrentPage()%>">&nbsp;<i class="fa fa-caret-right"></i> </a></li>
                 <%} %>
                 
                  </ul></div></div>
