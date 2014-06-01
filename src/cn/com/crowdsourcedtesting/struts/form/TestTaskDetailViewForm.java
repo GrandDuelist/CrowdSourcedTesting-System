@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.upload.FormFile;
 
 /** 
  * MyEclipse Struts
@@ -26,6 +27,16 @@ public class TestTaskDetailViewForm extends ActionForm {
 
 	/** taskID property */
 	private Integer taskID;
+	
+	private String bugTitle;
+	
+	private String bugType;
+	
+	private FormFile bugImage;
+	
+	private String bugOperation;
+	
+	private String bugResult;
 
 	/*
 	 * Generated Methods
@@ -83,4 +94,46 @@ public class TestTaskDetailViewForm extends ActionForm {
 	public void setTaskID(Integer taskID) {
 		this.taskID = taskID;
 	}
+
+	public String getBugTitle() {
+		return bugTitle;
+	}
+
+	public void setBugTitle(String bugTitle) {
+		this.bugTitle = bugTitle;
+	}
+
+	public String getBugType() {
+		return bugType;
+	}
+
+	public void setBugType(String bugType) {
+		this.bugType = bugType;
+	}
+
+	public FormFile getBugImage() {
+		return bugImage;
+	}
+
+	public void setBugImage(FormFile bugImage) {
+		this.bugImage = bugImage;
+	}
+
+	public String getBugOperation() {
+		return bugOperation;
+	}
+
+	public void setBugOperation(String bugOperation) {
+		this.bugOperation = bugOperation;
+	}
+
+	public String getBugResult() {
+		return bugResult;
+	}
+
+	public void setBugResult(String bugResult) {
+		this.bugResult = bugResult;
+	}
+	
+	
 }

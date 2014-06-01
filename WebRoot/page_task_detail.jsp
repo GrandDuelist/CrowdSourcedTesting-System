@@ -299,8 +299,13 @@
 				<div class="text-center">
 					<form action="testTaskDetailView.do" method="post">
 						<input type="hidden" name="taskID" value="<%=testTask.getTaskId() %>" />
-						<input type="hidden" name="method" value="goToTest" />
-						<button class="btn btn-large btn-primary" type="submit">参加测试</button>
+						<input type="hidden" name="method" value="joinTask" />
+						<button class="btn btn-large btn-primary" type="submit">已参加</button>
+					</form>
+					<form action="testTaskDetailView.do" method="post">
+						<input type="hidden" name="taskID" value="<%=testTask.getTaskId() %>" />
+						<input type="hidden" name="method" value="bugReportPage" />
+						<button class="btn btn-large btn-primary" type="submit">提交Bug报告</button>
 					</form>
 				</div>
 				<%

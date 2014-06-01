@@ -209,9 +209,6 @@ public class RecruitmentDAO extends BaseHibernateDAO {
 					log.error("find by page failed", re);
 					throw re;
 				}
-					
-				
-				
 			}
 			
 			

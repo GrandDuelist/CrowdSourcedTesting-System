@@ -293,10 +293,10 @@ public class PublishTestingTaskAction extends DispatchAction {
 		}
 
 		PublishTestingTaskForm publishTestingForm = (PublishTestingTaskForm) form;
-		System.out.println(publishTestingForm.getAppName());
-		System.out.println(publishTestingForm.getIcon().getFileName());
-		System.out.println(publishTestingForm.getApkFile().getFileName());
-		System.out.println(publishTestingForm.getDescription());
+//		System.out.println(publishTestingForm.getAppName());
+//		System.out.println(publishTestingForm.getIcon().getFileName());
+//		System.out.println(publishTestingForm.getApkFile().getFileName());
+//		System.out.println(publishTestingForm.getDescription());
 
 		FormFile iconFile = publishTestingForm.getIcon();
 		if (iconFile == null) {
@@ -376,7 +376,7 @@ public class PublishTestingTaskAction extends DispatchAction {
 		} catch (IOException e) {
 			e.printStackTrace();
 			request.getSession().setAttribute(productErrorMessageAttributeName,
-					productApkFileTypeErrorMessage);
+					productSystemErrorMessage);
 			return mapping.findForward(androidProductErrorForward);
 		}
 

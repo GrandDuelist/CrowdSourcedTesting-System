@@ -1,3 +1,16 @@
+<%@ page language="java"
+	import="java.util.*,cn.com.crowdsourcedtesting.modelhelper.*,cn.com.crowdsourcedtesting.bean.*,java.util.List,cn.com.other.page.*;"
+	contentType="text/html; charset=UTF-8"%>
+
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles"%>
+
+<% 
+TestTask testTask = (TestTask) session.getAttribute("TaskDetail");
+session.removeAttribute("TaskDetail");
+ %>
 <!DOCTYPE html>
 <!--[if IE 7]> <html lang="en" class="ie7"> <![endif]-->  
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
@@ -150,26 +163,35 @@
                 
 
                 <blockquote class="hero">
-                    <p>LOL连招测试</p>
-                    <small>腾讯公司</small>
+                    <p><%= testTask.getProduct().getProductName() %></p>
+                    <small><%= testTask.getPublisher().getPublisherCompany() %></small>
                 </blockquote>
 	           <!-- Leave a Comment -->
             <div class="post-comment">
             	<h2 class="color-green">BUG发布</h2>
-                <form />
+            	
+                <form enctype="multipart/form-data" action="testTaskDetailView.do" method="post" >
+                    <input type="hidden" name="method" value="bugReportSubmit" />
+                    <input type="hidden" name="taskID" value="<%= testTask.getTaskId() %>" />
+                    <%
+                String value = (String) session.getAttribute("BugReportPublishErrorMessage");
+                session.removeAttribute("BugReportPublishErrorMessage");
+                if (value != null && !"".equals(value)) { %>
+                    <p class="alert alert-warning"><%=value %></p>
+                <% } else { %>
+                    <p class="alert alert-success">请<b>正确填写</b>信息</p>
+                <% } %>
                     <label>标题<span class="color-red">*</span></label>
-                    <input type="text" class="span7" />
+                    <input type="text" name="bugTitle" required class="span7" />
                     <label>类型</label>
-                    <input type="text" class="span7" />
+                    <input type="text" name="bugType" class="span7" />
                     <label>图片</label>
-                    <input type="file" class="span7" />
+                    <input type="file" name="bugImage" class="span7" />
                     <br/>
                     <label>操作步骤<span class="color-red">*</span></label>
-                    <textarea rows="8" class="span10"></textarea>
-                    <label>BUG类型</label>
-                    <input type="text" class="span7" />
+                    <textarea required name="bugOperation" rows="8" class="span10"></textarea>
                     <label>操作结果<span class="color-red">*</span></label>
-                    <textarea rows="8" class="span10"></textarea>
+                    <textarea required name="bugResult" rows="8" class="span10"></textarea>
                     <p><button type="submit" class="btn-u">发送</button></p>
                 </form>
             </div><!--/post-comment-->
@@ -237,9 +259,9 @@
 		        <div class="headline"><h3>关于</h3></div>	
 				<p class="margin-bottom-25">TCTest全名为吐槽测试网的英文，该网站致力于为公司打造一个第三方测试团队，为大众创建一个吐槽平台，为你喜欢的软件提出重要的改进意见。</p>	
 
-				
+
 			</div><!--/span4-->	
-			
+
 			<div class="span4">
             <!-- Monthly Newsletter -->
 		        <div class="headline"><h3>联系我们</h3></div>	
@@ -253,7 +275,7 @@
 			</div><!--/span4-->
 
 			<div class="span4">
-	
+
 
                 <!-- Stay Connected -->
 		        <div class="headline">
@@ -304,4 +326,4 @@
     <script src="assets/js/respond.js"></script>
 <![endif]-->
 </body>
-</html>	
+</html>

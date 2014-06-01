@@ -483,6 +483,8 @@
       <forward name="taskDetailPage" path="/page_task_detail.jsp" ></forward>
       <forward name="taskList" path="/testTaskViewList.do"></forward>
       <forward name="testerLogin" path="login.do?method=testerLogin"></forward>
+      <forward name="bugReportPage" path="/page_task_bugReport.jsp"></forward>
+      <forward name="bugReportPageRedirect" path="testTaskDetailView.do"></forward>
     </action>
 
   </action-mappings>
