@@ -473,6 +473,7 @@
     </action>
     <action
       attribute="testTaskDetailViewForm"
+      parameter="method"
       input="/form/testTaskDetailView.jsp"
       name="testTaskDetailViewForm"
       path="/testTaskDetailView"
@@ -481,6 +482,7 @@
       <set-property property="cancellable" value="true" />
       <forward name="taskDetailPage" path="/page_task_detail.jsp" ></forward>
       <forward name="taskList" path="/testTaskViewList.do"></forward>
+      <forward name="testerLogin" path="login.do?method=testerLogin"></forward>
     </action>
 
   </action-mappings>

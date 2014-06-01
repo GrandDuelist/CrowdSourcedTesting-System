@@ -17,20 +17,20 @@ public class Administrator implements java.io.Serializable {
 	private String administratorPassword;
 	private Boolean administratorAuthority;
 	private String administratorOccupation;
-	private Set recruitments = new HashSet(0);
-	private Set publishers = new HashSet(0);
-	private Set questionnaires = new HashSet(0);
-	private Set testTasks = new HashSet(0);
+//	private Set recruitments = new HashSet(0);
+//	private Set publishers = new HashSet(0);
+//	private Set questionnaires = new HashSet(0);
+//	private Set testTasks = new HashSet(0);
 
 	// Constructors
 
-	public Set getTestTasks() {
-		return testTasks;
-	}
-
-	public void setTestTasks(Set testTasks) {
-		this.testTasks = testTasks;
-	}
+//	public Set getTestTasks() {
+//		return testTasks;
+//	}
+//
+//	public void setTestTasks(Set testTasks) {
+//		this.testTasks = testTasks;
+//	}
 
 	/** default constructor */
 	public Administrator() {
@@ -48,19 +48,19 @@ public class Administrator implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Administrator(String administratorName, String administratorEmail,
-			String administratorPassword, Boolean administratorAuthority,
-			String administratorOccupation, Set recruitments, Set publishers,
-			Set questionnaires) {
-		this.administratorName = administratorName;
-		this.administratorEmail = administratorEmail;
-		this.administratorPassword = administratorPassword;
-		this.administratorAuthority = administratorAuthority;
-		this.administratorOccupation = administratorOccupation;
-		this.recruitments = recruitments;
-		this.publishers = publishers;
-		this.questionnaires = questionnaires;
-	}
+//	public Administrator(String administratorName, String administratorEmail,
+//			String administratorPassword, Boolean administratorAuthority,
+//			String administratorOccupation, Set recruitments, Set publishers,
+//			Set questionnaires) {
+//		this.administratorName = administratorName;
+//		this.administratorEmail = administratorEmail;
+//		this.administratorPassword = administratorPassword;
+//		this.administratorAuthority = administratorAuthority;
+//		this.administratorOccupation = administratorOccupation;
+//		this.recruitments = recruitments;
+//		this.publishers = publishers;
+//		this.questionnaires = questionnaires;
+//	}
 
 	// Property accessors
 
@@ -112,28 +112,28 @@ public class Administrator implements java.io.Serializable {
 		this.administratorOccupation = administratorOccupation;
 	}
 
-	public Set getRecruitments() {
-		return this.recruitments;
-	}
-
-	public void setRecruitments(Set recruitments) {
-		this.recruitments = recruitments;
-	}
-
-	public Set getPublishers() {
-		return this.publishers;
-	}
-
-	public void setPublishers(Set publishers) {
-		this.publishers = publishers;
-	}
-
-	public Set getQuestionnaires() {
-		return this.questionnaires;
-	}
-
-	public void setQuestionnaires(Set questionnaires) {
-		this.questionnaires = questionnaires;
-	}
+//	public Set getRecruitments() {
+//		return this.recruitments;
+//	}
+//
+//	public void setRecruitments(Set recruitments) {
+//		this.recruitments = recruitments;
+//	}
+//
+//	public Set getPublishers() {
+//		return this.publishers;
+//	}
+//
+//	public void setPublishers(Set publishers) {
+//		this.publishers = publishers;
+//	}
+//
+//	public Set getQuestionnaires() {
+//		return this.questionnaires;
+//	}
+//
+//	public void setQuestionnaires(Set questionnaires) {
+//		this.questionnaires = questionnaires;
+//	}
 
 }

@@ -1,1 +1,1 @@
-from cn.com.crowdsourcedtesting.bean.TaskComment as model where model.testTask.taskId =28
+from JoinTask as model where model.testTask.taskId = 28 and model.tester.testerId = 2

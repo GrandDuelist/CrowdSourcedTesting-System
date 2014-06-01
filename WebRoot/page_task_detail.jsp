@@ -77,8 +77,10 @@
 			<div class="row-fluid">
 				<ul class="loginbar inline">
 					<li><a href="mailto:info@anybiz.com"><i
-							class="icon-envelope-alt"></i> chengran327@gmail.com</a></li>
-					<li><a><i class="icon-phone-sign"></i> 021 4202 2656</a></li>
+							class="icon-envelope-alt"></i> chengran327@gmail.com</a>
+					</li>
+					<li><a><i class="icon-phone-sign"></i> 021 4202 2656</a>
+					</li>
 					<li><a href="page_login.html"><i class="icon-user"></i> 登录</a>
 					</li>
 				</ul>
@@ -109,20 +111,15 @@
 					<!-- /nav-collapse -->
 					<div class="nav-collapse collapse">
 						<ul class="nav top-2">
-							<li><a href="index.html">主页 </a>
-							</li>
-							<li><a href="gifts.html">礼品中心 </a>
-							</li>
-							<li class="active"><a href="page_list.html">任务广场 </a>
-							</li>
-							<li><a href="page_hirelist.html">招募帖 </a>
-							</li>
-							<li><a href="page_clients.html">合作伙伴</a>
-							</li>
-							<li><a href="page_questionaire.html">问卷调查 </a>
-							</li>
+							<li><a href="index.html">主页 </a></li>
+							<li><a href="gifts.html">礼品中心 </a></li>
+							<li class="active"><a href="page_list.html">任务广场 </a></li>
+							<li><a href="page_hirelist.html">招募帖 </a></li>
+							<li><a href="page_clients.html">合作伙伴</a></li>
+							<li><a href="page_questionaire.html">问卷调查 </a></li>
 							<li><a class="search search-nav"><i
-									class="icon-search search-btn"></i> </a></li>
+									class="icon-search search-btn"></i> </a>
+							</li>
 						</ul>
 						<div class="search-open">
 							<div class="input-append">
@@ -278,11 +275,36 @@
 					if (tester == null) {
 				%>
 				<div class="text-center">
-					<a href="">
+					<a href="login.do?method=testerLogin">
 						<button class="btn btn-large btn-primary" type="button">请先登录</button>
 					</a>
 				</div>
 				<%
+					} else {
+						String isJoined = (String) session
+								.getAttribute("HasJoinedTask");
+						session.removeAttribute("HasJoinedTask");
+						if (isJoined == null || "false".equals(isJoined)) {
+				%>
+				<div class="text-center">
+					<form action="testTaskDetailView.do" method="post">
+						<input type="hidden" name="taskID" value="<%=testTask.getTaskId() %>" />
+						<input type="hidden" name="method" value="joinTask" />
+						<button class="btn btn-large btn-primary" type="submit">参加测试</button>
+					</form>
+				</div>
+				<%
+					} else {
+				%>
+				<div class="text-center">
+					<form action="testTaskDetailView.do" method="post">
+						<input type="hidden" name="taskID" value="<%=testTask.getTaskId() %>" />
+						<input type="hidden" name="method" value="goToTest" />
+						<button class="btn btn-large btn-primary" type="submit">参加测试</button>
+					</form>
+				</div>
+				<%
+					}
 					}
 				%>
 
@@ -312,28 +334,36 @@
 				<ul class="unstyled blog-ads">
 					<li><a href="#"><img
 							src="assets/img/sliders/elastislide/5.jpg" alt=""
-							class="hover-effect" /> </a></li>
+							class="hover-effect" /> </a>
+					</li>
 					<li><a href="#"><img
 							src="assets/img/sliders/elastislide/6.jpg" alt=""
-							class="hover-effect" /> </a></li>
+							class="hover-effect" /> </a>
+					</li>
 					<li><a href="#"><img
 							src="assets/img/sliders/elastislide/8.jpg" alt=""
-							class="hover-effect" /> </a></li>
+							class="hover-effect" /> </a>
+					</li>
 					<li><a href="#"><img
 							src="assets/img/sliders/elastislide/10.jpg" alt=""
-							class="hover-effect" /> </a></li>
+							class="hover-effect" /> </a>
+					</li>
 					<li><a href="#"><img
 							src="assets/img/sliders/elastislide/11.jpg" alt=""
-							class="hover-effect" /> </a></li>
+							class="hover-effect" /> </a>
+					</li>
 					<li><a href="#"><img
 							src="assets/img/sliders/elastislide/1.jpg" alt=""
-							class="hover-effect" /> </a></li>
+							class="hover-effect" /> </a>
+					</li>
 					<li><a href="#"><img
 							src="assets/img/sliders/elastislide/2.jpg" alt=""
-							class="hover-effect" /> </a></li>
+							class="hover-effect" /> </a>
+					</li>
 					<li><a href="#"><img
 							src="assets/img/sliders/elastislide/7.jpg" alt=""
-							class="hover-effect" /> </a></li>
+							class="hover-effect" /> </a>
+					</li>
 				</ul>
 
 				<!-- Blog Tags -->
@@ -341,16 +371,26 @@
 					<h3>任务标签</h3>
 				</div>
 				<ul class="unstyled inline blog-tags">
-					<li><a href="#"><i class="icon-tags"></i> Business</a></li>
-					<li><a href="#"><i class="icon-tags"></i> Music</a></li>
-					<li><a href="#"><i class="icon-tags"></i> Internet</a></li>
-					<li><a href="#"><i class="icon-tags"></i> Education</a></li>
-					<li><a href="#"><i class="icon-tags"></i> People</a></li>
-					<li><a href="#"><i class="icon-tags"></i> Math</a></li>
-					<li><a href="#"><i class="icon-tags"></i> Photos</a></li>
-					<li><a href="#"><i class="icon-tags"></i> Electronics</a></li>
-					<li><a href="#"><i class="icon-tags"></i> Apple</a></li>
-					<li><a href="#"><i class="icon-tags"></i> Canada</a></li>
+					<li><a href="#"><i class="icon-tags"></i> Business</a>
+					</li>
+					<li><a href="#"><i class="icon-tags"></i> Music</a>
+					</li>
+					<li><a href="#"><i class="icon-tags"></i> Internet</a>
+					</li>
+					<li><a href="#"><i class="icon-tags"></i> Education</a>
+					</li>
+					<li><a href="#"><i class="icon-tags"></i> People</a>
+					</li>
+					<li><a href="#"><i class="icon-tags"></i> Math</a>
+					</li>
+					<li><a href="#"><i class="icon-tags"></i> Photos</a>
+					</li>
+					<li><a href="#"><i class="icon-tags"></i> Electronics</a>
+					</li>
+					<li><a href="#"><i class="icon-tags"></i> Apple</a>
+					</li>
+					<li><a href="#"><i class="icon-tags"></i> Canada</a>
+					</li>
 				</ul>
 
 				<!-- Blog Latest Tweets -->
@@ -431,17 +471,23 @@
 						<li><a href="#" data-original-title="Feed" class="social_rss"></a>
 						</li>
 						<li><a href="#" data-original-title="Facebook"
-							class="social_picasa"></a></li>
+							class="social_picasa"></a>
+						</li>
 						<li><a href="#" data-original-title="Twitter"
-							class="social_twitter"></a></li>
+							class="social_twitter"></a>
+						</li>
 						<li><a href="#" data-original-title="Goole Plus"
-							class="social_tumblr"></a></li>
+							class="social_tumblr"></a>
+						</li>
 						<li><a href="#" data-original-title="Pinterest"
-							class="social_pintrest"></a></li>
+							class="social_pintrest"></a>
+						</li>
 						<li><a href="#" data-original-title="Linkedin"
-							class="social_linkedin"></a></li>
+							class="social_linkedin"></a>
+						</li>
 						<li><a href="#" data-original-title="Vimeo"
-							class="social_vimeo"></a></li>
+							class="social_vimeo"></a>
+						</li>
 					</ul>
 				</div>
 				<!--/span4-->

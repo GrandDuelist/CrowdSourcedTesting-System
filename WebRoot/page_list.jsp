@@ -167,7 +167,7 @@
                 </ul>
              </div>
              <div style="overflow:hidden;">
-                <h2><a href="testTaskDetailView.do?taskID=<%=testTask.getTaskId() %>"><%=testTask.getProduct().getProductName() %></a></h2>
+                <h2><a href="testTaskDetailView.do?method=detailView&taskID=<%=testTask.getTaskId() %>"><%=testTask.getProduct().getProductName() %></a></h2>
                 <ul class="unstyled inline">
                    <li><i class="icon-star"></i></li>
                    <li><i class="icon-star"></i></li>

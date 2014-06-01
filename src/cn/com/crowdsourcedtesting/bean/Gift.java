@@ -16,7 +16,7 @@ public class Gift implements java.io.Serializable {
 	private Double giftCredit;
 	private String giftName;
 	private String giftPhoto;
-	private Set changeGifts = new HashSet(0);
+//	private Set changeGifts = new HashSet(0);
 
 	// Constructors
 
@@ -34,14 +34,14 @@ public class Gift implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Gift(Integer giftAmount, Double giftCredit, String giftName,
-			String giftPhoto, Set changeGifts) {
-		this.giftAmount = giftAmount;
-		this.giftCredit = giftCredit;
-		this.giftName = giftName;
-		this.giftPhoto = giftPhoto;
-		this.changeGifts = changeGifts;
-	}
+//	public Gift(Integer giftAmount, Double giftCredit, String giftName,
+//			String giftPhoto, Set changeGifts) {
+//		this.giftAmount = giftAmount;
+//		this.giftCredit = giftCredit;
+//		this.giftName = giftName;
+//		this.giftPhoto = giftPhoto;
+//		this.changeGifts = changeGifts;
+//	}
 
 	// Property accessors
 
@@ -85,12 +85,12 @@ public class Gift implements java.io.Serializable {
 		this.giftPhoto = giftPhoto;
 	}
 
-	public Set getChangeGifts() {
-		return this.changeGifts;
-	}
-
-	public void setChangeGifts(Set changeGifts) {
-		this.changeGifts = changeGifts;
-	}
+//	public Set getChangeGifts() {
+//		return this.changeGifts;
+//	}
+//
+//	public void setChangeGifts(Set changeGifts) {
+//		this.changeGifts = changeGifts;
+//	}
 
 }

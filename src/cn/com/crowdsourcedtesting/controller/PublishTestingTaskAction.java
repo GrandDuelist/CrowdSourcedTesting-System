@@ -52,6 +52,7 @@ public class PublishTestingTaskAction extends DispatchAction {
 	private final String productNoIconFileErrorMessage = "未上传图标";
 	private final String productNoApkFileErrorMessage = "未上传应用程序";
 	private final String productFileUploadErrorMessage = "文件上传错误";
+	private final String productUrlErrorMessage = "上传连接出错";
 
 	private final String taskFormErrorMessage = "表单星标内容不能为空";
 	private final String taskDaterangeFormatErrorMessage = "时间范围格式错误，请重新输入";
@@ -148,6 +149,13 @@ public class PublishTestingTaskAction extends DispatchAction {
 					productIconFileTypeErrorMessage);
 			return mapping.findForward(webProductErrorForward);
 		}
+		
+		String webUrl = publishTestingForm.getWebUrl();
+		if ((webUrl = generalHelperHandler.isUrl(webUrl)) == null) {
+			request.getSession().setAttribute(productErrorMessageAttributeName,
+					productUrlErrorMessage);
+			return mapping.findForward(webProductErrorForward);
+		}
 
 		String iconFileTypeName = name[name.length - 1];
 
@@ -178,7 +186,7 @@ public class PublishTestingTaskAction extends DispatchAction {
 
 		Product product = new Product();
 		product.setProductName(publishTestingForm.getWebName());
-		product.setWebLink(publishTestingForm.getWebUrl());
+		product.setWebLink(webUrl);
 		product.setIcon(iconFilePath);
 		product.setDescription(publishTestingForm.getDescription());
 

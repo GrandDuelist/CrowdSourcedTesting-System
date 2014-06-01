@@ -1,0 +1,1 @@
+select * from JOIN_TASK

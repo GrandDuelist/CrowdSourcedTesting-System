@@ -102,13 +102,14 @@
   <StrutsActivity path="/form/editTask.jsp" location="650,1850" dimension="134,49" />
   <StrutsActivity path="/page_list.jsp" location="1850,1950" dimension="105,49" />
   <StrutsActivity path="/form/testTaskViewList.jsp" location="2450,2050" dimension="177,49" />
+  <StrutsActivity path="/page_task_detail.jsp" location="50,2050" dimension="146,49" />
   <StrutsActivity path="/form/testTaskDetailView.jsp" location="1250,2150" dimension="189,49" />
   <StrutsActivity path="page_list.jsp" location="1550,1950" dimension="99,49" />
   <StrutsActivity path="/publisher_taskpub_success.html" location="950,1350" dimension="211,49" />
   <StrutsActivity path="/form/publishWebTesting.jsp" location="1250,1350" dimension="190,49" />
   <StrutsActivity path="/form/publishTesting.jsp" location="1850,1550" dimension="168,49" />
   <StrutsActivity path="publisher_tasklist.jsp" location="950,1750" dimension="145,49" />
-  <StrutsActivity path="/page_task_detail.jsp" location="50,2050" dimension="146,49" />
+  <StrutsActivity path="login.do" />
   <StrutsTransition id="/page_hirelist.jsp,null,/recruitment.do,2" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="1675,1074" />
@@ -654,6 +655,14 @@
       <AbsolutePoint location="712,1684" />
     </AutomaticBendpoints>
   </StrutsTransition>
+  <StrutsTransition id="/testTaskDetailView.do,testerLogin,entrance.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2923,2050" />
+      <AbsolutePoint location="2923,1824" />
+      <AbsolutePoint location="2232,1824" />
+      <AbsolutePoint location="2232,1725" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
   <StrutsTransition id="/information.do,publisherList,/CheckPublisherListView.jsp,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="3100,964" />
@@ -995,12 +1004,6 @@
       <AbsolutePoint location="1550,1414" />
     </AutomaticBendpoints>
   </StrutsTransition>
-  <StrutsTransition id="/testTaskDetailView.do,dispPage,/testTaskViewList.do,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="2750,2114" />
-      <AbsolutePoint location="2243,2114" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
   <StrutsTransition id="/publishTestingTask.do,pubDesktop,/publisher_taskpub_desktop.jsp,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="1470,1550" />
@@ -1188,6 +1191,12 @@
       <AbsolutePoint location="3157,154" />
       <AbsolutePoint location="3157,1274" />
       <AbsolutePoint location="2917,1274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/testTaskDetailView.do,testerLogin,login.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2953,2094" />
+      <AbsolutePoint location="0,0" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/manageQuestionnaire.do,detail,/CheckQuestionnaireDetailView.jsp,1" routingType="0">

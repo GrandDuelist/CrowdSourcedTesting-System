@@ -14,7 +14,7 @@ public class Category implements java.io.Serializable {
 	private Integer categoryId;
 	private String categoryName;
 	private Boolean plateformType;
-	private Set subcategories = new HashSet(0);
+//	private Set subcategories = new HashSet(0);
 
 	// Constructors
 
@@ -29,12 +29,12 @@ public class Category implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Category(String categoryName, Boolean plateformType,
-			Set subcategories) {
-		this.categoryName = categoryName;
-		this.plateformType = plateformType;
-		this.subcategories = subcategories;
-	}
+//	public Category(String categoryName, Boolean plateformType,
+//			Set subcategories) {
+//		this.categoryName = categoryName;
+//		this.plateformType = plateformType;
+//		this.subcategories = subcategories;
+//	}
 
 	// Property accessors
 
@@ -62,12 +62,12 @@ public class Category implements java.io.Serializable {
 		this.plateformType = plateformType;
 	}
 
-	public Set getSubcategories() {
-		return this.subcategories;
-	}
-
-	public void setSubcategories(Set subcategories) {
-		this.subcategories = subcategories;
-	}
+//	public Set getSubcategories() {
+//		return this.subcategories;
+//	}
+//
+//	public void setSubcategories(Set subcategories) {
+//		this.subcategories = subcategories;
+//	}
 
 }
