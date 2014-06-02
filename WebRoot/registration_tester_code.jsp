@@ -103,7 +103,7 @@
           <div class="panel-body">
           <h2 class="text-info">验证码确认</h2>
           <hr/>
-            	<form id="verify_code">
+            	<form id="verify_code" action="registrationTester.do?method=testerRegistration" method="post">
                 	<div class="col-md-6 col-md-offset-3">
                 	<div class="alert alert-info">
                     	请正确填写您收到的验证码

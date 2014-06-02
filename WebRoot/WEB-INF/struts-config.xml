@@ -434,7 +434,7 @@
       <forward name="pubDesktop" path="/publisher_taskpub_desktop.jsp"></forward>
       <forward name="publisherLogin" path="entrance.do?method=goToLogin"></forward>
    
-
+</action>
   </action-mappings>
   <controller processorClass="filters.MyRequestProcessor" />
 
