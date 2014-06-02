@@ -152,13 +152,13 @@ public class RegistrationTesterForm extends ActionForm {
 		this.birthday = birthday;
 	}
 
-	public FormFile getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(FormFile photo) {
-		this.photo = photo;
-	}
+//	public FormFile getPhoto() {
+//		return photo;
+//	}
+//
+//	public void setPhoto(FormFile photo) {
+//		this.photo = photo;
+//	}
 
 	public double getCredit() {
 		return credit;

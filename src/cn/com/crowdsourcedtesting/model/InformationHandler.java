@@ -1,5 +1,7 @@
 package cn.com.crowdsourcedtesting.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -212,16 +214,21 @@ public class InformationHandler extends GeneralHandler {
 			
 			Tester tester = DAOFactory.getTesterDAO().findById(
 					f.getId());
+			if (tester == null) {
+				System.out.println("tester null==========");
+			}
 			if (f.getStatus()!=null&&f.getStatus())tester.setHasAuthority(!tester.
 					getHasAuthority());
 			if(f.getUsername()!=null)tester.setTesterName(f.getUsername());
-			if(f.getBirthday()!=null)tester.setTesterBirthday(new Date(f.getBirthday().format("DD/MM/YYYY", this)));	
+			DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+			if(f.getBirthday()!=null)tester.setTesterBirthday(dateFormat.parse(f.getBirthday()));	
 			DAOFactory.getTesterDAO().save(tester);
 			request.setAttribute("modify", "success");
 			/*跳回到修改前的页面
 			 */
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 			request.setAttribute("modify", "failed");
 		
 		}

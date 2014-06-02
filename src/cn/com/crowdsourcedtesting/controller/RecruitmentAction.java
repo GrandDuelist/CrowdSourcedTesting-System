@@ -70,7 +70,7 @@ public class RecruitmentAction extends DispatchAction {
 
 		RecruitmentDAO dao = new RecruitmentDAO();
 		int pagenow = recruitmentForm.getPagenow();
-		// 一�2个招募信�
+		// 一�2个招募信�
 		page.setCurrentPage(pagenow);
 		page.setPerRows(12);
 		page.setTotalRows(dao.getTotalRows());
@@ -92,7 +92,7 @@ public class RecruitmentAction extends DispatchAction {
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
 		RecruitmentDAO dao = new RecruitmentDAO();
-		// 一�2个招募信�
+		// 一�2个招募信�
 		page.setCurrentPage(1);
 		page.setPerRows(12);
 		page.setTotalRows(dao.getTotalRows());
@@ -184,7 +184,6 @@ public class RecruitmentAction extends DispatchAction {
 		String company = recruitmentForm.getCompany();	
 
 		handler.addNewRecruitment(title, online, startdate, enddate, place, brief, content, company, request);
-				brief, content, company, publisher, request);
 
 		return this.publisherList(mapping, recruitmentForm, request, response);
 		// return this.gotoList(mapping, form, request, response);
@@ -240,7 +239,7 @@ public class RecruitmentAction extends DispatchAction {
 	 * RecruitmentForm recruitmentForm = (RecruitmentForm) form;// TODO //
 	 * Auto-generated // method // stub RecruitmentDAO dao = new
 	 * RecruitmentDAO(); int perrow = recruitmentForm.getPerrow(); if (perrow ==
-	 * 0) perrow = 5; System.out.println(perrow); // 后台一�个招募信�
+	 * 0) perrow = 5; System.out.println(perrow); // 后台一�个招募信�
 	 * page.setCurrentPage(1); page.setPerRows(perrow);
 	 * page.setTotalRows(dao.getTotalRows());
 	 * handler.selectAllRecruitments(page, request); perrow = 0;
@@ -289,7 +288,7 @@ public class RecruitmentAction extends DispatchAction {
 
 		request.setAttribute("isLegal", "legal");
 		// 交给事务处理
-		handler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接�
+		handler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接�
 		return mapping.findForward("checklist");
 	}
 

@@ -37,14 +37,14 @@
 
 
 <%
- String flag = (String)request.getAttribute("isLegal");
+ /* String flag = (String)request.getAttribute("isLegal");
  if(flag == null || flag != "legal")
  {
  	response.sendRedirect("comment.do?method=checkWebList");
  	return;
  }
  else
- 	request.removeAttribute("isLegal");
+ 	request.removeAttribute("isLegal"); */
  %>
 
 

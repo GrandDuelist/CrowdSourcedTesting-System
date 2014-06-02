@@ -10,7 +10,7 @@ public class Page {
 	
 	private int totalRows= 0; 
 	
-	public final int DEFAULT_PERROWS =1;
+	public final int DEFAULT_PERROWS = 5;
 	public final int DEFAULT_MAX_PAGE = 5; //可选择的最大页数
 	
 	

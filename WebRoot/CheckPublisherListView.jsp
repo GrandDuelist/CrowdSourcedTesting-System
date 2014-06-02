@@ -376,8 +376,8 @@ try{
                           <td class="info"><b><%=publisher.getPublisherName() %></b><br />
                             <span class="text-muted"><i class="fa fa-home"></i> <%=publisher.getPublisherCompany() %></span></td>
                           <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> <%=publisher.getPublisherLogEmail() %></td>
-                          <td><i class="fa fa-link fa-lg text-blue padding-right-sm"></i><%=publisher.getPublisherAuthority()?"活跃":"封锁"%></td>
-                          <td><i class="fa fa-credit-card fa-lg text-blue padding-right-sm"></i><%=publisher.getBusinessLicense()==null?"无":publisher.getBusinessLicense()==null %></td>
+                          <td><i class="fa fa-link fa-lg text-blue padding-right-sm"></i><%=publisher.getPublisherAuthority()?"可用":"冻结"%></td>
+                          <td><i class="fa fa-credit-card fa-lg text-blue padding-right-sm"></i><%=publisher.getBusinessLicense()==null?"无":publisher.getBusinessLicense() %></td>
                           <td class="text-right text-center" id="detail1"><a class="btn btn-primary btn-gradient" id=<%=publisher.getPublisherId() %> type="button" ><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
                         </tr>
                         <%} %>

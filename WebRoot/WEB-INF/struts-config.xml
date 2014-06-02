@@ -24,8 +24,11 @@
     <form-bean name="publishTestingTaskForm" type="cn.com.crowdsourcedtesting.struts.form.PublishTestingTaskForm" />
     <form-bean name="questionnaireDisplayForm" type="cn.com.crowdsourcedtesting.struts.form.QuestionnaireDisplayForm" />
     <form-bean name="taskForm" type="cn.com.crowdsourcedtesting.struts.form.TaskForm" />
+    <form-bean name="taskLiskForm" type="cn.com.crowdsourcedtesting.struts.form.TaskLiskForm" />
+    <form-bean name="editTaskForm" type="cn.com.crowdsourcedtesting.struts.form.EditTaskForm" />
     <form-bean name="informationForm" type="cn.com.crowdsourcedtesting.struts.form.InformationForm" />
-
+    <form-bean name="testTaskViewListForm" type="cn.com.crowdsourcedtesting.struts.form.TestTaskViewListForm" />
+    <form-bean name="testTaskDetailViewForm" type="cn.com.crowdsourcedtesting.struts.form.TestTaskDetailViewForm" />
   
   </form-beans>
 
@@ -241,7 +244,7 @@
       <set-property property="cancellable" value="true" />
        <forward name="publisherLogin" path="/PublisherLoginView.jsp"></forward>
        <forward name="add" path="/PublisherQuestionnaireView.jsp"></forward>
-        <forward name="main" path="/PublisherQuestionnaireMainView.jsp"></forward>
+       <forward name="main" path="/PublisherQuestionnaireMainView.jsp"></forward>
     </action>
     
     
@@ -433,13 +436,56 @@
       <forward name="pubAndroid" path="/publisher_taskpub_android.jsp"></forward>
       <forward name="pubDesktop" path="/publisher_taskpub_desktop.jsp"></forward>
       <forward name="publisherLogin" path="entrance.do?method=goToLogin"></forward>
-   
-</action>
+    </action>
+    <action
+      attribute="taskLiskForm"
+      input="/form/taskLisk.jsp"
+      name="taskLiskForm"
+      path="/taskLisk"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.TaskLiskAction">
+      <set-property property="cancellable" value="true" />
+      <forward name="taskList" path="/publisher_tasklist.jsp"></forward>
+      <forward name="publisherLogin" path="entrance.do?method=goToLogin"></forward>
+    </action>
+    <action
+      attribute="editTaskForm"
+      parameter="method"
+      input="/form/editTask.jsp"
+      name="editTaskForm"
+      path="/editTask"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.EditTaskAction">
+      <set-property property="cancellable" value="true" />
+      <forward name="publisherLogin" path="entrance.do?method=goToLogin"></forward>
+      <forward name="taskCloseForm" path="/publisher_task_close.jsp"></forward>
+      <forward name="checkList" path="taskLisk.do"></forward>
+    </action>
+    <action
+      attribute="testTaskViewListForm"
+      input="/form/testTaskViewList.jsp"
+      name="testTaskViewListForm"
+      path="/testTaskViewList"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.TestTaskViewListAction">
+      <set-property property="cancellable" value="true" />
+      <forward name="dispPage" path="/page_list.jsp"></forward>
+    </action>
+    <action
+      attribute="testTaskDetailViewForm"
+      parameter="method"
+      input="/form/testTaskDetailView.jsp"
+      name="testTaskDetailViewForm"
+      path="/testTaskDetailView"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.TestTaskDetailViewAction">
+      <set-property property="cancellable" value="true" />
+      <forward name="taskDetailPage" path="/page_task_detail.jsp" ></forward>
+      <forward name="taskList" path="/testTaskViewList.do"></forward>
+      <forward name="testerLogin" path="login.do?method=testerLogin"></forward>
+    </action>
   </action-mappings>
   <controller processorClass="filters.MyRequestProcessor" />
 
   <message-resources parameter="cn.com.crowdsourcedtesting.struts.ApplicationResources" />
 </struts-config>
-
-
-  

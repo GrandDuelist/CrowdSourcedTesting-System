@@ -117,7 +117,7 @@
                     <hr/>
                     <div class="text-center">
                     <p>
-                    	<button class="btn btn-success btn-gradient btn-lg" type="button" disabled="disabled">提交</button>
+                    	<button class="btn btn-success btn-gradient btn-lg" type="submit" >提交</button>
                     </p>
                     </div>
                     </div>
@@ -258,7 +258,7 @@
 		{
 			document.getElementById("nonempty3").style.display = "none";
 			document.getElementById("error").style.display="none";
-			document.getElementById("comfirm").disabled = "";
+			document.getElementById("comfirm").disabled = " ";
 			return true;
 		}
 	}

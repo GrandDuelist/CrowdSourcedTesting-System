@@ -75,7 +75,7 @@ $("div#selectButton").click(function()
     
    
      $("form#selectForm input[name='subType']").attr("value","selectQuestion");
-    $("form#selectForm").attr("action","questionnaire.do?method=createItem");
+    $("form#selectForm").attr("action","publisherQuestionnaire.do?method=createItem");
     $("form#selectForm").submit();
       
     
@@ -90,7 +90,7 @@ $("div#confirm").click(function()
    
     $("form#selectForm input[name='currentOne']").attr("value",$("div#currentQuestion h3").attr("id"));
      $("form#selectForm input[name='subType']").attr("value","confirmQuestion");
-    $("form#selectForm").attr("action","questionnaire.do?method=createItem");
+    $("form#selectForm").attr("action","publisherQuestionnaire.do?method=createItem");
     $("form#selectForm").submit();
       
     
@@ -105,7 +105,7 @@ $("div#deleteQuestion").click(function()
     $("form#selectForm input[name='currentOne']").attr("value",$("div#currentQuestion h3").attr("id"));
     
      $("form#selectForm input[name='subType']").attr("value","deleteQuestion");
-    $("form#selectForm").attr("action","questionnaire.do?method=createItem");
+    $("form#selectForm").attr("action","publisherQuestionnaire.do?method=createItem");
     $("form#selectForm").submit();
       
     
@@ -119,7 +119,7 @@ $("div#publishQuetionnaire").click(function()
    
     
      $("form#selectForm input[name='subType']").attr("value","publishQuetionnaire");
-    $("form#selectForm").attr("action","questionnaire.do?method=createItem");
+    $("form#selectForm").attr("action","publisherQuestionnaire.do?method=createItem");
     $("form#selectForm").submit();
       
     
@@ -399,7 +399,7 @@ $("div#publishQuetionnaire").click(function()
           <div class="panel-heading">
             <div class="panel-title"> <i class="fa fa-pencil"></i> 创建问卷 </div>
           </div>
-          <form id="create-event-form" method="post" class="create" action="questionnaire.do?method=createItem">
+          <form id="create-event-form" method="post" class="create" action="publisherQuestionnaire.do?method=createItem">
             <div class="panel-body">
               <div class="form-group">
                 <label for="web_url"> 问卷名称 </label>

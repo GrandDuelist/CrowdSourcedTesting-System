@@ -1,1 +1,1 @@
-from TestTask testTask where testTask.taskType=0 order by testTask.taskId desc
+from JoinTask as model where model.testTask.taskId = 28 and model.tester.testerId = 2
