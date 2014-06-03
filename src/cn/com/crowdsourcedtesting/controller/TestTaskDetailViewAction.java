@@ -232,7 +232,7 @@ public class TestTaskDetailViewAction extends DispatchAction {
 		bugReport.setTester(tester);
 		bugReport.setTestTask(testTask);
 		BugReportDAO bugReportDAO = new BugReportDAO();
-		bugReportDAO.save(bugReport);
+		bugReportDAO.addBugReport(bugReport);
 		return mapping.findForward("taskDetailPage");
 	}
 }
