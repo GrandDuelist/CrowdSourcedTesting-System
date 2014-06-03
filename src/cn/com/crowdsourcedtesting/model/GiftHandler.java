@@ -1,7 +1,5 @@
 package cn.com.crowdsourcedtesting.model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,8 +20,6 @@ import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
 import cn.com.crowdsourcedtesting.bean.Administrator;
 import cn.com.crowdsourcedtesting.bean.ChangeGift;
 import cn.com.crowdsourcedtesting.bean.Gift;
-import cn.com.crowdsourcedtesting.bean.JoinQuestionnaire;
-import cn.com.crowdsourcedtesting.bean.Recruitment;
 import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.crowdsourcedtesting.modelhelper.MethodNumber;
 import cn.com.crowdsourcedtesting.struts.form.GiftForm;

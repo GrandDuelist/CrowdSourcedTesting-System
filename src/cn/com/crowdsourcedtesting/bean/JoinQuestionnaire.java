@@ -1,12 +1,6 @@
 package cn.com.crowdsourcedtesting.bean;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import org.hibernate.Query;
-
-import cn.com.other.page.Page;
 
 /**
  * JoinQuestionnaire entity. @author MyEclipse Persistence Tools

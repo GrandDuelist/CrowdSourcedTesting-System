@@ -2,11 +2,9 @@ package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.Administrator;
-import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.other.page.Page;
 
 import java.util.List;
-import java.util.Set;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.criterion.Example;
@@ -173,7 +171,7 @@ public class AdministratorDAO extends BaseHibernateDAO {
 
 		Administrator administrator=null;
 		
-		List<Administrator>administrators=(List<Administrator>)this.findByProperty(ADMINISTRATOR_EMAIL,email);
+		List<Administrator>administrators=this.findByProperty(ADMINISTRATOR_EMAIL,email);
 		
 	    if(administrators!=null&&administrators.size()!=0)
 	    {

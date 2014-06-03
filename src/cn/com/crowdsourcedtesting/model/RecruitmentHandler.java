@@ -1,9 +1,7 @@
 package cn.com.crowdsourcedtesting.model;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,9 +17,7 @@ import cn.com.crowdsourcedtesting.DAO.RecruitmentDAO;
 import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
 import cn.com.crowdsourcedtesting.bean.Product;
 import cn.com.crowdsourcedtesting.bean.Publisher;
-import cn.com.crowdsourcedtesting.bean.Questionnaire;
 import cn.com.crowdsourcedtesting.bean.Recruitment;
-import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.crowdtest.factory.DAOFactory;
 import cn.com.other.page.Page;
 

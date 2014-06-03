@@ -1,8 +1,5 @@
 package cn.com.crowdsourcedtesting.bean;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Gift entity. @author MyEclipse Persistence Tools
  */

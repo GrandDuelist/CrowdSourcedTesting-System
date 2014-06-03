@@ -2,7 +2,6 @@ package cn.com.crowdsourcedtesting.modelhelper;
 
 import java.util.List;
 
-import cn.com.crowdsourcedtesting.DAO.*;
 import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.crowdsourcedtesting.struts.form.LoginForm;
 import cn.com.crowdsourcedtesting.subinterface.RoleIdentify;

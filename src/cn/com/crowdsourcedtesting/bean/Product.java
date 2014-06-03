@@ -1,8 +1,6 @@
 package cn.com.crowdsourcedtesting.bean;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Product entity. @author MyEclipse Persistence Tools

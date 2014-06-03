@@ -26,7 +26,9 @@
     <form-bean name="taskForm" type="cn.com.crowdsourcedtesting.struts.form.TaskForm" />
     <form-bean name="taskLiskForm" type="cn.com.crowdsourcedtesting.struts.form.TaskLiskForm" />
     <form-bean name="editTaskForm" type="cn.com.crowdsourcedtesting.struts.form.EditTaskForm" />
-   
+    <form-bean name="informationForm" type="cn.com.crowdsourcedtesting.struts.form.InformationForm" />
+    <form-bean name="testTaskViewListForm" type="cn.com.crowdsourcedtesting.struts.form.TestTaskViewListForm" />
+    <form-bean name="testTaskDetailViewForm" type="cn.com.crowdsourcedtesting.struts.form.TestTaskDetailViewForm" />
   
   </form-beans>
 
@@ -115,9 +117,10 @@
       <set-property property="cancellable" value="true" />
        <forward name="home" path="/index.jsp"></forward>
        <forward name="login" path="/LoginView.jsp"></forward>
-     
-      
-      
+      <forward name="manageGiftList" path="/ManageGiftListView.jsp"></forward>
+      <forward name="manageGiftDetail" path="/ManageGiftDetailView.jsp"></forward>
+      <forward name="changeGiftList"  path="/ChangeGiftListView.jsp"></forward>
+      <forward name="changeGiftDetail" path="ChangeGiftDetailView.jsp"></forward>
       <forward name="giftitem" path="/gift.jsp"></forward>
       <forward name="allgifts" path="/gifts.jsp" />
       <forward name="changegift" path="/gift_address.jsp" />
@@ -166,7 +169,7 @@
       <forward name="allcomment" path="/page_task_item.jsp" />
     </action>
     
-    
+    <!-- 定义招募信息的ACTION -->
     <action
       attribute="recruitmentForm"
       input="/page_hirelist.jsp"
@@ -179,14 +182,29 @@
       
       <forward name="hireitem" path="/page_hireitem.jsp"></forward>
       <forward name="hirelist" path="/page_hirelist.jsp" />
-      
       <forward name="edititem" path="/publisher_hireinfo.jsp" />
       <forward name="checklist" path="/publisher_hirelist.jsp" />
       <forward name="backstage" path="/publisher_hireman.jsp" />
       <forward name="additem" path="/publisher_hirepub.jsp" />
       <forward name="index" path="/index.jsp" />
+      <forward name="publisherLogin" path="/PublisherLoginView.jsp"></forward>
     </action>
-    
+    <!-- 定义信息维护的MVC -->
+    <action
+         name = "informationForm"
+         attribute = "informationForm"
+         path="/information"
+         parameter="method"
+         scope="request"
+         type="cn.com.crowdsourcedtesting.controller.InformationRouter">
+      <set-property property="cancellable" value="true" />
+       <forward name="testerList" path="/CheckTesterListView.jsp"></forward>
+        <forward name="testerDetail" path="/CheckTesterDetailView.jsp"></forward>
+        <forward name="publisherList" path="/CheckPublisherListView.jsp"></forward>
+        <forward name="publisherDetail" path="/CheckPublisherDetailView.jsp"></forward>
+        <forward name="adminLogin"  path="/AdminLoginView.jsp"></forward>
+    </action>
+     
        <action  
          	 name="checkQuestionnaireDetailForm" 
           	attribute="checkQuestionnaireDetailForm"
@@ -332,33 +350,25 @@
           type="cn.com.crowdsourcedtesting.controller.QuestionnaireRouter">
           
       <set-property property="cancellable" value="true" />
-     
-       <forward name="detail" path="/QuestionnaireDetailView.jsp"></forward>
-       
+          <forward name="detail" path="/QuestionnaireDetailView.jsp"></forward>
          <forward name="adminLogin"  path="/AdminLoginView.jsp"></forward>
     </action>
     
-    
       <!--  定义一个前台问卷的MVC -->    
-      <action  
+    <action  
           name="pageIdForm" 
           attribute="pageIdForm"
           input = "/PageQuestionnaireView.jsp"
           path="/questionnaire" 
           parameter="method" 
           scope="request" 
-          type="cn.com.crowdsourcedtesting.controller.QuestionnaireRouter">
-          
-      <set-property property="cancellable" value="true" />
-     
+          type="cn.com.crowdsourcedtesting.controller.QuestionnaireRouter">  
+      <set-property property="cancellable" value="true" /> 
        <forward name="detail" path="/PageQuestionnaireInfoView.jsp"></forward>
         <forward name="list" path="/PageQuestionnaireView.jsp"></forward>
-       
          <forward name="testerLogin"  path="/LoginView.jsp"></forward>
-    </action>
-    
-    
-    
+    </action> 
+      
     <action
       attribute="registrationTesterForm"
       parameter = "method"
@@ -427,6 +437,8 @@
       <forward name="pubDesktop" path="/publisher_taskpub_desktop.jsp"></forward>
       <forward name="publisherLogin" path="entrance.do?method=goToLogin"></forward>
 <<<<<<< HEAD
+   
+</action>
 =======
     </action>
     <action
@@ -452,9 +464,32 @@
       <forward name="publisherLogin" path="entrance.do?method=goToLogin"></forward>
       <forward name="taskCloseForm" path="/publisher_task_close.jsp"></forward>
       <forward name="checkList" path="taskLisk.do"></forward>
->>>>>>> a2dd94d886e25b2402d605e27d05ba08d6436da5
+    </action>
+    <action
+      attribute="testTaskViewListForm"
+      input="/form/testTaskViewList.jsp"
+      name="testTaskViewListForm"
+      path="/testTaskViewList"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.TestTaskViewListAction">
+      <set-property property="cancellable" value="true" />
+      <forward name="dispPage" path="/page_list.jsp"></forward>
+    </action>
+    <action
+      attribute="testTaskDetailViewForm"
+      parameter="method"
+      input="/form/testTaskDetailView.jsp"
+      name="testTaskDetailViewForm"
+      path="/testTaskDetailView"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.TestTaskDetailViewAction">
+      <set-property property="cancellable" value="true" />
+      <forward name="taskDetailPage" path="/page_task_detail.jsp" ></forward>
+      <forward name="taskList" path="/testTaskViewList.do"></forward>
+      <forward name="testerLogin" path="login.do?method=testerLogin"></forward>
     </action>
 
+>>>>>>> 5a6185d44b8a0fd7c5bd1d5cbb6c4d2640220e48
   </action-mappings>
   <controller processorClass="filters.MyRequestProcessor" />
 

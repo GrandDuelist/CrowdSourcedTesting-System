@@ -2,12 +2,10 @@ package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.Publisher;
-import cn.com.crowdsourcedtesting.bean.Questionnaire;
 import cn.com.other.page.Page;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -195,7 +193,7 @@ public class PublisherDAO extends BaseHibernateDAO {
 
 		Publisher publisher = null;
 
-		List<Publisher> publishers = (List<Publisher>) this.findByProperty(
+		List<Publisher> publishers = this.findByProperty(
 				PUBLISHER_LOG_EMAIL, email);
 
 		if (publishers != null && publishers.size() != 0) {

@@ -486,7 +486,6 @@
       <forward name="bugReportPage" path="/page_task_bugReport.jsp"></forward>
       <forward name="bugReportPageRedirect" path="testTaskDetailView.do"></forward>
     </action>
-
   </action-mappings>
   <controller processorClass="filters.MyRequestProcessor" />
 

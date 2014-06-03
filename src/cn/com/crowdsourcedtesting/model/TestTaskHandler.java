@@ -9,15 +9,9 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import cn.com.crowdsourcedtesting.DAO.AdministratorDAO;
-import cn.com.crowdsourcedtesting.DAO.PublisherDAO;
-import cn.com.crowdsourcedtesting.DAO.RecruitmentDAO;
 import cn.com.crowdsourcedtesting.DAO.TestTaskDAO;
 import cn.com.crowdsourcedtesting.DAO.TesterDAO;
 import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
-import cn.com.crowdsourcedtesting.bean.Publisher;
-import cn.com.crowdsourcedtesting.bean.Questionnaire;
-import cn.com.crowdsourcedtesting.bean.Recruitment;
 import cn.com.crowdsourcedtesting.bean.TaskComment;
 import cn.com.crowdsourcedtesting.bean.TestTask;
 import cn.com.crowdsourcedtesting.bean.Tester;

@@ -1,17 +1,5 @@
 package cn.com.crowdtest.factory;
 
-import cn.com.crowdsourcedtesting.DAO.AdministratorDAO;
-import cn.com.crowdsourcedtesting.DAO.BugReportDAO;
-import cn.com.crowdsourcedtesting.DAO.CategoryDAO;
-import cn.com.crowdsourcedtesting.DAO.ChoiceDAO;
-import cn.com.crowdsourcedtesting.DAO.GiftDAO;
-import cn.com.crowdsourcedtesting.DAO.JoinQuestionnaireDAO;
-import cn.com.crowdsourcedtesting.DAO.ProductDAO;
-import cn.com.crowdsourcedtesting.DAO.PublisherDAO;
-import cn.com.crowdsourcedtesting.DAO.QuestionDAO;
-import cn.com.crowdsourcedtesting.DAO.QuestionnaireDAO;
-import cn.com.crowdsourcedtesting.DAO.RecruitmentDAO;
-import cn.com.crowdsourcedtesting.DAO.TesterDAO;
 import cn.com.crowdsourcedtesting.bean.*;
 
 public class BeanFactory {

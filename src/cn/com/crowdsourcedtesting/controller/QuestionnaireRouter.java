@@ -4,17 +4,11 @@
  */
 package cn.com.crowdsourcedtesting.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -23,10 +17,8 @@ import org.apache.struts.actions.DispatchAction;
 import cn.com.crowdsourcedtesting.model.QuestionnaireHandler;
 import cn.com.crowdsourcedtesting.modelhelper.MethodNumber;
 import cn.com.crowdsourcedtesting.struts.form.CheckQuestionnaireDetailForm;
-import cn.com.crowdsourcedtesting.struts.form.CheckRegisterDetailForm;
 import cn.com.crowdsourcedtesting.struts.form.PageIdForm;
 import cn.com.crowdsourcedtesting.struts.form.PublisherQuestionnaireForm;
-import cn.com.crowdsourcedtesting.struts.form.QuestionnaireDetailForm;
 import cn.com.crowdsourcedtesting.struts.form.QuestionnaireDisplayForm;
 import cn.com.crowdtest.factory.DAOFactory;
 import cn.com.crowdtest.factory.HibernateSessionFactory;
