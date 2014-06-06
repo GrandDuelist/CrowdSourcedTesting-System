@@ -29,6 +29,7 @@
     <form-bean name="informationForm" type="cn.com.crowdsourcedtesting.struts.form.InformationForm" />
     <form-bean name="testTaskViewListForm" type="cn.com.crowdsourcedtesting.struts.form.TestTaskViewListForm" />
     <form-bean name="testTaskDetailViewForm" type="cn.com.crowdsourcedtesting.struts.form.TestTaskDetailViewForm" />
+    <form-bean name="bugReportManagementForm" type="cn.com.crowdsourcedtesting.struts.form.BugReportManagementForm" />
   
   </form-beans>
 
@@ -485,6 +486,16 @@
       <forward name="testerLogin" path="login.do?method=testerLogin"></forward>
       <forward name="bugReportPage" path="/page_task_bugReport.jsp"></forward>
       <forward name="bugReportPageRedirect" path="testTaskDetailView.do"></forward>
+    </action>
+    <action
+      attribute="bugReportManagementForm"
+      name="bugReportManagementForm"
+      parameter="method"
+      path="/bugReportManagement"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.BugReportManagementAction">
+      <set-property property="cancellable" value="true" />
+      <forward name="bugReportDetail" path="/publisher_taskinfo.jsp"></forward>
     </action>
   </action-mappings>
   <controller processorClass="filters.MyRequestProcessor" />

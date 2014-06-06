@@ -361,6 +361,13 @@
                                 <li>
                                   <a><i class="fa fa-level-up"></i> 重启 </a>
                                 </li>
+                                <li>
+                                <form action="bugReportManagement.do" name="bugReport<%=i%>">
+                                <input type="hidden" name="method" value="bugReportList" />
+                                <input type="hidden" name="taskId" value="<%= testTask.getTaskId() %>" />
+                                </form>
+                                <a href="javascript:void(document.bugReport<%=i%>.submit())"><i class="fa fa-edit"></i> 反馈管理 </a>
+                                </li>
                               </ul>
                             </div></td>
                         </tr>

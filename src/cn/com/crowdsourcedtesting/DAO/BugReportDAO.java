@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.BugReport;
+import cn.com.crowdsourcedtesting.bean.TestTask;
 import cn.com.other.page.Page;
 
 /**
@@ -175,58 +176,78 @@ public class BugReportDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
-	
-	
-	//模糊搜索
-		public List findSimilarPropertyByPage(Page page, String propertyName, Object value) {
-			log.debug("search label by property limit");
 
-			try {
-				String queryString = "from BugReport as model where model."
-						+ propertyName + " like ?";
-				Query query = getSession().createQuery(queryString);
-				query.setParameter(0, "%"+value+"%");
-				query.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
-				query.setMaxResults(page.getPerRows());
-				return query.list();
-			} catch (RuntimeException re) {
-				log.error("find label by property limit failed", re);
-				throw re;
-			}
+	// 模糊搜索
+	public List findSimilarPropertyByPage(Page page, String propertyName,
+			Object value) {
+		log.debug("search label by property limit");
 
+		try {
+			String queryString = "from BugReport as model where model."
+					+ propertyName + " like ?";
+			Query query = getSession().createQuery(queryString);
+			query.setParameter(0, "%" + value + "%");
+			query.setFirstResult((page.getCurrentPage() - 1)
+					* page.getPerRows());
+			query.setMaxResults(page.getPerRows());
+			return query.list();
+		} catch (RuntimeException re) {
+			log.error("find label by property limit failed", re);
+			throw re;
 		}
-		
-		public int getTotalSimilarRows(String propertyName, Object value)
-		{
 
-			try {					
-				String queryString = "from BugReport as model where model."
-						+ propertyName + " like ?";
-				Query query = getSession().createQuery(queryString);
-				query.setParameter(0, "%"+value+"%");
-				return query.list().size();
-			}
-			catch(RuntimeException re) {
-				log.error("find by page failed", re);
-				throw re;
-			}
+	}
 
+	public int getTotalSimilarRows(String propertyName, Object value) {
+
+		try {
+			String queryString = "from BugReport as model where model."
+					+ propertyName + " like ?";
+			Query query = getSession().createQuery(queryString);
+			query.setParameter(0, "%" + value + "%");
+			return query.list().size();
+		} catch (RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
 		}
-	
-		public void addBugReport(BugReport instance) {
-			Session session = getSession();
-			Transaction tran = null;
-			try {
-				tran = session.beginTransaction();
-				session.save(instance);
-				tran.commit();
-			} catch (RuntimeException re) {
-				if (tran != null) {
-					tran.rollback();
-				}
-				log.error("find by page failed", re);
-				re.printStackTrace();
-				throw re;
+
+	}
+
+	public void addBugReport(BugReport instance) {
+		Session session = getSession();
+		Transaction tran = null;
+		try {
+			tran = session.beginTransaction();
+			session.save(instance);
+			tran.commit();
+		} catch (RuntimeException re) {
+			if (tran != null) {
+				tran.rollback();
 			}
+			log.error("find by page failed", re);
+			re.printStackTrace();
+			throw re;
 		}
+	}
+
+	public List getBugReportByTask(TestTask testTask) {
+		List list = null;
+		Session session = getSession();
+		Transaction tran = null;
+		try {
+			tran = session.beginTransaction();
+			String queryString = "from BugReport as model where model.testTask.taskId = ?";
+			Query query = session.createQuery(queryString);
+			query.setParameter(0, testTask.getTaskId());
+			list = query.list();
+			tran.commit();
+		} catch (RuntimeException re) {
+			if (tran != null) {
+				tran.rollback();
+			}
+			re.printStackTrace();
+			throw re;
+		}
+		return list;
+	}
 }

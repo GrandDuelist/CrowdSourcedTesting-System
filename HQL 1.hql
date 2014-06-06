@@ -1,1 +1,1 @@
-from JoinTask as model where model.testTask.taskId = 28 and model.tester.testerId = 2
+from BugReport as model where model.testTask.taskId = 1
