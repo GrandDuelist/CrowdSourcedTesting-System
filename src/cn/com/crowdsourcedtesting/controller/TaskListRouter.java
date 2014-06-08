@@ -3,6 +3,7 @@
  * Template path: templates/java/JavaClass.vtl
  */
 package cn.com.crowdsourcedtesting.controller;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,8 +73,10 @@ public class TaskListRouter extends Action {
 		List<TestTask> resultList;
 		switch (type) {
 		case (TaskType.Web):
+
 			resultList = testTaskDAO.findPublisherWebTestTaskByPage(page,
 					publisher);
+			page.setTotalRows(testTaskDAO.getPublisherWebTotalRows(publisher));
 			break;
 		case (TaskType.Android):
 			break;
@@ -83,9 +86,9 @@ public class TaskListRouter extends Action {
 		resultList = testTaskDAO
 				.findPublisherWebTestTaskByPage(page, publisher);
 
-		request.getSession().removeAttribute("PublisherWebTestTaskByPage");
-		request.getSession().setAttribute("PublisherWebTestTaskByPage",
-				resultList);
+		request.setAttribute("type", type);
+		request.setAttribute("PublisherWebTestTaskByPage", resultList);
+		request.setAttribute("Page", page);
 
 		return mapping.findForward("taskList");
 	}

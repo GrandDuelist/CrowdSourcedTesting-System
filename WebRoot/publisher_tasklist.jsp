@@ -278,9 +278,9 @@
     <div id="sidebar-menu">
       <ul class="nav sidebar-nav">
         <li class="active"> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
-        <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
-        <li> <a href="publisher_questionnaire_man.html"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
-        <li> <a href="publisher_hireman.html"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
+        
+        <li> <a href="PublisherQuestionnaireMainView.jsp"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
+        <li> <a href="publisher_hireman.jsp"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
       </ul>
       </li>
       </ul>
@@ -329,8 +329,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                      <% List<TestTask> list = (List<TestTask>)session.getAttribute("PublisherWebTestTaskByPage"); 
-                      request.getSession().removeAttribute("PublisherWebTestTaskByPage");
+                      <% List<TestTask> list = (List<TestTask>) request.getAttribute("PublisherWebTestTaskByPage"); 
                       int i=0;
                       for (TestTask testTask : list) { 
                       i++;%>
@@ -359,9 +358,6 @@
                                   <a href="publisher_task_edit.html"><i class="fa fa-edit"></i> 修改 </a>
                                 </li>
                                 <li>
-                                  <a><i class="fa fa-level-up"></i> 重启 </a>
-                                </li>
-                                <li>
                                 <form action="bugReportManagement.do" name="bugReport<%=i%>">
                                 <input type="hidden" name="method" value="bugReportList" />
                                 <input type="hidden" name="taskId" value="<%= testTask.getTaskId() %>" />
@@ -377,12 +373,15 @@
                     <div class="text-right">
                     	
                       <ul class="pagination pagination-alt margin-bottom">
+                      <% Page pageDisp = (Page) request.getAttribute("Page"); %>
                         <li><a href="#"><i class="fa fa-caret-left"></i> </a></li>
-                        <li <% if ("1".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskList.do?type=<%=request.getAttribute("type") %>&page=1">1</a></li>
-                        <li <% if ("2".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskList.do?type=<%=request.getAttribute("type") %>&page=2">2</a></li>
-                        <li <% if ("3".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskList.do?type=<%=request.getAttribute("type") %>&page=3">3</a></li>
-                        <li <% if ("4".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskList.do?type=<%=request.getAttribute("type") %>&page=4">4</a></li>
-                        <li <% if ("5".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskList.do?type=<%=request.getAttribute("type") %>&page=5">5</a></li>
+                        <% for (int pageCount=1; pageCount<= pageDisp.getTotalPage(); pageCount++) { 
+                        if (pageCount == pageDisp.getCurrentPage()) {%>
+                        <li class="active" ><a href="taskList.do?type=<%=request.getAttribute("type") %>&page=<%=pageCount %>"><%=pageCount %></a></li>
+                        <% }else { %>
+                        <li ><a href="taskList.do?type=<%=request.getAttribute("type") %>&page=<%=pageCount %>"><%=pageCount %></a></li>
+                        <% }
+                        } %>
                         <li><a href="#"><i class="fa fa-caret-right"></i> </a></li>
                       </ul>
                     

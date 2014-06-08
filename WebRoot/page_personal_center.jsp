@@ -128,7 +128,7 @@
                                        
                         </li>
                         <li>
-                            <a href="page_list.html">任务广场                            
+                            <a href="testTaskViewList.do">任务广场                            
                             </a>
                         </li>
                         <li>
@@ -319,7 +319,7 @@
     	
 	<!-- Meer Our Team -->
 	<div class="headline"><h3>近期任务</h3>
-    <a class="pull-right btn-u" href="page_list.html">更多</a>
+    <a class="pull-right btn-u" href="testTaskViewList.do">更多</a>
     </div>
     <ul class="thumbnails team">
         <li class="span3">

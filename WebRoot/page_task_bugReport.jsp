@@ -109,7 +109,7 @@
 						<ul class="nav top-2">
 							<li><a href="index.html">主页 </a></li>
 							<li><a href="gifts.html">礼品中心 </a></li>
-							<li class="active"><a href="page_list.html">任务广场 </a></li>
+							<li class="active"><a href="testTaskViewList.do">任务广场 </a></li>
 							<li><a href="page_hirelist.html">招募帖 </a></li>
 							<li><a href="page_clients.html">合作伙伴</a></li>
 							<li><a href="page_questionaire.html">问卷调查 </a></li>

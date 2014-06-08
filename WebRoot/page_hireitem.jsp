@@ -117,7 +117,7 @@ String flag = (String)request.getAttribute("isLegal");
                                        
                         </li>
                         <li>
-                            <a href="page_list.html">任务广场                            
+                            <a href="testTaskViewList.do">任务广场                            
                             </a>
                         </li>
                         <li class="active">

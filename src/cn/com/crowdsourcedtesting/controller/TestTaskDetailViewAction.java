@@ -99,12 +99,12 @@ public class TestTaskDetailViewAction extends DispatchAction {
 		TestTaskDAO testTaskDAO = new TestTaskDAO();
 		TestTask testTask = testTaskDAO.findById(testTaskId);
 		JoinTaskDAO joinTaskDAO = new JoinTaskDAO();
-		if (joinTaskDAO.isExist(tester, testTask)) {
+		if (!joinTaskDAO.isExist(tester, testTask)) {
 			joinTaskDAO.addJoinTask(tester, testTask);
 		}
 		switch (testTask.getTaskType()) {
 		case (TaskType.Web):
-			return new ActionRedirect("http://www.baidu.com");
+			return new ActionRedirect(testTask.getProduct().getWebLink());
 		case (TaskType.Android):
 			break;
 		case (TaskType.Desktop):

@@ -113,7 +113,7 @@
 						<ul class="nav top-2">
 							<li><a href="index.html">主页 </a></li>
 							<li><a href="gifts.html">礼品中心 </a></li>
-							<li class="active"><a href="page_list.html">任务广场 </a></li>
+							<li class="active"><a href="testTaskViewList.do">任务广场 </a></li>
 							<li><a href="page_hirelist.html">招募帖 </a></li>
 							<li><a href="page_clients.html">合作伙伴</a></li>
 							<li><a href="page_questionaire.html">问卷调查 </a></li>
@@ -168,106 +168,16 @@
 					<ul class="unstyled inline blog-info">
 						<li><i class="icon-calendar"></i><%=testTask.getTaskStartTime()%></li>
 						<li><i class="icon-pencil"></i><%=testTask.getPublisher().getPublisherName()%></li>
-						<li><i class="icon-comments"></i> <a href="#">24 Comments</a>
-						</li>
 					</ul>
 					<ul class="unstyled inline blog-tags">
-						<li><i class="icon-tags"></i> <a href="#">Technology</a> <a
-							href="#">Education</a> <a href="#">Internet</a> <a href="#">Media</a>
-						</li>
 					</ul>
 					<div class="blog-img">
 						<img src="assets/img/posts/1.jpg" alt="" />
 					</div>
 					<p><%=testTask.getProduct().getDescription()%></p>
-
-					<blockquote class="hero">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit
-							posuere erat a ante.</p>
-						<small>Someone famous <cite title="Source Title">Source
-								Title</cite> </small>
-					</blockquote>
-
-					<p>Accusamus et iusto odio dignissimos ducimus qui blanditiis
-						praesentium voluptatum deleniti atque corrupti quos dolores et
-						quas molestias feugiat. Pellentesque viverra vehicula sem ut
-						volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Ut non libero magna. Sed et quam lacus. Fusce condimentum eleifend
-						enim a feugiat. Lorem ipsum dolor sit amet, consectetur adipiscing
-						elit. Ut non libero magna. Sed et quam lacus. Fusce condimentum
-						eleifend enim a feugiat.</p>
 				</div>
 				<!--/blog-->
 
-				<hr />
-
-				<!-- Media -->
-				<div class="media">
-					<h3 class="color-green">评论列表</h3>
-					<a class="pull-left" href="#"> <img class="media-object"
-						src="assets/img/sliders/elastislide/2.jpg" alt="" /> </a>
-					<div class="media-body">
-						<h4 class="media-heading">
-							Media heading <span>5 hours ago / <a href="#">Reply</a> </span>
-						</h4>
-						<p>Donec id elit non mi porta gravida at eget metus. Fusce
-							dapibus, tellus ac cursus commodo, tortor mauris condimentum
-							nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
-							malesuada magna mollis euismod. Donec sed odio dui.</p>
-
-						<hr />
-
-						<!-- Nested media object -->
-						<div class="media">
-							<a class="pull-left" href="#"> <img class="media-object"
-								src="assets/img/sliders/elastislide/5.jpg" alt="" /> </a>
-							<div class="media-body">
-								<h4 class="media-heading">
-									Media heading <span>17 hours ago / <a href="#">Reply</a>
-									</span>
-								</h4>
-								<p>Donec id elit non mi porta gravida at eget metus. Fusce
-									dapibus, tellus ac cursus commodo, tortor mauris condimentum
-									nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
-									malesuada magna mollis euismod. Donec sed odio dui.</p>
-							</div>
-						</div>
-						<!--/media-->
-
-						<hr />
-
-						<div class="media">
-							<a class="pull-left" href="#"> <img class="media-object"
-								src="assets/img/sliders/elastislide/11.jpg" alt="" /> </a>
-							<div class="media-body">
-								<h4 class="media-heading">
-									Media heading <span>2 days ago / <a href="#">Reply</a> </span>
-								</h4>
-								<p>Donec id elit non mi porta gravida at eget metus. Fusce
-									dapibus, tellus ac cursus commodo, tortor mauris condimentum
-									nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
-									malesuada magna mollis euismod. Donec sed odio dui.</p>
-							</div>
-						</div>
-						<!--/media-->
-					</div>
-				</div>
-				<!--/media-->
-
-				<div class="media">
-					<a class="pull-left" href="#"> <img class="media-object"
-						src="assets/img/sliders/elastislide/9.jpg" alt="" /> </a>
-					<div class="media-body">
-						<h4 class="media-heading">
-							Media heading <span>July 5,2013 / <a href="#">Reply</a> </span>
-						</h4>
-						<p>Donec id elit non mi porta gravida at eget metus. Fusce
-							dapibus, tellus ac cursus commodo, tortor mauris condimentum
-							nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
-							malesuada magna mollis euismod. Donec sed odio dui.</p>
-					</div>
-				</div>
-				<!--/media-->
 
 				<hr />
 				<%

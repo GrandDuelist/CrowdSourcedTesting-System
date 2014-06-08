@@ -19,20 +19,23 @@ import cn.com.crowdsourcedtesting.bean.TestTask;
 import cn.com.crowdsourcedtesting.struts.form.TestTaskViewListForm;
 import cn.com.other.page.Page;
 
-/** 
- * MyEclipse Struts
- * Creation date: 05-28-2014
+/**
+ * MyEclipse Struts Creation date: 05-28-2014
  * 
  * XDoclet definition:
- * @struts.action path="/testTaskViewList" name="testTaskViewListForm" input="/form/testTaskViewList.jsp" scope="request" validate="true"
+ * 
+ * @struts.action path="/testTaskViewList" name="testTaskViewListForm"
+ *                input="/form/testTaskViewList.jsp" scope="request"
+ *                validate="true"
  */
 public class TestTaskViewListAction extends Action {
 	/*
 	 * Generated Methods
 	 */
 
-	/** 
+	/**
 	 * Method execute
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -43,12 +46,18 @@ public class TestTaskViewListAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		TestTaskViewListForm testTaskViewListForm = (TestTaskViewListForm) form;
+		Integer pageNum = testTaskViewListForm.getPage();
+		if (pageNum == null || pageNum <= 0) {
+			pageNum = 1;
+		}
 		TestTaskDAO testTaskDAO = new TestTaskDAO();
 		Page page = new Page();
-		page.setCurrentPage(1);
-		page.setPerRows(3);
+		page.setCurrentPage(pageNum);
+		page.setPerRows(4);
 		List<TestTask> list = testTaskDAO.findcheckedWebByPage(page);
-		request.getSession().setAttribute("TestTaskViewList", list);
+		page.setTotalRows(testTaskDAO.getcheckedWebTotalRows());
+		request.setAttribute("TestTaskViewList", list);
+		request.setAttribute("Page", page);
 		return mapping.findForward("dispPage");
 	}
 }

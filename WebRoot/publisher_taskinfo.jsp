@@ -409,15 +409,11 @@
 							class="glyphicons glyphicons-notes_2"></span><span
 							class="sidebar-title">任务管理</span> </a>
 					</li>
-					<li><a href="publisher_tasklist_feedback.html"><span
-							class="glyphicons glyphicons-log_book"></span><span
-							class="sidebar-title">反馈管理</span> </a>
-					</li>
-					<li><a href="publisher_questionnaire_man.html"><span
+					<li><a href="PublisherQuestionnaireMainView.jsp"><span
 							class="glyphicons glyphicons-more_items"></span><span
 							class="sidebar-title">问卷管理</span> </a>
 					</li>
-					<li><a href="publisher_hireman.html"><span
+					<li><a href="publisher_hireman.jsp"><span
 							class="glyphicons glyphicons-bullhorn"></span><span
 							class="sidebar-title">招募信息</span> </a>
 					</li>
@@ -436,7 +432,7 @@
 					</a></li>
 					<li><a href="publisher_home.html">主页</a></li>
 					<li><a href="publisher_taskman.html">任务管理</a></li>
-					<li><a href="publisher_tasklist.html">查看任务</a></li>
+					<li><a href="taskList.do">查看任务</a></li>
 					<li class="active">任务信息</li>
 				</ol>
 			</div>
