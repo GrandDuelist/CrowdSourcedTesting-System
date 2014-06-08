@@ -1,1 +1,1 @@
-select * from TEST_TASK
+select * from bug_report

@@ -25,6 +25,8 @@ public class BugReportManagementForm extends ActionForm {
 	
 	private Integer bugReportId;
 	
+	private String ensure;
+	
 	/** 
 	 * Method validate
 	 * @param mapping
@@ -60,6 +62,14 @@ public class BugReportManagementForm extends ActionForm {
 
 	public void setBugReportId(Integer bugReportId) {
 		this.bugReportId = bugReportId;
+	}
+
+	public String getEnsure() {
+		return ensure;
+	}
+
+	public void setEnsure(String ensure) {
+		this.ensure = ensure;
 	}
 	
 	

@@ -576,11 +576,27 @@
 													}
 												%>
 												<hr></hr>
+												<% if (bugReportDetail.getIsSelected().equals(false)) { %>
 												<div class="text-right">
-													<button class="btn btn-danger btn-gradient btn-lg"
-														type="button">关闭当前任务</button>
+													<form action="bugReportManagement.do" method="post">
+													<input type="hidden" name="method" value="selectBugReport" />
+													<input type="hidden" name="bugReportId" value="<%= bugReportDetail.getReportId() %>" />
+													<input type="hidden" name="ensure" value="true" />
+													<button class="btn btn-success btn-gradient btn-lg"
+														type="submit">确认Bug</button>
+													</form>
 												</div>
-
+												<% } else { %>
+												<div class="text-right">
+													<form action="bugReportManagement.do" method="post" >
+													<input type="hidden" name="method" value="selectBugReport" />
+													<input type="hidden" name="bugReportId" value="<%= bugReportDetail.getReportId() %>" />
+													<input type="hidden" name="ensure" value="false" />
+													<button class="btn btn-danger btn-gradient btn-lg"
+														type="submit">否决Bug</button>
+													</form>
+												</div>
+												<% } %>
 											</div>
 
 										</div>

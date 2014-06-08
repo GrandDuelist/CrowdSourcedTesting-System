@@ -496,6 +496,7 @@
       type="cn.com.crowdsourcedtesting.controller.BugReportManagementAction">
       <set-property property="cancellable" value="true" />
       <forward name="bugReportDetail" path="/publisher_taskinfo.jsp"></forward>
+      <forward name="bugReportDetailRedirect" path="bugReportManagement.do"></forward>
       <forward name="publisherLogin" path="entrance.do?method=goToLogin"></forward>
       <forward name="taskList" path="taskList.do"></forward>
       <forward name="noBugReport" path="/publisher_bugreport_notexist.html"></forward>

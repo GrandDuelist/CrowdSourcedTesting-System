@@ -27,6 +27,7 @@
   <StrutsActivity path="/checkQuestionnaire.do" location="2450,850" dimension="409,88" />
   <StrutsActivity path="/bugReportPublish.do" location="50,1050" dimension="381,88" />
   <StrutsActivity path="/publishTestingTask.do" location="650,1050" dimension="390,88" />
+  <StrutsActivity path="/taskList.do" location="50,2150" dimension="332,88" />
   <StrutsActivity path="/editTask.do" location="1850,1050" dimension="332,88" />
   <StrutsActivity path="/testTaskViewList.do" location="2450,1050" dimension="378,88" />
   <StrutsActivity path="/testTaskDetailView.do" location="50,1250" dimension="390,88" />
@@ -97,6 +98,7 @@
   <StrutsActivity path="/form/publishTestingTask.jsp" location="2150,1850" dimension="193,49" />
   <StrutsActivity path="/publisher_tasklist.jsp" location="2450,1850" dimension="151,49" />
   <StrutsActivity path="/form/taskLisk.jsp" location="2750,1850" dimension="132,49" />
+  <StrutsActivity path="taskList.do" location="1850,2050" dimension="100,75" />
   <StrutsActivity path="/publisher_task_close.jsp" location="350,1950" dimension="168,49" />
   <StrutsActivity path="/form/editTask.jsp" location="650,1950" dimension="134,49" />
   <StrutsActivity path="/page_list.jsp" location="1250,1950" dimension="105,49" />
@@ -107,12 +109,11 @@
   <StrutsActivity path="testTaskDetailView.do" location="2750,1950" dimension="159,75" />
   <StrutsActivity path="/form/testTaskDetailView.jsp" location="350,2050" dimension="189,49" />
   <StrutsActivity path="/publisher_taskinfo.jsp" location="1550,2050" dimension="156,49" />
+  <StrutsActivity path="/publisher_bugreport_notexist.html" location="1550,1150" dimension="224,49" />
   <StrutsActivity path="publisher_taskinfo.jsp" location="1250,2050" dimension="150,49" />
   <StrutsActivity path="t" location="1850,2050" dimension="36,49" />
-  <StrutsActivity path="/taskList.do" location="50,2150" dimension="332,88" />
-  <StrutsActivity path="taskList.do" location="1850,2050" dimension="100,75" />
   <StrutsActivity path="publisher_bugreport_notexist.html" location="1250,1150" dimension="218,49" />
-  <StrutsActivity path="/publisher_bugreport_notexist.html" />
+  <StrutsActivity path="bugReportManagement.do" />
   <StrutsTransition id="/testTaskDetailView.do,bugReportPage,/page_task_bugReport.jsp,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="296,1338" />
@@ -137,12 +138,6 @@
       <AbsolutePoint location="1753,694" />
       <AbsolutePoint location="1753,1669" />
       <AbsolutePoint location="1743,1669" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
-  <StrutsTransition id="/bugReportManagement.do,t,entrance.do,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="972,2050" />
-      <AbsolutePoint location="972,1925" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/bugReportManagement.do,publisherLogin,entrance.do,1" routingType="0">
@@ -193,13 +188,6 @@
       <AbsolutePoint location="866,1348" />
       <AbsolutePoint location="2075,1348" />
       <AbsolutePoint location="2075,1850" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
-  <StrutsTransition id="/editTask.do,checkList,taskLisk.do,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="2141,1138" />
-      <AbsolutePoint location="2141,2006" />
-      <AbsolutePoint location="152,2006" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/checkQuestionnaireDetail.do,list,/CheckQuestionnaireView.jsp,1" routingType="0">
@@ -308,16 +296,6 @@
       <AbsolutePoint location="650,1874" />
     </AutomaticBendpoints>
   </StrutsTransition>
-  <StrutsTransition id="/bugReportManagement.do,noBugReport,publisher_bugreport_notexist.html,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="1058,2050" />
-      <AbsolutePoint location="1058,1920" />
-      <AbsolutePoint location="1508,1920" />
-      <AbsolutePoint location="1508,1559" />
-      <AbsolutePoint location="1448,1559" />
-      <AbsolutePoint location="1448,1199" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
   <StrutsTransition id="/gifts.do,login,/LoginView.jsp,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="233,250" />
@@ -335,12 +313,6 @@
       <AbsolutePoint location="1850,699" />
     </AutomaticBendpoints>
   </StrutsTransition>
-  <StrutsTransition id="/bugReportManagement.do,taskList,entrance.do,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="972,2050" />
-      <AbsolutePoint location="972,1925" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
   <StrutsTransition id="/form/testTaskDetailView.jsp,null,/testTaskDetailView.do,2" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="350,2083" />
@@ -354,14 +326,6 @@
       <AbsolutePoint location="856,1444" />
       <AbsolutePoint location="2033,1444" />
       <AbsolutePoint location="2033,1750" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
-  <StrutsTransition id="/bugReportManagement.do,publisherLogin,/publisher_taskinfo.jsp,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="863,2138" />
-      <AbsolutePoint location="863,2165" />
-      <AbsolutePoint location="1658,2165" />
-      <AbsolutePoint location="1658,2099" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/form/testTaskViewList.jsp,null,/testTaskViewList.do,2" routingType="0">
@@ -411,6 +375,12 @@
       <AbsolutePoint location="903,1235" />
       <AbsolutePoint location="903,1574" />
       <AbsolutePoint location="799,1574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/bugReportManagement.do,bugReportDetailRedirect,bugReportManagement.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="863,2094" />
+      <AbsolutePoint location="0,0" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="ManageTestTaskView.jsp,null,/testtask.do,2" routingType="0">
@@ -635,13 +605,6 @@
       <AbsolutePoint location="1833,1409" />
       <AbsolutePoint location="723,1409" />
       <AbsolutePoint location="723,1399" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
-  <StrutsTransition id="/bugReportManagement.do,taskList,t,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="1076,2114" />
-      <AbsolutePoint location="1868,2114" />
-      <AbsolutePoint location="1868,2099" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/registration_tester.html,null,/registrationTester.do,2" routingType="0">
@@ -1027,14 +990,6 @@
       <AbsolutePoint location="203,250" />
     </AutomaticBendpoints>
   </StrutsTransition>
-  <StrutsTransition id="/form/taskLisk.jsp,null,/taskLisk.do,2" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="2816,1899" />
-      <AbsolutePoint location="2816,1938" />
-      <AbsolutePoint location="1498,1938" />
-      <AbsolutePoint location="1498,1138" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
   <StrutsTransition id="/bugReportPublish.do,bugPubSuccess,/publisher_taskpub_desktop.jsp,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="431,1098" />
@@ -1185,14 +1140,6 @@
       <AbsolutePoint location="1850,889" />
     </AutomaticBendpoints>
   </StrutsTransition>
-  <StrutsTransition id="/taskLisk.do,taskList,/publisher_tasklist.jsp,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="1537,1138" />
-      <AbsolutePoint location="1537,1913" />
-      <AbsolutePoint location="2525,1913" />
-      <AbsolutePoint location="2525,1899" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
   <StrutsTransition id="/form/publishTestingTask.jsp,null,/publishTestingTask.do,2" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="2246,1850" />
@@ -1319,13 +1266,6 @@
       <AbsolutePoint location="863,2153" />
       <AbsolutePoint location="1900,2153" />
       <AbsolutePoint location="1900,2125" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
-  <StrutsTransition id="/taskLisk.do,publisherLogin,entrance.do,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="1478,1138" />
-      <AbsolutePoint location="1478,1906" />
-      <AbsolutePoint location="1055,1906" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/publishTestingTask.do,pubAndroid,/publisher_taskpub_android.jsp,1" routingType="0">
