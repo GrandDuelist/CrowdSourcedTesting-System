@@ -378,11 +378,11 @@
                     	
                       <ul class="pagination pagination-alt margin-bottom">
                         <li><a href="#"><i class="fa fa-caret-left"></i> </a></li>
-                        <li <% if ("1".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=<%=request.getAttribute("type") %>&page=1">1</a></li>
-                        <li <% if ("2".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=<%=request.getAttribute("type") %>&page=2">2</a></li>
-                        <li <% if ("3".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=<%=request.getAttribute("type") %>&page=3">3</a></li>
-                        <li <% if ("4".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=<%=request.getAttribute("type") %>&page=4">4</a></li>
-                        <li <% if ("5".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=<%=request.getAttribute("type") %>&page=5">5</a></li>
+                        <li <% if ("1".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskList.do?type=<%=request.getAttribute("type") %>&page=1">1</a></li>
+                        <li <% if ("2".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskList.do?type=<%=request.getAttribute("type") %>&page=2">2</a></li>
+                        <li <% if ("3".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskList.do?type=<%=request.getAttribute("type") %>&page=3">3</a></li>
+                        <li <% if ("4".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskList.do?type=<%=request.getAttribute("type") %>&page=4">4</a></li>
+                        <li <% if ("5".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskList.do?type=<%=request.getAttribute("type") %>&page=5">5</a></li>
                         <li><a href="#"><i class="fa fa-caret-right"></i> </a></li>
                       </ul>
                     

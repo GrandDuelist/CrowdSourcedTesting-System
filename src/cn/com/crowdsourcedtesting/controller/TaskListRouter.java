@@ -29,7 +29,7 @@ import cn.com.other.page.Page;
  * @struts.action path="/taskLisk" name="taskLiskForm"
  *                input="/form/taskLisk.jsp" scope="request" validate="true"
  */
-public class TaskLiskAction extends Action {
+public class TaskListRouter extends Action {
 	/*
 	 * Generated Methods
 	 */

@@ -21,9 +21,9 @@ public class BugReportManagementForm extends ActionForm {
 	 * Generated Methods
 	 */
 
-	private String taskId;
+	private Integer taskId;
 	
-	private String bugReportId;
+	private Integer bugReportId;
 	
 	/** 
 	 * Method validate
@@ -46,19 +46,19 @@ public class BugReportManagementForm extends ActionForm {
 		// TODO Auto-generated method stub
 	}
 
-	public String getTaskId() {
+	public Integer getTaskId() {
 		return taskId;
 	}
 
-	public void setTaskId(String taskId) {
+	public void setTaskId(Integer taskId) {
 		this.taskId = taskId;
 	}
 
-	public String getBugReportId() {
+	public Integer getBugReportId() {
 		return bugReportId;
 	}
 
-	public void setBugReportId(String bugReportId) {
+	public void setBugReportId(Integer bugReportId) {
 		this.bugReportId = bugReportId;
 	}
 	
