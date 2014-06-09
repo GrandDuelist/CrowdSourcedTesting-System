@@ -29,6 +29,7 @@
     <form-bean name="informationForm" type="cn.com.crowdsourcedtesting.struts.form.InformationForm" />
     <form-bean name="testTaskViewListForm" type="cn.com.crowdsourcedtesting.struts.form.TestTaskViewListForm" />
     <form-bean name="testTaskDetailViewForm" type="cn.com.crowdsourcedtesting.struts.form.TestTaskDetailViewForm" />
+    <form-bean name="bugReportManagementForm" type="cn.com.crowdsourcedtesting.struts.form.BugReportManagementForm" />
   
   </form-beans>
 
@@ -441,9 +442,9 @@
       attribute="taskLiskForm"
       input="/form/taskLisk.jsp"
       name="taskLiskForm"
-      path="/taskLisk"
+      path="/taskList"
       scope="request"
-      type="cn.com.crowdsourcedtesting.controller.TaskLiskAction">
+      type="cn.com.crowdsourcedtesting.controller.TaskListRouter">
       <set-property property="cancellable" value="true" />
       <forward name="taskList" path="/publisher_tasklist.jsp"></forward>
       <forward name="publisherLogin" path="entrance.do?method=goToLogin"></forward>
@@ -459,7 +460,7 @@
       <set-property property="cancellable" value="true" />
       <forward name="publisherLogin" path="entrance.do?method=goToLogin"></forward>
       <forward name="taskCloseForm" path="/publisher_task_close.jsp"></forward>
-      <forward name="checkList" path="taskLisk.do"></forward>
+      <forward name="checkList" path="taskList.do"></forward>
     </action>
     <action
       attribute="testTaskViewListForm"
@@ -483,6 +484,22 @@
       <forward name="taskDetailPage" path="/page_task_detail.jsp" ></forward>
       <forward name="taskList" path="/testTaskViewList.do"></forward>
       <forward name="testerLogin" path="login.do?method=testerLogin"></forward>
+      <forward name="bugReportPage" path="/page_task_bugReport.jsp"></forward>
+      <forward name="bugReportPageRedirect" path="testTaskDetailView.do"></forward>
+    </action>
+    <action
+      attribute="bugReportManagementForm"
+      name="bugReportManagementForm"
+      parameter="method"
+      path="/bugReportManagement"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.BugReportManagementAction">
+      <set-property property="cancellable" value="true" />
+      <forward name="bugReportDetail" path="/publisher_taskinfo.jsp"></forward>
+      <forward name="bugReportDetailRedirect" path="bugReportManagement.do"></forward>
+      <forward name="publisherLogin" path="entrance.do?method=goToLogin"></forward>
+      <forward name="taskList" path="taskList.do"></forward>
+      <forward name="noBugReport" path="/publisher_bugreport_notexist.html"></forward>
     </action>
   </action-mappings>
   <controller processorClass="filters.MyRequestProcessor" />

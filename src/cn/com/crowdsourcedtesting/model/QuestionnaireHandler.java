@@ -4,22 +4,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.struts.action.ActionForward;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
-import cn.com.crowdsourcedtesting.bean.Administrator;
 import cn.com.crowdsourcedtesting.bean.Choice;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Question;
 import cn.com.crowdsourcedtesting.bean.Questionnaire;
 import cn.com.crowdsourcedtesting.bean.Tester;
-import cn.com.crowdsourcedtesting.struts.form.PageIdForm;
 import cn.com.crowdsourcedtesting.struts.form.PublisherQuestionnaireForm;
 import cn.com.crowdtest.factory.BeanFactory;
 import cn.com.crowdtest.factory.DAOFactory;

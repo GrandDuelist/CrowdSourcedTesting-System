@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
-import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.other.page.Page;
 
@@ -185,7 +184,7 @@ public class TesterDAO extends BaseHibernateDAO {
 	// 判断是否为Tester
 	public Tester isTester(String email, String password) {
 		Tester tester = null;
-		List<Tester> testers = (List<Tester>) this.findByProperty(TESTER_EMAIL,
+		List<Tester> testers = this.findByProperty(TESTER_EMAIL,
 				email);
 		if (testers != null && testers.size() != 0) {
 			tester = testers.get(0);

@@ -1,7 +1,5 @@
 package cn.com.crowdsourcedtesting.model;
 
-import oracle.net.aso.i;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

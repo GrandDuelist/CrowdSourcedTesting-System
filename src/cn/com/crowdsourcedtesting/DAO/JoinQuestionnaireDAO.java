@@ -3,10 +3,6 @@ package cn.com.crowdsourcedtesting.DAO;
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.JoinQuestionnaire;
 import cn.com.other.page.Page;
-import cn.com.crowdsourcedtesting.modelhelper.TaskType;
-
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.hibernate.LockMode;
 import org.hibernate.Query;

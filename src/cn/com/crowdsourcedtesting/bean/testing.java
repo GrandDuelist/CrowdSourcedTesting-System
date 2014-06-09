@@ -1,18 +1,5 @@
 package cn.com.crowdsourcedtesting.bean;
 
-import java.util.List;
-
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-
-import cn.com.crowdsourcedtesting.DAO.*;
-import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
-import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
-
-import cn.com.crowdtest.factory.BeanFactory;
-import cn.com.crowdtest.factory.DAOFactory;
-
 public class testing {
 
 	/**

@@ -95,7 +95,7 @@
                                        
                         </li>
                         <li class="active">
-                            <a href="page_list.html">任务广场                            
+                            <a href="testTaskViewList.do">任务广场                            
                             </a>
                         </li>
                         <li >
@@ -116,7 +116,7 @@
                     </ul>
                     <div class="search-open">
                         <div class="input-append">
-                            <form />
+                            <form >
                                 <input type="text" class="span3" placeholder="搜索" />
                                 <button type="submit" class="btn-u">搜索</button>
                             </form>
@@ -148,7 +148,8 @@
         <h2>所有任务列表</h2>
         
         <%
-        List<TestTask> list = (List<TestTask>) session.getAttribute("TestTaskViewList");
+        List<TestTask> list = (List<TestTask>) request.getAttribute("TestTaskViewList");
+        Page pageDisp = (Page) request.getAttribute("Page");
         if (list != null) {
         	TestTask testTask = null;
         	Iterator<TestTask> it = list.iterator();
@@ -187,15 +188,15 @@
         </div>
         <div class="pagination pagination-centered">
             <ul>
-              <li><a href="#">前一页</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li class="active"><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li><a href="#">6</a></li>
-              <li><a href="#">7</a></li>
-              <li><a href="#">8</a></li>
+            <li><a href="#">前一页</a></li>
+            <% for (int i=1; i <= pageDisp.getTotalPage(); i++) {
+            if (i == pageDisp.getCurrentPage()) {
+             %>
+             <li><a href="testTaskViewList.do?page=<%=i %>" class="active"><%=i %></a></li>
+             <% } else { %>
+              <li><a href="testTaskViewList.do?page=<%=i %>"><%=i %></a></li>
+             <% }
+             } %>
               <li><a href="#">后一页</a></li>
             </ul>
         </div>       

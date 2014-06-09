@@ -1,1 +1,1 @@
-select * from JOIN_TASK
+select * from bug_report

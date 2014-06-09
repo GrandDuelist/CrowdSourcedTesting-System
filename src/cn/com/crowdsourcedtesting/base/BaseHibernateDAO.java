@@ -12,6 +12,7 @@ import cn.com.crowdtest.factory.HibernateSessionFactory;
  */
 public class BaseHibernateDAO implements IBaseHibernateDAO {
 	
+	@Override
 	public Session getSession() {
 		return HibernateSessionFactory.getSession();
 	}

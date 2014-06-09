@@ -1,14 +1,8 @@
 package cn.com.crowdsourcedtesting.model;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import cn.com.crowdsourcedtesting.bean.Questionnaire;
 import cn.com.crowdsourcedtesting.modelhelper.MethodNumber;
 import cn.com.crowdsourcedtesting.struts.form.PageIdForm;
-import cn.com.crowdtest.factory.DAOFactory;
 import cn.com.other.page.Page;
 
 

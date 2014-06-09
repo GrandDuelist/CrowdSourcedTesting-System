@@ -30,7 +30,7 @@ import cn.com.other.page.Page;
  * @struts.action path="/taskLisk" name="taskLiskForm"
  *                input="/form/taskLisk.jsp" scope="request" validate="true"
  */
-public class TaskLiskAction extends Action {
+public class TaskListRouter extends Action {
 	/*
 	 * Generated Methods
 	 */
@@ -44,6 +44,7 @@ public class TaskLiskAction extends Action {
 	 * @param response
 	 * @return ActionForward
 	 */
+	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		TaskLiskForm taskLiskForm = (TaskLiskForm) form;// TODO Auto-generated
@@ -72,8 +73,10 @@ public class TaskLiskAction extends Action {
 		List<TestTask> resultList;
 		switch (type) {
 		case (TaskType.Web):
+
 			resultList = testTaskDAO.findPublisherWebTestTaskByPage(page,
 					publisher);
+			page.setTotalRows(testTaskDAO.getPublisherWebTotalRows(publisher));
 			break;
 		case (TaskType.Android):
 			break;
@@ -83,9 +86,9 @@ public class TaskLiskAction extends Action {
 		resultList = testTaskDAO
 				.findPublisherWebTestTaskByPage(page, publisher);
 
-		request.getSession().removeAttribute("PublisherWebTestTaskByPage");
-		request.getSession().setAttribute("PublisherWebTestTaskByPage",
-				resultList);
+		request.setAttribute("type", type);
+		request.setAttribute("PublisherWebTestTaskByPage", resultList);
+		request.setAttribute("Page", page);
 
 		return mapping.findForward("taskList");
 	}

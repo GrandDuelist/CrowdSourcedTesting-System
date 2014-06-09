@@ -367,6 +367,18 @@ public class TestTaskDAO extends BaseHibernateDAO {
 		}
 	}
 	
+	public int getPublisherWebTotalRows(Publisher publisher) {
+		String queryString = "select count(*) from TestTask testTask where testTask.taskType="
+					+ TaskType.Web
+					+ "and testTask.publisher.publisherId="
+					+ publisher.getPublisherId()
+					+ " order by testTask.taskId desc";
+		Number c = (Number) getSession().createQuery(queryString)
+				.uniqueResult();
+		return c.intValue();
+
+	}
+
 	public List<TestTask> findcheckedWebByPage(Page page) {
 		// TODO Auto-generated method stub
 		try {
@@ -388,6 +400,15 @@ public class TestTaskDAO extends BaseHibernateDAO {
 
 			throw re;
 		}
+
+	}
+
+	public int getcheckedWebTotalRows() {
+		String queryString = "select count(*)from TestTask where (CHECK_ADMINISTRATOR_ID is not null and IS_PASSED=1) and TASK_TYPE="
+				+ TaskType.Web;
+		Number c = (Number) getSession().createQuery(queryString)
+				.uniqueResult();
+		return c.intValue();
 
 	}
 }
