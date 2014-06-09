@@ -7,6 +7,8 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.hibernate.MYECLIPSE_HIBERNATE3_3_EM"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.hibernate.MYECLIPSE_HIBERNATE3_3_CORE"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_METRO_IMPL"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_JAXWS_API"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/Oracle+11g+11.2.0.1.0+JDBC_ojdbc6.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/javassist-3.0.jar"/>
 	<classpathentry kind="lib" path="commons-io-2.4.jar"/>
@@ -39,5 +41,10 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.transaction-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activation.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mail.jar"/>
+	<classpathentry kind="src" path=".apt_generated">
+		<attributes>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

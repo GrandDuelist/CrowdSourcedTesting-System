@@ -14,6 +14,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionRedirect;
 import org.apache.struts.actions.DispatchAction;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import cn.com.crowdsourcedtesting.DAO.BugReportDAO;
 import cn.com.crowdsourcedtesting.DAO.TestTaskDAO;
@@ -47,8 +49,8 @@ public class BugReportManagementAction extends DispatchAction {
 	public ActionForward bugReportList(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		BugReportManagementForm bugReportManagementForm = (BugReportManagementForm) form;
-//		System.out.println(bugReportManagementForm.getBugReportId());
-//		System.out.println(bugReportManagementForm.getTaskId());
+		// System.out.println(bugReportManagementForm.getBugReportId());
+		// System.out.println(bugReportManagementForm.getTaskId());
 
 		Publisher publisher = (Publisher) request.getSession().getAttribute(
 				"Publisher");
@@ -91,41 +93,66 @@ public class BugReportManagementAction extends DispatchAction {
 
 		return mapping.findForward("bugReportDetail");
 	}
-	
-	public ActionForward selectBugReport(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response) {
+
+	public ActionForward selectBugReport(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
 		BugReportManagementForm bugReportManagementForm = (BugReportManagementForm) form;
 		System.out.println(bugReportManagementForm.getEnsure());
 		System.out.println(bugReportManagementForm.getBugReportId());
-		
+
 		String ensure = bugReportManagementForm.getEnsure();
 		Integer bugReportId = bugReportManagementForm.getBugReportId();
-		
+
 		if (ensure == null || "".equals(ensure) || bugReportId == null) {
 			return new ActionRedirect(mapping.findForwardConfig("taskList"));
 		}
-		
+
 		BugReportDAO bugReportDAO = new BugReportDAO();
 		BugReport bugReport = bugReportDAO.findById(bugReportId);
-		
+
 		if (bugReport == null) {
 			return new ActionRedirect(mapping.findForwardConfig("taskList"));
 		}
-		
+
 		if ("false".equals(ensure)) {
-			bugReport.setIsSelected(false);
+
+			Session session = bugReportDAO.getSession();
+			Transaction tran = null;
+			try {
+				tran = session.beginTransaction();
+				bugReport.setIsSelected(false);
+				tran.commit();
+			} catch (RuntimeException re) {
+				if (tran != null) {
+					tran.rollback();
+				}
+			}
+
 		} else {
 			if ("true".equals(ensure)) {
-				bugReport.setIsSelected(true);
+				Session session = bugReportDAO.getSession();
+				Transaction tran = null;
+				try {
+					tran = session.beginTransaction();
+					bugReport.setIsSelected(true);
+					tran.commit();
+				} catch (RuntimeException re) {
+					if (tran != null) {
+						tran.rollback();
+					}
+				}
 			} else {
 				return new ActionRedirect(mapping.findForwardConfig("taskList"));
 			}
 		}
-		bugReportDAO.getSession().flush();	
+		bugReportDAO.getSession().flush();
 		bugReportDAO.getSession().clear();
-		
-		ActionRedirect actionRedirect = new ActionRedirect(mapping.findForwardConfig("bugReportDetailRedirect"));
-		actionRedirect.addParameter("taskId", bugReport.getTestTask().getTaskId());
+
+		ActionRedirect actionRedirect = new ActionRedirect(
+				mapping.findForwardConfig("bugReportDetailRedirect"));
+		actionRedirect.addParameter("taskId", bugReport.getTestTask()
+				.getTaskId());
 		actionRedirect.addParameter("method", "bugReportList");
 		actionRedirect.addParameter("bugReportId", bugReportId);
 		return actionRedirect;

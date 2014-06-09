@@ -39,6 +39,21 @@
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
+	<servlet>
+		<description>
+			JAX-WS endpoint - TaskManagementService
+		</description>
+		<display-name>TaskManagementService</display-name>
+		<servlet-name>TaskManagementService</servlet-name>
+		<servlet-class>
+			com.sun.xml.ws.transport.http.servlet.WSServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TaskManagementService</servlet-name>
+		<url-pattern>/TaskManagementPort</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>router</servlet-name>
 		<url-pattern>*.do</url-pattern>
@@ -55,6 +70,10 @@
 
 
 
-</web-app>
+    <listener>
+    	<listener-class>
+    		com.sun.xml.ws.transport.http.servlet.WSServletContextListener
+    	</listener-class>
+    </listener></web-app>
 
 

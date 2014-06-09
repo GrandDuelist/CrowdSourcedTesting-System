@@ -192,7 +192,7 @@
             <% for (int i=1; i <= pageDisp.getTotalPage(); i++) {
             if (i == pageDisp.getCurrentPage()) {
              %>
-             <li><a href="testTaskViewList.do?page=<%=i %>" class="active"><%=i %></a></li>
+             <li class="active"><a href="testTaskViewList.do?page=<%=i %>"><%=i %></a></li>
              <% } else { %>
               <li><a href="testTaskViewList.do?page=<%=i %>"><%=i %></a></li>
              <% }

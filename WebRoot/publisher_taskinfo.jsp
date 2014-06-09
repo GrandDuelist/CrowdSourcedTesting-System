@@ -572,7 +572,9 @@
 													}
 												%>
 												<hr></hr>
-												<% if (bugReportDetail.getIsSelected().equals(false)) { %>
+												<%
+												System.out.println("Id " + bugReportDetail.getReportId() + "  " + bugReportDetail.getIsSelected());
+												if (bugReportDetail.getIsSelected().equals(false)) { %>
 												<div class="text-right">
 													<form action="bugReportManagement.do" method="post">
 													<input type="hidden" name="method" value="selectBugReport" />

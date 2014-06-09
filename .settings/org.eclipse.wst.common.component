@@ -3,6 +3,7 @@
     <wb-module deploy-name="CrowdSourcedTesting-System">
         <wb-resource deploy-path="/" source-path="/WebRoot"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated"/>
         <property name="context-root" value="/CrowdSourcedTesting-System"/>
         <property name="java-output-path" value="/CrowdSourcedTesting-System/WebRoot/WEB-INF/classes"/>
     </wb-module>

@@ -1,1 +1,1 @@
-select * from bug_report
+delete product where product_id = 83
