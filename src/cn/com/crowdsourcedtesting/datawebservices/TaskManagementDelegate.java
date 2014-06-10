@@ -3,12 +3,14 @@ package cn.com.crowdsourcedtesting.datawebservices;
 import java.util.Date;
 
 import javax.jws.WebParam;
+import javax.jws.soap.SOAPBinding;
 
 import cn.com.crowdsourcedtesting.bean.Product;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.TestTask;
 import cn.com.other.page.Page;
 
+@SOAPBinding(style = SOAPBinding.Style.RPC)
 @javax.jws.WebService(targetNamespace = "http://datawebservices.crowdsourcedtesting.com.cn/", serviceName = "TaskManagementService", portName = "TaskManagementPort")
 public class TaskManagementDelegate {
 
@@ -46,7 +48,8 @@ public class TaskManagementDelegate {
 			@WebParam(name = "publisher") Publisher publisher,
 			@WebParam(name = "beginTime") Date beginTime,
 			@WebParam(name = "endTime") Date endTime,
-			@WebParam(name = "perReward") double perReward, double wholeCredit) {
+			@WebParam(name = "perReward") double perReward,
+			@WebParam(name = "wholeCredit") double wholeCredit) {
 		return taskManagement.addTestTask(product, productType, publisher,
 				beginTime, endTime, perReward, wholeCredit);
 	}
