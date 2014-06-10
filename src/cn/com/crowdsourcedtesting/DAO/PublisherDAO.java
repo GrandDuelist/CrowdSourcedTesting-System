@@ -9,6 +9,7 @@ import java.util.List;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -226,6 +227,25 @@ public class PublisherDAO extends BaseHibernateDAO {
 		}
 	}
 
+	public List<Publisher> findUncheckedCompanyByPageNumber(int page,int row) {
+		// TODO Auto-generated method stub
+		try {
+			List<Publisher> publishers = new ArrayList<Publisher>();
+			String queryString = "from Publisher where CHECK_ADMINISTRATOR_ID=null and PUBLISHER_TYPE=1";
+			Query queryObject = getSession().createQuery(queryString);
+
+			publishers = queryObject
+					.setFirstResult(
+							(page - 1) * row)
+					.setMaxResults(row).list();
+
+			return publishers;
+		} catch (RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
+		}
+	}
+	
 	// 按页查找个人用户
 	public List<Publisher> findUncheckedPersonByPage(Page page) {
 		// TODO Auto-generated method stub
@@ -246,6 +266,25 @@ public class PublisherDAO extends BaseHibernateDAO {
 		}
 	}
 
+	public List<Publisher> findUncheckedPersonByPageNumber(int page,int row) {
+		// TODO Auto-generated method stub
+		try {
+			List<Publisher> publishers = new ArrayList<Publisher>();
+			String queryString = "from Publisher where CHECK_ADMINISTRATOR_ID=null and PUBLISHER_TYPE=0";
+			Query queryObject = getSession().createQuery(queryString);
+
+			publishers = queryObject
+					.setFirstResult(
+							(page - 1) * row)
+					.setMaxResults(row).list();
+
+			return publishers;
+		} catch (RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
+		}
+	}
+	
 	// 得到未审核公司的总条数
 	public int getUncheckedCompanyTotalRows() {
 
@@ -372,7 +411,52 @@ public class PublisherDAO extends BaseHibernateDAO {
 
 				}
 				
-				
 		
+		public Publisher addPublisher(String name,String email,String password,
+				double credit,boolean authority,boolean publisherType,String company,
+				String connectEmail){
+			Session session = getSession();
+			Transaction transaction = null;
+			Publisher publisher = null;
+			try {
+				transaction = session.beginTransaction();
+				if(transaction != null)
+				{
+					publisher = new Publisher(name, email, 
+							password, credit, authority, publisherType);
+					publisher.setPublisherCompany(company);
+					publisher.setPublisherConnectEmail(connectEmail);
+					session.save(publisher);
+					
+					transaction.commit();
+					log.debug("add publisher success");
+					return publisher;
+				}
+			} catch (RuntimeException re) {
+				log.error("attach failed", re);
+				if (transaction != null) {
+					transaction.rollback();
+				}
+				publisher = null;
+				throw re;
+			}finally{
+				session.close();
+			}
+			return publisher;
+		}
+		
+		public boolean checkPublisher(String email)
+		{
+			String query = "select * from Publisher where CHECK_ADMINISTRATOR_ID=null and PUBLISHER_LOG_EMAIL = "+email;
+			Publisher publisher = (Publisher)getSession().createQuery(query).uniqueResult();
+			if(publisher == null)
+			{
+				return false;
+			}
+			else {
+				return true;
+			}
+			
+		}
 		
 }

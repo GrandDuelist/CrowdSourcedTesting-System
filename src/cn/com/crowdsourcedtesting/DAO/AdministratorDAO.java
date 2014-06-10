@@ -7,6 +7,8 @@ import cn.com.other.page.Page;
 import java.util.List;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -222,6 +224,36 @@ public class AdministratorDAO extends BaseHibernateDAO {
 				throw re;
 			}
 
+		}
+		
+		public Administrator addAdministrator(String name,String email,
+				String password,boolean authority,String occupation){
+			Session session = getSession();
+			Transaction transaction = null;
+			Administrator administrator = null;
+			try {
+				transaction = session.beginTransaction();
+				if(transaction != null)
+				{
+					administrator = new Administrator(name, email, 
+							password, authority, occupation);
+					session.save(administrator);
+					
+					transaction.commit();
+					log.debug("add administrator successful");
+					return administrator;
+				}
+			} catch (RuntimeException re) {
+				log.error("attach failed", re);
+				if (transaction != null) {
+					transaction.rollback();
+				}
+				administrator = null;
+				throw re;
+			}finally{
+				session.close();
+			}
+			return administrator;
 		}
 	
 }

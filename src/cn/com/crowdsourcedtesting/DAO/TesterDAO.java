@@ -1,5 +1,6 @@
 package cn.com.crowdsourcedtesting.DAO;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -267,6 +268,39 @@ public class TesterDAO extends BaseHibernateDAO {
 
 			return c.intValue();
 
+		}
+		
+		public Tester addTester(String email,String password,String name,
+				boolean gender,String mobile,Date birthday,double credit)
+		{
+			Session session = getSession();
+			Transaction transaction = null;
+			Tester tester = null;
+			try {
+				transaction = session.getTransaction();
+				if(transaction != null)
+				{
+					tester = new Tester(name, email, password, credit);
+					tester.setTesterGender(gender);
+					tester.setTesterMobile(mobile);
+					tester.setTesterBirthday(birthday);
+					session.save(tester);
+					
+					transaction.commit();
+					log.debug("add tester successful");
+					return tester;
+				}
+			} catch (RuntimeException e) {
+				log.error("attach failed", e);
+				if (transaction != null) {
+					transaction.rollback();
+				}
+				tester = null;
+				throw e;
+			}finally{
+				session.close();
+			}
+			return tester;
 		}
 
 }

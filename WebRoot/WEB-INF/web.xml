@@ -51,6 +51,10 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
+		<servlet-name>UserManagementService</servlet-name>
+		<url-pattern>/UserManagementPort</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>TaskManagementService</servlet-name>
 		<url-pattern>/TaskManagementPort</url-pattern>
 	</servlet-mapping>

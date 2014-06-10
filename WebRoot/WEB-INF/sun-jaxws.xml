@@ -4,4 +4,8 @@
 	<endpoint name="TaskManagementPort"
 		implementation="cn.com.crowdsourcedtesting.datawebservices.TaskManagementDelegate"
 		url-pattern="/TaskManagementPort">
+	</endpoint>
+	<endpoint name="UserManagementPort"
+		implementation="cn.com.crowdsourcedtesting.datawebservices.UserManagementDelegate"
+		url-pattern="/UserManagementPort">
 	</endpoint></endpoints>
