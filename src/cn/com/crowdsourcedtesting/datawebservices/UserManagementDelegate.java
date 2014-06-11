@@ -1,6 +1,6 @@
 package cn.com.crowdsourcedtesting.datawebservices;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.jws.WebParam;
@@ -8,6 +8,7 @@ import javax.jws.WebParam;
 import cn.com.crowdsourcedtesting.bean.Administrator;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Tester;
+import cn.com.other.page.Page;
 
 @javax.jws.WebService(targetNamespace = "http://datawebservices.crowdsourcedtesting.com.cn/", serviceName = "UserManagementService", portName = "UserManagementPort")
 @javax.jws.soap.SOAPBinding(style = javax.jws.soap.SOAPBinding.Style.RPC)
@@ -73,20 +74,18 @@ public class UserManagementDelegate {
 		return userManagement.checkPublisher(email);
 	}
 
-	public List<Publisher> viewAllPublisher() {
+	public Publisher[] viewAllPublisher() {
 		return userManagement.viewAllPublisher();
 	}
 
-	public List<Publisher> findUncheckedCompany(
-			@WebParam(name = "page") int page, 
-			@WebParam(name = "row") int row) {
-		return userManagement.findUncheckedCompany(page, row);
+	public Publisher[] findUncheckedCompany(
+			@WebParam(name = "page") Page page) {
+		return userManagement.findUncheckedCompany(page);
 	}
 
-	public List<Publisher> findUncheckedPerson(
-			@WebParam(name = "page") int page, 
-			@WebParam(name = "row") int row) {
-		return userManagement.findUncheckedPerson(page, row);
+	public Publisher[] findUncheckedPerson(
+			@WebParam(name = "page") Page page) {
+		return userManagement.findUncheckedPerson(page);
 	}
 
 	public int getUncheckedCompanyTotalRows() {

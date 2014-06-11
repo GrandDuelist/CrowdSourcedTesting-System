@@ -1,6 +1,6 @@
 package cn.com.crowdsourcedtesting.datawebservices;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import cn.com.crowdsourcedtesting.DAO.AdministratorDAO;
@@ -9,6 +9,7 @@ import cn.com.crowdsourcedtesting.DAO.TesterDAO;
 import cn.com.crowdsourcedtesting.bean.Administrator;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Tester;
+import cn.com.other.page.Page;
 
 public class UserManagement {
 	
@@ -55,20 +56,20 @@ public class UserManagement {
 				.checkPublisher(email);
 	}//check
 	
-	public List<Publisher> viewAllPublisher() {
-		return (List<Publisher>)publisherDAO
-				.findAll();
+	public Publisher[] viewAllPublisher() {
+		return (Publisher[]) publisherDAO
+				.findAll().toArray();
 	}
 	
-	public List<Publisher> findUncheckedCompany(int page,int row) {
-		return publisherDAO
-				.findUncheckedCompanyByPageNumber(page, row);
+	public Publisher[] findUncheckedCompany(Page page) {
+		return (Publisher[]) publisherDAO
+				.findUncheckedCompanyByPage(page).toArray();
 	}
 	
-	public List<Publisher> findUncheckedPerson(int page,int row)
+	public Publisher[] findUncheckedPerson(Page page)
 	{
-		return publisherDAO
-				.findUncheckedPersonByPageNumber(page, row);
+		return (Publisher[]) publisherDAO
+				.findUncheckedPersonByPage(page).toArray();
 	}
 	
 	public int getUncheckedCompanyTotalRows() {
