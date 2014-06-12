@@ -2,6 +2,7 @@ package cn.com.crowdsourcedtesting.datawebservices;
 
 import java.util.Date;
 
+import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.soap.SOAPBinding;
 
@@ -10,12 +11,13 @@ import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.TestTask;
 import cn.com.other.page.Page;
 
-@SOAPBinding(style = SOAPBinding.Style.RPC)
+//@SOAPBinding(style = SOAPBinding.Style.RPC)
 @javax.jws.WebService(targetNamespace = "http://datawebservices.crowdsourcedtesting.com.cn/", serviceName = "TaskManagementService", portName = "TaskManagementPort")
 public class TaskManagementDelegate {
 
 	cn.com.crowdsourcedtesting.datawebservices.TaskManagement taskManagement = new cn.com.crowdsourcedtesting.datawebservices.TaskManagement();
 
+	@WebMethod(operationName="addWebProduct")
 	public Product addWebProduct(
 			@WebParam(name = "productName") String productName,
 			@WebParam(name = "icon") String icon,
