@@ -1,6 +1,8 @@
 package cn.com.crowdsourcedtesting.testing;
 
 
+import java.io.File;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +14,13 @@ public class QuestionnaireTesting extends MockStrutsTestCase {
 	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
+		setContextDirectory(new File("WebRoot"));
+		setContextDirectory(new File("WebRoot"));
+		setRequestPathInfo("/manage");
+		addRequestParameter("username", "SHAWN@126.COM");
+		addRequestParameter("password", "123456");
+		addRequestParameter("method", "manage");
+		actionPerform();
 	}
 
 	@After
@@ -20,63 +29,87 @@ public class QuestionnaireTesting extends MockStrutsTestCase {
 	}
 
 	@Test
-	public final void testGoToPublish() {
-		fail("Not yet implemented"); // TODO
+	public final void testManagePublisherList() {
+		setRequestPathInfo("/information");
+		addRequestParameter("method", "managePublisherList");
+		addRequestParameter("id", "1");
+		addRequestParameter("page", "3");
+		addRequestParameter("subType", "pageNum");
+		actionPerform();
+		verifyForward("publisherList");
 	}
 
 	@Test
-	public final void testPublish() {
-		fail("Not yet implemented"); // TODO
+	public final void testManageCompanyList() {
+		setRequestPathInfo("/information");
+		addRequestParameter("method", "manageCompanyList");
+		addRequestParameter("id", "1");
+		addRequestParameter("page", "3");
+		addRequestParameter("subType", "previousPage");
+		actionPerform();
+		verifyForward("publisherList");
+		assertEquals("true", getRequest().getAttribute("isLegal"));
 	}
 
 	@Test
-	public final void testCreateItem() {
-		fail("Not yet implemented"); // TODO
+	public final void testManagePersonList() {
+		setRequestPathInfo("/information");
+		addRequestParameter("method", "managePersonList");
+		addRequestParameter("id", "1");
+		addRequestParameter("page", "3");
+		addRequestParameter("subType", "nextPage");
+		actionPerform();
+		verifyForward("publisherList");
+		assertEquals("true", getRequest().getAttribute("isLegal"));
 	}
-
 	@Test
-	public final void testCheckList() {
-		fail("Not yet implemented"); // TODO
+	public final void testMaintainPublisherFail() {
+		//id == null 
+		setRequestPathInfo("/information");
+		addRequestParameter("method", "maintainPublisher");
+		addRequestParameter("username", "linyiwei");
+		addRequestParameter("status", "1");
+		addRequestParameter("license", "营业执照00XX11");
+		addRequestParameter("company", "网易公司");
+		addRequestParameter("credit", "10000");
+		actionPerform();
+		verifyForward("publisherDetail");
+		assertEquals("failed", getRequest().getAttribute("modify"));
+		//id == wrong
+		setRequestPathInfo("/information");
+		addRequestParameter("method", "maintainPublisher");
+		addRequestParameter("id", "1");
+		addRequestParameter("username", "linyiwei");
+		addRequestParameter("status", "1");
+		addRequestParameter("license", "营业执照00XX11");
+		addRequestParameter("company", "网易公司");
+		addRequestParameter("credit", "10000");
+		actionPerform();
+		verifyForward("publisherDetail");
+		assertEquals("failed", getRequest().getAttribute("modify"));
+		//username = null
+		setRequestPathInfo("/information");
+		addRequestParameter("method", "maintainPublisher");
+		addRequestParameter("id", "47");
+		addRequestParameter("status", "1");
+		addRequestParameter("license", "营业执照00XX11");
+		addRequestParameter("company", "网易公司");
+		addRequestParameter("credit", "10000");
+		actionPerform();
+		verifyForward("publisherDetail");
+		assertEquals("success", getRequest().getAttribute("modify"));
 	}
-
+	
 	@Test
-	public final void testQuestionnaireList() {
-		fail("Not yet implemented"); // TODO
+	public final void testMaintainTesterSuccess() {
+		setRequestPathInfo("/information");
+		addRequestParameter("method", "maintainTester");
+		addRequestParameter("id", "29");
+		addRequestParameter("username", "linyiwei");
+		actionPerform();
+		verifyForward("testerDetail");
+		assertEquals("success", getRequest().getAttribute("modify"));
 	}
-
-	@Test
-	public final void testCheckDetail() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testQuestionnaireDetail() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testDisplay() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testCheckConfirm() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testPageQuestionnaire() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testPageDetail() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testSubQuestionnaire() {
-		fail("Not yet implemented"); // TODO
-	}
+	
 
 }

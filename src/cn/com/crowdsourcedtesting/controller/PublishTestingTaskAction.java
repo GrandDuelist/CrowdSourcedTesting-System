@@ -133,9 +133,9 @@ public class PublishTestingTaskAction extends DispatchAction {
 		if (publisher == null) {
 			return new ActionRedirect(mapping.findForwardConfig(publisherLogin));
 		}
-
+		
 		PublishTestingTaskForm publishTestingForm = (PublishTestingTaskForm) form;
-
+		
 		FormFile iconFile = publishTestingForm.getIcon();
 		if (iconFile == null) {
 			request.getSession().setAttribute(productErrorMessageAttributeName,

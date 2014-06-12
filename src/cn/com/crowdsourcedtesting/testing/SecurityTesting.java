@@ -28,7 +28,7 @@ public class SecurityTesting extends MockStrutsTestCase {
 	@Test
 	public final void testTesterLoginSuccess() {
 		addRequestParameter("username", "1306922411@qq.com");
-		addRequestParameter("password", "111111");
+		addRequestParameter("password", "123456");
 		addRequestParameter("method", "testerLogin");
 		actionPerform();
 		verifyForwardPath("/page_personal_center.jsp");

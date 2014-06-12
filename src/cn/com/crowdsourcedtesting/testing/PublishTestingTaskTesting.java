@@ -1,6 +1,8 @@
 package cn.com.crowdsourcedtesting.testing;
 
 
+import java.io.File;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +14,13 @@ public class PublishTestingTaskTesting extends MockStrutsTestCase {
 	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
+		setContextDirectory(new File("WebRoot"));
+		setRequestPathInfo("/entrance");
+		addRequestParameter("username", "1014582610@qq.com");
+		addRequestParameter("password", "1234");
+		addRequestParameter("method", "enter");
+		actionPerform();
+		setRequestPathInfo("/publishTestingTask");
 	}
 
 	@After
@@ -21,62 +30,73 @@ public class PublishTestingTaskTesting extends MockStrutsTestCase {
 
 	@Test
 	public final void testGoToPublish() {
-		fail("Not yet implemented"); // TODO
+		addRequestParameter("method", "goToPublish");
+		actionPerform();
+		verifyForward("pubTask");
 	}
 
 	@Test
 	public final void testTaskManagement() {
-		fail("Not yet implemented"); // TODO
+		addRequestParameter("method", "taskManagement");
+		actionPerform();
+		verifyForward("taskManagement");
 	}
 
 	@Test
 	public final void testPubWeb() {
-		fail("Not yet implemented"); // TODO
+		addRequestParameter("method", "pubWeb");
+		actionPerform();
+		verifyForward("pubWeb");
 	}
 
 	@Test
 	public final void testPubAndroid() {
-		fail("Not yet implemented"); // TODO
+		addRequestParameter("method", "pubAndroid");
+		actionPerform();
+		verifyForward("pubAndroid");
 	}
 
 	@Test
 	public final void testPubDesktop() {
-		fail("Not yet implemented"); // TODO
+		addRequestParameter("method", "pubDesktop");
+		actionPerform();
+		verifyForward("pubDesktop");
 	}
 
 	@Test
-	public final void testWebSubmitForm() {
-		fail("Not yet implemented"); // TODO
+	public final void testWebSubmitFormFail() {
+		addRequestParameter("method", "webSubmitForm");
+		addRequestParameter("webUrl", "www.baidu.com");
+		addRequestParameter("description", "this is a web test");
+		actionPerform();
+		assertNull(getRequest().getSession().getAttribute("productErrorMessageAttributeName"));
 	}
 
 	@Test
-	public final void testPubWebTask() {
-		fail("Not yet implemented"); // TODO
+	public final void testAndroidSubmitFormFail() {
+		addRequestParameter("method", "androidSubmitForm");
+		addRequestParameter("appName", "testAndroid");
+		addRequestParameter("description", "this is a app test");
+		actionPerform();
+		assertNull(getRequest().getSession().getAttribute("productErrorMessageAttributeName"));
 	}
 
-	@Test
-	public final void testAndroidSubmitForm() {
-		fail("Not yet implemented"); // TODO
-	}
 
 	@Test
-	public final void testPubAndroidTask() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testDesktopSubmitForm() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testPubDesktopTask() {
-		fail("Not yet implemented"); // TODO
+	public final void testDesktopSubmitFormFail() {
+		addRequestParameter("method", "desktopSubmitForm");
+		addRequestParameter("appName", "testDesktop");
+		addRequestParameter("downLoadLink", "www.baidu.com");
+		addRequestParameter("description", "this is a desktop test");
+		actionPerform();
+		assertNull(getRequest().getSession().getAttribute("productErrorMessageAttributeName"));
 	}
 
 	@Test
 	public final void testPubTaskSuccess() {
-		fail("Not yet implemented"); // TODO
+		addRequestParameter("method", "pubTaskSuccess");
+		actionPerform();
+		verifyForwardPath("/publisher_taskpub_success.jsp");
 	}
 
 }
