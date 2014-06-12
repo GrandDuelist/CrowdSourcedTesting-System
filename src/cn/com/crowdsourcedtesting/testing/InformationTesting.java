@@ -1,6 +1,8 @@
 package cn.com.crowdsourcedtesting.testing;
 
 
+import java.io.File;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +14,7 @@ public class InformationTesting extends MockStrutsTestCase {
 	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
+		setContextDirectory(new File("WebRoot"));
 	}
 
 	@After
