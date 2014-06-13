@@ -102,7 +102,7 @@
             </div>
           </div>
           <div class="panel-body">
-            <form class="cmxform" action="registrationPublisher.do?method=publisherRegistrationActive" id="commentForm" method="post" />
+            <form class="cmxform" enctype="multipart/form-data" action="registrationPublisher.do?method=publisherRegistrationActive" id="commentForm" method="post" >
               <div id="rootwizard">
                 <div class="wizard-wrapper">
                   <ul class="wizard-steps">
@@ -124,26 +124,31 @@
                         <p class="alert alert-warning">请您<b>正确填写</b> 注册信息</p>
                         
                         <div class="form-group">
+                        <label for="web_url"> 注册邮箱 </label>
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-envelope-o"></i> </span>
                             <input class="form-control" type="email" name="logEmail" placeholder="注册邮箱" required />
                           </div>
                         </div>
                         <div class="form-group">
+                        <label for="web_url"> 密码</label>
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-key"></i> </span>
                             <input class="form-control" type="password" name="password" placeholder="密码" required />
                           </div>
                         </div>
                         <div class="form-group">
+                        <label for="web_url"> 注册人姓名 </label>
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i> </span>
                             <input class="form-control" type="text" name="publisherName" placeholder="注册人姓名" required />
                           </div>
                         </div>
                         <div class="form-group">
+                        <label for="web_url"> 联络邮箱 </label>
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-envelope-o"></i> </span>
                             <input class="form-control" type="email" name="connectEmail" placeholder="联络邮箱" required />
                           </div>
                         </div>
                         <div class="form-group">
+                        <label for="web_url"> 注册类型 </label>
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i> </span>
                             <!-- <input class="form-control" type="text" name="type" placeholder="no类型" required />  -->
                            <select name="type" class="form-control">
@@ -153,23 +158,27 @@
                           </div>
                         </div>
                         <div class="form-group">
+                        <label for="web_url"> 公司名称 </label>
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-globe"></i> </span>
                             <input class="form-control" type="text" name="companyName" placeholder="公司名称" required />
                           </div>
                         </div>
                         <div class="form-group">
+                        <label for="web_url"> 营业执照 </label>
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-file-o"></i> </span>
-                            <input id="营业执照" class="form-control" type="text" name="license" placeholder="营业执照" required></input>
+                            <input id="营业执照" class="form-control" type="file" name="license" placeholder="营业执照" required></input>
                           <!--  <input type="text" id="datepicker" class="form-control datepicker margin-top-none" placeholder="23/9/2013" />
                           -->
                           </div>
                         </div>               
                         <div class="form-group">
+                        <label for="web_url"> 公司图片 </label>
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-chain"></i> </span>
-                           <input class="form-control" type="text" name="photo" placeholder="公司图片" required /> 
+                           <input class="form-control" type="file" name="photo" placeholder="公司图片" required /> 
                           </div>
                         </div>
                         <div class="form-group">
+                        <label for="web_url"> 公司概述 </label>
                           <div class="input-group"> <span class="input-group-addon"><i class="fa fa-list-alt"></i> </span>
                           	 <textarea id="textArea" class="form-control" name="introduction" placeholder="公司概述"  rows="3"></textarea>
                           </div>
@@ -217,6 +226,13 @@
 <script src="js/jquery.min.js"></script> 
 <script src="js/jquery-ui.min.js"></script> 
 <script src="js/bootstrap.min.js"></script> 
+
+
+<!-- Core Javascript - via CDN --> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+
 
 <!-- Plugins --> 
 <script type="text/javascript" src="vendor/plugins/validate/jquery.validate.js"></script> 

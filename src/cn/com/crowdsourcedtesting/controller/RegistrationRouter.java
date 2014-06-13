@@ -114,7 +114,7 @@ public class RegistrationRouter extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		RegistrationTesterForm registrationTesterForm = (RegistrationTesterForm) form;// TODO Auto-generated method stub
 		
-		handler.handleRegistrationTester(registrationTesterForm);
+		handler.handleRegistrationTester(request,registrationTesterForm);
 			
 		return mapping.findForward("success");
 
@@ -184,7 +184,7 @@ public class RegistrationRouter extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		RegistrationPublisherForm registrationPublisherForm = (RegistrationPublisherForm) form;
 		
-		handler.handleRegistrationPublisher(registrationPublisherForm);
+		handler.handleRegistrationPublisher(request,registrationPublisherForm);
 		
 		return mapping.findForward("success");
 	}

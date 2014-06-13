@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.upload.FormFile;
 
 /** 
  * MyEclipse Struts
@@ -43,9 +44,9 @@ public class RegistrationPublisherForm extends ActionForm {
 	
 	private String companyName;
 	
-	private String license;
+	private FormFile license;
 	
-	private String photo;
+	private FormFile photo;
 	
 	private String introduction;
 
@@ -193,19 +194,19 @@ public class RegistrationPublisherForm extends ActionForm {
 		this.companyName = companyName;
 	}
 
-	public String getLicense() {
+	public FormFile getLicense() {
 		return license;
 	}
 
-	public void setLicense(String license) {
+	public void setLicense(FormFile license) {
 		this.license = license;
 	}
 
-	public String getPhoto() {
+	public FormFile getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(String photo) {
+	public void setPhoto(FormFile photo) {
 		this.photo = photo;
 	}
 

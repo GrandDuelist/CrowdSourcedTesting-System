@@ -102,7 +102,7 @@
             </div>
           </div>
           <div class="panel-body">
-            <form class="cmxform" action="registrationTester.do?method=testerRegistrationActivate" id="commentForm" method="post">
+            <form class="cmxform" enctype="multipart/form-data" action="registrationTester.do?method=testerRegistration" id="commentForm" method="post">
               <div id="rootwizard">
                 <div class="wizard-wrapper">
                   <ul class="wizard-steps">
@@ -158,7 +158,7 @@
                           </div>
                         </div>
                         <div class="form-group">
-                    		<label for="web_url"> 上传头像 </label>
+                   			<label for="web_url"> 上传头像 </label>
                     		<div class="input-group"> <span class="input-group-addon"> <i class="fa fa-picture-o"></i> </span>
                       			<input class="form-control" type="file" required placeholder="" name="photo" />
                     		</div>
@@ -214,6 +214,11 @@
 <script src="js/jquery.min.js"></script> 
 <script src="js/jquery-ui.min.js"></script> 
 <script src="js/bootstrap.min.js"></script> 
+
+<!-- Core Javascript - via CDN --> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 
 <!-- Plugins --> 
 <script type="text/javascript" src="vendor/plugins/validate/jquery.validate.js"></script> 

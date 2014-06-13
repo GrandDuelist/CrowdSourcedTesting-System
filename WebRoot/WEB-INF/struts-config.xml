@@ -373,7 +373,7 @@
     <action
       attribute="registrationTesterForm"
       parameter = "method"
-      input="/registration_tester.html"
+      input="/form/registration_tester.jsp"
       name="registrationTesterForm"
       path="/registrationTester"
       scope="request"
