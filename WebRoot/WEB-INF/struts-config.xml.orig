@@ -24,9 +24,8 @@
     <form-bean name="publishTestingTaskForm" type="cn.com.crowdsourcedtesting.struts.form.PublishTestingTaskForm" />
     <form-bean name="questionnaireDisplayForm" type="cn.com.crowdsourcedtesting.struts.form.QuestionnaireDisplayForm" />
     <form-bean name="taskForm" type="cn.com.crowdsourcedtesting.struts.form.TaskForm" />
-    <form-bean name="taskLiskForm" type="cn.com.crowdsourcedtesting.struts.form.TaskLiskForm" />
-    <form-bean name="editTaskForm" type="cn.com.crowdsourcedtesting.struts.form.EditTaskForm" />
-   
+    <form-bean name="informationForm" type="cn.com.crowdsourcedtesting.struts.form.InformationForm" />
+
   
   </form-beans>
 
@@ -115,9 +114,10 @@
       <set-property property="cancellable" value="true" />
        <forward name="home" path="/index.jsp"></forward>
        <forward name="login" path="/LoginView.jsp"></forward>
-     
-      
-      
+      <forward name="manageGiftList" path="/ManageGiftListView.jsp"></forward>
+      <forward name="manageGiftDetail" path="/ManageGiftDetailView.jsp"></forward>
+      <forward name="changeGiftList"  path="/ChangeGiftListView.jsp"></forward>
+      <forward name="changeGiftDetail" path="ChangeGiftDetailView.jsp"></forward>
       <forward name="giftitem" path="/gift.jsp"></forward>
       <forward name="allgifts" path="/gifts.jsp" />
       <forward name="changegift" path="/gift_address.jsp" />
@@ -166,7 +166,7 @@
       <forward name="allcomment" path="/page_task_item.jsp" />
     </action>
     
-    
+    <!-- 定义招募信息的ACTION -->
     <action
       attribute="recruitmentForm"
       input="/page_hirelist.jsp"
@@ -179,14 +179,29 @@
       
       <forward name="hireitem" path="/page_hireitem.jsp"></forward>
       <forward name="hirelist" path="/page_hirelist.jsp" />
-      
       <forward name="edititem" path="/publisher_hireinfo.jsp" />
       <forward name="checklist" path="/publisher_hirelist.jsp" />
       <forward name="backstage" path="/publisher_hireman.jsp" />
       <forward name="additem" path="/publisher_hirepub.jsp" />
       <forward name="index" path="/index.jsp" />
+      <forward name="publisherLogin" path="/PublisherLoginView.jsp"></forward>
     </action>
-    
+    <!-- 定义信息维护的MVC -->
+    <action
+         name = "informationForm"
+         attribute = "informationForm"
+         path="/information"
+         parameter="method"
+         scope="request"
+         type="cn.com.crowdsourcedtesting.controller.InformationRouter">
+      <set-property property="cancellable" value="true" />
+       <forward name="testerList" path="/CheckTesterListView.jsp"></forward>
+        <forward name="testerDetail" path="/CheckTesterDetailView.jsp"></forward>
+        <forward name="publisherList" path="/CheckPublisherListView.jsp"></forward>
+        <forward name="publisherDetail" path="/CheckPublisherDetailView.jsp"></forward>
+        <forward name="adminLogin"  path="/AdminLoginView.jsp"></forward>
+    </action>
+     
        <action  
          	 name="checkQuestionnaireDetailForm" 
           	attribute="checkQuestionnaireDetailForm"
@@ -226,7 +241,7 @@
       <set-property property="cancellable" value="true" />
        <forward name="publisherLogin" path="/PublisherLoginView.jsp"></forward>
        <forward name="add" path="/PublisherQuestionnaireView.jsp"></forward>
-       <forward name="main" path="/PublisherQuestionnaireMainView.jsp"></forward>
+        <forward name="main" path="/PublisherQuestionnaireMainView.jsp"></forward>
     </action>
     
     
@@ -332,33 +347,25 @@
           type="cn.com.crowdsourcedtesting.controller.QuestionnaireRouter">
           
       <set-property property="cancellable" value="true" />
-     
-       <forward name="detail" path="/QuestionnaireDetailView.jsp"></forward>
-       
+          <forward name="detail" path="/QuestionnaireDetailView.jsp"></forward>
          <forward name="adminLogin"  path="/AdminLoginView.jsp"></forward>
     </action>
     
-    
       <!--  定义一个前台问卷的MVC -->    
-      <action  
+    <action  
           name="pageIdForm" 
           attribute="pageIdForm"
           input = "/PageQuestionnaireView.jsp"
           path="/questionnaire" 
           parameter="method" 
           scope="request" 
-          type="cn.com.crowdsourcedtesting.controller.QuestionnaireRouter">
-          
-      <set-property property="cancellable" value="true" />
-     
+          type="cn.com.crowdsourcedtesting.controller.QuestionnaireRouter">  
+      <set-property property="cancellable" value="true" /> 
        <forward name="detail" path="/PageQuestionnaireInfoView.jsp"></forward>
         <forward name="list" path="/PageQuestionnaireView.jsp"></forward>
-       
          <forward name="testerLogin"  path="/LoginView.jsp"></forward>
-    </action>
-    
-    
-    
+    </action> 
+      
     <action
       attribute="registrationTesterForm"
       parameter = "method"
@@ -425,38 +432,22 @@
       <forward name="pubWeb" path="/publisher_taskpub_web.jsp"></forward>
       <forward name="pubAndroid" path="/publisher_taskpub_android.jsp"></forward>
       <forward name="pubDesktop" path="/publisher_taskpub_desktop.jsp"></forward>
-      <forward name="publisherLogin" path="entrance.do?method=goToLogin"></forward>
 <<<<<<< HEAD
+    </action>
+    <action path="/checkQuestionnaire" type="cn.com.crowdsourcedtesting.struts.action.CheckQuestionnaireAction">
+      <set-property property="cancellable" value="true" />
+    </action>
+   
 =======
-    </action>
-    <action
-      attribute="taskLiskForm"
-      input="/form/taskLisk.jsp"
-      name="taskLiskForm"
-      path="/taskLisk"
-      scope="request"
-      type="cn.com.crowdsourcedtesting.controller.TaskLiskAction">
-      <set-property property="cancellable" value="true" />
-      <forward name="taskList" path="/publisher_tasklist.jsp"></forward>
       <forward name="publisherLogin" path="entrance.do?method=goToLogin"></forward>
     </action>
-    <action
-      attribute="editTaskForm"
-      parameter="method"
-      input="/form/editTask.jsp"
-      name="editTaskForm"
-      path="/editTask"
-      scope="request"
-      type="cn.com.crowdsourcedtesting.controller.EditTaskAction">
-      <set-property property="cancellable" value="true" />
-      <forward name="publisherLogin" path="entrance.do?method=goToLogin"></forward>
-      <forward name="taskCloseForm" path="/publisher_task_close.jsp"></forward>
-      <forward name="checkList" path="taskLisk.do"></forward>
->>>>>>> a2dd94d886e25b2402d605e27d05ba08d6436da5
-    </action>
+>>>>>>> f54a140892468db3cd5232c6b26b3d1fe4d3e5fc
 
   </action-mappings>
   <controller processorClass="filters.MyRequestProcessor" />
 
   <message-resources parameter="cn.com.crowdsourcedtesting.struts.ApplicationResources" />
 </struts-config>
+
+
+  
