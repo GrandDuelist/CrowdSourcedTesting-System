@@ -135,11 +135,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </li>
                         <li><a class="search search-nav"><i class="icon-search search-btn"></i></a></li>                                
                     </ul>
-                    <div class="search-open search-open-inner">
+                    <div class="search-open">
                         <div class="input-append">
-                            <form />
-                                <input type="text" class="span3" placeholder="Search" />
-                                <button type="submit" class="btn-u">Search</button>
+                            <form action="gifts.do?method=selectSimilarGifts" method="post">
+                                <input name="searchinput" type="text" class="span3" placeholder="搜索" />
+                                <button type="submit" class="btn-u">搜索</button>
                             </form>
                         </div>
                     </div>
