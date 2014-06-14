@@ -37,14 +37,14 @@
 
 
 <%
- String flag = (String)request.getAttribute("isLegal");
+ /* String flag = (String)request.getAttribute("isLegal");
  if(flag == null || flag != "legal")
  {
  	response.sendRedirect("comment.do?method=checkWebList");
  	return;
  }
  else
- 	request.removeAttribute("isLegal");
+ 	request.removeAttribute("isLegal"); */
  %>
 
 
@@ -110,7 +110,7 @@
                                        
                         </li>
                         <li class="active">
-                            <a href="page_list.html">任务广场                            
+                            <a href="testTaskViewList.do">任务广场                            
                             </a>
                         </li>
                         <li>

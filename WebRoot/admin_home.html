@@ -10,11 +10,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- Font CSS  -->
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
+<link rel="stylesheet" type="text/css" href="css/opensans.css" />
 
 <!-- Core CSS  -->
-<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
 <!-- Plugin CSS -->
@@ -268,15 +268,15 @@
       <ul class="nav sidebar-nav">
         <li> <a class="accordion-toggle collapsed" href="#examine"><span class="glyphicons glyphicons-check"></span><span class="sidebar-title">审核</span><span class="caret"></span></a>
           <ul id="examine" class="nav sub-nav">
-            <li><a href="#"><span class="glyphicons glyphicons glyphicons-flag"></span> 审核任务</a></li>
-            <li><a href="admin_queslist.html"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
-            <li><a href="admin_registerlist.html"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>
+            <li><a href="checkTestTaskList.do?method=checkWebList"><span class="glyphicons glyphicons glyphicons-flag"></span> 审核任务</a></li>
+            <li><a href="manageQuestionnaire.do?method=checkList"><span class="glyphicons glyphicons-list"></span> 审核问卷</a></li>
+            <li><a href="checkRegisterList.do?method=checkCompanyList"><span class="glyphicons glyphicons-user"></span> 审核发布者帐号</a></li>
           </ul>
         </li>
         <li> <a class="accordion-toggle collapsed" href="#user_admin"><span class="glyphicons glyphicons-adress_book"></span><span class="sidebar-title">用户管理</span><span class="caret"></span></a>
           <ul id="user_admin" class="nav sub-nav">
-            <li><a href="admin_testerlist.html"><span class="glyphicons glyphicons-cleaning"></span> 维护测试者信息</a></li>
-            <li><a href="admin_publisherlist.html"><span class="glyphicons glyphicons-lightbulb"></span> 维护发布者信息</a></li>
+            <li><a href="information.do?method=manageTesterList"><span class="glyphicons glyphicons-cleaning"></span> 维护测试者信息</a></li>
+            <li><a href="information.do?method=managePublisherList"><span class="glyphicons glyphicons-lightbulb"></span> 维护发布者信息</a></li>
           </ul>
         </li>
         
@@ -312,9 +312,9 @@
 <!-- End: Main --> 
 
 <!-- Core Javascript - via CDN --> 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+<script src="js/jquery.min.js"></script> 
+<script src="js/jquery-ui.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
 
 <!-- Plugins - Via CDN-->
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.min.js"></script>

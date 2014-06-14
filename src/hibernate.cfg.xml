@@ -53,6 +53,7 @@
 			resource="cn/com/crowdsourcedtesting/DAO/Tester.hbm.xml" />
 		<mapping
 			resource="cn/com/crowdsourcedtesting/DAO/Product.hbm.xml" />
+		<mapping resource="cn/com/crowdsourcedtesting/DAO/JoinTask.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>

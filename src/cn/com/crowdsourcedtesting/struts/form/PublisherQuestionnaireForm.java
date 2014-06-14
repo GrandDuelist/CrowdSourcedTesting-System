@@ -53,6 +53,7 @@ public class PublisherQuestionnaireForm extends ActionForm {
 	 * @param request
 	 * @return ActionErrors
 	 */
+	@Override
 	public ActionErrors validate(ActionMapping mapping,
 			HttpServletRequest request) {
 		// TODO Auto-generated method stub
@@ -64,6 +65,7 @@ public class PublisherQuestionnaireForm extends ActionForm {
 	 * @param mapping
 	 * @param request
 	 */
+	@Override
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		// TODO Auto-generated method stub
 	}

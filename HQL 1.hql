@@ -1,1 +1,1 @@
-from TestTask testTask where testTask.taskType=0 order by testTask.taskId desc
+from BugReport as model where model.testTask.taskId = 1

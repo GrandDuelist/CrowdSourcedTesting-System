@@ -1,5 +1,6 @@
 package cn.com.crowdsourcedtesting.DAO;
 
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
-import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.other.page.Page;
 
@@ -185,7 +185,7 @@ public class TesterDAO extends BaseHibernateDAO {
 	// 判断是否为Tester
 	public Tester isTester(String email, String password) {
 		Tester tester = null;
-		List<Tester> testers = (List<Tester>) this.findByProperty(TESTER_EMAIL,
+		List<Tester> testers = this.findByProperty(TESTER_EMAIL,
 				email);
 		if (testers != null && testers.size() != 0) {
 			tester = testers.get(0);
@@ -268,6 +268,39 @@ public class TesterDAO extends BaseHibernateDAO {
 
 			return c.intValue();
 
+		}
+		
+		public Tester addTester(String email,String password,String name,
+				boolean gender,String mobile,Date birthday,double credit)
+		{
+			Session session = getSession();
+			Transaction transaction = null;
+			Tester tester = null;
+			try {
+				transaction = session.getTransaction();
+				if(transaction != null)
+				{
+					tester = new Tester(name, email, password, credit);
+					tester.setTesterGender(gender);
+					tester.setTesterMobile(mobile);
+					tester.setTesterBirthday(birthday);
+					session.save(tester);
+					
+					transaction.commit();
+					log.debug("add tester successful");
+					return tester;
+				}
+			} catch (RuntimeException e) {
+				log.error("attach failed", e);
+				if (transaction != null) {
+					transaction.rollback();
+				}
+				tester = null;
+				throw e;
+			}finally{
+				session.close();
+			}
+			return tester;
 		}
 
 }

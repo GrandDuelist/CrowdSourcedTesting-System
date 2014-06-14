@@ -2,20 +2,14 @@ package cn.com.crowdsourcedtesting.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
-import cn.com.crowdsourcedtesting.bean.Administrator;
-import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.model.InformationHandler;
 import cn.com.crowdsourcedtesting.modelhelper.MethodNumber;
 import cn.com.crowdsourcedtesting.struts.form.InformationForm;
-import cn.com.crowdsourcedtesting.struts.form.PageIdForm;
-import cn.com.crowdtest.factory.DAOFactory;
 
 public class InformationRouter extends DispatchAction {
 

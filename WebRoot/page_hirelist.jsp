@@ -122,7 +122,7 @@ String flag = (String)request.getAttribute("isLegal");
                                        
                         </li>
                         <li>
-                            <a href="page_list.html">任务广场                            
+                            <a href="testTaskViewList.do">任务广场                            
                             </a>
                         </li>
                         <li class="active">
@@ -143,7 +143,7 @@ String flag = (String)request.getAttribute("isLegal");
                     </ul>
                     <div class="search-open">
                         <div class="input-append">
-                            <form />
+                            <form>
                                 <input type="text" class="span3" placeholder="搜索" />
                                 <button type="submit" class="btn-u">搜索</button>
                             </form>
@@ -366,8 +366,10 @@ String flag = (String)request.getAttribute("isLegal");
 <script type="text/javascript" src="assets/js/modernizr.custom.js"></script>        
 <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
 <!-- JS Implementing Plugins -->           
-<script type="text/javascript" src="assets/plugins/portfolioSorting/js/jquery.quicksand.js"></script>
-<script type="text/javascript" src="assets/plugins/portfolioSorting/js/sorting.js"></script>
+<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
+<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/sequence.jquery-min.js"></script>
+<script type="text/javascript" src="assets/plugins/horizontal-parallax/js/horizontal-parallax.js"></script>
+<script type="text/javascript" src="assets/plugins/bxslider/jquery.bxslider.js"></script>
 <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
 <!-- JS Page Level -->           
 <script type="text/javascript" src="assets/js/app.js"></script>
@@ -379,6 +381,5 @@ String flag = (String)request.getAttribute("isLegal");
 <!--[if lt IE 9]>
     <script src="assets/js/respond.js"></script>
 <![endif]-->
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html:html>

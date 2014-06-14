@@ -20,11 +20,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<!-- Font CSS  -->
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
+	<link rel="stylesheet" type="text/css" href="css/opensans.css" />
 
 	<!-- Core CSS  -->
-	<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
 	<!-- Plugin CSS -->
@@ -103,7 +103,7 @@
           <div class="panel-body">
           <h2 class="text-info">验证码确认</h2>
           <hr/>
-            	<form id="verify_code">
+            	<form id="verify_code" action="registrationTester.do?method=testerRegistration" method="post">
                 	<div class="col-md-6 col-md-offset-3">
                 	<div class="alert alert-info">
                     	请正确填写您收到的验证码
@@ -117,7 +117,7 @@
                     <hr/>
                     <div class="text-center">
                     <p>
-                    	<button class="btn btn-success btn-gradient btn-lg" type="button" disabled="disabled">提交</button>
+                    	<button class="btn btn-success btn-gradient btn-lg" type="submit" >提交</button>
                     </p>
                     </div>
                     </div>
@@ -144,9 +144,9 @@
 <!-- End: Main --> 
 
 <!-- Core Javascript - via CDN --> 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+<script src="js/jquery.min.js"></script> 
+<script src="js/jquery-ui.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
 
 <!-- Plugins --> 
 <script type="text/javascript" src="vendor/plugins/validate/jquery.validate.js"></script> 
@@ -258,7 +258,7 @@
 		{
 			document.getElementById("nonempty3").style.display = "none";
 			document.getElementById("error").style.display="none";
-			document.getElementById("comfirm").disabled = "";
+			document.getElementById("comfirm").disabled = " ";
 			return true;
 		}
 	}

@@ -5,7 +5,6 @@
 package cn.com.crowdsourcedtesting.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +20,6 @@ import cn.com.crowdsourcedtesting.DAO.GiftDAO;
 import cn.com.crowdsourcedtesting.bean.Gift;
 import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.crowdsourcedtesting.model.GiftHandler;
-import cn.com.crowdsourcedtesting.model.RecruitmentHandler;
 import cn.com.crowdsourcedtesting.modelhelper.MethodNumber;
 import cn.com.crowdsourcedtesting.struts.form.GiftForm;
 import cn.com.other.page.Page;

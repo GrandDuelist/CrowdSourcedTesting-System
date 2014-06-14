@@ -26,6 +26,9 @@
     <form-bean name="taskForm" type="cn.com.crowdsourcedtesting.struts.form.TaskForm" />
     <form-bean name="informationForm" type="cn.com.crowdsourcedtesting.struts.form.InformationForm" />
 
+    <form-bean name="informationForm" type="cn.com.crowdsourcedtesting.struts.form.InformationForm" />
+    <form-bean name="testTaskViewListForm" type="cn.com.crowdsourcedtesting.struts.form.TestTaskViewListForm" />
+    <form-bean name="testTaskDetailViewForm" type="cn.com.crowdsourcedtesting.struts.form.TestTaskDetailViewForm" />
   
   </form-beans>
 
@@ -433,6 +436,8 @@
       <forward name="pubAndroid" path="/publisher_taskpub_android.jsp"></forward>
       <forward name="pubDesktop" path="/publisher_taskpub_desktop.jsp"></forward>
 <<<<<<< HEAD
+   
+</action>
     </action>
     <action path="/checkQuestionnaire" type="cn.com.crowdsourcedtesting.struts.action.CheckQuestionnaireAction">
       <set-property property="cancellable" value="true" />
@@ -441,8 +446,32 @@
 =======
       <forward name="publisherLogin" path="entrance.do?method=goToLogin"></forward>
     </action>
+    <action
+      attribute="testTaskViewListForm"
+      input="/form/testTaskViewList.jsp"
+      name="testTaskViewListForm"
+      path="/testTaskViewList"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.TestTaskViewListAction">
+      <set-property property="cancellable" value="true" />
+      <forward name="dispPage" path="/page_list.jsp"></forward>
+    </action>
+    <action
+      attribute="testTaskDetailViewForm"
+      parameter="method"
+      input="/form/testTaskDetailView.jsp"
+      name="testTaskDetailViewForm"
+      path="/testTaskDetailView"
+      scope="request"
+      type="cn.com.crowdsourcedtesting.controller.TestTaskDetailViewAction">
+      <set-property property="cancellable" value="true" />
+      <forward name="taskDetailPage" path="/page_task_detail.jsp" ></forward>
+      <forward name="taskList" path="/testTaskViewList.do"></forward>
+      <forward name="testerLogin" path="login.do?method=testerLogin"></forward>
+    </action>
 >>>>>>> f54a140892468db3cd5232c6b26b3d1fe4d3e5fc
 
+>>>>>>> 5a6185d44b8a0fd7c5bd1d5cbb6c4d2640220e48
   </action-mappings>
   <controller processorClass="filters.MyRequestProcessor" />
 

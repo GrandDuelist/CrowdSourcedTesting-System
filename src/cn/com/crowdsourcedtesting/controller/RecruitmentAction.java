@@ -5,11 +5,7 @@
 package cn.com.crowdsourcedtesting.controller;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,16 +15,10 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
-import cn.com.crowdsourcedtesting.DAO.GiftDAO;
-import cn.com.crowdsourcedtesting.DAO.ProductDAO;
 import cn.com.crowdsourcedtesting.DAO.RecruitmentDAO;
-import cn.com.crowdsourcedtesting.bean.Gift;
 import cn.com.crowdsourcedtesting.bean.Publisher;
-import cn.com.crowdsourcedtesting.bean.Product;
-import cn.com.crowdsourcedtesting.bean.Recruitment;
 import cn.com.crowdsourcedtesting.model.RecruitmentHandler;
 import cn.com.crowdsourcedtesting.modelhelper.MethodNumber;
-import cn.com.crowdsourcedtesting.struts.form.GiftForm;
 import cn.com.crowdsourcedtesting.struts.form.PageIdForm;
 import cn.com.crowdsourcedtesting.struts.form.RecruitmentForm;
 import cn.com.other.page.Page;
@@ -70,7 +60,7 @@ public class RecruitmentAction extends DispatchAction {
 
 		RecruitmentDAO dao = new RecruitmentDAO();
 		int pagenow = recruitmentForm.getPagenow();
-		// 一�2个招募信�
+		// 一�2个招募信�
 		page.setCurrentPage(pagenow);
 		page.setPerRows(12);
 		page.setTotalRows(dao.getTotalRows());
@@ -92,7 +82,7 @@ public class RecruitmentAction extends DispatchAction {
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
 		RecruitmentDAO dao = new RecruitmentDAO();
-		// 一�2个招募信�
+		// 一�2个招募信�
 		page.setCurrentPage(1);
 		page.setPerRows(12);
 		page.setTotalRows(dao.getTotalRows());
@@ -184,7 +174,6 @@ public class RecruitmentAction extends DispatchAction {
 		String company = recruitmentForm.getCompany();	
 
 		handler.addNewRecruitment(title, online, startdate, enddate, place, brief, content, company, request);
-				brief, content, company, publisher, request);
 
 		return this.publisherList(mapping, recruitmentForm, request, response);
 		// return this.gotoList(mapping, form, request, response);
@@ -240,7 +229,7 @@ public class RecruitmentAction extends DispatchAction {
 	 * RecruitmentForm recruitmentForm = (RecruitmentForm) form;// TODO //
 	 * Auto-generated // method // stub RecruitmentDAO dao = new
 	 * RecruitmentDAO(); int perrow = recruitmentForm.getPerrow(); if (perrow ==
-	 * 0) perrow = 5; System.out.println(perrow); // 后台一�个招募信�
+	 * 0) perrow = 5; System.out.println(perrow); // 后台一�个招募信�
 	 * page.setCurrentPage(1); page.setPerRows(perrow);
 	 * page.setTotalRows(dao.getTotalRows());
 	 * handler.selectAllRecruitments(page, request); perrow = 0;
@@ -289,7 +278,7 @@ public class RecruitmentAction extends DispatchAction {
 
 		request.setAttribute("isLegal", "legal");
 		// 交给事务处理
-		handler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接�
+		handler.ListHandle(pageIDForm, request, MethodNumber.MethodOne); // 调用第一个接�
 		return mapping.findForward("checklist");
 	}
 

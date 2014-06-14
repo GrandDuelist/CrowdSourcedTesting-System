@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<!DOCTYPE html> 
 <html>
 <!--[if IE 7]> <html lang="en" class="ie7"> <![endif]-->  
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
@@ -124,7 +124,7 @@ Tester tester  = (Tester)session.getAttribute("Tester");
                                        
                         </li>
                         <li>
-                            <a href="page_list.html">任务广场                            
+                            <a href="testTaskViewList.do">任务广场                            
                             </a>
                         </li>
                         <li>

@@ -4,8 +4,6 @@
  */
 package cn.com.crowdsourcedtesting.struts.form;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
@@ -153,6 +151,7 @@ public class RecruitmentForm extends ActionForm {
 	 * @param request
 	 * @return ActionErrors
 	 */
+	@Override
 	public ActionErrors validate(ActionMapping mapping,
 			HttpServletRequest request) {
 		// TODO Auto-generated method stub
@@ -164,6 +163,7 @@ public class RecruitmentForm extends ActionForm {
 	 * @param mapping
 	 * @param request
 	 */
+	@Override
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		// TODO Auto-generated method stub
 	}

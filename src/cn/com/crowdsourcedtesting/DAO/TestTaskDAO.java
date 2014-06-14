@@ -1,10 +1,5 @@
 package cn.com.crowdsourcedtesting.DAO;
 
-import cn.com.crowdsourcedtesting.bean.Publisher;
-import cn.com.other.page.Page;
-import cn.com.crowdsourcedtesting.bean.Questionnaire;
-import cn.com.crowdsourcedtesting.modelhelper.TaskType;
-import cn.com.other.page.Page;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +16,8 @@ import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
 import cn.com.crowdsourcedtesting.bean.Product;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.TestTask;
+import cn.com.crowdsourcedtesting.modelhelper.TaskType;
+import cn.com.other.page.Page;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -46,7 +43,7 @@ public class TestTaskDAO extends BaseHibernateDAO {
 
 	public void save(TestTask transientInstance) {
 		log.debug("saving TestTask instance");
-		 Session session=getSession();
+		Session session = getSession();
 		try {
 			session.beginTransaction();
 			getSession().save(transientInstance);
@@ -177,87 +174,82 @@ public class TestTaskDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
-	
-	
-	//模糊搜索
-		public List findSimilarPropertyByPage(Page page, String propertyName, Object value) {
-			log.debug("search label by property limit");
 
-			try {
-				String queryString = "from TestTask as model where model."
-						+ propertyName + " like ?";
-				Query query = getSession().createQuery(queryString);
-				query.setParameter(0, "%"+value+"%");
-				query.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
-				query.setMaxResults(page.getPerRows());
-				return query.list();
-			} catch (RuntimeException re) {
-				log.error("find label by property limit failed", re);
-				throw re;
-			}
+	// 模糊搜索
+	public List findSimilarPropertyByPage(Page page, String propertyName,
+			Object value) {
+		log.debug("search label by property limit");
 
-		}
-		
-		public int getTotalSimilarRows(String propertyName, Object value)
-		{
-
-			try {					
-				String queryString = "from TestTask as model where model."
-						+ propertyName + " like ?";
-				Query query = getSession().createQuery(queryString);
-				query.setParameter(0, "%"+value+"%");
-				return query.list().size();
-			}
-			catch(RuntimeException re) {
-				log.error("find by page failed", re);
-				throw re;
-			}
-
+		try {
+			String queryString = "from TestTask as model where model."
+					+ propertyName + " like ?";
+			Query query = getSession().createQuery(queryString);
+			query.setParameter(0, "%" + value + "%");
+			query.setFirstResult((page.getCurrentPage() - 1)
+					* page.getPerRows());
+			query.setMaxResults(page.getPerRows());
+			return query.list();
+		} catch (RuntimeException re) {
+			log.error("find label by property limit failed", re);
+			throw re;
 		}
 
-	
+	}
 
-	public TestTask addTestTask(Product product, int productType, Publisher publisher,
-			Date beginTime, Date endTime, double perReward, double wholeCredit) {
+	public int getTotalSimilarRows(String propertyName, Object value) {
+
+		try {
+			String queryString = "from TestTask as model where model."
+					+ propertyName + " like ?";
+			Query query = getSession().createQuery(queryString);
+			query.setParameter(0, "%" + value + "%");
+			return query.list().size();
+		} catch (RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
+		}
+
+	}
+
+	public TestTask addTestTask(Product product, int productType,
+			Publisher publisher, Date beginTime, Date endTime,
+			double perReward, double wholeCredit) {
 		Session session = getSession();
 		Transaction trans = null;
 		TestTask testTask = null;
 		try {
 			trans = session.beginTransaction();
 			if (trans != null) {
-				
-			testTask = new TestTask(product, publisher, productType, perReward,wholeCredit);
-			testTask.setTaskStartTime(beginTime);
-			testTask.setTaskEndTime(endTime);
-			session.save(testTask);
 
-			trans.commit();
-			log.debug("add testtask successful");
-			return testTask;
-			
-			}} catch (RuntimeException re) {
-				log.error("attach failed", re);
-				if (trans != null) {
-					trans.rollback();
-				}
-				testTask = null;
-				throw re;
+				testTask = new TestTask(product, publisher, productType,
+						perReward, wholeCredit);
+				testTask.setTaskStartTime(beginTime);
+				testTask.setTaskEndTime(endTime);
+				session.save(testTask);
+
+				trans.commit();
+				log.debug("add testtask successful");
+				return testTask;
+
 			}
-			return testTask;
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			if (trans != null) {
+				trans.rollback();
+			}
+			testTask = null;
+			throw re;
 		}
-	
+		return testTask;
+	}
 
-	
-	
-
-	
-	
-	//按页查找未审核Web应用
+	// 按页查找未审核Web应用
 	public List<TestTask> findUncheckedWebByPage(Page page) {
 		// TODO Auto-generated method stub
-		try{
+		try {
 			List<TestTask> testTasks = new ArrayList<TestTask>();
-			String queryString = "from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="+TaskType.Web;
+			String queryString = "from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="
+					+ TaskType.Web;
 			Query queryObject = getSession().createQuery(queryString);
 
 			testTasks = queryObject
@@ -266,106 +258,157 @@ public class TestTaskDAO extends BaseHibernateDAO {
 					.setMaxResults(page.getPerRows()).list();
 
 			return testTasks;
-			
-	} catch(RuntimeException re) {
-		
-		log.error("attach failed", re);
-		
-		throw re;
-	}
-		
-	}
-	// 得到未审核Web任务的总条�
-		public int getUncheckedWebTotalRows() {
 
-			Number c = (Number) getSession()
-					.createQuery(
-							"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="+TaskType.Web)
-					.uniqueResult();
+		} catch (RuntimeException re) {
 
-			return c.intValue();
+			log.error("attach failed", re);
 
+			throw re;
 		}
-		
-		//按页查找未审核Android应用
-		public List<TestTask> findUncheckedAndroidByPage(Page page) {
-			// TODO Auto-generated method stub
-			try {
-				List<TestTask> testTasks = new ArrayList<TestTask>();
-				String queryString = "from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="+TaskType.Android;
-				Query queryObject = getSession().createQuery(queryString);
 
-				testTasks = queryObject
-						.setFirstResult(
-								(page.getCurrentPage() - 1) * page.getPerRows())
-						.setMaxResults(page.getPerRows()).list();
+	}
 
-				return testTasks;
-			} catch (RuntimeException re) {
-				log.error("find by page failed", re);
-				throw re;
-			}
+	// 得到未审核Web任务的总条�
+	public int getUncheckedWebTotalRows() {
+
+		Number c = (Number) getSession()
+				.createQuery(
+						"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="
+								+ TaskType.Web).uniqueResult();
+
+		return c.intValue();
+
+	}
+
+	// 按页查找未审核Android应用
+	public List<TestTask> findUncheckedAndroidByPage(Page page) {
+		// TODO Auto-generated method stub
+		try {
+			List<TestTask> testTasks = new ArrayList<TestTask>();
+			String queryString = "from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="
+					+ TaskType.Android;
+			Query queryObject = getSession().createQuery(queryString);
+
+			testTasks = queryObject
+					.setFirstResult(
+							(page.getCurrentPage() - 1) * page.getPerRows())
+					.setMaxResults(page.getPerRows()).list();
+
+			return testTasks;
+		} catch (RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
 		}
-		
-				
-			
-				
+	}
 
-		
-		// 得到未审核Android任务的总条�
-					public int getUncheckedAndroidTotalRows() {
-						Number c = (Number) getSession()
-						.createQuery(
-								"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and  TASK_TYPE="+TaskType.Android)
-						.uniqueResult();
+	// 得到未审核Android任务的总条�
+	public int getUncheckedAndroidTotalRows() {
+		Number c = (Number) getSession()
+				.createQuery(
+						"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and  TASK_TYPE="
+								+ TaskType.Android).uniqueResult();
 
-				return c.intValue();
+		return c.intValue();
 
-			}
-			
+	}
 
-			
-				
-			
-			//按页查找未审核Desktop应用
-			public List<TestTask> findUncheckedDesktopByPage(Page page) {
-				// TODO Auto-generated method stub
-				try {
-					List<TestTask> testTasks = new ArrayList<TestTask>();
-					String queryString = "from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="+TaskType.Desktop;
-					Query queryObject = getSession().createQuery(queryString);
+	// 按页查找未审核Desktop应用
+	public List<TestTask> findUncheckedDesktopByPage(Page page) {
+		// TODO Auto-generated method stub
+		try {
+			List<TestTask> testTasks = new ArrayList<TestTask>();
+			String queryString = "from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and TASK_TYPE="
+					+ TaskType.Desktop;
+			Query queryObject = getSession().createQuery(queryString);
 
-					testTasks = queryObject
-							.setFirstResult(
-									(page.getCurrentPage() - 1) * page.getPerRows())
-							.setMaxResults(page.getPerRows()).list();
+			testTasks = queryObject
+					.setFirstResult(
+							(page.getCurrentPage() - 1) * page.getPerRows())
+					.setMaxResults(page.getPerRows()).list();
 
-					return testTasks;
-				} catch (RuntimeException re) {
-					log.error("find by page failed", re);
-					throw re;
-				}
-			}
-			// 得到未审核Desktop任务的总条�
-				public int getUncheckedDesktopTotalRows() {
+			return testTasks;
+		} catch (RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
+		}
+	}
 
-					Number c = (Number) getSession()
-							.createQuery(
-									"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and  TASK_TYPE="+TaskType.Desktop)
-							.uniqueResult();
+	// 得到未审核Desktop任务的总条�
+	public int getUncheckedDesktopTotalRows() {
 
-					return c.intValue();
+		Number c = (Number) getSession()
+				.createQuery(
+						"select count(*) from TestTask where (CHECK_ADMINISTRATOR_ID=null or IS_PASSED=0) and  TASK_TYPE="
+								+ TaskType.Desktop).uniqueResult();
 
-				}
+		return c.intValue();
+
+	}
+
+	public List<TestTask> findPublisherWebTestTaskByPage(Page page,
+			Publisher publisher) {
+		try {
+			String queryString = "from TestTask testTask where testTask.taskType="
+					+ TaskType.Web
+					+ "and testTask.publisher.publisherId="
+					+ publisher.getPublisherId()
+					+ " order by testTask.taskId desc";
+			Query queryObject = getSession().createQuery(queryString);
+
+			queryObject
+					.setFirstResult(
+							(page.getCurrentPage() - 1) * page.getPerRows())
+					.setMaxResults(page.getPerRows()).list();
+
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find by page failed", re);
+			throw re;
+		}
+	}
+	
+	public int getPublisherWebTotalRows(Publisher publisher) {
+		String queryString = "select count(*) from TestTask testTask where testTask.taskType="
+					+ TaskType.Web
+					+ "and testTask.publisher.publisherId="
+					+ publisher.getPublisherId()
+					+ " order by testTask.taskId desc";
+		Number c = (Number) getSession().createQuery(queryString)
+				.uniqueResult();
+		return c.intValue();
+
+	}
+
+	public List<TestTask> findcheckedWebByPage(Page page) {
+		// TODO Auto-generated method stub
+		try {
+			List<TestTask> testTasks = new ArrayList<TestTask>();
+			String queryString = "from TestTask where (CHECK_ADMINISTRATOR_ID is not null and IS_PASSED=1) and TASK_TYPE="
+					+ TaskType.Web;
+			Query queryObject = getSession().createQuery(queryString);
+
+			testTasks = queryObject
+					.setFirstResult(
+							(page.getCurrentPage() - 1) * page.getPerRows())
+					.setMaxResults(page.getPerRows()).list();
+
+			return testTasks;
+
+		} catch (RuntimeException re) {
+
+			log.error("attach failed", re);
+
+			throw re;
+		}
+
+	}
+
+	public int getcheckedWebTotalRows() {
+		String queryString = "select count(*)from TestTask where (CHECK_ADMINISTRATOR_ID is not null and IS_PASSED=1) and TASK_TYPE="
+				+ TaskType.Web;
+		Number c = (Number) getSession().createQuery(queryString)
+				.uniqueResult();
+		return c.intValue();
+
+	}
 }
-
-
-		
-			
-		
-			
-
-
-
-
-

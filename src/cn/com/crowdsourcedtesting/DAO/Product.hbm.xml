@@ -42,13 +42,7 @@
   <property generated="never" lazy="false" name="desktopAddress" type="java.lang.String">
    <column length="256" name="DESKTOP_ADDRESS"/>
   </property>
-  <set inverse="true" name="testTasks" sort="unsorted">
-   <key>
-    <column name="PRODUCT_ID" not-null="true" precision="9" scale="0"/>
-   </key>
-   <one-to-many class="cn.com.crowdsourcedtesting.bean.TestTask"/>
-  </set>
-  <property name="productName" type="string">
+  <property generated="never" lazy="false" name="productName" type="string">
    <column name="PRODUCT_NAME"/>
   </property>
  </class>

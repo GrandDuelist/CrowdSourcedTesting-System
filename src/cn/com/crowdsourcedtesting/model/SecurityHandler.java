@@ -10,9 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.omg.CORBA.Request;
-import org.omg.DynamicAny.DynAnyOperations;
-
 import com.sun.jmx.snmp.tasks.Task;
 
 import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;

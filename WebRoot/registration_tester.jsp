@@ -20,11 +20,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<!-- Font CSS  -->
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
+	<link rel="stylesheet" type="text/css" href="css/opensans.css" />
 
 	<!-- Core CSS  -->
-	<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
 	<!-- Plugin CSS -->
@@ -102,7 +102,7 @@
             </div>
           </div>
           <div class="panel-body">
-            <form class="cmxform" action="registrationTester.do?method=testerRegistrationActivate" id="commentForm" method="post">
+            <form class="cmxform" enctype="multipart/form-data" action="registrationTester.do?method=testerRegistration" id="commentForm" method="post">
               <div id="rootwizard">
                 <div class="wizard-wrapper">
                   <ul class="wizard-steps">
@@ -158,7 +158,7 @@
                           </div>
                         </div>
                         <div class="form-group">
-                    		<label for="web_url"> 上传头像 </label>
+                   			<label for="web_url"> 上传头像 </label>
                     		<div class="input-group"> <span class="input-group-addon"> <i class="fa fa-picture-o"></i> </span>
                       			<input class="form-control" type="file" required placeholder="" name="photo" />
                     		</div>
@@ -209,6 +209,11 @@
   <!-- End: Content --> 
 </div>
 <!-- End: Main --> 
+
+<!-- Core Javascript - via CDN --> 
+<script src="js/jquery.min.js"></script> 
+<script src="js/jquery-ui.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
 
 <!-- Core Javascript - via CDN --> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 

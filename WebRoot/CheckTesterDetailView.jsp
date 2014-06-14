@@ -31,11 +31,11 @@ try{
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/detail_control/admin_tester.js"></script>
 <!-- Font CSS  -->
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
+<link rel="stylesheet" type="text/css" href="css/opensans.css" />
 
 <!-- Core CSS  -->
-<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
 <!-- Plugin CSS -->
@@ -425,9 +425,9 @@ try{
 </div>
 <!--End:Popup-->
 <!-- Core Javascript - via CDN --> 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+<script src="js/jquery.min.js"></script> 
+<script src="js/jquery-ui.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
 
 <!-- Plugins --> 
 <script type="text/javascript" src="vendor/editors/xeditable/js/bootstrap-editable.js"></script> 

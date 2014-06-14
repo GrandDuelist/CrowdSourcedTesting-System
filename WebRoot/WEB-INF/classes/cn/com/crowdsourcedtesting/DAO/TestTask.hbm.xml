@@ -10,13 +10,13 @@
   <id name="taskId" type="java.lang.Integer">
    <column name="TASK_ID" precision="9" scale="0"/>
    <generator class="sequence">
-   <param name="sequence">TEST_TASK_SEQUENCE</param>
+    <param name="sequence">TEST_TASK_SEQUENCE</param>
    </generator>
   </id>
- 	<many-to-one class="cn.com.crowdsourcedtesting.bean.Administrator"
-	fetch="select" name="administrator">
-	<column name="CHECK_ADMINISTRATOR_ID" precision="9" scale="0" />
-	</many-to-one>
+  <many-to-one class="cn.com.crowdsourcedtesting.bean.Administrator"
+   fetch="select" name="administrator">
+   <column name="CHECK_ADMINISTRATOR_ID" precision="9" scale="0"/>
+  </many-to-one>
   <many-to-one class="cn.com.crowdsourcedtesting.bean.Product"
    fetch="select" name="product">
    <column name="PRODUCT_ID" not-null="true" precision="9" scale="0"/>
@@ -37,23 +37,15 @@
   <property generated="never" lazy="false" name="taskEnvironment" type="java.lang.String">
    <column length="256" name="TASK_ENVIRONMENT"/>
   </property>
-  <property generated="never" lazy="false" name="isPassed"
-  type="java.lang.Boolean">
-<column name="IS_PASSED" not-null="false" precision="1"
-scale="0" />
-</property>
+  <property generated="never" lazy="false" name="isPassed" type="java.lang.Boolean">
+   <column name="IS_PASSED" not-null="false" precision="1" scale="0"/>
+  </property>
   <property generated="never" lazy="false" name="perReward" type="java.lang.Double">
    <column name="PER_REWARD" not-null="true" precision="9"/>
   </property>
   <property generated="never" lazy="false" name="wholeCredit" type="java.lang.Double">
    <column name="WHOLE_CREDIT" not-null="true" precision="9"/>
   </property>
-  <set inverse="true" name="bugReports" sort="unsorted">
-   <key>
-    <column name="TASK_ID" not-null="true" precision="9" scale="0"/>
-   </key>
-   <one-to-many class="cn.com.crowdsourcedtesting.bean.BugReport"/>
-  </set>
   <set inverse="true" name="taskComments" sort="unsorted">
    <key>
     <column name="TASK_ID" not-null="true" precision="9" scale="0"/>

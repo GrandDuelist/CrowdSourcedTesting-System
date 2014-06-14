@@ -1,8 +1,6 @@
 package cn.com.crowdsourcedtesting.bean;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Product entity. @author MyEclipse Persistence Tools
@@ -24,7 +22,7 @@ public class Product implements java.io.Serializable {
 	private String apkAddress;
 	private String webLink;
 	private String desktopAddress;
-	private Set testTasks = new HashSet(0);
+//	private Set testTasks = new HashSet(0);
 	// Constructors
 
 	/** default constructor */
@@ -46,24 +44,24 @@ public class Product implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Product(Subcategory subcategory, String productName,
-			Date releaseTime, String version, Boolean status,
-			String description, String loginXmlFile, String icon,
-			String apkAddress, String webLink, String desktopAddress,
-			Set testTasks) {
-		this.subcategory = subcategory;
-		this.productName = productName;
-		this.releaseTime = releaseTime;
-		this.version = version;
-		this.status = status;
-		this.description = description;
-		this.loginXmlFile = loginXmlFile;
-		this.icon = icon;
-		this.apkAddress = apkAddress;
-		this.webLink = webLink;
-		this.desktopAddress = desktopAddress;
-		this.testTasks = testTasks;
-	}
+//	public Product(Subcategory subcategory, String productName,
+//			Date releaseTime, String version, Boolean status,
+//			String description, String loginXmlFile, String icon,
+//			String apkAddress, String webLink, String desktopAddress,
+//			Set testTasks) {
+//		this.subcategory = subcategory;
+//		this.productName = productName;
+//		this.releaseTime = releaseTime;
+//		this.version = version;
+//		this.status = status;
+//		this.description = description;
+//		this.loginXmlFile = loginXmlFile;
+//		this.icon = icon;
+//		this.apkAddress = apkAddress;
+//		this.webLink = webLink;
+//		this.desktopAddress = desktopAddress;
+//		this.testTasks = testTasks;
+//	}
 
 	// Property accessors
 
@@ -163,12 +161,12 @@ public class Product implements java.io.Serializable {
 		this.desktopAddress = desktopAddress;
 	}
 
-	public Set getTestTasks() {
-		return this.testTasks;
-	}
-
-	public void setTestTasks(Set testTasks) {
-		this.testTasks = testTasks;
-	}
+//	public Set getTestTasks() {
+//		return this.testTasks;
+//	}
+//
+//	public void setTestTasks(Set testTasks) {
+//		this.testTasks = testTasks;
+//	}
 
 }

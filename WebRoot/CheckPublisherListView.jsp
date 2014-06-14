@@ -29,11 +29,11 @@ try{
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- Font CSS  -->
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
+<link rel="stylesheet" type="text/css" href="css/opensans.css" />
 
 <!-- Core CSS  -->
-<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
 <!-- Plugin CSS -->
@@ -376,8 +376,8 @@ try{
                           <td class="info"><b><%=publisher.getPublisherName() %></b><br />
                             <span class="text-muted"><i class="fa fa-home"></i> <%=publisher.getPublisherCompany() %></span></td>
                           <td><i class="fa fa-envelope fa-lg text-blue padding-right-sm"></i> <%=publisher.getPublisherLogEmail() %></td>
-                          <td><i class="fa fa-link fa-lg text-blue padding-right-sm"></i><%=publisher.getPublisherAuthority()?"活跃":"封锁"%></td>
-                          <td><i class="fa fa-credit-card fa-lg text-blue padding-right-sm"></i><%=publisher.getBusinessLicense()==null?"无":publisher.getBusinessLicense()==null %></td>
+                          <td><i class="fa fa-link fa-lg text-blue padding-right-sm"></i><%=publisher.getPublisherAuthority()?"可用":"冻结"%></td>
+                          <td><i class="fa fa-credit-card fa-lg text-blue padding-right-sm"></i><%=publisher.getBusinessLicense()==null?"无":publisher.getBusinessLicense() %></td>
                           <td class="text-right text-center" id="detail1"><a class="btn btn-primary btn-gradient" id=<%=publisher.getPublisherId() %> type="button" ><span class="glyphicons glyphicons-circle_info"></span> 详细 </a></td>
                         </tr>
                         <%} %>
@@ -499,16 +499,16 @@ try{
 <!-- End: Main --> 
 
 <!-- Core Javascript - via CDN --> 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+<script src="js/jquery.min.js"></script> 
+<script src="js/jquery-ui.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
 
 <!-- Plugins - Via CDN --> 
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
 <script type="text/javascript" src="vendor/plugins/datatables/js/datatables.js"></script> 
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/flot/0.8.1/jquery.flot.min.js"></script> 
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script> 
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.min.js"></script> 
 
 <!-- Plugins - Via Local Storage

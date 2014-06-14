@@ -117,7 +117,7 @@ String flag = (String)request.getAttribute("isLegal");
                                        
                         </li>
                         <li>
-                            <a href="page_list.html">任务广场                            
+                            <a href="testTaskViewList.do">任务广场                            
                             </a>
                         </li>
                         <li class="active">
@@ -260,7 +260,7 @@ String flag = (String)request.getAttribute("isLegal");
 			</div><!--/span4-->
 		</div><!--/row-fluid-->	
 	</div><!--/container-->	
-</div><!--/footer-->
+</div><!--/footer-->	
 <!--=== End Footer ===-->
 
 <!--=== Copyright ===-->
@@ -271,7 +271,7 @@ String flag = (String)request.getAttribute("isLegal");
 	            <p>Copyright &copy; 2014.TCtest All rights reserved.</p>
 			</div>
 			<div class="span4">	
-				<a href="index.html"><img id="logo-footer" src="assets/img/logo2-default.png" class="pull-right" alt="" /></a>
+                <a href="index.html"><img id="logo-footer" src="assets/img/logo2-default.png" class="pull-right" alt="" /></a>
 			</div>
 		</div><!--/row-fluid-->
 	</div><!--/container-->	
@@ -296,6 +296,5 @@ String flag = (String)request.getAttribute("isLegal");
 <!--[if lt IE 9]>
     <script src="assets/js/respond.js"></script>
 <![endif]-->
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html:html>

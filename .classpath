@@ -7,6 +7,8 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.hibernate.MYECLIPSE_HIBERNATE3_3_EM"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.hibernate.MYECLIPSE_HIBERNATE3_3_CORE"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_METRO_IMPL"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_JAXWS_API"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/Oracle+11g+11.2.0.1.0+JDBC_ojdbc6.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/javassist-3.0.jar"/>
 	<classpathentry kind="lib" path="commons-io-2.4.jar"/>
@@ -39,5 +41,61 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.transaction-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activation.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mail.jar"/>
+	<classpathentry kind="src" path=".apt_generated">
+		<attributes>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/strutstest-2.1.4.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/easymock-3.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/easymock-3.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/easymock-3.2-samples.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/easymock-3.2-sources.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/easymock-3.2-tests.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/easymockclassextension-3.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/easymockclassextension-3.2-samples.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/easymockclassextension-3.2-sources.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/easymockclassextension-3.2-tests.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/easymockclassextension-3.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/selenium-java-2.41.0-srcs.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/selenium-java-2.41.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/apache-mime4j-0.6.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/bsh-1.3.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/cglib-nodep-2.1_3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/commons-codec-1.8.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/commons-exec-1.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/commons-io-2.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/commons-jxpath-1.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/cssparser-0.9.11.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/guava-15.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/hamcrest-library-1.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/htmlunit-2.13.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/htmlunit-core-js-2.13.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/httpclient-4.3.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/httpcore-4.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/httpmime-4.3.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/ini4j-0.5.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/jcommander-1.29.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/jetty-websocket-8.1.8.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/jna-3.4.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/jna-platform-3.4.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/json-20080701.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/junit-dep-4.11.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/nekohtml-1.9.19.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/netty-3.5.7.Final.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/operadriver-1.5.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/phantomjsdriver-1.1.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/protobuf-java-2.4.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/sac-1.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/serializer-2.7.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/testng-6.8.5.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/xalan-2.7.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/xercesImpl-2.10.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/libs/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

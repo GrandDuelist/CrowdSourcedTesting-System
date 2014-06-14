@@ -11,11 +11,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- Font CSS  -->
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
+<link rel="stylesheet" type="text/css" href="css/opensans.css" />
 
 <!-- Core CSS  -->
-<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
 <!-- Plugin CSS -->
@@ -75,7 +75,7 @@ $("div#selectButton").click(function()
     
    
      $("form#selectForm input[name='subType']").attr("value","selectQuestion");
-    $("form#selectForm").attr("action","questionnaire.do?method=createItem");
+    $("form#selectForm").attr("action","publisherQuestionnaire.do?method=createItem");
     $("form#selectForm").submit();
       
     
@@ -90,7 +90,7 @@ $("div#confirm").click(function()
    
     $("form#selectForm input[name='currentOne']").attr("value",$("div#currentQuestion h3").attr("id"));
      $("form#selectForm input[name='subType']").attr("value","confirmQuestion");
-    $("form#selectForm").attr("action","questionnaire.do?method=createItem");
+    $("form#selectForm").attr("action","publisherQuestionnaire.do?method=createItem");
     $("form#selectForm").submit();
       
     
@@ -105,7 +105,7 @@ $("div#deleteQuestion").click(function()
     $("form#selectForm input[name='currentOne']").attr("value",$("div#currentQuestion h3").attr("id"));
     
      $("form#selectForm input[name='subType']").attr("value","deleteQuestion");
-    $("form#selectForm").attr("action","questionnaire.do?method=createItem");
+    $("form#selectForm").attr("action","publisherQuestionnaire.do?method=createItem");
     $("form#selectForm").submit();
       
     
@@ -119,7 +119,7 @@ $("div#publishQuetionnaire").click(function()
    
     
      $("form#selectForm input[name='subType']").attr("value","publishQuetionnaire");
-    $("form#selectForm").attr("action","questionnaire.do?method=createItem");
+    $("form#selectForm").attr("action","publisherQuestionnaire.do?method=createItem");
     $("form#selectForm").submit();
       
     
@@ -373,7 +373,7 @@ $("div#publishQuetionnaire").click(function()
     <div id="sidebar-menu">
       <ul class="nav sidebar-nav">
       <li> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
-        <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
+        
         <li class="active"> <a href="PublisherQuestionnaireMainView.jsp"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
         <li> <a href="publisher_hireman.jsp"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
       </ul>
@@ -399,7 +399,7 @@ $("div#publishQuetionnaire").click(function()
           <div class="panel-heading">
             <div class="panel-title"> <i class="fa fa-pencil"></i> 创建问卷 </div>
           </div>
-          <form id="create-event-form" method="post" class="create" action="questionnaire.do?method=createItem">
+          <form id="create-event-form" method="post" class="create" action="publisherQuestionnaire.do?method=createItem">
             <div class="panel-body">
               <div class="form-group">
                 <label for="web_url"> 问卷名称 </label>
@@ -564,9 +564,9 @@ $("div#publishQuetionnaire").click(function()
 <!-- End: Main --> 
 
 <!-- Core Javascript - via CDN --> 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+<script src="js/jquery.min.js"></script> 
+<script src="js/jquery-ui.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
 
 <!-- Plugins --> 
 <script type="text/javascript" src="vendor/bootstrap/holder.js"></script> 

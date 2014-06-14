@@ -49,13 +49,14 @@ public class PublishTestingTaskAction extends DispatchAction {
 	private final String productSystemErrorMessage = "系统错误";
 	private final String productIconFileTypeErrorMessage = "上传图标文件类型错误";
 	private final String productApkFileTypeErrorMessage = "上传应用文件类型错误";
-	private final String productNoIconFileErrorMessage = "未上传图�;
-	private final String productNoApkFileErrorMessage = "未上传应用程�;
+	private final String productNoIconFileErrorMessage = "未上传图标";
+	private final String productNoApkFileErrorMessage = "未上传应用程序";
 	private final String productFileUploadErrorMessage = "文件上传错误";
+	private final String productUrlErrorMessage = "上传连接出错";
 
 	private final String taskFormErrorMessage = "表单星标内容不能为空";
 	private final String taskDaterangeFormatErrorMessage = "时间范围格式错误，请重新输入";
-	private final String taskSystemErrorMessage = "系统错误,请重试或者稍后再�;
+	private final String taskSystemErrorMessage = "系统错误,请重试或者稍后再试";
 
 	private final String goToPubWebProductForward = "pubWeb";
 	private final String goToPubAndroidProductForward = "pubAndroid";
@@ -132,9 +133,9 @@ public class PublishTestingTaskAction extends DispatchAction {
 		if (publisher == null) {
 			return new ActionRedirect(mapping.findForwardConfig(publisherLogin));
 		}
-
+		
 		PublishTestingTaskForm publishTestingForm = (PublishTestingTaskForm) form;
-
+		
 		FormFile iconFile = publishTestingForm.getIcon();
 		if (iconFile == null) {
 			request.getSession().setAttribute(productErrorMessageAttributeName,
@@ -146,6 +147,13 @@ public class PublishTestingTaskAction extends DispatchAction {
 				|| !generalHelperHandler.isPic(name[name.length - 1])) {
 			request.getSession().setAttribute(productErrorMessageAttributeName,
 					productIconFileTypeErrorMessage);
+			return mapping.findForward(webProductErrorForward);
+		}
+		
+		String webUrl = publishTestingForm.getWebUrl();
+		if ((webUrl = generalHelperHandler.isUrl(webUrl)) == null) {
+			request.getSession().setAttribute(productErrorMessageAttributeName,
+					productUrlErrorMessage);
 			return mapping.findForward(webProductErrorForward);
 		}
 
@@ -178,7 +186,7 @@ public class PublishTestingTaskAction extends DispatchAction {
 
 		Product product = new Product();
 		product.setProductName(publishTestingForm.getWebName());
-		product.setWebLink(publishTestingForm.getWebUrl());
+		product.setWebLink(webUrl);
 		product.setIcon(iconFilePath);
 		product.setDescription(publishTestingForm.getDescription());
 
@@ -258,7 +266,7 @@ public class PublishTestingTaskAction extends DispatchAction {
 					product.getIcon(), product.getWebLink(),
 					product.getDescription());
 			TestTaskDAO testTaskDAO = new TestTaskDAO();
-			testTaskDAO.addTestTask(product, 1, publisher, beginDate, endDate,
+			testTaskDAO.addTestTask(product, TaskType.Web, publisher, beginDate, endDate,
 					perReward, wholeCredit);
 		} catch (RuntimeException re) {
 			re.printStackTrace();
@@ -285,10 +293,10 @@ public class PublishTestingTaskAction extends DispatchAction {
 		}
 
 		PublishTestingTaskForm publishTestingForm = (PublishTestingTaskForm) form;
-		System.out.println(publishTestingForm.getAppName());
-		System.out.println(publishTestingForm.getIcon().getFileName());
-		System.out.println(publishTestingForm.getApkFile().getFileName());
-		System.out.println(publishTestingForm.getDescription());
+//		System.out.println(publishTestingForm.getAppName());
+//		System.out.println(publishTestingForm.getIcon().getFileName());
+//		System.out.println(publishTestingForm.getApkFile().getFileName());
+//		System.out.println(publishTestingForm.getDescription());
 
 		FormFile iconFile = publishTestingForm.getIcon();
 		if (iconFile == null) {
@@ -368,7 +376,7 @@ public class PublishTestingTaskAction extends DispatchAction {
 		} catch (IOException e) {
 			e.printStackTrace();
 			request.getSession().setAttribute(productErrorMessageAttributeName,
-					productApkFileTypeErrorMessage);
+					productSystemErrorMessage);
 			return mapping.findForward(androidProductErrorForward);
 		}
 
@@ -465,7 +473,7 @@ public class PublishTestingTaskAction extends DispatchAction {
 					product.getIcon(), product.getApkAddress(),
 					product.getDescription());
 			TestTaskDAO testTaskDAO = new TestTaskDAO();
-			testTaskDAO.addTestTask(product, 2, publisher, beginDate, endDate,
+			testTaskDAO.addTestTask(product, TaskType.Android, publisher, beginDate, endDate,
 					perReward, wholeCredit);
 		} catch (RuntimeException re) {
 			re.printStackTrace();
@@ -617,7 +625,7 @@ public class PublishTestingTaskAction extends DispatchAction {
 					product.getIcon(), product.getDesktopAddress(),
 					product.getDescription());
 			TestTaskDAO testTaskDAO = new TestTaskDAO();
-			testTaskDAO.addTestTask(product, 3, publisher, beginDate, endDate,
+			testTaskDAO.addTestTask(product, TaskType.Desktop, publisher, beginDate, endDate,
 					perReward, wholeCredit);
 		} catch (RuntimeException re) {
 			re.printStackTrace();

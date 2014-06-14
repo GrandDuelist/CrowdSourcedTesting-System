@@ -8,8 +8,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
-import java.util.Random;
-
 import javax.mail.Address;
 import javax.mail.Authenticator;
 import javax.mail.BodyPart;
@@ -25,15 +23,12 @@ import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.ChangedCharSetException;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import cn.com.crowdsourcedtesting.DAO.PublisherDAO;
-import cn.com.crowdsourcedtesting.DAO.QuestionnaireDAO;
 import cn.com.crowdsourcedtesting.bean.Administrator;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.Questionnaire;
@@ -44,7 +39,6 @@ import cn.com.crowdsourcedtesting.modelhelper.UserType;
 import cn.com.crowdsourcedtesting.struts.form.AdminLoginForm;
 import cn.com.crowdsourcedtesting.struts.form.ChangeInformationForm;
 import cn.com.crowdsourcedtesting.struts.form.FindPasswordForm;
-import cn.com.crowdsourcedtesting.struts.form.CheckQuestionnaireDetailForm;
 import cn.com.crowdsourcedtesting.struts.form.CheckRegisterDetailForm;
 import cn.com.crowdsourcedtesting.struts.form.CheckRegisterListForm;
 import cn.com.crowdsourcedtesting.struts.form.LoginForm;
@@ -464,7 +458,8 @@ class findAuthenticator extends Authenticator{
         this.userName = username;   
         this.password = password;   
     }   
-    protected PasswordAuthentication getPasswordAuthentication(){  
+    @Override
+	protected PasswordAuthentication getPasswordAuthentication(){  
         return new PasswordAuthentication(userName, password);  
     }  
 }  

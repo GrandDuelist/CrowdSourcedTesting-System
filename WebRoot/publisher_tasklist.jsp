@@ -16,11 +16,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- Font CSS  -->
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
+<link rel="stylesheet" type="text/css" href="css/opensans.css" />
 
 <!-- Core CSS  -->
-<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="fonts/glyphicons_pro/glyphicons.min.css" />
 
 <!-- Plugin CSS -->
@@ -278,9 +278,9 @@
     <div id="sidebar-menu">
       <ul class="nav sidebar-nav">
         <li class="active"> <a href="publisher_taskman.html"><span class="glyphicons glyphicons-notes_2"></span><span class="sidebar-title">任务管理</span></a> </li>
-        <li> <a href="publisher_tasklist_feedback.html"><span class="glyphicons glyphicons-log_book"></span><span class="sidebar-title">反馈管理</span></a> </li>
-        <li> <a href="publisher_questionnaire_man.html"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
-        <li> <a href="publisher_hireman.html"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
+        
+        <li> <a href="PublisherQuestionnaireMainView.jsp"><span class="glyphicons glyphicons-more_items"></span><span class="sidebar-title">问卷管理</span></a> </li>		
+        <li> <a href="publisher_hireman.jsp"><span class="glyphicons glyphicons-bullhorn"></span><span class="sidebar-title">招募信息</span></a> </li>
       </ul>
       </li>
       </ul>
@@ -329,8 +329,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                      <% List<TestTask> list = (List<TestTask>)session.getAttribute("PublisherWebTestTaskByPage"); 
-                      request.getSession().removeAttribute("PublisherWebTestTaskByPage");
+                      <% List<TestTask> list = (List<TestTask>) request.getAttribute("PublisherWebTestTaskByPage"); 
                       int i=0;
                       for (TestTask testTask : list) { 
                       i++;%>
@@ -359,7 +358,11 @@
                                   <a href="publisher_task_edit.html"><i class="fa fa-edit"></i> 修改 </a>
                                 </li>
                                 <li>
-                                  <a><i class="fa fa-level-up"></i> 重启 </a>
+                                <form action="bugReportManagement.do" name="bugReport<%=i%>">
+                                <input type="hidden" name="method" value="bugReportList" />
+                                <input type="hidden" name="taskId" value="<%= testTask.getTaskId() %>" />
+                                </form>
+                                <a href="javascript:void(document.bugReport<%=i%>.submit())"><i class="fa fa-edit"></i> 反馈管理 </a>
                                 </li>
                               </ul>
                             </div></td>
@@ -370,12 +373,15 @@
                     <div class="text-right">
                     	
                       <ul class="pagination pagination-alt margin-bottom">
+                      <% Page pageDisp = (Page) request.getAttribute("Page"); %>
                         <li><a href="#"><i class="fa fa-caret-left"></i> </a></li>
-                        <li <% if ("1".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=<%=request.getAttribute("type") %>&page=1">1</a></li>
-                        <li <% if ("2".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=<%=request.getAttribute("type") %>&page=2">2</a></li>
-                        <li <% if ("3".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=<%=request.getAttribute("type") %>&page=3">3</a></li>
-                        <li <% if ("4".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=<%=request.getAttribute("type") %>&page=4">4</a></li>
-                        <li <% if ("5".equals(request.getAttribute("page"))) {%> class="active" <% } %> ><a href="taskLisk.do?type=<%=request.getAttribute("type") %>&page=5">5</a></li>
+                        <% for (int pageCount=1; pageCount<= pageDisp.getTotalPage(); pageCount++) { 
+                        if (pageCount == pageDisp.getCurrentPage()) {%>
+                        <li class="active" ><a href="taskList.do?type=<%=request.getAttribute("type") %>&page=<%=pageCount %>"><%=pageCount %></a></li>
+                        <% }else { %>
+                        <li ><a href="taskList.do?type=<%=request.getAttribute("type") %>&page=<%=pageCount %>"><%=pageCount %></a></li>
+                        <% }
+                        } %>
                         <li><a href="#"><i class="fa fa-caret-right"></i> </a></li>
                       </ul>
                     
@@ -492,16 +498,16 @@
 <!-- End: Main --> 
 
 <!-- Core Javascript - via CDN --> 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+<script src="js/jquery.min.js"></script> 
+<script src="js/jquery-ui.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
 
 <!-- Plugins - Via CDN --> 
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
 <script type="text/javascript" src="vendor/plugins/datatables/js/datatables.js"></script> 
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/flot/0.8.1/jquery.flot.min.js"></script> 
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script> 
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.min.js"></script> 
 
 <!-- Plugins - Via Local Storage

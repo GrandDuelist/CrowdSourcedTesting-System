@@ -1,7 +1,5 @@
 package cn.com.crowdsourcedtesting.model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,8 +20,6 @@ import cn.com.crowdsourcedtesting.base.HibernateSessionFactory;
 import cn.com.crowdsourcedtesting.bean.Administrator;
 import cn.com.crowdsourcedtesting.bean.ChangeGift;
 import cn.com.crowdsourcedtesting.bean.Gift;
-import cn.com.crowdsourcedtesting.bean.JoinQuestionnaire;
-import cn.com.crowdsourcedtesting.bean.Recruitment;
 import cn.com.crowdsourcedtesting.bean.Tester;
 import cn.com.crowdsourcedtesting.modelhelper.MethodNumber;
 import cn.com.crowdsourcedtesting.struts.form.GiftForm;
@@ -197,7 +193,7 @@ public class GiftHandler extends GeneralHandler {
 	public boolean changeGift(ActionMapping mapping, GiftForm giftForm,
 			HttpServletRequest request, HttpServletResponse response){
 		int gift_id = giftForm.getGiftId();
-		int tester_id = 24;
+		//int tester_id = ((Tester)request.getSession().getAttribute("Tester")).getTesterId();
 		Double credit = giftForm.getCredit();
 		Date change_date = new Date(System.currentTimeMillis());//获取当前时间
 		String address = giftForm.getAddress();
@@ -210,7 +206,8 @@ public class GiftHandler extends GeneralHandler {
 		TesterDAO tdao = new TesterDAO();
 		GiftDAO dao = new GiftDAO();
 		Gift gift = dao.findById(gift_id);
-		Tester tester = tdao.findById(tester_id);
+		//Tester tester = tdao.findById(tester_id);
+		Tester tester = (Tester)request.getSession().getAttribute("Tester");
 		
 		if(gift != null && tester != null)
 		{

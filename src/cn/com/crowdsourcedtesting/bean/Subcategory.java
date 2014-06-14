@@ -1,8 +1,5 @@
 package cn.com.crowdsourcedtesting.bean;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Subcategory entity. @author MyEclipse Persistence Tools
  */
@@ -14,7 +11,7 @@ public class Subcategory implements java.io.Serializable {
 	private Integer subcategoryId;
 	private Category category;
 	private String subcategoryName;
-	private Set products = new HashSet(0);
+//	private Set products = new HashSet(0);
 
 	// Constructors
 
@@ -29,11 +26,11 @@ public class Subcategory implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Subcategory(Category category, String subcategoryName, Set products) {
-		this.category = category;
-		this.subcategoryName = subcategoryName;
-		this.products = products;
-	}
+//	public Subcategory(Category category, String subcategoryName, Set products) {
+//		this.category = category;
+//		this.subcategoryName = subcategoryName;
+//		this.products = products;
+//	}
 
 	// Property accessors
 
@@ -61,12 +58,12 @@ public class Subcategory implements java.io.Serializable {
 		this.subcategoryName = subcategoryName;
 	}
 
-	public Set getProducts() {
-		return this.products;
-	}
-
-	public void setProducts(Set products) {
-		this.products = products;
-	}
+//	public Set getProducts() {
+//		return this.products;
+//	}
+//
+//	public void setProducts(Set products) {
+//		this.products = products;
+//	}
 
 }

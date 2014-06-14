@@ -5,14 +5,11 @@
 package cn.com.crowdsourcedtesting.struts.form;
 
 import java.sql.Date;
-import java.util.Random;
-
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.upload.FormFile;
-import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
 
 /** 
  * MyEclipse Struts
@@ -27,6 +24,9 @@ public class RegistrationTesterForm extends ActionForm {
 	 */
 
 	
+	
+	/** photo property */
+	private FormFile photo;
 	
 	/** email property */
 	private String email;
@@ -46,9 +46,6 @@ public class RegistrationTesterForm extends ActionForm {
 	/** birthday property */
 	private Date birthday;
 	
-	/** photo property */
-	private FormFile photo;
-	
 	/** credit property */
 	private double credit;
 
@@ -65,6 +62,7 @@ public class RegistrationTesterForm extends ActionForm {
 	 * @param request
 	 * @return ActionErrors
 	 */
+	@Override
 	public ActionErrors validate(ActionMapping mapping,
 			HttpServletRequest request) {
 		// TODO Auto-generated method stub
@@ -76,6 +74,7 @@ public class RegistrationTesterForm extends ActionForm {
 	 * @param mapping
 	 * @param request
 	 */
+	@Override
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		// TODO Auto-generated method stub
 	}

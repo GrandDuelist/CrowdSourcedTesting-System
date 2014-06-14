@@ -1,2 +1,1 @@
-select * from test_task;
-select * from product order by product_id
+delete product where product_id = 83

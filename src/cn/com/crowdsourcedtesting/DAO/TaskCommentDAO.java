@@ -1,12 +1,10 @@
 package cn.com.crowdsourcedtesting.DAO;
 
 import cn.com.crowdsourcedtesting.base.BaseHibernateDAO;
-import cn.com.crowdsourcedtesting.bean.Recruitment;
 import cn.com.crowdsourcedtesting.bean.TaskComment;
 import cn.com.other.page.Page;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
@@ -155,7 +153,7 @@ public class TaskCommentDAO extends BaseHibernateDAO {
 			{
 				try {
 					List<TaskComment> recruitments = new ArrayList<TaskComment>();
-					String queryString = "from TaskComment as model where model.TASK_ID =" + task_id;					
+					String queryString = "from TaskComment as model where model.testTask.taskId =" + task_id;					
 					Query queryObject = getSession().createQuery(queryString);
 					queryObject.setFirstResult((page.getCurrentPage()-1)*page.getPerRows());
 					queryObject.setMaxResults(page.getPerRows());

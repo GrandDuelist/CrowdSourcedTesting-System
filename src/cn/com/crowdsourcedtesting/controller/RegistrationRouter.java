@@ -5,14 +5,8 @@
 package cn.com.crowdsourcedtesting.controller;
 
 import java.util.Date;
-import java.util.Random;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import oracle.net.aso.p;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -26,7 +20,6 @@ import javax.mail.Address;
 import javax.mail.Authenticator;
 import javax.mail.BodyPart;   
 import javax.mail.Message;   
-import javax.mail.MessagingException;   
 import javax.mail.Multipart;   
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;   
@@ -121,7 +114,7 @@ public class RegistrationRouter extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		RegistrationTesterForm registrationTesterForm = (RegistrationTesterForm) form;// TODO Auto-generated method stub
 		
-		handler.handleRegistrationTester(registrationTesterForm);
+		handler.handleRegistrationTester(request,registrationTesterForm);
 			
 		return mapping.findForward("success");
 
@@ -191,7 +184,7 @@ public class RegistrationRouter extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		RegistrationPublisherForm registrationPublisherForm = (RegistrationPublisherForm) form;
 		
-		handler.handleRegistrationPublisher(registrationPublisherForm);
+		handler.handleRegistrationPublisher(request,registrationPublisherForm);
 		
 		return mapping.findForward("success");
 	}
@@ -206,7 +199,8 @@ class MyAuthenticator extends Authenticator{
         this.userName = username;   
         this.password = password;   
     }   
-    protected PasswordAuthentication getPasswordAuthentication(){  
+    @Override
+	protected PasswordAuthentication getPasswordAuthentication(){  
         return new PasswordAuthentication(userName, password);  
     }  
 }  
