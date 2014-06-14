@@ -5,7 +5,12 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
+<!--[if IE 7]> <html lang="en" class="ie7"> <![endif]-->  
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> 
+
 <%try{ %>
 <html>
 <%
@@ -13,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	Tester tester  = (Tester)session.getAttribute("Tester");
 %>
   <head>
-   <title>TCTEST</title>
+    <title>TCTEST</title>
 
     <!-- Meta -->
     <meta charset="utf-8" />
@@ -29,14 +34,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="assets/css/style_responsive.css" />
     <link rel="shortcut icon" href="favicon.ico" />        
     <!-- CSS Implementing Plugins -->    
-    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css" />
+	<link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="assets/plugins/flexslider/flexslider.css" type="text/css" media="screen" /> 
     <link rel="stylesheet" href="assets/plugins/bxslider/jquery.bxslider.css" />             
     <link rel="stylesheet" href="assets/plugins/horizontal-parallax/css/horizontal-parallax.css" />
     <!-- CSS Theme -->    
     <link rel="stylesheet" href="assets/css/themes/default.css" id="style_color" />
     <link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-2" />    
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head> 
+
   </head> 
   <%
   	String flag = (String)request.getAttribute("flag");
@@ -361,7 +367,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
 
            
-           
+     </div>      
     </div><!--/row-fluid-->
     <!-- //End Container -->
 
