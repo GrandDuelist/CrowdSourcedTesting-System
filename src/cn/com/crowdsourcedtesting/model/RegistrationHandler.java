@@ -29,7 +29,7 @@ public class RegistrationHandler {
 		
 		String photoFileTypeName = null;
 		String photoFilePath = null;
-		String realPath = null;
+		String photorealPath = null;
 		
 		FormFile photo = form.getPhoto();
 		if(photo != null)
@@ -42,13 +42,13 @@ public class RegistrationHandler {
 				photoFileTypeName = name[name.length - 1];
 				photoFilePath = "registrate/tester/photo/photo_"
 						+ form.getEmail() + "." + photoFileTypeName;
-				realPath = request.getSession().getServletContext()
+				photorealPath = request.getSession().getServletContext()
 						.getRealPath("/" + photoFilePath);
 				try {
 					BufferedInputStream bin = new BufferedInputStream(
 							photo.getInputStream());
 					BufferedOutputStream bout = new BufferedOutputStream(
-							new FileOutputStream(realPath));
+							new FileOutputStream(photorealPath));
 					int bufferSize = 0;
 					byte[] buffer = new byte[1024];
 					while ((bufferSize = bin.read(buffer, 0, buffer.length)) != -1) {
@@ -96,7 +96,7 @@ public class RegistrationHandler {
 		
 		String photoFileTypeName = null;
 		String photoFilePath = null;
-		String realPath = null;
+		String photorealPath = null;
 		
 		FormFile photo = form.getPhoto();
 		if(photo != null)
@@ -109,13 +109,13 @@ public class RegistrationHandler {
 				photoFileTypeName = name[name.length - 1];
 				photoFilePath = "registrate/publisher/photo/photo_"
 						+ form.getLogEmail()+ "." + photoFileTypeName;
-				realPath = request.getSession().getServletContext()
+				photorealPath = request.getSession().getServletContext()
 						.getRealPath("/" + photoFilePath);
 				try {
 					BufferedInputStream bin = new BufferedInputStream(
 							photo.getInputStream());
 					BufferedOutputStream bout = new BufferedOutputStream(
-							new FileOutputStream(realPath));
+							new FileOutputStream(photorealPath));
 					int bufferSize = 0;
 					byte[] buffer = new byte[1024];
 					while ((bufferSize = bin.read(buffer, 0, buffer.length)) != -1) {
@@ -129,6 +129,9 @@ public class RegistrationHandler {
 					
 				}
 			}
+		}
+		else {
+			System.out.println("null");
 		}
 		
 		String licenseFileTypeName = null;
@@ -150,7 +153,7 @@ public class RegistrationHandler {
 						.getRealPath("/"+licenseFilePath);
 				try {
 					BufferedInputStream bin = new BufferedInputStream(
-							photo.getInputStream());
+							license.getInputStream());
 					BufferedOutputStream bout = new BufferedOutputStream(
 							new FileOutputStream(licenserealPath));
 					int bufferSize = 0;

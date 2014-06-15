@@ -102,7 +102,7 @@
             </div>
           </div>
           <div class="panel-body">
-            <form class="cmxform" enctype="multipart/form-data" action="registrationPublisher.do?method=publisherRegistrationActive" id="commentForm" method="post" >
+            <form class="cmxform" enctype="multipart/form-data" action="registrationPublisher.do?method=publisherRegistration" id="commentForm" method="post" >
               <div id="rootwizard">
                 <div class="wizard-wrapper">
                   <ul class="wizard-steps">
