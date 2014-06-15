@@ -2,22 +2,22 @@ package cn.com.crowdsourcedtesting.datawebservices;
 
 import java.util.Date;
 
-import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.soap.SOAPBinding;
 
+import cn.com.crowdsourcedtesting.bean.JoinTask;
 import cn.com.crowdsourcedtesting.bean.Product;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.TestTask;
 import cn.com.other.page.Page;
 
-//@SOAPBinding(style = SOAPBinding.Style.RPC)
+@SOAPBinding(style = SOAPBinding.Style.RPC)
 @javax.jws.WebService(targetNamespace = "http://datawebservices.crowdsourcedtesting.com.cn/", serviceName = "TaskManagementService", portName = "TaskManagementPort")
 public class TaskManagementDelegate {
 
 	cn.com.crowdsourcedtesting.datawebservices.TaskManagement taskManagement = new cn.com.crowdsourcedtesting.datawebservices.TaskManagement();
 
-	@WebMethod(operationName="addWebProduct")
+	// @WebMethod(operationName = "addWebProduct")
 	public Product addWebProduct(
 			@WebParam(name = "productName") String productName,
 			@WebParam(name = "icon") String icon,
@@ -99,6 +99,16 @@ public class TaskManagementDelegate {
 
 	public int getcheckedWebTotalRows() {
 		return taskManagement.getcheckedWebTotalRows();
+	}
+
+	public boolean isTesterJoinTask(@WebParam(name = "testerId") int testerId,
+			@WebParam(name = "testTaskId") int testTaskId) {
+		return taskManagement.isTesterJoinTask(testerId, testTaskId);
+	}
+
+	public JoinTask addJoinTask(@WebParam(name = "testerId") int testerId,
+			@WebParam(name = "testTaskId") int testTaskId) {
+		return taskManagement.addJoinTask(testerId, testTaskId);
 	}
 
 }
