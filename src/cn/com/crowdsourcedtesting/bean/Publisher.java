@@ -1,5 +1,8 @@
 package cn.com.crowdsourcedtesting.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Publisher entity. @author MyEclipse Persistence Tools
  */
@@ -19,9 +22,9 @@ public class Publisher implements java.io.Serializable {
 	private String publisherCompany;
 	private Boolean publisherType;
 	private String publisherConnectEmail;
-//	private Set recruitments = new HashSet(0);
-//	private Set testTasks = new HashSet(0);
-//	private Set questionnaires = new HashSet(0);
+	private Set recruitments = new HashSet(0);
+	private Set testTasks = new HashSet(0);
+	private Set questionnaires = new HashSet(0);
 	private Boolean isPassed;
 	private String businessLicense;
 	
@@ -61,26 +64,26 @@ public class Publisher implements java.io.Serializable {
 	}
 
 	/** full constructor */
-//	public Publisher(Administrator administrator, String publisherName,
-//			String publisherLogEmail, String publisherPassword,
-//			String publisherPhoto, Double publisherCredit,
-//			Boolean publisherAuthority, String publisherCompany,
-//			Boolean publisherType, String publisherConnectEmail,
-//			Set recruitments, Set testTasks, Set questionnaires) {
-//		this.administrator = administrator;
-//		this.publisherName = publisherName;
-//		this.publisherLogEmail = publisherLogEmail;
-//		this.publisherPassword = publisherPassword;
-//		this.publisherPhoto = publisherPhoto;
-//		this.publisherCredit = publisherCredit;
-//		this.publisherAuthority = publisherAuthority;
-//		this.publisherCompany = publisherCompany;
-//		this.publisherType = publisherType;
-//		this.publisherConnectEmail = publisherConnectEmail;
-//		this.recruitments = recruitments;
-//		this.testTasks = testTasks;
-//		this.questionnaires = questionnaires;
-//	}
+	public Publisher(Administrator administrator, String publisherName,
+			String publisherLogEmail, String publisherPassword,
+			String publisherPhoto, Double publisherCredit,
+			Boolean publisherAuthority, String publisherCompany,
+			Boolean publisherType, String publisherConnectEmail,
+			Set recruitments, Set testTasks, Set questionnaires) {
+		this.administrator = administrator;
+		this.publisherName = publisherName;
+		this.publisherLogEmail = publisherLogEmail;
+		this.publisherPassword = publisherPassword;
+		this.publisherPhoto = publisherPhoto;
+		this.publisherCredit = publisherCredit;
+		this.publisherAuthority = publisherAuthority;
+		this.publisherCompany = publisherCompany;
+		this.publisherType = publisherType;
+		this.publisherConnectEmail = publisherConnectEmail;
+		this.recruitments = recruitments;
+		this.testTasks = testTasks;
+		this.questionnaires = questionnaires;
+	}
 
 	// Property accessors
 
@@ -172,28 +175,28 @@ public class Publisher implements java.io.Serializable {
 		this.publisherConnectEmail = publisherConnectEmail;
 	}
 
-//	public Set getRecruitments() {
-//		return this.recruitments;
-//	}
-//
-//	public void setRecruitments(Set recruitments) {
-//		this.recruitments = recruitments;
-//	}
-//
-//	public Set getTestTasks() {
-//		return this.testTasks;
-//	}
-//
-//	public void setTestTasks(Set testTasks) {
-//		this.testTasks = testTasks;
-//	}
-//
-//	public Set getQuestionnaires() {
-//		return this.questionnaires;
-//	}
-//
-//	public void setQuestionnaires(Set questionnaires) {
-//		this.questionnaires = questionnaires;
-//	}
+	public Set getRecruitments() {
+		return this.recruitments;
+	}
+
+	public void setRecruitments(Set recruitments) {
+		this.recruitments = recruitments;
+	}
+
+	public Set getTestTasks() {
+		return this.testTasks;
+	}
+
+	public void setTestTasks(Set testTasks) {
+		this.testTasks = testTasks;
+	}
+
+	public Set getQuestionnaires() {
+		return this.questionnaires;
+	}
+
+	public void setQuestionnaires(Set questionnaires) {
+		this.questionnaires = questionnaires;
+	}
 
 }

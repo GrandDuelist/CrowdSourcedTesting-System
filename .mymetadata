@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="CrowdSourcedTesting-System"
+  name="crowdsourcedtesting-system"
   id="myeclipse.1395165179396"
   context-root="/CrowdSourcedTesting-System"
   j2ee-spec="5.0"
-  archive="CrowdSourcedTesting-System.war">
+  archive="crowdsourcedtesting-system.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>
