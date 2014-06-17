@@ -25,6 +25,9 @@ public class RegistrationTesterForm extends ActionForm {
 
 	
 	
+	/** photo property */
+	private FormFile photo;
+	
 	/** email property */
 	private String email;
 
@@ -42,9 +45,6 @@ public class RegistrationTesterForm extends ActionForm {
 	
 	/** birthday property */
 	private Date birthday;
-	
-	/** photo property */
-	private FormFile photo;
 	
 	/** credit property */
 	private double credit;
@@ -151,13 +151,13 @@ public class RegistrationTesterForm extends ActionForm {
 		this.birthday = birthday;
 	}
 
-//	public FormFile getPhoto() {
-//		return photo;
-//	}
-//
-//	public void setPhoto(FormFile photo) {
-//		this.photo = photo;
-//	}
+	public FormFile getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(FormFile photo) {
+		this.photo = photo;
+	}
 
 	public double getCredit() {
 		return credit;

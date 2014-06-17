@@ -8,4 +8,8 @@
 	<endpoint name="UserManagementPort"
 		implementation="cn.com.crowdsourcedtesting.datawebservices.UserManagementDelegate"
 		url-pattern="/UserManagementPort">
+	</endpoint>
+	<endpoint name="BugReportManagementPort"
+		implementation="cn.com.crowdsourcedtesting.datawebservices.BugReportManagementDelegate"
+		url-pattern="/BugReportManagementPort">
 	</endpoint></endpoints>

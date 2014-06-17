@@ -53,6 +53,17 @@
   <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
   <load-on-startup>1</load-on-startup>
  </servlet>
+ <servlet>
+  <description>JAX-WS endpoint -BugReportManagementService</description>
+  <display-name>BugReportManagementService</display-name>
+  <servlet-name>BugReportManagementService</servlet-name>
+  <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+  <load-on-startup>1</load-on-startup>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>BugReportManagementService</servlet-name>
+  <url-pattern>/BugReportManagementPort</url-pattern>
+ </servlet-mapping>
  <servlet-mapping>
   <servlet-name>UserManagementService</servlet-name>
   <url-pattern>/UserManagementPort</url-pattern>

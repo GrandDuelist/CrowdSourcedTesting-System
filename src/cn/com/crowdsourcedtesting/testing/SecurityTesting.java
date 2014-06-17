@@ -28,7 +28,7 @@ public class SecurityTesting extends MockStrutsTestCase {
 	@Test
 	public final void testTesterLoginSuccess() {
 		addRequestParameter("username", "1306922411@qq.com");
-		addRequestParameter("password", "111111");
+		addRequestParameter("password", "123456");
 		addRequestParameter("method", "testerLogin");
 		actionPerform();
 		verifyForwardPath("/page_personal_center.jsp");
@@ -38,8 +38,6 @@ public class SecurityTesting extends MockStrutsTestCase {
 	
 	@Test
 	public final void testTesterLoginFail(){
-		String[] passworderror = {"Password Wrong"};
-		String[] usernameerror = {"Usrname Not found"};
 		
 		addRequestParameter("username", "113213123@qq.com");
 		addRequestParameter("password", "111111");
@@ -80,7 +78,7 @@ public class SecurityTesting extends MockStrutsTestCase {
 		//verifyActionErrors(usernameerror);
 	}
 
-	/*@Test
+	@Test
 	public final void testTesterLogoutSuccess() {
 		addRequestParameter("username", "1306922411@qq.com");
 		addRequestParameter("password", "111111");
@@ -226,5 +224,5 @@ public class SecurityTesting extends MockStrutsTestCase {
 		addRequestParameter("method", "testerChangeInformation");
 		actionPerform();
 		verifyForward("success");
-	}*/
+	}
 }

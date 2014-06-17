@@ -345,7 +345,7 @@ public class SecurityRouter extends DispatchAction {
 			qd.save(q); // 修改数据�
 
 			Page currentPage = (Page) session.getAttribute("currentPage");
-			PageIdForm p = new PageIdForm();
+			CheckRegisterListForm  p = new CheckRegisterListForm ();
 			p.setPage(currentPage.getCurrentPage() + "");
 			
 			if (publisherType != null && publisherType.equals("Company")) {    //如果是公司，返回公司表单

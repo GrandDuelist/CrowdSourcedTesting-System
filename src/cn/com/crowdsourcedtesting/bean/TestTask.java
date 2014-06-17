@@ -22,7 +22,7 @@ public class TestTask implements java.io.Serializable {
 	private String taskEnvironment;
 	private Double perReward;
 	private Double wholeCredit;
-//	private Set bugReports = new HashSet(0);
+	private Set bugReports = new HashSet(0);
 	private Set taskComments = new HashSet(0);
 	private Boolean isPassed ;
 
@@ -43,22 +43,22 @@ public class TestTask implements java.io.Serializable {
 	}
 
 	/** full constructor */
-//	public TestTask(Product product, Publisher publisher, Date taskStartTime,
-//			Date taskEndTime, Integer taskType, Administrator administrator,
-//			String taskEnvironment, Double perReward, Double wholeCredit,
-//			Set bugReports, Set taskComments) {
-//		this.product = product;
-//		this.publisher = publisher;
-//		this.taskStartTime = taskStartTime;
-//		this.taskEndTime = taskEndTime;
-//		this.taskType = taskType;
-//		this.administrator = administrator;
-//		this.taskEnvironment = taskEnvironment;
-//		this.perReward = perReward;
-//		this.wholeCredit = wholeCredit;
-//		this.bugReports = bugReports;
-//		this.taskComments = taskComments;
-//	}
+	public TestTask(Product product, Publisher publisher, Date taskStartTime,
+			Date taskEndTime, Integer taskType, Administrator administrator,
+			String taskEnvironment, Double perReward, Double wholeCredit,
+			Set bugReports, Set taskComments) {
+		this.product = product;
+		this.publisher = publisher;
+		this.taskStartTime = taskStartTime;
+		this.taskEndTime = taskEndTime;
+		this.taskType = taskType;
+		this.administrator = administrator;
+		this.taskEnvironment = taskEnvironment;
+		this.perReward = perReward;
+		this.wholeCredit = wholeCredit;
+		this.bugReports = bugReports;
+		this.taskComments = taskComments;
+	}
 
 	// Property accessors
 	public Boolean getIsPassed() {
@@ -148,14 +148,14 @@ public class TestTask implements java.io.Serializable {
 		this.wholeCredit = wholeCredit;
 	}
 
-//	public Set getBugReports() {
-//		return this.bugReports;
-//	}
-//
-//	public void setBugReports(Set bugReports) {
-//		this.bugReports = bugReports;
-//	}
-//
+	public Set getBugReports() {
+		return this.bugReports;
+	}
+
+	public void setBugReports(Set bugReports) {
+		this.bugReports = bugReports;
+	}
+
 	public Set getTaskComments() {
 		return this.taskComments;
 	}

@@ -266,7 +266,7 @@
      <action  
           name="checkRegisterListForm" 
            attribute="checkRegisterListForm"
-           input = "/CheckRegisterListView.jsp"
+         
             path="/checkRegisterList" 
             parameter="method" 
             scope="request" 
@@ -280,7 +280,6 @@
      <action  
           name="checkRegisterDetailForm" 
            attribute="checkRegisterDetailForm"
-           input = "/CheckRegisterDetailView.jsp"
             path="/checkRegisterDetail" 
             parameter="method" 
             scope="request" 
@@ -294,7 +293,7 @@
      <action  
           name="pageIdForm" 
           attribute="pageIdForm"
-          input = "/CheckTestTaskListView.jsp"
+        
           path="/checkTestTaskList" 
           parameter="method" 
           scope="request" 
@@ -373,7 +372,7 @@
     <action
       attribute="registrationTesterForm"
       parameter = "method"
-      input="/registration_tester.html"
+      input="/form/registration_tester.jsp"
       name="registrationTesterForm"
       path="/registrationTester"
       scope="request"

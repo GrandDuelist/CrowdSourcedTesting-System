@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<!DOCTYPE html> 
 <html>
 <!--[if IE 7]> <html lang="en" class="ie7"> <![endif]-->  
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
