@@ -24,7 +24,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- Font CSS  -->
-<link rel="stylesheet" type="text/css" href="css/opensans.css" />
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
 
 
 <!-- Core CSS  -->
