@@ -266,19 +266,29 @@ public class QuestionnaireRouter extends DispatchAction {
 			QuestionnaireDAO qd = DAOFactory.getQuestionnaireDAO();
 			Questionnaire q = qd.findById(id);
 			q.setAdministrator(admin);
-
+			String content="";
 			if ("yes".equals(subType)) { // 审核通过
 
 				q.setIsPassed(true);
+				content="恭喜您" +
+						"您在TC众测网发布的问卷：<br>" +
+						"问卷名称："+q.getTitle()+"<br>"+
+						
+						"审核成功!<br>";
 
 			} else // 审核不通过
 			{
 
 				q.setIsPassed(false);
+				content="抱歉，" +
+						"您在TC众测网发布的问卷：<br>" +
+						"问卷名称："+q.getTitle()+"<br>"+
+						
+						"审核失败！请您及时处理<br>";
 
 			}
 			qd.save(q); // 修改数据�
-
+            myHandler.sendEmail(q.getPublisher().getPublisherLogEmail(), content, "问卷审核结果");
 			Page currentPage = (Page) session.getAttribute("currentPage");
 			PageIdForm p = new PageIdForm();
 			p.setPage(currentPage.getCurrentPage() + "");

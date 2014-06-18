@@ -212,7 +212,7 @@ public class PublisherDAO extends BaseHibernateDAO {
 		// TODO Auto-generated method stub
 		try {
 			List<Publisher> publishers = new ArrayList<Publisher>();
-			String queryString = "from Publisher where CHECK_ADMINISTRATOR_ID=null and PUBLISHER_TYPE=1";
+			String queryString = "from Publisher where CHECK_ADMINISTRATOR_ID=null and PUBLISHER_TYPE=0";
 			Query queryObject = getSession().createQuery(queryString);
 
 			publishers = queryObject
@@ -231,7 +231,7 @@ public class PublisherDAO extends BaseHibernateDAO {
 		// TODO Auto-generated method stub
 		try {
 			List<Publisher> publishers = new ArrayList<Publisher>();
-			String queryString = "from Publisher where CHECK_ADMINISTRATOR_ID=null and PUBLISHER_TYPE=1";
+			String queryString = "from Publisher where CHECK_ADMINISTRATOR_ID=null and PUBLISHER_TYPE=0";
 			Query queryObject = getSession().createQuery(queryString);
 
 			publishers = queryObject
@@ -251,7 +251,7 @@ public class PublisherDAO extends BaseHibernateDAO {
 		// TODO Auto-generated method stub
 		try {
 			List<Publisher> publishers = new ArrayList<Publisher>();
-			String queryString = "from Publisher where CHECK_ADMINISTRATOR_ID=null and PUBLISHER_TYPE=0";
+			String queryString = "from Publisher where CHECK_ADMINISTRATOR_ID=null and PUBLISHER_TYPE=1";
 			Query queryObject = getSession().createQuery(queryString);
 
 			publishers = queryObject
@@ -290,7 +290,7 @@ public class PublisherDAO extends BaseHibernateDAO {
 
 		Number c = (Number) getSession()
 				.createQuery(
-						"select count(*) from Publisher where CHECK_ADMINISTRATOR_ID=null and  PUBLISHER_TYPE=1")
+						"select count(*) from Publisher where CHECK_ADMINISTRATOR_ID=null and  PUBLISHER_TYPE=0")
 				.uniqueResult();
 
 		return c.intValue();
@@ -302,7 +302,7 @@ public class PublisherDAO extends BaseHibernateDAO {
 
 		Number c = (Number) getSession()
 				.createQuery(
-						"select count(*) from Publisher where CHECK_ADMINISTRATOR_ID=null and  PUBLISHER_TYPE=0")
+						"select count(*) from Publisher where CHECK_ADMINISTRATOR_ID=null and  PUBLISHER_TYPE=1")
 				.uniqueResult();
 
 		return c.intValue();
@@ -351,7 +351,7 @@ public class PublisherDAO extends BaseHibernateDAO {
 			// TODO Auto-generated method stub
 			try {
 				List<Publisher> publishers = new ArrayList<Publisher>();
-				String queryString = "from Publisher where PUBLISHER_TYPE=1";
+				String queryString = "from Publisher where PUBLISHER_TYPE=0";
 				Query queryObject = getSession().createQuery(queryString);
 
 				publishers = queryObject
@@ -371,7 +371,7 @@ public class PublisherDAO extends BaseHibernateDAO {
 			// TODO Auto-generated method stub
 			try {
 				List<Publisher> publishers = new ArrayList<Publisher>();
-				String queryString = "from Publisher where PUBLISHER_TYPE=0";
+				String queryString = "from Publisher where PUBLISHER_TYPE=1";
 				Query queryObject = getSession().createQuery(queryString);
 
 				publishers = queryObject
@@ -391,7 +391,7 @@ public class PublisherDAO extends BaseHibernateDAO {
 
 			Number c = (Number) getSession()
 					.createQuery(
-							"select count(*) from Publisher Where PUBLISHER_TYPE=0")
+							"select count(*) from Publisher Where PUBLISHER_TYPE=1")
 					.uniqueResult();
 
 			return c.intValue();
@@ -404,7 +404,7 @@ public class PublisherDAO extends BaseHibernateDAO {
 
 			Number c = (Number) getSession()
 							.createQuery(
-									"select count(*) from Publisher where PUBLISHER_TYPE=1")
+									"select count(*) from Publisher where PUBLISHER_TYPE=0")
 							.uniqueResult();
 
 					return c.intValue();

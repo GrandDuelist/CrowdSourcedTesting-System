@@ -269,14 +269,25 @@ public class TestTaskRouter extends DispatchAction {
 			TestTask q = qd.findById(id);
 			q.setAdministrator(admin);
 
+			String content="";
 			if ("yes".equals(subType)) { // 审核通过
 
 				q.setIsPassed(true);
+				content="恭喜您！" +
+						"您在TC众测网发布的任务：<br>" +
+						"任务名称："+q.getProduct().getProductName()+"<br>"+
+						"版本号："+q.getProduct().getVersion()+"<br>"
+						+"审核通过！<br>";
 
 			} else // 审核不通过
 			{
 
 				q.setIsPassed(false);
+				content="抱歉，" +
+						"您在TC众测网发布的任务：<br>" +
+						"任务名称："+q.getProduct().getProductName()+"<br>"+
+						"版本号："+q.getProduct().getVersion()+"<br>"
+						+"审核失败！请您及时处理<br>";;
 
 			}
 			qd.save(q); // 修改数据�
@@ -290,6 +301,7 @@ public class TestTaskRouter extends DispatchAction {
 				p.setPage("1");
 			}
 
+			myHandler.sendEmail(q.getPublisher().getPublisherLogEmail(), content,"任务审核结果");
 			if (taskType != null && taskType.equals("Web")) { // 如果是web，返回web任务列表
 				return this.checkWebList(mapping, p, request, response);
 			} else if (taskType != null && taskType.equals("Android")) {

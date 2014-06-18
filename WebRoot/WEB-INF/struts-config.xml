@@ -287,6 +287,8 @@
       <set-property property="cancellable" value="true" />
        <forward name="detail" path="/CheckRegisterDetailView.jsp"></forward>
         <forward name="adminLogin"  path="/AdminLoginView.jsp"></forward>
+          <forward name="list" path="/CheckRegisterListView.jsp"></forward>
+      
     </action>
      
      <!--  定义一个审核测试任务列表的MVC -->

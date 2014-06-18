@@ -327,23 +327,34 @@ public class SecurityRouter extends DispatchAction {
 
 			String subType = detailForm.getSubType(); // 通过或者不通过类型
 
-			int id = Integer.parseInt(detailForm.getId()); // 得到要处理的问卷
+			int id = Integer.parseInt(detailForm.getId()); // 得到要处理的发布者
 			PublisherDAO qd = DAOFactory.getPublisherDAO();
 			Publisher q = qd.findById(id);
 			q.setAdministrator(admin);
-
+			String content="";
 			if ("yes".equals(subType)) { // 审核通过
 
 				q.setIsPassed(true);
+				
+				content="恭喜您！" +
+						"您在TC众测网申请的帐号：<br>" +
+						"帐号名称："+q.getPublisherName()+"<br>"
+						+"帐号邮箱："+q.getPublisherLogEmail()+"<br>"
+						+"审核通过！<br>";
+				
 
 			} else // 审核不通过
 			{
 
 				q.setIsPassed(false);
-
+				content="抱歉,您在TC众测网申请的帐号：<br>" +
+						"帐号名称："+q.getPublisherName()+"<br>"
+						+"帐号邮箱："+q.getPublisherLogEmail()+"<br>"
+						+"审核未通过<br>"+"请重新申请<br>";
+				
 			}
 			qd.save(q); // 修改数据�
-
+			handler.sendEmail(q.getPublisherLogEmail(),content,"帐号审核结果");
 			Page currentPage = (Page) session.getAttribute("currentPage");
 			CheckRegisterListForm  p = new CheckRegisterListForm ();
 			p.setPage(currentPage.getCurrentPage() + "");
@@ -447,6 +458,9 @@ public class SecurityRouter extends DispatchAction {
 			return mapping.findForward("personal_center");		
 		}	
 	}
+	
+	   
+  
 }
 class findAuthenticator extends Authenticator{  
     String userName=null;  
@@ -462,4 +476,6 @@ class findAuthenticator extends Authenticator{
 	protected PasswordAuthentication getPasswordAuthentication(){  
         return new PasswordAuthentication(userName, password);  
     }  
+    
+ 
 }  

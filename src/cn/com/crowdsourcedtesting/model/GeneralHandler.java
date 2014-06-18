@@ -1,6 +1,23 @@
 package cn.com.crowdsourcedtesting.model;
 
+import java.util.Date;
+import java.util.Properties;
+
+import javax.mail.Address;
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServletRequest;
+
+
 import cn.com.crowdsourcedtesting.modelhelper.MethodNumber;
 import cn.com.crowdsourcedtesting.struts.form.PageIdForm;
 import cn.com.other.page.Page;
@@ -25,7 +42,47 @@ public abstract class GeneralHandler {
 	abstract public void  setTargetDetailTwo(int id,HttpServletRequest request);
 	abstract public void  setTargetDetailThree(int id,HttpServletRequest request);
 	
-	
+	  /**
+     * @author 方志晗 
+     * 发送邮件
+     */
+    
+    public void sendEmail(String emailAddress,String mailContent,String subject)
+	{
+		findAuthenticator authenticator = new findAuthenticator("lin1014582610@163.com","zhaoyunting36057");
+		
+		Properties pros = new Properties();
+		pros.put("mail.smtp,host","smtp.163.com");
+		pros.put("mail.smtp.port", "25");
+		pros.put("mail.transport.protocol", "smtp");
+		pros.put("mail.smtp.auth", "true");
+		
+		Session sendMailSession = Session.getDefaultInstance(pros,authenticator);
+		
+		try {
+			Message mailMessage = new MimeMessage(sendMailSession);
+			Address fromAddress = new InternetAddress("lin1014582610@163.com");
+			mailMessage.setFrom(fromAddress);
+			Address toAddress = new InternetAddress(emailAddress);
+			mailMessage.setRecipient(Message.RecipientType.TO, toAddress);
+			mailMessage.setSubject(subject);
+			mailMessage.setSentDate(new Date());
+			Multipart mainpart = new MimeMultipart();
+			BodyPart htmlBodyPart  = new MimeBodyPart();
+			htmlBodyPart.setContent(mailContent,"text/html;charset=utf-8");
+			mainpart.addBodyPart(htmlBodyPart);
+			mailMessage.setContent(mainpart);
+			
+			Transport transport = sendMailSession.getTransport("smtp");
+			transport.connect("smtp.163.com","lin1014582610@163.com","zhaoyunting36057");
+			transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
+			transport.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+	}
 	//通用的列表处理
 	public void ListHandle(PageIdForm form,
 			HttpServletRequest request, MethodNumber method)
@@ -49,6 +106,7 @@ public abstract class GeneralHandler {
 		}else if("pageNum".equals(subType))
 		{
 			System.out.println(form.getPage());
+			if(form.getPage().equals("0")){form.setPage("1");}
 			currentPage  = Integer.parseInt(form.getPage());
 		}else if("previousPage".equals(subType))
 		{
@@ -106,3 +164,21 @@ public abstract class GeneralHandler {
 	
 
 }
+
+class findAuthenticator extends Authenticator{  
+    String userName=null;  
+    String password=null;  
+       
+    public findAuthenticator(){  
+    }  
+    public findAuthenticator(String username, String password) {   
+        this.userName = username;   
+        this.password = password;   
+    }   
+    @Override
+	protected PasswordAuthentication getPasswordAuthentication(){  
+        return new PasswordAuthentication(userName, password);  
+    }  
+    
+ 
+}  

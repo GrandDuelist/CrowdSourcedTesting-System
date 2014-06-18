@@ -175,7 +175,7 @@ public class SecurityHandler extends GeneralHandler {
 			
 		}
 
-		
+	
 		//DetailHandle的处理接�
 		@Override
 		public void setTargetDetailOne(int id, HttpServletRequest request) {
