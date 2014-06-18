@@ -3,6 +3,8 @@ package cn.com.crowdsourcedtesting.bean;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 /**
  * Publisher entity. @author MyEclipse Persistence Tools
  */
@@ -95,6 +97,7 @@ public class Publisher implements java.io.Serializable {
 		this.publisherId = publisherId;
 	}
 
+	@XmlTransient
 	public Administrator getAdministrator() {
 		return this.administrator;
 	}
@@ -175,6 +178,7 @@ public class Publisher implements java.io.Serializable {
 		this.publisherConnectEmail = publisherConnectEmail;
 	}
 
+	@XmlTransient
 	public Set getRecruitments() {
 		return this.recruitments;
 	}
@@ -182,7 +186,7 @@ public class Publisher implements java.io.Serializable {
 	public void setRecruitments(Set recruitments) {
 		this.recruitments = recruitments;
 	}
-
+	@XmlTransient
 	public Set getTestTasks() {
 		return this.testTasks;
 	}
@@ -190,7 +194,7 @@ public class Publisher implements java.io.Serializable {
 	public void setTestTasks(Set testTasks) {
 		this.testTasks = testTasks;
 	}
-
+	@XmlTransient
 	public Set getQuestionnaires() {
 		return this.questionnaires;
 	}

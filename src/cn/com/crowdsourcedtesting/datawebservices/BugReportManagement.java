@@ -20,6 +20,6 @@ public class BugReportManagement {
 		TestTask testTask=new TestTask();
 		testTask.setTaskId(taskID);
 		List<BugReport> list = bugReportDao.getBugReportByTask(testTask);
-		return (BugReport[]) list.toArray();
+		return (BugReport[]) list.toArray(new BugReport[0]);
 	}
 }

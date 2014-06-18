@@ -2,6 +2,8 @@ package cn.com.crowdsourcedtesting.bean;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 /**
  * BugReport entity. @author MyEclipse Persistence Tools
  */
@@ -76,6 +78,7 @@ public class BugReport implements java.io.Serializable {
 		this.testTask = testTask;
 	}
 
+	@XmlTransient
 	public Tester getTester() {
 		return this.tester;
 	}
@@ -148,4 +151,5 @@ public class BugReport implements java.io.Serializable {
 		this.isSelected = isSelected;
 	}
 
+	
 }

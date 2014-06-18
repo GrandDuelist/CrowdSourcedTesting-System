@@ -58,18 +58,18 @@ public class UserManagement {
 	
 	public Publisher[] viewAllPublisher() {
 		return (Publisher[]) publisherDAO
-				.findAll().toArray();
+				.findAll().toArray(new Publisher[0]);
 	}
 	
 	public Publisher[] findUncheckedCompany(Page page) {
 		return (Publisher[]) publisherDAO
-				.findUncheckedCompanyByPage(page).toArray();
+				.findUncheckedCompanyByPage(page).toArray(new Publisher[0]);
 	}
 	
 	public Publisher[] findUncheckedPerson(Page page)
 	{
 		return (Publisher[]) publisherDAO
-				.findUncheckedPersonByPage(page).toArray();
+				.findUncheckedPersonByPage(page).toArray(new Publisher[0]);
 	}
 	
 	public int getUncheckedCompanyTotalRows() {
