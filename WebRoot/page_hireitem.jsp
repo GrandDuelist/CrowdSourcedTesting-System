@@ -169,8 +169,15 @@ String flag = (String)request.getAttribute("isLegal");
  String type = "线下";
  if(recruitment.getOnline())
  type = "线上";
- String startdate = (recruitment.getTimeStart().getYear()+1900)+"-"+(recruitment.getTimeStart().getMonth()+1)+"-"+recruitment.getTimeStart().getDate();
- String enddate = (recruitment.getTimeEnd().getYear()+1900)+"-"+(recruitment.getTimeEnd().getMonth()+1)+"-"+recruitment.getTimeEnd().getDate();
+ String startdate="";
+ if(recruitment.getTimeStart()!=null){
+		startdate = (recruitment.getTimeStart().getYear()+1900)+"-"+(recruitment.getTimeStart().getMonth()+1)+"-"+recruitment.getTimeStart().getDate();
+		}
+		
+		String enddate="";
+		if(recruitment.getTimeEnd()!=null){
+		enddate = (recruitment.getTimeEnd().getYear()+1900)+"-"+(recruitment.getTimeEnd().getMonth()+1)+"-"+recruitment.getTimeEnd().getDate();
+		}
  %>
  
 
