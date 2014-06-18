@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.jws.WebParam;
 import javax.jws.soap.SOAPBinding;
 
+import cn.com.crowdsourcedtesting.bean.JoinTask;
 import cn.com.crowdsourcedtesting.bean.Product;
 import cn.com.crowdsourcedtesting.bean.Publisher;
 import cn.com.crowdsourcedtesting.bean.TestTask;
@@ -16,6 +17,7 @@ public class TaskManagementDelegate {
 
 	cn.com.crowdsourcedtesting.datawebservices.TaskManagement taskManagement = new cn.com.crowdsourcedtesting.datawebservices.TaskManagement();
 
+	// @WebMethod(operationName = "addWebProduct")
 	public Product addWebProduct(
 			@WebParam(name = "productName") String productName,
 			@WebParam(name = "icon") String icon,
@@ -97,6 +99,16 @@ public class TaskManagementDelegate {
 
 	public int getcheckedWebTotalRows() {
 		return taskManagement.getcheckedWebTotalRows();
+	}
+
+	public boolean isTesterJoinTask(@WebParam(name = "testerId") int testerId,
+			@WebParam(name = "testTaskId") int testTaskId) {
+		return taskManagement.isTesterJoinTask(testerId, testTaskId);
+	}
+
+	public JoinTask addJoinTask(@WebParam(name = "testerId") int testerId,
+			@WebParam(name = "testTaskId") int testTaskId) {
+		return taskManagement.addJoinTask(testerId, testTaskId);
 	}
 
 }
